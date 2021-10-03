@@ -1,22 +1,22 @@
-<?php include_once ('controller/Controller.php');
 
+<?php
 $c = new Controller();
 $posts=$c->load_posts();
-foreach($posts as $data){?>
+foreach($posts as $post){?>
 
 <div class="news_feed">
             <div class="news_feed_title">
-              <img src="img/avatar.jpg" alt="user" />
+              <img src="img/avatars/<?php echo $post['avatar']?>.jpg" alt="user" />
               <div class="news_feed_title_content">
-                <p><?php echo $data['title'] ?></p>
+                <p><?php echo $post['title'] ?></p>
                 <span>12. <i class="fas fa-globe-americas"></i></span>
               </div>
             </div>
             <div class="news_feed_description">
               <p class="news_feed_subtitle">
-                <?php echo $data['description'] ?>
+                <?php echo $post['description'] ?>
               </p>
-              <img src="img/monke1.PNG" alt="sunflower" />
+              <img src="img/media/<?php echo $post['media_url']?>.PNG" alt="sunflower" />
               <div class="news_feed_description_title">
                 <span>YOUTUBE</span>
                 <p>
@@ -30,9 +30,9 @@ foreach($posts as $data){?>
             <div class="likes_area">
               <div class="emojis">
                 <span>&#129373;</span>
-                <span>124</span>
+                <span><?php echo $post['up_votes'] ?></span>
                 <span>&#127813;</span>
-                <span>25</span>
+                <span><?php echo $post['down_votes'] ?></span>
               </div>
               <div class="comment_counts">
                 <span>4 comments</span>
@@ -56,4 +56,5 @@ foreach($posts as $data){?>
                 <span>Share</span>
               </div>
             </div>
-          </div> <?php }; ?>
+          </div> 
+          <?php }; ?>

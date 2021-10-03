@@ -45,6 +45,7 @@ CREATE TABLE `POST` (
   title VARCHAR(255) NOT NULL,
   up_votes INT,
   down_votes INT,
+  media_url VARCHAR(2030),
   `description` TEXT NOT NULL,
   `datetime` DATETIME NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES USER (`user_id`),
@@ -112,10 +113,11 @@ INSERT INTO `CATEGORY` VALUES ('Videos', null, null);
 INSERT INTO `CATEGORY` VALUES ('Music', null, null);
 INSERT INTO `CATEGORY` VALUES ('Photography', null, null);
 INSERT INTO `CATEGORY` VALUES ('Films', null, null);
-INSERT INTO `USER` VALUES (null, 'monke', 'moderator', 'monke1', 'monke@gmail.com', 'Beginner', 'registeredUser') ;
+INSERT INTO `USER` VALUES (null, 'monke', 'avatar', 'monke1', 'monke@gmail.com', 'Beginner', 'registeredUser') ;
+INSERT INTO `USER` VALUES (null, 'doggo', 'doggo', 'dog1', 'doggo@gmail.com', 'Beginner', 'registeredUser') ;
 -- USER_CATEGORY MISSING
-INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531, 'Monkeys are going to rule the world in the next 30 years', '2021-10-02') ;
-INSERT INTO `POST` VALUES (null, 'Sports', 1, 'Monke second post post', 246, 321, 'Where banana', '2021-10-03') ;
+INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02') ;
+INSERT INTO `POST` VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'Capture', '', '2021-10-03') ;
 INSERT INTO `COMMENT` (comment_id, user_id, media_id, post_id, `description`, up_votes, down_votes) VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809) ;
 -- POST_TAG MISSING
 -- MEDIA MISSING
