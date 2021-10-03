@@ -114,7 +114,8 @@ INSERT INTO `CATEGORY` VALUES ('Photography', null, null);
 INSERT INTO `CATEGORY` VALUES ('Films', null, null);
 INSERT INTO `USER` VALUES (null, 'monke', 'moderator', 'monke1', 'monke@gmail.com', 'Beginner', 'registeredUser') ;
 -- USER_CATEGORY MISSING
-INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531, 'Monkeys are going to rule the world in the next 30 years', '2021-10-04') ;
+INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531, 'Monkeys are going to rule the world in the next 30 years', '2021-10-02') ;
+INSERT INTO `POST` VALUES (null, 'Sports', 1, 'Monke second post post', 246, 321, 'Where banana', '2021-10-03') ;
 INSERT INTO `COMMENT` (comment_id, user_id, media_id, post_id, `description`, up_votes, down_votes) VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809) ;
 -- POST_TAG MISSING
 -- MEDIA MISSING

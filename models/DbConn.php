@@ -39,7 +39,7 @@ class DbConn{
             if($stmt)
             {
                 $stmt->execute();
-                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $result = $stmt->fetchAll();
             }
 
         }
