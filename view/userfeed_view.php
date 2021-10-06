@@ -1,7 +1,7 @@
 
 <?php
 $c = new Controller();
-$posts=$c->load_posts();
+$posts=$c->loadUserFeedPosts();
 foreach($posts as $post){?>
 
 <div class="news_feed">
