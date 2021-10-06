@@ -1,0 +1,138 @@
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.vflex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Card */
+.card {
+  background-color: rgba(240, 240, 240, 0.6);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+  height: 200px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.card-image {
+  background-size: cover;
+  opacity: 0.75;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card h3,
+p {
+  position: relative;
+  top: 20px;
+  left: 10px;
+}
+
+.card-1 {
+  background-image: url(https://source.unsplash.com/featured/?water);
+}
+.card-2 {
+  background-image: url(https://source.unsplash.com/featured/?dog);
+}
+.card-3 {
+  background-image: url(https://source.unsplash.com/featured/?nature);
+}
+
+/* Padding */
+
+.py-1 {
+  padding: 0.5rem 0;
+}
+.py-2 {
+  padding: 1rem 0;
+}
+.py-3 {
+  padding: 1.5rem 0;
+}
+.py-4 {
+  padding: 2rem 0;
+}
+.py-5 {
+  padding: 2.5rem 0;
+}
+.py-6 {
+  padding: 3rem 0;
+}
+
+.p-1 {
+  padding: 0.5rem;
+}
+.p-2 {
+  padding: 1rem;
+}
+.p-3 {
+  padding: 1.5rem;
+}
+.p-4 {
+  padding: 2rem;
+}
+.p-5 {
+  padding: 2.5rem;
+}
+.p-6 {
+  padding: 3rem;
+}
+
+/* Margin */
+.my-1 {
+  margin: 0.5rem 0;
+}
+.my-2 {
+  margin: 1rem 0;
+}
+.my-3 {
+  margin: 1.5rem 0;
+}
+.my-4 {
+  margin: 2rem 0;
+}
+.my-5 {
+  margin: 2.5rem 0;
+}
+.my-6 {
+  margin: 3rem 0;
+}
+
+.m-1 {
+  margin: 0.5rem 0;
+}
+.m-2 {
+  margin: 1rem 0;
+}
+.m-3 {
+  margin: 1.5rem 0;
+}
+.m-4 {
+  margin: 2rem 0;
+}
+.m-5 {
+  margin: 2.5rem 0;
+}
+.m-6 {
+  margin: 3rem 0;
+}
