@@ -118,6 +118,9 @@ INSERT INTO `USER` VALUES (null, 'doggo', 'doggo', 'dog1', 'doggo@gmail.com', 'B
 -- USER_CATEGORY MISSING
 INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02') ;
 INSERT INTO `POST` VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'Capture', '', '2021-10-03') ;
+INSERT INTO `USER_CATEGORY`VALUES (1, 'Sports');
+INSERT INTO `USER_CATEGORY`VALUES (1, 'News');
+INSERT INTO `USER_CATEGORY`VALUES (2, 'News');
 INSERT INTO `COMMENT` (comment_id, user_id, media_id, post_id, `description`, up_votes, down_votes) VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809) ;
 -- POST_TAG MISSING
 -- MEDIA MISSING

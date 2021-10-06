@@ -5,7 +5,6 @@ class DbConn{
     private $servername = "localhost";
     private $dbname = "socialdb";
     private $charset = "utf8";
-    public $result;
     public $dbConn;
     
     public function __construct() 
@@ -28,11 +27,22 @@ class DbConn{
     {
         $this->dbConn = null;
     }
+
+    public function isConnected(){
+        $res = false;
+        if($this->dbConn){
+            $res = true;
+        }else {
+            die();
+        }
+        return($res);
+    }
+
     // Execute single query statement. Returns next row as an array indexed by column name
-    public function selectquery($sql)
+    public function selectQuery($sql)
     {
         $stmt = null;
-        $this->result = false;
+        $result = false;
         if(isset($sql) && $sql != "" && isset($this->dbConn))
         {
             $stmt = $this->dbConn->prepare($sql);
@@ -44,6 +54,22 @@ class DbConn{
 
         }
         return($result);
+    }
+
+    public function executeQuery($sql)
+    {
+        $stmt = null;
+        $result = false;
+        if(isset($sql) && $sql != "" && isset($this->dbConn))
+        {
+            $stmt = $this->dbConn->prepare($sql);
+            if($stmt)
+            {
+                $result=$stmt->execute();
+            }
+
+        }
+        return($result);  
     }
 
 
