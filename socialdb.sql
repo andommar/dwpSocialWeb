@@ -1,9 +1,9 @@
 DROP DATABASE IF EXISTS socialdb;
 CREATE DATABASE socialdb;
-USE socialdb;  /* Good practice */
+USE socialdb; 
 
 
-/*CREATE TABLES*/
+/* Tables creation */
 
 CREATE TABLE `ROLE` (
     role_name VARCHAR (100) NOT NULL PRIMARY KEY
@@ -71,7 +71,7 @@ CREATE TABLE `MEDIA` (
 
 CREATE TABLE `COMMENT` (
   comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id INT,
+  `user_id` INT,
   media_id INT,
   post_id INT,
   `description` TEXT NOT NULL,
@@ -97,30 +97,82 @@ CREATE TABLE USER_MESSAGE(
 )ENGINE = InnoDB;
 
 
+/* Data insertion */
+
+/* Role */
+INSERT INTO `ROLE` (role_name) VALUES ('guest');
+INSERT INTO `ROLE` (role_name) VALUES ('registeredUser');
+INSERT INTO `ROLE` (role_name) VALUES ('moderator');
+INSERT INTO `ROLE` (role_name) VALUES ('admin') ;
+
+/* Tag */
+INSERT INTO `TAG` (tag_name) VALUES ('Cristiano Ronaldo');
+INSERT INTO `TAG` (tag_name) VALUES ('Angela Merkel');
+INSERT INTO `TAG` (tag_name) VALUES ('White House');
+INSERT INTO `TAG` (tag_name) VALUES ('Brexit') ;
+
+/* Category */
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('News', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Sports', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Videos', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Music', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Photography', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Films', null, null);
+
+/* User */
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'monke', 'avatar', 'monke1', 'monke@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'doggo', 'doggo', 'dog1', 'doggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'beerdoggo', 'beerdoggo', 'beerdoggo', 'beerdoggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'dogaldtrump', 'dogaldtrump', 'dogaldtrump', 'dogaldtrump@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'emodoggo', 'emodoggo', 'emodoggo', 'emodoggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'sassydoggo', 'sassydoggo', 'sassydoggo', 'sassydoggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'sassydoggo', 'sassydoggo', 'sassydoggo', 'sassydoggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'farwestdoggo', 'farwestdoggo', 'farwestdoggo', 'farwestdoggo@gmail.com', 'Beginner', 'registeredUser');
+
+INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
+VALUES (null, 'bdaydoggo', 'bdaydoggo', 'bdaydoggo', 'bdaydoggo@gmail.com', 'Beginner', 'registeredUser');
+
+/* Post */
+INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
+VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02');
+
+INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
+VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'capture', 'Howler zoo arboreal primate space monkey exotic new world tree endangered baby banana spider poo.', '2021-10-03');
+
+INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
+VALUES (null, 'Music', 3, "I am a freelancer, but this does not mean I'll work for free", 122, 5,'doggo2', '', '2021-10-06');
+
+INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
+VALUES (null, 'Photography', 4, 'Where banana', 23, 7,'monke2', "I'm baby offal vegan messenger bag gluten-free tote bag. Brooklyn schlitz cronut fixie, pork belly lo-fi gentrify bushwick slow-carb.", '2021-10-08');
+
+INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
+VALUES (null, 'Videos', 5, 'Happy Halloween, from my doggo', 2000, 0,'halloween', '', '2021-10-09');
+
+/* User_Category */
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (1, 'Sports');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (1, 'News');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (2, 'News');
+
+/* Comment */
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809);
 
 
-INSERT INTO `ROLE` VALUES ('guest');
-INSERT INTO `ROLE` VALUES ('registeredUser');
-INSERT INTO `ROLE` VALUES ('moderator');
-INSERT INTO `ROLE` VALUES ('admin') ;
-INSERT INTO `TAG` VALUES ('Cristiano Ronaldo');
-INSERT INTO `TAG` VALUES ('Angela Merkel');
-INSERT INTO `TAG` VALUES ('White House');
-INSERT INTO `TAG` VALUES ('Brexit') ;
-INSERT INTO `CATEGORY` VALUES ('News', null, null);
-INSERT INTO `CATEGORY` VALUES ('Sports', null, null);
-INSERT INTO `CATEGORY` VALUES ('Videos', null, null);
-INSERT INTO `CATEGORY` VALUES ('Music', null, null);
-INSERT INTO `CATEGORY` VALUES ('Photography', null, null);
-INSERT INTO `CATEGORY` VALUES ('Films', null, null);
-INSERT INTO `USER` VALUES (null, 'monke', 'avatar', 'monke1', 'monke@gmail.com', 'Beginner', 'registeredUser') ;
-INSERT INTO `USER` VALUES (null, 'doggo', 'doggo', 'dog1', 'doggo@gmail.com', 'Beginner', 'registeredUser') ;
--- USER_CATEGORY MISSING
-INSERT INTO `POST` VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02') ;
-INSERT INTO `POST` VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'Capture', '', '2021-10-03') ;
-INSERT INTO `USER_CATEGORY`VALUES (1, 'Sports');
-INSERT INTO `USER_CATEGORY`VALUES (1, 'News');
-INSERT INTO `USER_CATEGORY`VALUES (2, 'News');
-INSERT INTO `COMMENT` (comment_id, user_id, media_id, post_id, `description`, up_votes, down_votes) VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809) ;
--- POST_TAG MISSING
--- MEDIA MISSING
+/* Post_tag MISSING
+   Media MISSING
+   User_message MISSING */
