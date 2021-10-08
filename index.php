@@ -17,7 +17,7 @@ include_once('view/header.php');?>
         <div class="media_container">
           <div class="share">
             <div class="share_upside">
-              <img src="img/avatar.jpg" alt="avatar" />
+              <img src="img/avatars/avatar.jpg" alt="avatar" />
               <input
                 type="text"
                 name="post_profile"

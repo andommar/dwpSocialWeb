@@ -54,7 +54,7 @@
 
       <div class="navbar_right">
         <div class="navbar_profile">
-          <img src="img/avatar.jpg" alt="avatar" />
+          <img src="img/avatars/avatar.jpg" alt="avatar" />
           <span>Monke</span>
         </div>
         <div class="navbar_links">

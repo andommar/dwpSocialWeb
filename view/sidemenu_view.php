@@ -2,7 +2,7 @@
         <ul>
           <li>
             <a href="#">
-              <img src="img/avatar.jpg" alt="avatar" />
+              <img src="img/avatars/avatar.jpg" alt="avatar" />
               <span>Monke monki</span>
             </a>
           </li>
