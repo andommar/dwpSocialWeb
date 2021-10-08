@@ -1,5 +1,6 @@
 <?php
 require_once "models/Post.php";
+require_once "models/User.php";
 
 class Controller {
 
@@ -24,7 +25,11 @@ class Controller {
     }
 
     // User
-
+    public function isUserRegistered ($username, $email, $password){
+        $u = new User();
+        $res = $u->isUserRegistered($username, $email, $password);
+        return $res;
+    }
 
     //Comment
 }

@@ -68,6 +68,21 @@ class User {
         return $result;
     }
 
+    public function updateUser($userId, $email, $username,$password){
+        $db = new Dbconn();
+        $result = false;
+        if($db->isConnected()){
+            $sql = 'UPDATE user 
+                    SET username = $username;
+                    avatar = $email;
+                    password = $username;
+                    email = $password; 
+                    WHERE user_id = $userId';
+            $result =$db->executeQuery($sql);
+        }
+        return $result; 
+    }
+
 
 }
 
