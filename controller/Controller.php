@@ -1,6 +1,6 @@
 <?php
-require_once "models/Post.php";
-require_once "models/User.php";
+spl_autoload_register(function ($class)
+{include"models/".$class.".php";});
 
 class Controller {
 

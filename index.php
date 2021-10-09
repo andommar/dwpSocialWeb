@@ -1,7 +1,16 @@
 <?php
 include_once('controller/Controller.php');
-include_once('view/header.php'); ?>
+include_once('models/SessionHandle.php');
+include_once('models/Redirector.php');
+include_once('view/header.php'); 
 
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("login.php");
+}
+
+?>
+<p align="center"><a href="login.php?logout=1">Logout!</a> </p>
 <!-- Content -->
 <div class="content">
   <?php include_once('view/sidemenu_view.php'); ?>
