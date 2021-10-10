@@ -1,40 +1,58 @@
 <?php
-spl_autoload_register(function ($class)
-{include"models/".$class.".php";});
+spl_autoload_register(function ($class) {
+    include "models/" . $class . ".php";
+});
 $session = new SessionHandle;
 
-if(isset($_GET['logout']) && $_GET['logout'] == 1){
+if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
     $msg = "You are now logged out.";
 } elseif ($session->logged_in()) {
     $redirect = new Redirector("index.php");
 }
 
-if (isset($_POST['submit'])){
-   $login = new LoginUser ($_POST['username'], $_POST['password']);
-   $msg = $login->message;
+if (isset($_POST['submit'])) {
+    $login = new LoginUser($_POST['username'], $_POST['password']);
+    $msg = $login->message;
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login-signup.css" />
 </head>
+
 <body>
-<?php
-if (!empty($msg)) {echo "<p>" . $msg . "</p>";}
-?>
-    <h2>Please login</h2>
-    <form action="" method="post">
-        Username:
-        <input type="text" name="username" id="username">
-        Password:
-        <input type="password" name="password" id="password">
-        <input type="submit" name ="submit" value="login">
-    </form>
+    <div id="container">
+        <div id="login-form" class="form-wrap extra-margin">
+            <?php
+            if (!empty($msg)) {
+                echo "<p class=\"info-message\">" . $msg . "</p>";
+            }
+            ?>
+            <h1>Login</h1>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" autocomplete="off" id="password">
+                </div>
+                <input type="submit" name="submit" value="Submit">
+            </form>
+            <footer>
+                <p>Don't have an account yet? <a class="purple-color" href="signup.php">Sign up Here</a></p>
+            </footer>
+        </div>
+    </div>
 </body>
+
 </html>
