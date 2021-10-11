@@ -6,7 +6,7 @@ foreach($posts as $post){?>
 
 <div class="news_feed">
             <div class="news_feed_title">
-              <img src="img/avatars/<?php echo $post['avatar']?>.jpg" alt="user" />
+              <img src="img/avatars/<?php echo $post['avatar']?>" alt="user" />
               <div class="news_feed_title_content">
                 <p><?php echo $post['title'] ?></p>
                 <span>12. <i class="fas fa-globe-americas"></i></span>
@@ -16,7 +16,7 @@ foreach($posts as $post){?>
               <p class="news_feed_subtitle">
                 <?php echo $post['description'] ?>
               </p>
-              <img src="img/media/<?php echo $post['media_url']?>.PNG" alt="sunflower" />
+              <img src="img/media/<?php echo $post['media_url']?>" alt="post-media" />
               <div class="news_feed_description_title">
                 <span>YOUTUBE</span>
                 <p>

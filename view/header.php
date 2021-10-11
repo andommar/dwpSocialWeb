@@ -8,6 +8,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/post.css" />
   <title>DwpUnknown</title>
 </head>
 
@@ -44,7 +45,7 @@
         <span>Monke</span>
       </div>
       <div class="navbar_links">
-        <i class="fa fa-plus"></i>
+        <a href="submit.php"><i class="fa fa-plus"></i></a>
         <i class="fab fa-facebook-messenger"></i>
         <i class="fa fa-bell"></i>
         <i class="fas fa-arrow-down"></i>

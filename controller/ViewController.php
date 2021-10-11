@@ -1,5 +1,10 @@
 <?php
 include_once("controller/Controller.php");
+
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("login.php");
+}
 // Validates fields, returns errors to show them in the View
 // If everything is okay calls the Controller to execute the specific query
 function validateSignUp($username, $email, $password, $password2, $termsofuse, $message)
@@ -40,4 +45,38 @@ function validateSignUp($username, $email, $password, $password2, $termsofuse, $
         }
     }
     return $message;
+}
+
+// Validates new post form
+
+function validateNewPost ($title, $category, $mediaUrl, $description,$message) {
+    
+    $title = trim($title);
+    $description = trim($description);
+
+    if(empty($title)){
+        $message['title'] = 'Title cannot be empty';
+    } else if (empty($category) || $category == 'Category'){
+        $message['category'] = 'Please choose a category for your post';
+    } else if (empty($description)) {
+        $message['description'] = 'Add a description for your post';
+    }
+
+    // Delete array elements with no errors
+    foreach ($message as $key => $value) {
+        if (empty($value)) unset($message[$key]);
+    }
+    // If no validation errors
+    if (empty($message)) {
+        var_dump($_SESSION['userId']);
+        $c = new Controller();
+        if ($c->newPost($_SESSION['userId'],$title, $category, $mediaUrl, $description)) {
+            $message['database'] = 'User succesfully created';
+        } else {
+            $message['database'] = 'Error creating the user';
+        }
+    }
+
+    return $message;
+
 }

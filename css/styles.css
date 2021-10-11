@@ -96,8 +96,7 @@ body {
   color: #2d88ff; /*!important*/
 }
 
-.navbar a,
-.navbar a i {
+.navbar a {
   text-decoration: none;
   color: #b8bbbf;
   font-size: 23px;
@@ -138,6 +137,9 @@ body {
   font-weight: 500;
 }
 
+.navbar_links a {
+  font-size: 16px;
+}
 .navbar_links i {
   margin-right: 5px;
   background: #404041;
