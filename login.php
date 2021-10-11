@@ -33,18 +33,18 @@ if (isset($_POST['submit'])) {
         <div id="login-form" class="form-wrap extra-margin">
             <?php
             if (!empty($msg)) {
-                echo "<p class=\"info-message\">" . $msg . "</p>";
+                echo "<p class=\"message info-message\">" . $msg . "</p>";
             }
             ?>
             <h1>Login</h1>
             <form action="" method="post">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()">
+                    <input type="text" name="username" id="username" autocomplete="off" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" autocomplete="off" id="password">
+                    <input type="password" name="password" autocomplete="off" required="" aria-required="true" id="password">
                 </div>
                 <input type="submit" name="submit" value="Submit">
             </form>

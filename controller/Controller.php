@@ -1,6 +1,7 @@
 <?php
-spl_autoload_register(function ($class)
-{include"models/".$class.".php";});
+spl_autoload_register(function ($class) {
+    include "models/" . $class . ".php";
+});
 // require_once "models/Category.php";
 // require_once "models/Post.php";
 // require_once "models/User.php";
@@ -35,6 +36,13 @@ class Controller
     {
         $p = new Post();
         $res = $p->newPost($userId, $title, $categoryName, $mediaUrl, $description);
+        return $res;
+    }
+
+    public function registerUser($username, $email, $password)
+    {
+        $u = new User($username, $email, $password);
+        $res = $u->registerUser($username, $email, $password);
         return $res;
     }
 

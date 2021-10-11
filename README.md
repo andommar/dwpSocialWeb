@@ -10,3 +10,7 @@
 - Post comment and comments in general
 - Voting
 - Validations and errors
+
+## Issues
+
+- SignUp and other forms: page reloads after validation errors (when submitting) and the user must rewrite everything!

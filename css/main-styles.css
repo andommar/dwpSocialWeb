@@ -1,0 +1,21 @@
+/* Validation messages, etc */
+
+.message {
+  text-align: left !important;
+  font-style: italic;
+  /* position: absolute;
+  top: 3em; */
+}
+
+.error-message {
+  color: red;
+}
+.info-message {
+  color: #fff;
+}
+.success-message {
+  color: rgb(26, 172, 70);
+}
+.danger-message {
+  color: rgb(255, 197, 6);
+}
