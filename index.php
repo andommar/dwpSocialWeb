@@ -10,7 +10,6 @@ if ($session->confirm_logged_in()) {
 }
 
 ?>
-<p align="center"><a href="login.php?logout=1">Logout!</a> </p>
 <!-- Content -->
 <div class="content">
   <?php include_once('view/sidemenu_view.php'); ?>

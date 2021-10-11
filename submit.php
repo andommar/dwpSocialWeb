@@ -2,9 +2,6 @@
 include_once('view/header.php');
 include_once "controller/ViewController.php";
 
-
-echo "Hey im". $_SESSION['userId'] . " with name" . $_SESSION['username'];
-
 if(isset($_POST['submit'])){
 
   if(($_FILES['imgfile']['type'] == 'image/jpeg'  ||
@@ -16,12 +13,9 @@ if(isset($_POST['submit'])){
           echo "Error: ". $_FILES['imgfile']['error'];
       } else {
         move_uploaded_file($_FILES['imgfile']['tmp_name'], "img/media/".$_FILES['imgfile']['name']);
-        echo "stored in: img/media/".$_FILES['imgfile']['name'];
       }
     }
-
   $message = ['title' => '', 'category' => '', 'description' => '',];
-  var_dump($_FILES['imgfile']['name']);
   $msg = validateNewPost($_POST['title'], $_POST['category'],$_FILES['imgfile']['name'], $_POST['description'], $message);
 }
 
@@ -54,7 +48,7 @@ if(isset($_POST['submit'])){
         <input type="file" name="imgfile" id="imgfile">
       </div>
         <input type="submit" name="submit" value="New post">
-        <p><?php echo $msg ?></p>
+        <p class="message info-message"><?php echo isset($msg['database']) ? $msg['database'] : '' ?></p>
     </form>
   </div>
 </section>

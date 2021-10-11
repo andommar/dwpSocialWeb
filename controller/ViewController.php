@@ -68,12 +68,11 @@ function validateNewPost ($title, $category, $mediaUrl, $description,$message) {
     }
     // If no validation errors
     if (empty($message)) {
-        var_dump($_SESSION['userId']);
         $c = new Controller();
         if ($c->newPost($_SESSION['userId'],$title, $category, $mediaUrl, $description)) {
-            $message['database'] = 'User succesfully created';
+            $message['database'] = 'Post successfully created';
         } else {
-            $message['database'] = 'Error creating the user';
+            $message['database'] = 'An error ocurred';
         }
     }
 

@@ -7,6 +7,7 @@ $session = new SessionHandle;
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
     $msg = "You are now logged out.";
+    $redirect = new Redirector("index.php");
 } elseif ($session->logged_in()) {
     $redirect = new Redirector("index.php");
 }

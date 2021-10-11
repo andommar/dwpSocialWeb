@@ -48,7 +48,7 @@
         <a href="submit.php"><i class="fa fa-plus"></i></a>
         <i class="fab fa-facebook-messenger"></i>
         <i class="fa fa-bell"></i>
-        <i class="fas fa-arrow-down"></i>
+        <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
       </div>
     </div>
   </div>
