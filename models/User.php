@@ -8,7 +8,7 @@ class User
     private $email;
     private $password;
     public $userCategories = array();
-
+    public $message;
 
     //We retrieve user data from user table and their preferred categories from user_category table
     public function getUserData($userId)
@@ -67,7 +67,10 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = 'INSERT INTO user (username, avatar, password, email, rank, role_name) VALUES ($username, "avatar", $password, $email, "Beginner", "registeredUser")';
+
+            $sql = "INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
+            VALUES ('{$username}', 'avatar', '{$password}', '{$email}', 'Beginner', 'registeredUser')";
+
             $result = $db->executeQuery($sql);
             var_dump($result);
         }
