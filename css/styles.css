@@ -29,8 +29,9 @@ body {
 }
 
 .navbar_logo {
-  width: 45px;
-  height: 45px;
+  /* width: 45px;
+  height: 45px; */
+  width: 37px;
   margin-right: 5px;
 }
 
@@ -89,11 +90,11 @@ body {
 }
 
 .active_icon {
-  border-bottom: 3px solid #2d88ff;
+  border-bottom: 3px solid #b64ffb;
 }
 
 .active_icon i {
-  color: #2d88ff; /*!important*/
+  color: #b64ffb; /*!important*/
 }
 
 .navbar a {
@@ -201,10 +202,10 @@ body {
 }
 
 .content_left ul li i {
-  background: #404041;
+  background: #2b2b2b; /*background: #404041;*/
   padding: 10px;
   border-radius: 100%;
-  color: #e7e9ed;
+  color: #b64ffb; /* color: #e7e9ed; */
   cursor: pointer;
   transition: 0.3s;
   font-size: 16px;
@@ -238,7 +239,8 @@ body {
 }
 
 .media_container {
-  padding: 5px 115px;
+  /* padding: 5px 115px; */
+  padding: 5px 92px;
 }
 
 .share {
@@ -395,6 +397,13 @@ body {
   font-size: 15px;
 }
 
+/* Post date area */
+.post-date-area {
+  text-align: right;
+  padding: 10px 15px;
+  color: #989898;
+  font-size: smaller;
+}
 /* Likes */
 .likes_area {
   display: flex;
@@ -427,6 +436,9 @@ body {
   justify-content: center;
   padding: 5px 15px;
   height: 35px;
+}
+.likes_buttons div {
+  cursor: pointer;
 }
 
 .likes_buttons_links {

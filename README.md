@@ -14,3 +14,5 @@
 ## Issues
 
 - SignUp and other forms: page reloads after validation errors (when submitting) and the user must rewrite everything!
+- When signing up correctly, it redirects user to login, so the message of successful registration has no time to be shown
+- Check Image types when loading posts images, avatar, etc
