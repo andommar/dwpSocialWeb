@@ -6,29 +6,33 @@ class User
     private $userId;
     private $username;
     private $email;
+    private $avatar;
     private $password;
     public $userCategories = array();
     public $message;
 
     //We retrieve user data from user table and their preferred categories from user_category table
-    public function getUserData($userId)
+    public function __construct($userId)
     {
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = 'SELECT user_id, username, email
-                    from user where user_id = $userId';
+            $sql = "SELECT `user_id`, username, email, avatar
+                    from user where `user_id` = $userId";
             $stmt = $db->selectQuery($sql);
             if ($stmt) {
-                $this->userId = $stmt['user_id'];
-                $this->username = $stmt['username'];
-                $this->email = $stmt['email'];
+                foreach ($stmt as $values){
+                    $this->userId = $values['user_id'];
+                    $this->username = $values['username'];
+                    $this->email = $values['email'];
+                    $this->avatar = $values['avatar'];
+                }
+
             }
-            $sql = 'SELECT c.category_name
+            $sql = "SELECT c.category_name
             from category c 
             inner join user_category uc on c.category_name = uc.category_name  
-            where uc.user_id = $userId';
-
+            where uc.user_id = $userId";
             $stmt = $db->selectQuery($sql);
             if ($stmt) {
                 foreach ($stmt as $data)
@@ -39,6 +43,35 @@ class User
 
         return $result;
     }
+
+    // Getters
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    public function getUserCategories()
+    {
+        return $this->userCategories;
+    }
+
+    public function getUserAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function getUserEmail()
+    {
+        return $this->email;
+    }
+
+
+    // Methods
 
     public function isUserRegistered($username, $email, $password)
     {

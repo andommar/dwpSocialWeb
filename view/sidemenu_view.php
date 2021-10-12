@@ -2,30 +2,32 @@
   <ul>
     <li>
       <a href="#">
-        <img src="img/avatars/avatar.jpg" alt="avatar" />
-        <span>Monke monki</span>
+        <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
+        <span><?php echo $userData['username'] ?></span>
       </a>
     </li>
     <?php
     $c = new Controller();
-    $categories = $c->loadCategories();
-    foreach ($categories as $category) { ?>
+    $categories = $c->getUserCategories();
+    // $c = new Controller();
+    // $categories = $c->loadCategories();
+    foreach ($categories as $value) { ?>
       <li>
         <a href="#">
-          <?php if ($category['category_name'] == 'Sports') : ?>
+          <?php if ($value['category_name'] == 'Sports') : ?>
             <i class="fas fa-running"></i>
-          <?php elseif ($category['category_name'] == 'Videos') : ?>
+          <?php elseif ($value['category_name'] == 'Videos') : ?>
             <i class="fas fa-video"></i>
-          <?php elseif ($category['category_name'] == 'News') : ?>
+          <?php elseif ($value['category_name'] == 'News') : ?>
             <i class="fas fa-newspaper"></i>
-          <?php elseif ($category['category_name'] == 'Music') : ?>
+          <?php elseif ($value['category_name'] == 'Music') : ?>
             <i class="fas fa-music"></i>
-          <?php elseif ($category['category_name'] == 'Photography') : ?>
+          <?php elseif ($value['category_name'] == 'Photography') : ?>
             <i class="fas fa-photo-video"></i>
-          <?php elseif ($category['category_name'] == 'Films') : ?>
+          <?php elseif ($value['category_name'] == 'Films') : ?>
             <i class="fas fa-film"></i>
           <?php endif; ?>
-          <span><?php echo $category['category_name'] ?></span>
+          <span><?php echo $value['category_name'] ?></span>
         </a>
       </li>
     <?php }; ?>

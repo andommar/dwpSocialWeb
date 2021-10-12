@@ -4,10 +4,7 @@ include_once('models/SessionHandle.php');
 include_once('models/Redirector.php');
 include_once('view/header.php'); 
 
-$session = new SessionHandle();
-if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("login.php");
-}
+
 
 ?>
 <!-- Content -->

@@ -1,3 +1,13 @@
+<?php
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("login.php");
+}
+
+$c = new Controller();
+$userData = $c->getUserInfo();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +51,8 @@
 
     <div class="navbar_right">
       <div class="navbar_profile">
-        <img src="img/avatars/avatar.jpg" alt="avatar" />
-        <span>Monke</span>
+        <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
+        <span><?php echo $userData['username'] ?></span>
       </div>
       <div class="navbar_links">
         <a href="submit.php"><i class="fa fa-plus"></i></a>

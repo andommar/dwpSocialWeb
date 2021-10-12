@@ -167,6 +167,12 @@ VALUES (null, 'Videos', 5, 'Happy Halloween, from my doggo', 2000, 0,'halloween'
 INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (1, 'Sports');
 INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (1, 'News');
 INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (2, 'News');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'Films');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'Music');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'News');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'Photography');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'Sports');
+INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (3, 'Videos');
 
 /* Comment */
 INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
