@@ -105,7 +105,6 @@ class User
             VALUES ('{$username}', 'avatar', '{$password}', '{$email}', 'Beginner', 'registeredUser')";
 
             $result = $db->executeQuery($sql);
-            var_dump($result);
         }
         return $result;
     }
