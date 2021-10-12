@@ -1,5 +1,6 @@
 <?php
 include_once('controller/Controller.php');
+include_once('controller/ViewController.php');
 include_once('models/SessionHandle.php');
 include_once('models/Redirector.php');
 $session = new SessionHandle();

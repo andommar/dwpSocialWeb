@@ -1,7 +1,7 @@
 <?php
 include_once("controller/Controller.php");
 
-$session = new SessionHandle();
+// $session = new SessionHandle();
 
 // Validates fields, returns errors to show them in the View
 // If everything is okay calls the Controller to execute the specific query
