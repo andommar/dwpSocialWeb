@@ -1,10 +1,6 @@
 <?php
-include_once('controller/Controller.php');
-include_once('models/SessionHandle.php');
-include_once('models/Redirector.php');
-include_once('view/header.php'); 
-
-
+include_once('view/header.php');
+//Session handler
 
 ?>
 <!-- Content -->
@@ -21,7 +17,7 @@ include_once('view/header.php');
     </div>
     <div class="media_container">
       <!-- Create post -->
-      <?php include_once('view/user_create_post_view.php'); ?>
+      <!-- <?php include_once('view/user_create_post_view.php'); ?> -->
       <!-- News FEED -->
       <?php include_once('view/userfeed_view.php'); ?>
 

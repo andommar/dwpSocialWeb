@@ -20,7 +20,7 @@ class LoginUser{
                $this->message = "Incorrect Username/password.";
            }
         } else {
-            $this->message = "Username doesn't exists.";
+            $this->message = "Username doesn't exist.";
         }
     }
 }

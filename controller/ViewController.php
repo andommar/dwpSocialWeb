@@ -2,9 +2,7 @@
 include_once("controller/Controller.php");
 
 $session = new SessionHandle();
-if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("login.php");
-}
+
 // Validates fields, returns errors to show them in the View
 // If everything is okay calls the Controller to execute the specific query
 function validateSignUp($username, $email, $password, $password2, $termsofuse, $message)
@@ -49,14 +47,15 @@ function validateSignUp($username, $email, $password, $password2, $termsofuse, $
 
 // Validates new post form
 
-function validateNewPost ($title, $category, $mediaUrl, $description,$message) {
-    
+function validateNewPost($title, $category, $mediaUrl, $description, $message)
+{
+
     $title = trim($title);
     $description = trim($description);
 
-    if(empty($title)){
+    if (empty($title)) {
         $message['title'] = 'Title cannot be empty';
-    } else if (empty($category) || $category == 'Category'){
+    } else if (empty($category) || $category == 'Category') {
         $message['category'] = 'Please choose a category for your post';
     } else if (empty($description)) {
         $message['description'] = 'Add a description for your post';
@@ -69,7 +68,7 @@ function validateNewPost ($title, $category, $mediaUrl, $description,$message) {
     // If no validation errors
     if (empty($message)) {
         $c = new Controller();
-        if ($c->newPost($_SESSION['userId'],$title, $category, $mediaUrl, $description)) {
+        if ($c->newPost($_SESSION['userId'], $title, $category, $mediaUrl, $description)) {
             $message['database'] = 'Post successfully created';
         } else {
             $message['database'] = 'An error ocurred';
@@ -77,5 +76,4 @@ function validateNewPost ($title, $category, $mediaUrl, $description,$message) {
     }
 
     return $message;
-
 }

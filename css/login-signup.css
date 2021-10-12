@@ -7,8 +7,9 @@
 
 body {
   color: #fff;
-  background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3, #15eb88);
-  background: linear-gradient(130deg, #b06ab3, #61a9f3, #15eb88);
+  /* #15eb88 */
+  background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3);
+  background: linear-gradient(130deg, #b06ab3, #61a9f3);
   line-height: 1.8;
 }
 form {
@@ -168,4 +169,18 @@ input#password2:focus {
 .terms-margin {
   display: flex;
   align-items: center;
+}
+
+.logo-position {
+  text-align: center;
+  position: relative;
+}
+#logo {
+  width: 114px;
+  /* text-align: center; */
+  margin-left: auto;
+  margin-right: auto;
+  position: absolute;
+  top: -7px;
+  right: 25px;
 }

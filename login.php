@@ -37,6 +37,7 @@ if (isset($_POST['submit'])) {
                 echo "<p class=\"message info-message\">" . $msg . "</p>";
             }
             ?>
+            <div class="logo-position"><img id="logo" src="img/assets/logo.png" alt="avatar" /></div>
             <h1>Login</h1>
             <form action="" method="post">
                 <div class="form-group">

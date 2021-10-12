@@ -4,10 +4,11 @@
   margin: auto;
   max-width: 700px;
   overflow: auto;
-  padding: 10px 20px;
-  background-color: #b496c9;
-  border-radius: 5px;
-  margin-top: 20px;
+  padding: 52px 66px;
+  background-color: #35333375;
+  /* border-radius: 5px; */
+  /* margin-top: 20px; */
+  color: white;
 }
 
 #post-form .form-group {
@@ -39,15 +40,20 @@
 
 #post-form input[type="submit"] {
   color: #fff;
-  background-color: #9e30e9;
+  background-color: #202020;
   padding: 13px;
   margin: 24px 0px;
   border: 0 none;
   cursor: pointer;
   border-radius: 5px;
-  box-shadow: 6px 5px 9px #2b2b2bb5;
-  font-size: 20px;
+  box-shadow: 3px 3px 9px #2b2b2b4a;
+  font-size: 17px;
   font-weight: 500;
   width: 100%;
   display: block;
+}
+
+#post-form {
+  background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3);
+  background: linear-gradient(130deg, #b06ab3, #61a9f3);
 }

@@ -1,4 +1,7 @@
 <?php
+include_once('controller/Controller.php');
+include_once('models/SessionHandle.php');
+include_once('models/Redirector.php');
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
     $redirect = new Redirector("login.php");
@@ -25,7 +28,7 @@ $userData = $c->getUserInfo();
 <body>
   <div class="navbar">
     <div class="navbar_left">
-      <img class="navbar_logo" src="img/assets/fb-icon.png" alt="avatar" />
+      <a href="index.php"><img class="navbar_logo" src="img/assets/logo.png" alt="avatar" /></a>
       <div class="input-icons">
         <i class="fas fa-search icon"></i>
         <input type="text" class="input-field" name="srch_input" placeholder="Search" />
@@ -39,13 +42,13 @@ $userData = $c->getUserInfo();
         <i class="fas fa-user-friends"></i>
       </a>
       <a href="#">
-        <i class="fas fa-circle"></i>
+        <i class="fas fa-infinity"></i>
       </a>
       <a href="#">
-        <i class="fas fa-archive"></i>
+        <i class="fas fa-bookmark"></i>
       </a>
       <a href="#">
-        <i class="fas fa-users"></i>
+        <i class="fas fa-info-circle"></i>
       </a>
     </div>
 
@@ -56,8 +59,8 @@ $userData = $c->getUserInfo();
       </div>
       <div class="navbar_links">
         <a href="submit.php"><i class="fa fa-plus"></i></a>
-        <i class="fab fa-facebook-messenger"></i>
-        <i class="fa fa-bell"></i>
+        <i class="fas fa-comment-dots"></i>
+        <!-- <i class="fa fa-bell"></i> -->
         <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
       </div>
     </div>
