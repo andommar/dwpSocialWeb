@@ -1,7 +1,7 @@
 <?php
 class DbConn{
-    private $user = "admin";
-    private $pass = "123";
+    private $user = "Anna";
+    private $pass = "4nn4";
     private $servername = "localhost";
     private $dbname = "socialdb";
     private $charset = "utf8";
@@ -74,5 +74,3 @@ class DbConn{
 
 
 }
-
-?>

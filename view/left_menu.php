@@ -1,11 +1,12 @@
-<div class="content_left">
+<div class="content_left col col-lg-2 col-xs-12 d-flex">
   <ul>
-    <li>
+    <!-- <li>
       <a href="#">
         <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
         <span><?php echo $userData['username'] ?></span>
       </a>
-    </li>
+    </li> -->
+    <li>My Categories</li>
     <?php
     $c = new Controller();
     $categories = $c->getUserCategories();

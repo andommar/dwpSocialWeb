@@ -2,43 +2,44 @@
 
 .container-form {
   margin: auto;
-  max-width: 700px;
+  max-width: 600px;
   overflow: auto;
   padding: 52px 66px;
-  background-color: #35333375;
-  /* border-radius: 5px; */
-  /* margin-top: 20px; */
-  color: white;
+  background-color: #35333361;
+  color: #242526;
 }
-
-#post-form .form-group {
+#post-form {
+  background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3);
+  background: linear-gradient(130deg, #b06ab3, #61a9f3);
+}
+#post-form section .form-group {
   margin-bottom: 20px;
 }
 
-#post-form label {
+#post-form section label {
   display: block; /*empuja a la siguiente linea */
   margin-bottom: 5px;
 }
 
-#post-form input,
-#post-form textarea,
-#post-form select {
+#post-form section input,
+#post-form section textarea,
+#post-form section select {
   width: 100%;
   padding: 10px;
   border: 1px #ddd solid;
 }
 
-#post-form textarea {
+#post-form section textarea {
   height: 200px;
 }
 
-#post-form input:focus,
-#post-form textarea:focus {
+#post-form section input:focus,
+#post-form section textarea:focus {
   outline: none;
   border-color: red;
 }
 
-#post-form input[type="submit"] {
+#post-form section input[type="submit"] {
   color: #fff;
   background-color: #202020;
   padding: 13px;
@@ -51,9 +52,4 @@
   font-weight: 500;
   width: 100%;
   display: block;
-}
-
-#post-form {
-  background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3);
-  background: linear-gradient(130deg, #b06ab3, #61a9f3);
 }

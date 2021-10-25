@@ -5,64 +5,79 @@ include_once('models/SessionHandle.php');
 include_once('models/Redirector.php');
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("login.php");
+  $redirect = new Redirector("login.php");
 }
 
 $c = new Controller();
 $userData = $c->getUserInfo();
 ?>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap 5.1.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/post.css" />
-  <title>DwpUnknown</title>
+  <link rel="stylesheet" href="css/new_post.css" />
+  <title>Monkia</title>
 </head>
 
 <body>
-  <div class="navbar">
-    <div class="navbar_left">
-      <a href="index.php"><img class="navbar_logo" src="img/assets/logo.png" alt="avatar" /></a>
-      <div class="input-icons">
-        <i class="fas fa-search icon"></i>
-        <input type="text" class="input-field" name="srch_input" placeholder="Search" />
-      </div>
-    </div>
-    <div class="navbar_center">
-      <a href="#" class="active_icon">
-        <i class="fas fa-home"></i>
-      </a>
-      <a href="#">
-        <i class="fas fa-user-friends"></i>
-      </a>
-      <a href="#">
-        <i class="fas fa-infinity"></i>
-      </a>
-      <a href="#">
-        <i class="fas fa-bookmark"></i>
-      </a>
-      <a href="#">
-        <i class="fas fa-info-circle"></i>
-      </a>
-    </div>
+  <div class="container-fluid d-flex flex-column">
+    <div class="row navbar d-flex align-items-center h-auto sticky-top">
+      <div class="col col-xl-3 col-md-4 col-xs-3 navbar_left d-flex align-items-center flex-fill">
+        <div>
+          <a href="index.php"><img class="navbar_logo" src="img/assets/logo_low.png" alt="avatar" /></a>
+        </div>
+        <div class="input-icons">
+          <!-- <i class="fas fa-search icon"></i> -->
 
-    <div class="navbar_right">
-      <div class="navbar_profile">
-        <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
-        <span><?php echo $userData['username'] ?></span>
+          <form class="d-flex">
+            <input class="form-control me-2 input-field" type="search" placeholder="Type something" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search </button>
+            <!-- <i class="fas fa-search d-flex align-items-center"></i> -->
+          </form>
+
+
+          <!-- <input type="text" class="input-field" name="srch_input" placeholder="Search" /> -->
+        </div>
       </div>
-      <div class="navbar_links">
-        <a href="submit.php"><i class="fa fa-plus"></i></a>
-        <i class="fas fa-comment-dots"></i>
-        <!-- <i class="fa fa-bell"></i> -->
-        <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
+      <div class="col col-xl-6 col-md-4 col-xs-4 navbar_center d-flex">
+        <a href="#" class="active_icon">
+          <i class="fas fa-home"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-user-friends"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-infinity"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-bookmark"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-info-circle"></i>
+        </a>
+      </div>
+
+      <div class="col col-xl-3 col-md-3 col-xs-5 navbar_right d-flex align-items-center flex-fill">
+
+        <div class="navbar_profile d-flex align-items-center">
+          <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
+          <span><?php echo $userData['username'] ?></span>
+        </div>
+        <div class="navbar_links">
+          <a href="new_post.php"><i class="fa fa-plus"></i></a>
+          <i class="fas fa-comment-dots"></i>
+          <!-- <i class="fa fa-bell"></i> -->
+          <a href="login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+
+
       </div>
     </div>
-  </div>
