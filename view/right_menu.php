@@ -2,7 +2,7 @@
     <ul>
         <li>All Categories</li>
         <?php
-        $c = new Controller();
+        $c = new CategoryController();
         $categories = $c->loadCategories();
         foreach ($categories as $value) { ?>
             <li>

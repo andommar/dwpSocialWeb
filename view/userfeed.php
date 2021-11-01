@@ -1,15 +1,15 @@
 <div class="col col-lg-8 col-xs-12">
   <!-- Stories section  -->
-  <div class="stories d-flex justify-content-center align-items-center">
+  <!-- <div class="stories d-flex justify-content-center align-items-center">
     <img src="https://picsum.photos/id/022/110/200" alt="" />
     <img src="https://picsum.photos/id/122/110/200" alt="" />
     <img src="https://picsum.photos/id/352/110/200" alt="" />
     <img src="https://picsum.photos/id/439/110/200" alt="" />
     <img src="https://picsum.photos/id/582/110/200" alt="" />
     <img src="https://picsum.photos/id/072/110/200" alt="" />
-  </div>
+  </div> -->
   <?php
-  $c = new Controller();
+  $c = new PostController();
   $posts = $c->loadUserFeedPosts();
   foreach ($posts as $post) { ?>
     <div class="news_feed">

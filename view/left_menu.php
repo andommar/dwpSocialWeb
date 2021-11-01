@@ -8,7 +8,7 @@
     </li> -->
     <li>My Categories</li>
     <?php
-    $c = new Controller();
+    $c = new CategoryController();
     $categories = $c->getUserCategories();
     // $c = new Controller();
     // $categories = $c->loadCategories();

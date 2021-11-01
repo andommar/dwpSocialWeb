@@ -1,14 +1,20 @@
 <?php
-include_once('controller/Controller.php');
+// Controllers
 include_once('controller/ViewController.php');
+include_once('controller/UserController.php');
+include_once('controller/CategoryController.php');
+include_once('controller/PostController.php');
+// Other files
 include_once('models/SessionHandle.php');
 include_once('models/Redirector.php');
+
+
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
   $redirect = new Redirector("login.php");
 }
 
-$c = new Controller();
+$c = new UserController();
 $userData = $c->getUserInfo();
 ?>
 
@@ -30,24 +36,18 @@ $userData = $c->getUserInfo();
 <body>
   <div class="container-fluid d-flex flex-column">
     <div class="row navbar d-flex align-items-center h-auto sticky-top">
-      <div class="col col-xl-3 col-md-4 col-xs-3 navbar_left d-flex align-items-center flex-fill">
+      <div class="col col-6 navbar_left d-flex align-items-center flex-fill my-2">
         <div>
           <a href="index.php"><img class="navbar_logo" src="img/assets/logo_low.png" alt="avatar" /></a>
         </div>
         <div class="input-icons">
-          <!-- <i class="fas fa-search icon"></i> -->
-
           <form class="d-flex">
             <input class="form-control me-2 input-field" type="search" placeholder="Type something" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search </button>
-            <!-- <i class="fas fa-search d-flex align-items-center"></i> -->
           </form>
-
-
-          <!-- <input type="text" class="input-field" name="srch_input" placeholder="Search" /> -->
         </div>
       </div>
-      <div class="col col-xl-6 col-md-4 col-xs-4 navbar_center d-flex">
+      <!-- <div class="col col-xl-6 col-md-4 col-xs-4 navbar_center d-flex">
         <a href="#" class="active_icon">
           <i class="fas fa-home"></i>
         </a>
@@ -63,9 +63,9 @@ $userData = $c->getUserInfo();
         <a href="#">
           <i class="fas fa-info-circle"></i>
         </a>
-      </div>
+      </div> -->
 
-      <div class="col col-xl-3 col-md-3 col-xs-5 navbar_right d-flex align-items-center flex-fill">
+      <div class="col col-6 navbar_right d-flex align-items-center flex-fill my-2">
 
         <div class="navbar_profile d-flex align-items-center">
           <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />

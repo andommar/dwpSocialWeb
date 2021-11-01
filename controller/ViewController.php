@@ -1,5 +1,6 @@
 <?php
-include_once("controller/Controller.php");
+include_once("controller/UserController.php");
+include_once("controller/PostController.php");
 
 // $session = new SessionHandle();
 
@@ -35,8 +36,8 @@ function validateSignUp($username, $email, $password, $password2, $termsofuse, $
     // If no validation errors
     if (empty($message)) {
 
-        $c = new Controller();
-        if ($c->registerUser($username,  $email,  $password)) {
+        $u = new UserController();
+        if ($u->registerUser($username,  $email,  $password)) {
             $message['database'] = 'User succesfully created';
         } else {
             $message['database'] = 'Error creating the user';
@@ -67,8 +68,8 @@ function validateNewPost($title, $category, $mediaUrl, $description, $message)
     }
     // If no validation errors
     if (empty($message)) {
-        $c = new Controller();
-        if ($c->newPost($_SESSION['userId'], $title, $category, $mediaUrl, $description)) {
+        $p = new PostController();
+        if ($p->newPost($_SESSION['userId'], $title, $category, $mediaUrl, $description)) {
             $message['database'] = 'Post successfully created';
         } else {
             $message['database'] = 'An error ocurred';

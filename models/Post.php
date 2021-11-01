@@ -1,27 +1,30 @@
 <?php
 
-require_once('DbConn.php');
+require_once('db/DbConn.php');
 
-class Post {
+class Post
+{
 
 
   //It's missing userid parameter
-  public function loadUserFeedPosts(){
+  public function loadUserFeedPosts()
+  {
     $db = new Dbconn();
     $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.* FROM user u inner join post p where u.user_id = p.user_id';
     $result = $db->selectquery($sql);
     return $result;
-
   }
 
-  public function loadCategoryPosts($categoryName){
+  public function loadCategoryPosts($categoryName)
+  {
     $db = new Dbconn();
     $sql = 'SELECT * FROM post where category_name = $categoryName';
     $result = $db->selectquery($sql);
     return $result;
   }
 
-  public function newPost($userId, $title, $categoryName, $mediaUrl, $description){
+  public function newPost($userId, $title, $categoryName, $mediaUrl, $description)
+  {
     $db = new DbConn();
     $date = date('Y-m-d H:i:s');
     $sql = "INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`, up_votes, down_votes)
@@ -30,6 +33,3 @@ class Post {
     return $result;
   }
 }
-
-
-?>

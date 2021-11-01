@@ -1,5 +1,5 @@
 <?php
-require_once('DbConn.php');
+require_once('db/DbConn.php');
 
 class User
 {
@@ -21,13 +21,12 @@ class User
                     from user where `user_id` = $userId";
             $stmt = $db->selectQuery($sql);
             if ($stmt) {
-                foreach ($stmt as $values){
+                foreach ($stmt as $values) {
                     $this->userId = $values['user_id'];
                     $this->username = $values['username'];
                     $this->email = $values['email'];
                     $this->avatar = $values['avatar'];
                 }
-
             }
             $sql = "SELECT c.category_name
             from category c 

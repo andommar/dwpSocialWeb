@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 <div class="row d-flex justify-content-center">
   <?php include_once('view/left_menu.php'); ?>
 
-  <div id="post-form" class="col col-lg-8">
+  <div id="post-form" class="col col-lg-10">
     <section>
       <div class="container-form">
         <h2 class="f-heading">
@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
       </div>
     </section>
   </div>
-  <?php include_once('view/right_menu.php'); ?>
+  <!-- <?php include_once('view/right_menu.php'); ?> -->
 </div>
 
 
