@@ -76,9 +76,10 @@ class User
     {
         $db = new Dbconn();
         $result = false;
+        $arr = [$username, $email, $password];
         if ($db->isConnected()) {
-            $sql = 'SELECT count(*) from user where username = $username and email = $email and password = $password';
-            $result = $db->executeQuery($sql);
+            $sql = 'SELECT count(*) from user where username = ? and email = ? and password = ?';
+            $result = $db->executeQueryBindArr($sql,$arr);
         }
         return $result;
     }
@@ -88,8 +89,8 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = 'SELECT count(*) from user where $user_id = $userId';
-            $result = $db->executeQuery($sql);
+            $sql = 'SELECT count(*) from user where $user_id = ?';
+            $result = $db->executeQuery($sql,$userId);
         }
         return $result;
     }
@@ -100,26 +101,29 @@ class User
         $result = false;
         if ($db->isConnected()) {
 
-            $sql = "INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
-            VALUES ('{$username}', 'avatar', '{$password}', '{$email}', 'Beginner', 'registeredUser')";
-
-            $result = $db->executeQuery($sql);
+            $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
+                    VALUES (?, ?, ?, ?, ?, ?)';
+            $arr = [$username, 'avatar', $password, $email, 'Beginner', 'registeredUser'];
+            // VALUES ('{$username}', 'avatar', '{$password}', '{$email}', 'Beginner', 'registeredUser')";
+            $result = $db->executeQueryBindArr($sql, $arr);
         }
         return $result;
     }
 
+    //Not implemented yet. Missing binded parameters array
     public function updateUser($userId, $email, $username, $password)
     {
         $db = new Dbconn();
         $result = false;
+        $arr = [$userId, $email, $username, $password];
         if ($db->isConnected()) {
             $sql = 'UPDATE user 
-                    SET username = $username;
-                    avatar = $email;
-                    password = $username;
-                    email = $password; 
-                    WHERE user_id = $userId';
-            $result = $db->executeQuery($sql);
+                    SET username = ?,
+                    avatar = ?,
+                    password = ?,
+                    email = ?,
+                    WHERE user_id = ?';
+            $result = $db->executeQueryBindArr($sql, $arr);
         }
         return $result;
     }

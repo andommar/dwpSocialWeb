@@ -27,9 +27,13 @@ class Post
   {
     $db = new DbConn();
     $date = date('Y-m-d H:i:s');
-    $sql = "INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`, up_votes, down_votes)
-            VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)";
-    $result = $db->executeQuery($sql);
+    $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`, up_votes, down_votes)
+            VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)';
+            // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
+            // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
+    $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date, 0, 0];
+
+    $result = $db->executeQueryBindArr($sql, $arr);
     return $result;
   }
 }

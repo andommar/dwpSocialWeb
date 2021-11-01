@@ -10,8 +10,8 @@ class LoginUser
         $db = new DbConn();
         $user = trim($username);
         $pass = trim($password);
-        $sql = "SELECT user_id, username, `password` from user where username = '{$user}' LIMIT 1";
-        $result = $db->selectquery($sql);
+        $sql = 'SELECT user_id, username, `password` from user where username = ? LIMIT 1';
+        $result = $db->selectSingleQueryBind($sql,$user);
         if (count($result) == 1) {
             if ($result[0]['password'] == $pass) {
                 $_SESSION['userId'] = $result[0]['user_id'];

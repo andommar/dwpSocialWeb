@@ -51,14 +51,43 @@ class DbConn
         return ($result);
     }
 
-    public function executeQuery($sql)
+    public function selectSingleQueryBind($sql,$bind)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            if (isset($bind)){
+                $stmt = $this->dbConn->prepare($sql);
+                if ($stmt) {
+                    $stmt->execute([$bind]);
+                    $result = $stmt->fetchAll();
+                }   
+            }
+        }
+        return ($result);
+    }
+
+    public function executeQuery($sql, $bindParam)
     {
         $stmt = null;
         $result = false;
         if (isset($sql) && $sql != "" && isset($this->dbConn)) {
             $stmt = $this->dbConn->prepare($sql);
             if ($stmt) {
-                $result = $stmt->execute();
+                $result = $stmt->execute($bindParam);
+            }
+        }
+        return ($result);
+    }
+
+    public function executeQueryBindArr($sql,$bindArr)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            $stmt = $this->dbConn->prepare($sql);
+            if ($stmt) {
+                $result = $stmt->execute($bindArr);
             }
         }
         return ($result);
