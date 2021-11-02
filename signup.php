@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/login-signup.css" />
-  <link rel="stylesheet" href="css/main-styles.css" />
+  <link rel="stylesheet" href="css/messages-styles.css" />
 </head>
 
 <body id="signup">
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
           <p class="message info-message"><?php echo isset($msg['database']) ? $msg['database'] : '' ?></p>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" autocomplete="off" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()" />
+            <input type="text" name="username" id="username" autocomplete="off" maxlength="30" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()" />
             <p class="message error-message"><?php echo isset($msg['username']) ? $msg['username'] : '' ?></p>
           </div>
           <div class="form-group">
@@ -53,12 +53,12 @@ if (isset($_POST['submit'])) {
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" autocomplete="off" required="" aria-required="true" />
+            <input type="password" name="password" id="password" maxlength="30" autocomplete="off" required="" aria-required="true" />
             <p class="message error-message"><?php echo isset($msg['password']) ? $msg['password'] : '' ?></p>
           </div>
           <div class="form-group">
             <label for="password2">Confirm Password</label>
-            <input type="password" name="password2" id="password2" autocomplete="off" required="" aria-required="true" />
+            <input type="password" name="password2" id="password2" maxlength="30" autocomplete="off" required="" aria-required="true" />
             <p class="message error-message"><?php echo isset($msg['password2']) ? $msg['password2'] : '' ?></p>
           </div>
           <div class="terms-margin">

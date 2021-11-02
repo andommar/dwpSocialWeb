@@ -7,18 +7,18 @@
 
 ## Pending Tasks
 
-- Add constants.php file to gitignore
-- Change Dynamic SQL to Prepared Statements
+- Fill database with real info
+- Password Hash
 - Add transactions in User Login, for example (IT'S NOT A REQUIREMENT FOR THE DWP)
 - Consider Batch processing pdo sql (If we have multiple queries to run)
-- Basic CRUD > Update and delete
-- User login > A user should login with username or email
+- User login > A user should login with username or email ??
 - Sign up
 - User settings
 - Post creation
 - Post comment and comments in general
 - Voting
-- Validations and errors (delete viewcontroller and validate with js)
+- Validations and errors (delete viewcontroller)
+- Prevent re submit (just once)
 
 ## Issues
 
