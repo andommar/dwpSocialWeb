@@ -1,13 +1,14 @@
 <?php
-// Controllers
-include_once('controller/ViewController.php');
-include_once('controller/UserController.php');
-include_once('controller/CategoryController.php');
-include_once('controller/PostController.php');
-// Other files
-include_once('models/SessionHandle.php');
-include_once('models/Redirector.php');
+spl_autoload_register(function ($class) {
+  $pathController = 'controller/' . $class . '.php';
+  $pathModel = 'models/' . $class . '.php';
 
+  if(file_exists($pathController)) {
+    require_once $pathController;
+  } else if (file_exists($pathModel)) {
+    require_once $pathModel;
+  }
+});
 
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
