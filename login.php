@@ -2,6 +2,7 @@
 spl_autoload_register(function ($class) {
     include "models/" . $class . ".php";
 });
+require_once "controller/LoginController.php";
 $session = new SessionHandle;
 
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
@@ -12,9 +13,22 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $redirect = new Redirector("index.php");
 }
 
+// php validation after js validation it's okay
+
 if (isset($_POST['submit'])) {
-    $login = new LoginUser($_POST['username'], $_POST['password']);
-    $msg = $login->message;
+
+    $username = validate_data($_POST['username']);
+    $password = validate_data($_POST['password']);
+    $c = new LoginController();
+    $msg = $c->loginUser($username, $password);
+}
+function validate_data($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = strip_tags($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }
 ?>
 
@@ -29,6 +43,10 @@ if (isset($_POST['submit'])) {
     <!-- Bootstrap 5.1.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="css/login-signup.css" />
+    <link rel="stylesheet" href="css/messages-styles.css" />
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
 
@@ -38,21 +56,24 @@ if (isset($_POST['submit'])) {
             <div id="login-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap extra-margin">
                 <?php
                 if (!empty($msg)) {
-                    echo "<p class=\"message info-message\">" . $msg . "</p>";
+                    echo "<p id=\"info-msg\" class=\"message info-message\">" . $msg . "</p>";
                 }
                 ?>
                 <div class="logo-position"><img id="logo" src="img/assets/logo.png" alt="monkia logo" /></div>
                 <h1>Login</h1>
-                <form action="" method="post">
+                <!-- -->
+                <form method="post" action="" onsubmit="return validate();">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" name="username" id="username" autocomplete="off" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()">
+                        <input type="text" name="username" id="username" maxlength="30" autocomplete="off" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()">
+                        <span class="msg error-message my-2" id="username-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" autocomplete="off" required="" aria-required="true" id="password">
+                        <input type="password" name="password" maxlength="30" autocomplete="off" required="" aria-required="true" id="password">
+                        <span class="msg error-message my-2" id="password-error"></span>
                     </div>
-                    <input type="submit" name="submit" value="Submit">
+                    <input type="submit" name="submit" value="Submit" id="submit">
                 </form>
                 <footer>
                     <p>Don't have an account yet? <a class="purple-color" href="signup.php">Sign up Here</a></p>
@@ -60,6 +81,10 @@ if (isset($_POST['submit'])) {
             </div>
         </div>
     </div>
+    <!-- Login validation -->
+    <script type="text/javascript" src="js/login.js"></script>
+
+
 </body>
 
 </html>
