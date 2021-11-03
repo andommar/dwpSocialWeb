@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    require_once "../models/" . $class . ".php";
 });
 
 class UserController

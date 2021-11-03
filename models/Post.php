@@ -1,6 +1,6 @@
 <?php
 
-require_once('db/DbConn.php');
+require_once('DbConn.php');
 
 class Post
 {

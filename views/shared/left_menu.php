@@ -2,7 +2,7 @@
   <ul>
     <!-- <li>
       <a href="#">
-        <img src="img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
+        <img src="/../../web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
         <span><?php echo $userData['username'] ?></span>
       </a>
     </li> -->

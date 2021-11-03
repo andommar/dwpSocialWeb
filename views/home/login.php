@@ -1,16 +1,23 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    $pathController = '../../controller/' . $class . '.php';
+    $pathModel = '../../models/' . $class . '.php';
+  
+    if(file_exists($pathController)) {
+      require_once $pathController;
+    } else if (file_exists($pathModel)) {
+      require_once $pathModel;
+    }
 });
-require_once "controller/LoginController.php";
+
 $session = new SessionHandle;
 
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
     $msg = "You are now logged out.";
-    $redirect = new Redirector("index.php");
+    $redirect = new Redirector("../../index.php");
 } elseif ($session->logged_in()) {
-    $redirect = new Redirector("index.php");
+    $redirect = new Redirector("../../index.php");
 }
 
 // php validation after js validation it's okay
@@ -42,8 +49,8 @@ function validate_data($data)
     <title>Login</title>
     <!-- Bootstrap 5.1.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/login-signup.css" />
-    <link rel="stylesheet" href="css/messages-styles.css" />
+    <link rel="stylesheet" href="../../web/css/login-signup.css" />
+    <link rel="stylesheet" href="../../web/css/messages-styles.css" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -59,7 +66,7 @@ function validate_data($data)
                     echo "<p id=\"info-msg\" class=\"message info-message\">" . $msg . "</p>";
                 }
                 ?>
-                <div class="logo-position"><img id="logo" src="img/assets/logo.png" alt="monkia logo" /></div>
+                <div class="logo-position"><img id="logo" src="../../web/img/assets/logo.png" alt="monkia logo" /></div>
                 <h1>Login</h1>
                 <!-- -->
                 <form method="post" action="" onsubmit="return validate();">

@@ -1,6 +1,6 @@
 <?php
-include_once("controller/UserController.php");
-include_once("controller/PostController.php");
+include_once("UserController.php");
+include_once("PostController.php");
 
 // $session = new SessionHandle();
 
