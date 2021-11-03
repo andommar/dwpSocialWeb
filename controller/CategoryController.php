@@ -1,7 +1,12 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    $pathModel = '../models/' . $class . '.php';
+
+    if (file_exists($pathModel)) {
+        require_once $pathModel;
+    }
 });
+
 
 class CategoryController
 {

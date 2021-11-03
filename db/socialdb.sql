@@ -118,6 +118,18 @@ INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Videos', n
 INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Music', null, null);
 INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Photography', null, null);
 INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Films', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Animals', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Finance', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Gaming', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Health', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Fitness', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Science', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Art', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Food', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Humor', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Shows', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Tech', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Books', null, null);
 
 /* User */
 INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  

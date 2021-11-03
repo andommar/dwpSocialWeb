@@ -10,19 +10,19 @@ $( ".btn-primary-selected" ).click(function() {
     $( ".btn-primary-selected" ).removeClass( "btn-primary-selected" ).addClass( "btn-primary-deselected" );
 });
 
-$( ".btn-outline-success" ).click(function() {
+// $( ".btn-outline-success" ).click(function() {
    
-});
-$( ".btn-outline-danger" ).click(function() {
+// });
+// $( ".btn-outline-danger" ).click(function() {
    
-});
-$( ".btn-outline-warning" ).click(function() {
+// });
+// $( ".btn-outline-warning" ).click(function() {
    
-});
-$( ".btn-outline-info" ).click(function() {
+// });
+// $( ".btn-outline-info" ).click(function() {
     
-});
-$( ".btn-outline-secondary" ).click(function() {
+// });
+// $( ".btn-outline-secondary" ).click(function() {
    
-});
+// });
 
