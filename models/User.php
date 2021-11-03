@@ -9,7 +9,10 @@ class User
     private $avatar;
     private $password;
     public $userCategories = array();
-    public $message;
+    public $message = array(
+        "id" => "",
+        "text" => "",
+    );
 
     //We retrieve user data from user table and their preferred categories from user_category table
     public function __construct($userId)
@@ -18,8 +21,8 @@ class User
         $result = false;
         if ($db->isConnected()) {
             $sql = "SELECT `user_id`, username, email, avatar
-                    from user where `user_id` = $userId";
-            $stmt = $db->selectQuery($sql);
+                    from user where `user_id` = ?";
+            $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
                 foreach ($stmt as $values) {
                     $this->userId = $values['user_id'];
@@ -31,8 +34,8 @@ class User
             $sql = "SELECT c.category_name
             from category c 
             inner join user_category uc on c.category_name = uc.category_name  
-            where uc.user_id = $userId";
-            $stmt = $db->selectQuery($sql);
+            where uc.user_id = ?";
+            $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
                 foreach ($stmt as $data)
                     array_push($this->userCategories, $data);
@@ -72,15 +75,38 @@ class User
 
     // Methods
 
-    public function isUserRegistered($username, $email, $password)
+    public function isEmailRegistered($email)
     {
         $db = new Dbconn();
         $result = false;
-        $arr = [$username, $email, $password];
         if ($db->isConnected()) {
-            $sql = 'SELECT count(*) from user where username = ? and email = ? and password = ?';
-            $result = $db->executeQueryBindArr($sql,$arr);
+            $sql = 'SELECT count(*) as total from user where email = ?';
+            $result = $db->selectQueryBind($sql, $email);
+            if ($result['total'] == 0) {
+                $result = false;
+            } else {
+                $result = true;
+            }
         }
+        print_r($result);
+
+        return $result;
+    }
+    public function isUsernameRegistered($username)
+    {
+        $db = new Dbconn();
+        $result = false;
+        if ($db->isConnected()) {
+            $sql = 'SELECT count(*) as total from user where `username` = ?';
+            $result = $db->selectQueryBind($sql, $username);
+            if ($result['total'] == 0) {
+                $result = false;
+            } else {
+                $result = true;
+            }
+        }
+        print_r($result);
+
         return $result;
     }
 
@@ -89,24 +115,33 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = 'SELECT count(*) from user where $user_id = ?';
-            $result = $db->executeQuery($sql,$userId);
+            $sql = 'SELECT count(*) from user where user_id = ?';
+            $result = $db->selectQueryBind($sql, $userId);
         }
         return $result;
     }
 
-    public function registerUser($username, $email, $password)
+    public function registerUser($username, $email, $password, $avatar)
     {
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
 
-            $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
+            if ($this->isUsernameRegistered($username)) {
+                $this->message["id"] = "username";
+                $this->message["text"] = "This username is currently being used by another user.";
+            } else if ($this->isEmailRegistered($email)) {
+                $this->message["id"] = "email";
+                $this->message["text"] = "This email is currently being used by another user.";
+            } else {
+                $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
                     VALUES (?, ?, ?, ?, ?, ?)';
-            $arr = [$username, 'avatar', $password, $email, 'Beginner', 'registeredUser'];
-            // VALUES ('{$username}', 'avatar', '{$password}', '{$email}', 'Beginner', 'registeredUser')";
-            $result = $db->executeQueryBindArr($sql, $arr);
+                $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
+                $result = $db->executeQueryBindArr($sql, $arr);
+                if ($result) $redirect = new Redirector("view/category_selection.php");
+            }
         }
+        print_r($this->message);
         return $result;
     }
 

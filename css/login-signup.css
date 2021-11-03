@@ -1,3 +1,6 @@
+
+/* variables */ 
+
 * {
   box-sizing: border-box;
 }
@@ -151,10 +154,9 @@ input#password2:focus {
   content: "\2714";
   font-size: 14px;
   position: absolute;
-  top: 0px;
-  left: 3px;
-  color: #17a650;
-  /*    color: #4b4b4b;*/
+  top: -3px;
+  left: 0px;
+  color: #9e30e9;
 }
 /* END Custom checkbox style*/
 footer {
@@ -180,6 +182,15 @@ footer p {
   display: flex;
   align-items: center;
 }
+.terms-margin input, .terms-margin label{
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 
 /* MEDIA QUERIES */
 /* Login page when resizing height to 592px or less*/

@@ -18,8 +18,8 @@ class Post
   public function loadCategoryPosts($categoryName)
   {
     $db = new Dbconn();
-    $sql = 'SELECT * FROM post where category_name = $categoryName';
-    $result = $db->selectquery($sql);
+    $sql = 'SELECT * FROM post where category_name = ?';
+    $result = $db->selectQueryBind($sql, $categoryName);
     return $result;
   }
 
@@ -29,8 +29,8 @@ class Post
     $date = date('Y-m-d H:i:s');
     $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`, up_votes, down_votes)
             VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)';
-            // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
-            // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
+    // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
+    // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
     $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date, 0, 0];
 
     $result = $db->executeQueryBindArr($sql, $arr);

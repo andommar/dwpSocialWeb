@@ -36,7 +36,7 @@ class DbConn
         return ($res);
     }
 
-    // Execute single query statement. Returns next row as an array indexed by column name
+    // For no condition queries
     public function selectQuery($sql)
     {
         $stmt = null;
@@ -51,36 +51,53 @@ class DbConn
         return ($result);
     }
 
-    public function selectSingleQueryBind($sql,$bind)
-    {
-        $stmt = null;
-        $result = false;
-        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
-            if (isset($bind)){
-                $stmt = $this->dbConn->prepare($sql);
-                if ($stmt) {
-                    $stmt->execute([$bind]);
-                    $result = $stmt->fetchAll();
-                }   
-            }
-        }
-        return ($result);
-    }
-
-    public function executeQuery($sql, $bindParam)
+    // Execute single query statement. Returns next row as an array indexed by column name
+    public function selectQueryBind($sql, $bindParam)
     {
         $stmt = null;
         $result = false;
         if (isset($sql) && $sql != "" && isset($this->dbConn)) {
             $stmt = $this->dbConn->prepare($sql);
             if ($stmt) {
-                $result = $stmt->execute($bindParam);
+                $stmt->bindParam(1, $bindParam);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
             }
         }
         return ($result);
     }
 
-    public function executeQueryBindArr($sql,$bindArr)
+    public function selectQueryBindArr($sql, $bindArr)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            if (isset($bindArr)) {
+                $stmt = $this->dbConn->prepare($sql);
+                if ($stmt) {
+                    $stmt->execute([$bindArr]);
+                    $result = $stmt->fetchAll();
+                }
+            }
+        }
+        return ($result);
+    }
+
+    public function executeQueryBind($sql, $bindParam)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            $stmt = $this->dbConn->prepare($sql);
+            if ($stmt) {
+                $stmt->bindParam(1, $bindParam);
+                $result = $stmt->execute();
+            }
+        }
+        return ($result);
+    }
+
+    public function executeQueryBindArr($sql, $bindArr)
     {
         $stmt = null;
         $result = false;

@@ -1,5 +1,5 @@
 <?php
-require_once('db/DbConn.php');
+require_once('../db/DbConn.php');
 
 class Category
 {
@@ -12,4 +12,3 @@ class Category
         return $result;
     }
 }
-?>
