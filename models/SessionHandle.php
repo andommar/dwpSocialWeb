@@ -11,7 +11,10 @@ class SessionHandle{
 
     public function confirm_logged_in(){
         if (!$this->logged_in()){
-            $redirect = new Redirector("login.php");
+            // $redirect = new Redirector("login.php");
+            return true;
+        } else {
+            return false;
         }
     }
 }

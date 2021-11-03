@@ -1,5 +1,5 @@
 <?php
-require_once('db/DbConn.php');
+require_once('DbConn.php');
 
 class User
 {
@@ -138,7 +138,7 @@ class User
                     VALUES (?, ?, ?, ?, ?, ?)';
                 $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
                 $result = $db->executeQueryBindArr($sql, $arr);
-                if ($result) $redirect = new Redirector("view/category_selection.php");
+                if ($result) $redirect = new Redirector("../shared/category_selection.php");
             }
         }
         print_r($this->message);

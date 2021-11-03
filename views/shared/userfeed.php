@@ -14,7 +14,7 @@
   foreach ($posts as $post) { ?>
     <div class="news_feed">
       <div class="news_feed_title">
-        <img src="img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
+        <img src="web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
         <div class="news_feed_title_content">
           <p class="mb-0">
             <?php echo $post['category_name'] ?>
@@ -39,7 +39,7 @@
         <p style="font-size:17px; font-weight:400;" class="news_feed_subtitle">
           <?php echo $post['title'] ?>
         </p>
-        <img class="img-fluid" src="img/media/<?php echo $post['media_url'] ?>" alt="post-media" />
+        <img class="img-fluid" src="web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" />
         <div class="news_feed_description_title">
           <!-- <span>YOUTUBE</span> -->
           <p>

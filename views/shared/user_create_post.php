@@ -1,6 +1,6 @@
 <div class="share">
     <div class="share_upside">
-        <img src="img/avatars/avatar.jpg" alt="avatar" />
+        <img src="web/img/avatars/avatar.jpg" alt="avatar" />
         <input type="text" name="post_profile" placeholder="Whats on your mind?" />
     </div>
     <hr />

@@ -1,8 +1,8 @@
 <?php
 
 spl_autoload_register(function ($class) {
-    $pathController = '../controller/' . $class . '.php';
-    $pathModel = '../models/' . $class . '.php';
+    $pathController = '../../controller/' . $class . '.php';
+    $pathModel = '../../models/' . $class . '.php';
 
     if (file_exists($pathController)) {
         require_once $pathController;
@@ -16,9 +16,9 @@ $session = new SessionHandle;
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
     $msg = "You are now logged out.";
-    $redirect = new Redirector("index.php");
+    $redirect = new Redirector("login.php");
 } elseif ($session->logged_in()) {
-    $redirect = new Redirector("index.php");
+    $redirect = new Redirector("../../index.php");
 }
 
 // php validation after js validation it's okay
@@ -51,9 +51,9 @@ $categories = $c->loadCategories();
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../css/login-signup.css" />
-    <link rel="stylesheet" href="../css/category_selection.css" />
-    <link rel="stylesheet" href="../css/messages-styles.css" />
+    <link rel="stylesheet" href="../web/css/login-signup.css" />
+    <link rel="stylesheet" href="../web/css/category_selection.css" />
+    <link rel="stylesheet" href="../web/css/messages-styles.css" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -124,7 +124,7 @@ $categories = $c->loadCategories();
     </div>
     <!-- Validation -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="../js/category_selection.js"></script>
+    <script type="text/javascript" src="../web/js/category_selection.js"></script>
 </body>
 
 </html>
