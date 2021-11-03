@@ -5,18 +5,13 @@ spl_autoload_register(function ($class) {
 
 class UserController
 {
+    public $msg;
 
-    public function registerUser($username, $email, $password)
+    public function registerUser($username, $email, $password, $avatar)
     {
         $u = new User($username, $email, $password);
-        $res = $u->registerUser($username, $email, $password);
-        return $res;
-    }
-
-    public function isUserRegistered($username, $email, $password)
-    {
-        $u = new User($_SESSION['userId']);
-        $res = $u->isUserRegistered($username, $email, $password);
+        $res = $u->registerUser($username, $email, $password, $avatar);
+        $this->msg = $u->message;
         return $res;
     }
 
