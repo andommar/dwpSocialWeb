@@ -7,6 +7,8 @@
 
 ## Pending Tasks
 
+- Post descriptions, allow nulls??
+- Have in mind the possibility of posts with no images, external links, thumbnails, videos, etc
 - Save in the session the form inputs values (except from the pass), when page reloads and user has something wrong during the process
 - Assign categories to user when signing up
 - create general functions file (validate data function, for example)

@@ -14,22 +14,46 @@
   foreach ($posts as $post) { ?>
     <div class="news_feed">
       <div class="news_feed_title">
-        <img src="web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
+        <img src="./views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
         <div class="news_feed_title_content">
           <p class="mb-0">
             <?php echo $post['category_name'] ?>
             <?php if ($post['category_name'] == 'Sports') : ?>
-              <i class="fas fa-running"></i>
+              <i class="fas fa-running mx-1"></i>
             <?php elseif ($post['category_name'] == 'Videos') : ?>
-              <i class="fas fa-video"></i>
+              <i class="fas fa-video mx-1"></i>
             <?php elseif ($post['category_name'] == 'News') : ?>
-              <i class="fas fa-newspaper"></i>
+              <i class="fas fa-newspaper mx-1"></i>
             <?php elseif ($post['category_name'] == 'Music') : ?>
-              <i class="fas fa-music"></i>
+              <i class="fas fa-music mx-1"></i>
             <?php elseif ($post['category_name'] == 'Photography') : ?>
-              <i class="fas fa-photo-video"></i>
+              <i class="fas fa-photo-video mx-1"></i>
             <?php elseif ($post['category_name'] == 'Films') : ?>
-              <i class="fas fa-film"></i>
+              <i class="fas fa-film mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Animals') : ?>
+              <i class="fas fa-paw mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Art') : ?>
+              <i class="fas fa-palette mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Books') : ?>
+              <i class="fas fa-book-open mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Finance') : ?>
+              <i class="fas fa-landmark mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Fitness') : ?>
+              <i class="fas fa-dumbbell mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Food') : ?>
+              <i class="fas fa-hamburger mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Health') : ?>
+              <i class="fas fa-heartbeat mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Gaming') : ?>
+              <i class="fas fa-gamepad mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Humor') : ?>
+              <i class="fas fa-grin-squint mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Science') : ?>
+              <i class="fas fa-flask mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Shows') : ?>
+              <i class="fab fa-youtube mx-1"></i>
+            <?php elseif ($post['category_name'] == 'Tech') : ?>
+              <i class="fas fa-mobile-alt mx-1"></i>
             <?php endif; ?>
           </p>
           <span><i><?php echo $post['username'] ?></i></span>
@@ -39,11 +63,11 @@
         <p style="font-size:17px; font-weight:400;" class="news_feed_subtitle">
           <?php echo $post['title'] ?>
         </p>
-        <img class="img-fluid" src="web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" />
+        <?php if ($post['media_url']) { ?><img class="img-fluid" src="./views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" /> <?php } ?>
         <div class="news_feed_description_title">
           <!-- <span>YOUTUBE</span> -->
           <p>
-            <?php echo $post['description'] ?>
+            <?php if ($post['description']) echo $post['description'] ?>
           </p>
         </div>
       </div>
