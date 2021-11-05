@@ -1,5 +1,5 @@
 <?php
-include_once('header.php');
+// include_once('header.php');
 // include_once "controller/ViewController.php";
 // include_once('models/SessionHandle.php');
 
@@ -25,7 +25,6 @@ if (isset($_POST['submit'])) {
 
 
 <div class="row d-flex justify-content-center">
-  <?php include_once('left_menu.php'); ?>
 
   <div id="post-form" class="col col-lg-10">
     <section>

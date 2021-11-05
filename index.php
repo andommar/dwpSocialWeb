@@ -1,15 +1,20 @@
 <?php
 //Session handler
-spl_autoload_register(function ($class) {
-  $pathController = 'controller/' . $class . '.php';
-  $pathModel = 'models/' . $class . '.php';
+// spl_autoload_register(function ($class) {
+//   $pathController = 'controller/' . $class . '.php';
+//   $pathModel = 'models/' . $class . '.php';
+//   $file = str_replace('\\', '/', $class) . '.php';
 
-  if(file_exists($pathController)) {
-    require_once $pathController;
-  } else if (file_exists($pathModel)) {
-    require_once $pathModel;
-  }
-});
+//   if(file_exists($pathController)) {
+//     require_once $pathController;
+//   } elseif (file_exists($pathModel)) {
+//     require_once $pathModel;
+//   } elseif (file_exists("$class.php")) {
+//     require_once "$class.php";
+//   }
+// });
+
+require_once ('bootstrapping.php');
 
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
@@ -59,4 +64,4 @@ $userData = $c->getUserInfo();
 
 </html>
 
-<script type="text/javascript" src="views/web/js/AJAXdynamic.js"></script>
+<script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
