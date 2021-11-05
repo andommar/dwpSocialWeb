@@ -18,7 +18,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $msg = "You are now logged out.";
     $redirect = new Redirector("login.php");
 } elseif ($session->logged_in()) {
-    $redirect = new Redirector("../../index.php");
+    $redirect = new Redirector("./views/shared/category_selection.php");
 }
 
 // php validation after js validation it's okay
@@ -67,49 +67,10 @@ $categories = $c->loadCategories();
                 <form method="post" action="" onsubmit="return validate();">
                     <div class="form-group d-flex flex-wrap justify-content-between">
                         <?php foreach ($categories as $category) { ?>
-
                             <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-primary-deselected btn-style d-flex">
-                                <?php if ($category['category_name'] == 'Sports') : ?>
-                                    <i class="fas fa-running my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Videos') : ?>
-                                    <i class="fas fa-video my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'News') : ?>
-                                    <i class="fas fa-newspaper my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Music') : ?>
-                                    <i class="fas fa-music my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Photography') : ?>
-                                    <i class="fas fa-photo-video my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Films') : ?>
-                                    <i class="fas fa-film my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Animals') : ?>
-                                    <i class="fas fa-paw my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Art') : ?>
-                                    <i class="fas fa-palette my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Books') : ?>
-                                    <i class="fas fa-book-open my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Finance') : ?>
-                                    <i class="fas fa-landmark my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Fitness') : ?>
-                                    <i class="fas fa-dumbbell my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Food') : ?>
-                                    <i class="fas fa-hamburger my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Health') : ?>
-                                    <i class="fas fa-heartbeat my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Gaming') : ?>
-                                    <i class="fas fa-gamepad my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Humor') : ?>
-                                    <i class="fas fa-grin-squint my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Science') : ?>
-                                    <i class="fas fa-flask my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Shows') : ?>
-                                    <i class="fab fa-youtube my-auto"></i>
-                                <?php elseif ($category['category_name'] == 'Tech') : ?>
-                                    <i class="fas fa-mobile-alt my-auto"></i>
-                                <?php endif; ?>
+                                <i class="<?php echo $category['icon'] ?> my-auto"></i>
                                 <?php echo $category['category_name'] ?>
-
                             </button>
-
                             <!-- <button type="button" id="1" class="btn btn-primary-deselected btn-spacing">Primary</button>
                         <button type="button" id="12" class="btn btn-secondary-deselected btn-spacing">Dark</button>-->
                         <?php }; ?>
@@ -117,6 +78,7 @@ $categories = $c->loadCategories();
                     <h6 class="text-center mt-3">Please, pick at least <u>two</u></h6>
 
                     <input type="submit" name="submit" value="Next" id="submit">
+                    <div id="omit-link" class="text-center mt-2"><u><a href="../../index.php">Omit</a></u></div>
                 </form>
 
             </div>
