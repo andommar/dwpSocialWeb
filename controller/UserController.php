@@ -1,6 +1,9 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    $file = __DIR__ . '/../models/' . $class . '.php';
+    if (file_exists($file)) {
+        require $file;
+    }
 });
 
 class UserController

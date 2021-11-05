@@ -1,4 +1,3 @@
-<div class="col col-lg-8 col-xs-12">
   <!-- Stories section  -->
   <!-- <div class="stories d-flex justify-content-center align-items-center">
     <img src="https://picsum.photos/id/022/110/200" alt="" />
@@ -14,23 +13,11 @@
   foreach ($posts as $post) { ?>
     <div class="news_feed">
       <div class="news_feed_title">
-        <img src="img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
+        <img src="./views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
         <div class="news_feed_title_content">
           <p class="mb-0">
             <?php echo $post['category_name'] ?>
-            <?php if ($post['category_name'] == 'Sports') : ?>
-              <i class="fas fa-running"></i>
-            <?php elseif ($post['category_name'] == 'Videos') : ?>
-              <i class="fas fa-video"></i>
-            <?php elseif ($post['category_name'] == 'News') : ?>
-              <i class="fas fa-newspaper"></i>
-            <?php elseif ($post['category_name'] == 'Music') : ?>
-              <i class="fas fa-music"></i>
-            <?php elseif ($post['category_name'] == 'Photography') : ?>
-              <i class="fas fa-photo-video"></i>
-            <?php elseif ($post['category_name'] == 'Films') : ?>
-              <i class="fas fa-film"></i>
-            <?php endif; ?>
+            <i class="<?php echo $post['icon'] ?> mx-1"></i>
           </p>
           <span><i><?php echo $post['username'] ?></i></span>
         </div>
@@ -39,11 +26,11 @@
         <p style="font-size:17px; font-weight:400;" class="news_feed_subtitle">
           <?php echo $post['title'] ?>
         </p>
-        <img class="img-fluid" src="img/media/<?php echo $post['media_url'] ?>" alt="post-media" />
+        <?php if ($post['media_url']) { ?><img class="img-fluid" src="./views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" /> <?php } ?>
         <div class="news_feed_description_title">
           <!-- <span>YOUTUBE</span> -->
           <p>
-            <?php echo $post['description'] ?>
+            <?php if ($post['description']) echo $post['description'] ?>
           </p>
         </div>
       </div>
@@ -83,4 +70,3 @@
       </div>
     </div>
   <?php }; ?>
-</div>

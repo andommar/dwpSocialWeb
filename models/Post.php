@@ -1,6 +1,6 @@
 <?php
 
-require_once('db/DbConn.php');
+require_once('DbConn.php');
 
 class Post
 {
@@ -10,7 +10,7 @@ class Post
   public function loadUserFeedPosts()
   {
     $db = new Dbconn();
-    $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.* FROM user u inner join post p where u.user_id = p.user_id';
+    $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name';
     $result = $db->selectquery($sql);
     return $result;
   }

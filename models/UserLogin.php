@@ -1,5 +1,5 @@
 <?php
-require_once('./db/DbConn.php');
+require_once('DbConn.php');
 require_once('Redirector.php');
 class UserLogin
 {
@@ -21,7 +21,7 @@ class UserLogin
             if ($result[0]['password'] == $pass) {
                 $_SESSION['userId'] = $result[0]['user_id'];
                 $_SESSION['username'] = $result[0]['username'];
-                $redirect = new Redirector("index.php");
+                $redirect = new Redirector("../../index.php");
             } else {
                 $this->message["id"] = "general";
                 $this->message["text"] = "Username/password combination incorrect. Please make sure your caps lock key is off and try again.";

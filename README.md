@@ -5,8 +5,16 @@
 - Index (home) imports 3 views: header, leftmenu, userfeed and rightmenu
 - For the style, we are using Using Bootstrap 5.1
 
+## Anna's Pending Tasks
+
+- Sign up > categories selection (jquery)
+- Post reading and comments
+
 ## Pending Tasks
 
+- Category page
+- Post descriptions, allow nulls??
+- Have in mind the possibility of posts with no images, external links, thumbnails, videos, etc
 - Save in the session the form inputs values (except from the pass), when page reloads and user has something wrong during the process
 - Assign categories to user when signing up
 - create general functions file (validate data function, for example)
@@ -17,7 +25,8 @@
 - Add transactions in User Login, for example (IT'S NOT A REQUIREMENT FOR THE DWP)
 - Consider Batch processing pdo sql (If we have multiple queries to run)
 - User login > A user should login with username or email ??
-- Sign up
+- Search Bar
+- Filters
 - User settings
 - Post creation
 - Post comment and comments in general

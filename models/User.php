@@ -1,5 +1,5 @@
 <?php
-require_once('db/DbConn.php');
+require_once('DbConn.php');
 
 class User
 {
@@ -31,7 +31,7 @@ class User
                     $this->avatar = $values['avatar'];
                 }
             }
-            $sql = "SELECT c.category_name
+            $sql = "SELECT c.category_name, c.icon
             from category c 
             inner join user_category uc on c.category_name = uc.category_name  
             where uc.user_id = ?";
@@ -138,7 +138,7 @@ class User
                     VALUES (?, ?, ?, ?, ?, ?)';
                 $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
                 $result = $db->executeQueryBindArr($sql, $arr);
-                if ($result) $redirect = new Redirector("view/category_selection.php");
+                if ($result) $redirect = new Redirector("../shared/category_selection.php");
             }
         }
         print_r($this->message);

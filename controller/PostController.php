@@ -1,6 +1,6 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    include "../models/" . $class . ".php";
 });
 
 class PostController

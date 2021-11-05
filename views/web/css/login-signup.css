@@ -1,5 +1,4 @@
-
-/* variables */ 
+/* variables */
 
 * {
   box-sizing: border-box;
@@ -182,16 +181,30 @@ footer p {
   display: flex;
   align-items: center;
 }
-.terms-margin input, .terms-margin label{
+.terms-margin input,
+.terms-margin label {
   cursor: pointer;
   -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
-
+}
+#password-parent,
+#password2-parent {
+  position: relative;
+}
+#password-show,
+#password2-show {
+  position: absolute;
+  z-index: 1;
+  top: 43px;
+  right: 15px;
+  color: #5d5d5d;
+  cursor: pointer;
+}
 /* MEDIA QUERIES */
 /* Login page when resizing height to 592px or less*/
 @media (max-height: 592px) {

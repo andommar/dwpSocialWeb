@@ -1,5 +1,5 @@
 <?php
-include_once('view/header.php');
+include_once('header.php');
 // include_once "controller/ViewController.php";
 // include_once('models/SessionHandle.php');
 
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])) {
     if ($_FILES['imgfile']['error'] > 0) {
       echo "Error: " . $_FILES['imgfile']['error'];
     } else {
-      move_uploaded_file($_FILES['imgfile']['tmp_name'], "img/media/" . $_FILES['imgfile']['name']);
+      move_uploaded_file($_FILES['imgfile']['tmp_name'], "web/img/media/" . $_FILES['imgfile']['name']);
     }
   }
   $message = ['title' => '', 'category' => '', 'description' => '',];
@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
 
 
 <div class="row d-flex justify-content-center">
-  <?php include_once('view/left_menu.php'); ?>
+  <?php include_once('left_menu.php'); ?>
 
   <div id="post-form" class="col col-lg-10">
     <section>
