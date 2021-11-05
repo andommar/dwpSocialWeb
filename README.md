@@ -5,6 +5,11 @@
 - Index (home) imports 3 views: header, leftmenu, userfeed and rightmenu
 - For the style, we are using Using Bootstrap 5.1
 
+## Anna's Pending Tasks
+
+- Sign up > categories selection (jquery)
+- Post reading and comments
+
 ## Pending Tasks
 
 - Post descriptions, allow nulls??
@@ -19,7 +24,8 @@
 - Add transactions in User Login, for example (IT'S NOT A REQUIREMENT FOR THE DWP)
 - Consider Batch processing pdo sql (If we have multiple queries to run)
 - User login > A user should login with username or email ??
-- Sign up
+- Search Bar
+- Filters
 - User settings
 - Post creation
 - Post comment and comments in general

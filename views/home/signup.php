@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
   $c = new UserController();
   $c->registerUser($username, $email, $password, $avatar);
   $msg = $c->msg;
+  echo "SUBMIT";
 }
 function validate_data($data)
 {
@@ -38,6 +39,7 @@ function generate_rnd_avatar()
   <!-- Bootstrap 5.1.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../web/css/login-signup.css" />
@@ -61,44 +63,55 @@ function generate_rnd_avatar()
           email VARCHAR(255) NOT NULL,
           *`rank` VARCHAR (255),
           *role_name VARCHAR (100) NOT NULL,
-      -->
+        -->
         <form action="" method="post" onsubmit="return validate();">
-
+          <!-- USERNAME -->
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" name="username" id="username" autocomplete="off" maxlength="30" required="" aria-required="true" autofocus="autofocus" onfocus="this.select()" />
+            <!-- required="" aria-required="true" -->
+            <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()" />
           </div>
+          <!-- USERNAME Error -->
           <span class="msg error-message my-2" id="username-error">
             <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'username') {
               echo $msg["text"];
             } ?>
           </span>
+          <!-- EMAIL -->
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" autocomplete="off" required="" aria-required="true" />
+            <input type="text" name="email" id="email" autocomplete="off" />
           </div>
+          <!-- EMAIL Error -->
           <span class="msg error-message my-2" id="email-error">
             <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'email') {
               echo $msg["text"];
             } ?>
           </span>
-          <div class="form-group">
+          <!-- PASSWORD -->
+          <div class="form-group" id="password-parent">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" maxlength="30" autocomplete="off" required="" aria-required="true" />
+            <i id="password-show" class="fas fa-eye-slash"></i>
+            <input type="password" name="password" id="password" autocomplete="off" />
           </div>
+          <!-- PASSWORD Error -->
           <span class="msg error-message my-2" id="password-error"></span>
-          <div class="form-group">
+          <!-- PASSWORD 2 -->
+          <div class="form-group" id="password2-parent">
             <label for="password2">Confirm Password</label>
-            <input type="password" name="password2" id="password2" maxlength="30" autocomplete="off" required="" aria-required="true" />
+            <i id="password2-show" class="fas fa-eye-slash"></i>
+            <input type="password" name="password2" id="password2" autocomplete="off" />
           </div>
+          <!-- PASSWORD 2  Error -->
           <span class="msg error-message my-2" id="password2-error"></span>
+          <!-- TERMS OF USE -->
           <div class="terms-margin">
-            <!-- required="" aria-required="true" -->
             <input type="checkbox" id="termsofuse" name="termsofuse" class="custom-checkbox">
             <label for="termsofuse"> I accept the Terms of Use.</label>
           </div>
+          <!-- TERMS OF USE Error -->
           <span class="msg error-message my-2" id="termsofuse-error"></span>
-          <input type="submit" name="submit" value="Submit" onclick="submitButtonClick(event)">
+          <input type="submit" name="submit" value="Submit" id="submit">
           <p class="bottom-text">
             By continuing, you agree to our
             <a class="purple-color" href="#">Terms & Conditions</a> and

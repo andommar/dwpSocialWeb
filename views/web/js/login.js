@@ -1,13 +1,8 @@
 
 function validate()
 {
-    // Reset errors and info message
-    $('#username-error').val('');
-    $('#username-error').text("");
-    $('#password-error').val('');
-    $('#password-error').text("");
-    $('#info-msg').val('');
-    $('#info-msg').text("");
+    // Reset error messages
+    resetErrorMessages();
 
     var error="";
     var username =$('#username').val();
@@ -15,13 +10,14 @@ function validate()
 
     if( isEmptyOrSpaces(username) ){
         $('#username-error').text("Username cannot be empty");
+        cleanPasswordField();
         return false;
     }
 
     if( isEmptyOrSpaces(password) ){
         $('#password-error').text("Password cannot be empty");
         // We clear password input for security purposes
-        $('#password').val('');
+        cleanPasswordField();
         return false;
     }
 
@@ -31,7 +27,36 @@ function validate()
     }
 }
 
+function cleanPasswordField(){
+    $('#password').val('');
+    $('#password').text("");
+}
 function isEmptyOrSpaces(str){
     return str === null || str.match(/^ *$/) !== null;
 }
+function resetErrorMessages(){
+    $('#username-error').val('');
+    $('#username-error').text("");
+    
+    $('#password-error').val('');
+    $('#password-error').text("");
+}
 
+$(document).ready(function() {
+    // When user clicks on show/hide password (eye icon)
+    $("#password-parent i").on('click', function(event) {
+        event.preventDefault();
+        // Hide password and change icon to unsee
+        if($('#password-parent input').attr("type") == "text"){
+            $('#password-parent input').attr('type', 'password');
+            $('#password-parent i').addClass( "fas fa-eye-slash" );
+            $('#password-parent i').removeClass( "far fa-eye" );
+        // Show password and change icon to see
+        }else if($('#password-parent input').attr("type") == "password"){
+            $('#password-parent input').attr('type', 'text');
+            $('#password-parent i').removeClass( "fas fa-eye-slash" );
+            $('#password-parent i').addClass( "far fa-eye" );
+        }
+    });
+
+});
