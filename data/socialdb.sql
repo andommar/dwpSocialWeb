@@ -416,6 +416,8 @@ INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (7, 'Photography')
 INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
 VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809);
 
+-- By the moment we'll set the same description to all the categories.
+UPDATE `CATEGORY` SET `description` = 'Nullam ut porttitor lorem, sed maximus dolor. Vestibulum eget enim diam. Donec ut luctus leo, vitae pellentesque nibh. Vivamus eleifend eros sit amet velit tempus, et bibendum elit pharetra. Proin at rhoncus lectus. Pellentesque semper dui quis tortor ornare, nec dapibus leo gravida. Vestibulum pharetra ultrices nisi, nec scelerisque odio aliquam in.' 
 
 /* Post_tag MISSING
    Media MISSING

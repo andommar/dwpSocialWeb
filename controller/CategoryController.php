@@ -24,4 +24,10 @@ class CategoryController
         $res = $c->getUserCategories();
         return $res;
     }
+    public function loadCategoryById($categoryName)
+    {
+        $c = new Category();
+        $res = $c->loadCategories($categoryName);
+        return $res;
+    }
 }

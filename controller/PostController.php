@@ -12,6 +12,12 @@ class PostController
         $res = $p->loadUserFeedPosts();
         return $res;
     }
+    public function loadPostById($postId)
+    {
+        $p = new Post();
+        $res = $p->loadPostById($postId);
+        return $res;
+    }
 
     public function loadCategoryPosts($categoryName)
     {

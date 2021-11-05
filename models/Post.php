@@ -6,6 +6,7 @@ class Post
 {
 
 
+
   //It's missing userid parameter
   public function loadUserFeedPosts()
   {
@@ -14,7 +15,13 @@ class Post
     $result = $db->selectquery($sql);
     return $result;
   }
-
+  public function loadPostById($postId)
+  {
+    $db = new Dbconn();
+    $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.*, c.icon FROM user u,post p,category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.post_id = ?';
+    $result = $db->selectQueryBind($sql, $postId);
+    return $result;
+  }
   public function loadCategoryPosts($categoryName)
   {
     $db = new Dbconn();

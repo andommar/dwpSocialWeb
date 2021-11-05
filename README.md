@@ -9,6 +9,7 @@
 
 - Sign up > categories selection (jquery)
 - Post reading and comments
+- Datetime formatting on posts
 
 ## Pending Tasks
 
