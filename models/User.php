@@ -31,7 +31,7 @@ class User
                     $this->avatar = $values['avatar'];
                 }
             }
-            $sql = "SELECT c.category_name
+            $sql = "SELECT c.category_name, c.icon
             from category c 
             inner join user_category uc on c.category_name = uc.category_name  
             where uc.user_id = ?";

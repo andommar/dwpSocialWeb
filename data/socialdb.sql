@@ -27,7 +27,8 @@ CREATE TABLE `USER` (
 CREATE TABLE `CATEGORY` (
   category_name VARCHAR (100) NOT NULL PRIMARY KEY,
   `description` TEXT,
-  `rules` VARCHAR (255)
+  `rules` VARCHAR (255),
+  `icon` VARCHAR (50) NOT NULL
 )ENGINE = InnoDB;
 
 CREATE TABLE `USER_CATEGORY` (
@@ -120,24 +121,42 @@ INSERT INTO `TAG` (tag_name) VALUES ('memes') ;
 
 
 /* Category */
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('News', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Sports', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Videos', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Music', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Photography', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Films', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Animals', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Finance', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Gaming', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Health', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Fitness', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Science', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Art', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Food', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Humor', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Shows', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Tech', null, null);
-INSERT INTO `CATEGORY` (category_name, `description`, rules) VALUES ('Books', null, null);
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('News', null, null, 'fas fa-newspaper');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Sports', null, null, 'fas fa-running');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Videos', null, null, 'fas fa-video');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Music', null, null, 'fas fa-music');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Photography', null, null, 'fas fa-photo-video');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Films', null, null, 'fas fa-film');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Animals', null, null, 'fas fa-paw');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Finance', null, null, 'fas fa-landmark');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Gaming', null, null, 'fas fa-gamepad');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Health', null, null, 'fas fa-heartbeat');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Fitness', null, null, 'fas fa-dumbbell');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Science', null, null, 'fas fa-flask');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Art', null, null, 'fas fa-palette');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Food', null, null, 'fas fa-hamburger');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Humor', null, null, 'fas fa-grin-squint');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Shows', null, null, 'fab fa-youtube');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Tech', null, null, 'fas fa-mobile-alt');
+INSERT INTO `CATEGORY` (category_name, `description`, rules, `icon`) 
+VALUES ('Books', null, null, 'fas fa-book-open');
 
 /* User (23 users) */
 
@@ -188,33 +207,6 @@ values (null, 'atoopini', 'avatar_4', 'QA9uL9ADNyub', 'rfiennesi@bloglines.com',
 INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
 values (null, 'arougheyj', 'avatar_2', 'kHDGlJMK9P', 'sthorouggoodj@unicef.org','Beginner', 'registeredUser');
 
-
-
-
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'doggo', 'doggo', 'dog1', 'doggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'beerdoggo', 'beerdoggo', 'beerdoggo', 'beerdoggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'dogaldtrump', 'dogaldtrump', 'dogaldtrump', 'dogaldtrump@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'emodoggo', 'emodoggo', 'emodoggo', 'emodoggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'sassydoggo', 'sassydoggo', 'sassydoggo', 'sassydoggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'sassydoggo', 'sassydoggo', 'sassydoggo', 'sassydoggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'farwestdoggo', 'farwestdoggo', 'farwestdoggo', 'farwestdoggo@gmail.com', 'Beginner', 'registeredUser');
-
--- INSERT INTO `USER` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
--- VALUES (null, 'bdaydoggo', 'bdaydoggo', 'bdaydoggo', 'bdaydoggo@gmail.com', 'Beginner', 'registeredUser');
 
 /* Post , 40 Posts */
 
@@ -373,9 +365,6 @@ VALUES (null, 'Music', 3, "I am a freelancer, but this does not mean I'll work f
 
 INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
 VALUES (null, 'Photography', 4, 'Where banana', 23, 7,'monke2', "I'm baby offal vegan messenger bag gluten-free tote bag. Brooklyn schlitz cronut fixie, pork belly lo-fi gentrify bushwick slow-carb.", '2021-10-08');
-
-INSERT INTO `POST` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`)
-VALUES (null, 'Videos', 5, 'Happy Halloween, from my doggo', 2000, 0,'halloween', '', '2021-10-09');
 
 /* User_Category (23 users) */
 
