@@ -1,4 +1,3 @@
-<div class="content_left col col-lg-2 col-xs-12 d-flex">
   <ul>
     <!-- <li>
       <a href="#">
@@ -27,4 +26,3 @@
       </a>
     </li>
   </ul>
-</div>

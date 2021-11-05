@@ -1,4 +1,3 @@
-<div class="col col-lg-8 col-xs-12">
   <!-- Stories section  -->
   <!-- <div class="stories d-flex justify-content-center align-items-center">
     <img src="https://picsum.photos/id/022/110/200" alt="" />
@@ -71,4 +70,3 @@
       </div>
     </div>
   <?php }; ?>
-</div>

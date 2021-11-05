@@ -1,5 +1,3 @@
-<body>
-  <div class="container-fluid d-flex flex-column">
     <div class="row navbar d-flex align-items-center h-auto sticky-top">
       <div class="col col-6 navbar_left d-flex align-items-center flex-fill my-2">
         <div>
