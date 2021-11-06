@@ -24,23 +24,12 @@
     }
    
   }
-  // // When we want to send the page id and a parameter
-  // function loadContentById(pageName,id) {
-  //   $.ajax({
-  //     url: "controller/PageController.php",
-  //     method: "POST",
-  //     data: { pageName: pageName, id:id },
-  //     success: function (data) {
-  //       $("#content").html(data);
-  //     },
-  //   });
-  // }
 
   $(".navbar_links i").click(function () {
     var pageName = $(this).attr("id");
     loadContent(pageName,'');
   });
-  
+  // Show post page - we send the selected post id
  function sendPostId(id){
     loadContent('show_post',id);
   }
