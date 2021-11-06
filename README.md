@@ -13,6 +13,8 @@
 
 ## Pending Tasks
 
+- Total members of a category? (can be a view) !!!!
+- votes. Control voting twice. We should change the DB accordingly
 - Category page
 - Post descriptions, allow nulls??
 - Have in mind the possibility of posts with no images, external links, thumbnails, videos, etc

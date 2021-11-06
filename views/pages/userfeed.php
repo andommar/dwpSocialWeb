@@ -1,9 +1,10 @@
 <div class="row">
   <div class="col col-lg-10 col-xs-12">
     <?php
-    $c = new PostController();
-    $posts = $c->loadUserFeedPosts();
-    foreach ($posts as $post) { ?>
+    $p = new PostController();
+    $posts = $p->loadUserFeedPosts(); ?>
+
+    <?php foreach ($posts as $post) { ?>
       <div class="post">
         <div class="post_title">
           <img src="./views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />

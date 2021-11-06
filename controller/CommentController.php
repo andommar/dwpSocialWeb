@@ -5,10 +5,10 @@ spl_autoload_register(function ($class) {
 
 class CommentController
 {
-    // public function loadComments()
-    // {
-    //     $c = new Comment();
-    //     $res = $c->loadComments();
-    //     return $res;
-    // }
+    public function loadCommentsbyPostId($postId)
+    {
+        $c = new CommentController();
+        $res = $c->loadCommentsbyPostId($postId);
+        return $res;
+    }
 }

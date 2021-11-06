@@ -27,7 +27,13 @@ class CategoryController
     public function loadCategoryById($categoryName)
     {
         $c = new Category();
-        $res = $c->loadCategories($categoryName);
+        $res = $c->loadCategoryById($categoryName);
+        return $res;
+    }
+    public function getCategoryFollowers($categoryName)
+    {
+        $c = new Category();
+        $res = $c->getCategoryFollowers($categoryName);
         return $res;
     }
 }

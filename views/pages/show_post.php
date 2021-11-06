@@ -1,26 +1,4 @@
 <?php
-// require_once('../../bootstrapping.php');
-
-//Session handler
-// spl_autoload_register(function ($class) {
-//     $pathController = '../../controller/' . $class . '.php';
-//     $pathModel = '../../models/' . $class . '.php';
-
-//     if (file_exists($pathController)) {
-//         require_once $pathController;
-//     } else if (file_exists($pathModel)) {
-//         require_once $pathModel;
-//     }
-// });
-
-// $session = new SessionHandle();
-// if ($session->confirm_logged_in()) {
-//     $redirect = new Redirector("../home/login.php");
-// }
-// // Lines needed for the header to load user info (can be a problem)
-// $c = new UserController();
-// $userData = $c->getUserInfo();
-
 // Load post info
 // $postID = $_GET['ID'];
 $p = new PostController();
@@ -41,7 +19,7 @@ $post = $p->loadPostById($id);
                         <?php echo $post[0]['category_name'] ?>
                         <i class="<?php echo $post[0]['icon'] ?> mx-1"></i>
                     </p>
-                    <span><i><?php echo $post[0]['username'] ?></i></span>
+                    <span>Posted by <b><?php echo $post[0]['username'] ?></b></span>
                 </div>
             </div>
             <div class="post_description">
@@ -83,11 +61,18 @@ $post = $p->loadPostById($id);
         <?php
         $c = new CategoryController();
         $category = $c->loadCategoryById($post[0]['category_name']);
+        $followers = $c->getCategoryFollowers($post[0]['category_name']);
         ?>
-        <div id="category-section " class="m-3 text-center">
-            <p><?php echo $category[0]['category_name'] ?></p>
-        </div>
+        <div id="show-post_category-section" class="m-3 text-center">
+            <i class="<?php echo $category[0]['icon'] ?> mt-3"></i>
+            <p id="category-name"><?php echo $category[0]['category_name'] ?></p>
+            <p id="category-members"><strong><?php echo $followers[0]['total'] ?></strong> <span>Members</span></p>
+            </hr>
+            <p id="category-description"><?php echo $category[0]['description'] ?></p>
+            <button type="button" class="btn">Join</button>
 
+
+        </div>
 
     </div>
 </div>

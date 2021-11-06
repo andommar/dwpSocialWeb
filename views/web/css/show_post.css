@@ -3,3 +3,25 @@
   border-radius: 0;
   margin: 0em 13em;
 }
+#show-post_category-section i {
+  font-size: xx-large;
+}
+#show-post_category-section #category-name {
+  margin-bottom: 3px;
+}
+#show-post_category-section #category-description {
+  font-size: 13px;
+  text-align: justify;
+  text-justify: inter-word;
+}
+#show-post_category-section #category-members {
+  font-size: 11px;
+  color: #b99be1;
+}
+
+#show-post_category-section button {
+  color: #ffffff;
+  background-color: #9b2fe4;
+  padding: 8px 72px;
+  margin-bottom: 0.3 em;
+}

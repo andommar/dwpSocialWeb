@@ -18,4 +18,11 @@ class Category
         $result = $db->selectQueryBind($sql, $categoryName);
         return $result;
     }
+    public function getCategoryFollowers($categoryName)
+    {
+        $db = new Dbconn();
+        $sql = 'SELECT COUNT(*) AS total FROM `user_category` WHERE category_name = ?';
+        $result = $db->selectQueryBind($sql, $categoryName);
+        return $result;
+    }
 }
