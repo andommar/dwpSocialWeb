@@ -13,6 +13,7 @@
 
 ## Pending Tasks
 
+- Join/Unjoin button not working
 - Total members of a category? (can be a view) !!!!
 - votes. Control voting twice. We should change the DB accordingly
 - Category page

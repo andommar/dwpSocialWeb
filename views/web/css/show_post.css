@@ -22,6 +22,17 @@
 #show-post_category-section button {
   color: #ffffff;
   background-color: #9b2fe4;
-  padding: 8px 72px;
+  padding: 11px 10px;
   margin-bottom: 0.3 em;
+  font-size: smaller;
+  width: 100%;
+}
+
+#show-post_category-section .btn-leave {
+  color: #ffffff;
+  background-color: #9b2fe4;
+}
+#show-post_category-section .btn-join {
+  color: #ffffff;
+  background-color: #9b2fe4;
 }

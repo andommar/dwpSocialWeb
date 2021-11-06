@@ -75,7 +75,7 @@ class DbConn
             if (isset($bindArr)) {
                 $stmt = $this->dbConn->prepare($sql);
                 if ($stmt) {
-                    $stmt->execute([$bindArr]);
+                    $stmt->execute($bindArr);
                     $result = $stmt->fetchAll();
                 }
             }

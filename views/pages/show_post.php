@@ -69,7 +69,24 @@ $post = $p->loadPostById($id);
             <p id="category-members"><strong><?php echo $followers[0]['total'] ?></strong> <span>Members</span></p>
             </hr>
             <p id="category-description"><?php echo $category[0]['description'] ?></p>
-            <button type="button" class="btn">Join</button>
+            <?php
+            $session = new SessionHandle();
+            if ($session->confirm_logged_in()) {
+                $redirect = new Redirector("views/home/login.php");
+            }
+            $u = new UserController();
+            $userData = $u->getUserInfo();
+
+            if ($userData) {
+                $c = new CategoryController();
+                $category = $c->isUserFollower($category[0]['category_name'], (int)$userData['userId']);
+            }
+            ?>
+            <?php if ((int)$category[0]['total'] > 0) { ?>
+                <button type="button" class="btn btn-leave">Leave Category</button>
+            <?php } else { ?>
+                <button type="button" class="btn btn-join">Join Category</button>
+            <?php } ?>
 
 
         </div>

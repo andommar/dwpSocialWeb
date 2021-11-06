@@ -1,6 +1,6 @@
 <?php
 require_once('DbConn.php');
-
+require_once('User.php');
 class Category
 {
     //loadUserCategories not implemented yet
@@ -23,6 +23,14 @@ class Category
         $db = new Dbconn();
         $sql = 'SELECT COUNT(*) AS total FROM `user_category` WHERE category_name = ?';
         $result = $db->selectQueryBind($sql, $categoryName);
+        return $result;
+    }
+    public function isUserFollower($categoryName, $userId)
+    {
+        $db = new Dbconn();
+        $sql = 'SELECT COUNT(*) as total FROM `user_category` WHERE category_name = ? AND `user_id`=?';
+        $arr = [$categoryName, $userId];
+        $result = $db->selectQueryBindArr($sql, $arr);
         return $result;
     }
 }

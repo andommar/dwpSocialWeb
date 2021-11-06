@@ -36,4 +36,10 @@ class CategoryController
         $res = $c->getCategoryFollowers($categoryName);
         return $res;
     }
+    public function isUserFollower($categoryName, $userId)
+    {
+        $c = new Category();
+        $res = $c->isUserFollower($categoryName, $userId);
+        return $res;
+    }
 }
