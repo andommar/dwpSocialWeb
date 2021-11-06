@@ -418,12 +418,11 @@ body {
   margin-right: 10px;
 }
 
-.custom-link:active {
-  color: #adadad;
-  transition: 0.3s;
+.custom-link,
+.custom-link-text {
+  cursor: pointer;
 }
-
-.custom-link:hover {
+.custom-link-text:hover {
   color: #b64ffb;
   transition: 0.3s;
 }
@@ -441,14 +440,13 @@ a:hover {
 }
 
 a,
-a:link,
-.custom-link,
-.custom-link:link {
+a:link {
   color: inherit;
 }
+
 /* Small devices */
 @media (min-width: 577px) {
-  .content_right ul,
+  .content_right div,
   .content_left ul {
     position: fixed;
   }

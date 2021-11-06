@@ -18,8 +18,8 @@
           <span><?php echo $userData['username'] ?></span>
         </div>
         <div class="navbar_links">
-          <i class="fa fa-plus" id='1'></i>
-          <i class="fas fa-comment-dots" id='2'></i>
+          <i class="fa fa-plus" id="userfeed"></i>
+          <i class="fas fa-comment-dots" id="new_post"></i>
           <!-- <i class="fa fa-bell"></i> -->
           <a href="./views/home/login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
         </div>
