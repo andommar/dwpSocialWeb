@@ -2,12 +2,14 @@
 require_once('../bootstrapping.php');
 
 
-if (isset($_POST["id"])) {
+if (isset($_POST["pageName"])) {
 
-    $id = $_POST["pageId"];
-    $show_post_ID = $_POST["id"];
+    if (isset($_POST["id"])) {
+        $id = $_POST["id"];
+    }
+    $pageName = $_POST["pageName"];
 
-    switch ($id) {
+    switch ($pageName) {
         case 'userfeed':
             include_once('../views/pages/userfeed.php');
             break;
@@ -18,7 +20,7 @@ if (isset($_POST["id"])) {
             include_once('../views/pages/show_post.php');
             break;
         default:
-            $content = '<h1> This is what you came for' . $id . ' </h1>';
+            $content = '<h1> This is what you came for' . $pageId . ' </h1>';
             break;
     }
 

@@ -1,31 +1,46 @@
   // When we want to send the page id
-  function loadContent(id) {
-    $.ajax({
-      url: "controller/PageController.php",
-      method: "POST",
-      data: { id: id },
-      success: function (data) {
-        $("#content").html(data);
-      },
-    });
+  function loadContent(pageName,id) {
+    // If we send an extra parameter
+    if(id){
+      $.ajax({
+        url: "controller/PageController.php",
+        method: "POST",
+        data: { pageName: pageName, id:id },
+        success: function (data) {
+          $("#content").html(data);
+        },
+      });
+    }
+    // If we only send the page name
+    else{
+      $.ajax({
+        url: "controller/PageController.php",
+        method: "POST",
+        data: { pageName: pageName },
+        success: function (data) {
+          $("#content").html(data);
+        },
+      });
+    }
+   
   }
-  // When we want to send the page id and a parameter
-  function loadContentById(pageId,id) {
-    $.ajax({
-      url: "controller/PageController.php",
-      method: "POST",
-      data: { pageId: pageId, id:id },
-      success: function (data) {
-        $("#content").html(data);
-      },
-    });
-  }
+  // // When we want to send the page id and a parameter
+  // function loadContentById(pageName,id) {
+  //   $.ajax({
+  //     url: "controller/PageController.php",
+  //     method: "POST",
+  //     data: { pageName: pageName, id:id },
+  //     success: function (data) {
+  //       $("#content").html(data);
+  //     },
+  //   });
+  // }
 
   $(".navbar_links i").click(function () {
-    var pageId = $(this).attr("id");
-    loadContent(pageId);
+    var pageName = $(this).attr("id");
+    loadContent(pageName,'');
   });
   
  function sendPostId(id){
-    loadContentById('show_post',id);
+    loadContent('show_post',id);
   }

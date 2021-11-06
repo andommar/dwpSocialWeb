@@ -25,7 +25,7 @@
 // $postID = $_GET['ID'];
 $p = new PostController();
 // $post = $p->loadPostById($postID);
-$post = $p->loadPostById($show_post_ID);
+$post = $p->loadPostById($id);
 
 ?>
 
