@@ -69,6 +69,9 @@ $post = $p->loadPostById($id);
             <p id="category-members"><strong><?php echo $followers[0]['total'] ?></strong> <span>Members</span></p>
             </hr>
             <p id="category-description"><?php echo $category[0]['description'] ?></p>
+
+
+            <!-- USER SESSION -- NEEDS TO BE FIXED -->
             <?php
             $session = new SessionHandle();
             if ($session->confirm_logged_in()) {
@@ -77,11 +80,14 @@ $post = $p->loadPostById($id);
             $u = new UserController();
             $userData = $u->getUserInfo();
 
+            // Check if user follows the category
+
             if ($userData) {
                 $c = new CategoryController();
                 $category = $c->isUserFollower($category[0]['category_name'], (int)$userData['userId']);
             }
             ?>
+            <!-- Follow category button. Depending on whether the user is a follower of the category or not-->
             <?php if ((int)$category[0]['total'] > 0) { ?>
                 <button type="button" class="btn btn-leave">Leave Category</button>
             <?php } else { ?>
