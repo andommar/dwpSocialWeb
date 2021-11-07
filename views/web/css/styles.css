@@ -443,6 +443,17 @@ a,
 a:link {
   color: inherit;
 }
+#userfeed_filters_section {
+  margin: 2em 13em;
+}
+#userfeed_filters_section #userfeed_filters {
+  background-color: #242526;
+  color: white;
+  border: 1px solid #2a2b2d;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 /* Small devices */
 @media (min-width: 577px) {
