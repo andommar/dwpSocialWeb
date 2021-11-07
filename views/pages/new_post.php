@@ -23,6 +23,12 @@
 //   $p->newPost($_SESSION['userId'], $_POST['title'], $_POST['category'], $_FILES['imgfile']['name'], $_POST['description']);
 // }
 
+
+
+$c = new CategoryController();
+$categories = $c->loadCategories();
+
+
 ?>
 
 
@@ -43,9 +49,9 @@
             <label for="category">Category</label>
             <select name="category" id="category">
               <option value="Categroy">Select category</option>
-              <option value="News">News</option>
-              <option value="Sports">Sports</option>
-              <option value="Photography">Photography</option>
+              <?php foreach ($categories as $category) { ?>
+                <option value="<?php echo $category['category_name'] ?>"><?php echo $category['category_name'] ?></option>
+              <?php } ?> 
             </select>
           </div>
           <div class="form-group">
