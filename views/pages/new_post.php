@@ -3,23 +3,25 @@
 // include_once "controller/ViewController.php";
 // include_once('models/SessionHandle.php');
 
-if (isset($_POST['submit'])) {
+// echo (__FILE__);
 
-  if (($_FILES['imgfile']['type'] == 'image/jpeg'  ||
-      $_FILES['imgfile']['type'] == 'image/jpg'   ||
-      $_FILES['imgfile']['type'] == 'image/png'   ||
-      $_FILES['imgfile']['type'] == 'image/gif') &&
-    ($_FILES['imgfile']['size'] < 10000000)
-  ) {
-    if ($_FILES['imgfile']['error'] > 0) {
-      echo "Error: " . $_FILES['imgfile']['error'];
-    } else {
-      move_uploaded_file($_FILES['imgfile']['tmp_name'], "web/img/media/" . $_FILES['imgfile']['name']);
-    }
-  }
-  $message = ['title' => '', 'category' => '', 'description' => '',];
-  $msg = validateNewPost($_POST['title'], $_POST['category'], $_FILES['imgfile']['name'], $_POST['description'], $message);
-}
+// if (isset($_POST['submit'])) {
+
+//   if (($_FILES['imgfile']['type'] == 'image/jpeg'  ||
+//       $_FILES['imgfile']['type'] == 'image/jpg'   ||
+//       $_FILES['imgfile']['type'] == 'image/png'   ||
+//       $_FILES['imgfile']['type'] == 'image/gif') &&
+//     ($_FILES['imgfile']['size'] < 10000000)
+//   ) {
+//     if ($_FILES['imgfile']['error'] > 0) {
+//       echo "Error: " . $_FILES['imgfile']['error'];
+//     } else {
+//       move_uploaded_file($_FILES['imgfile']['tmp_name'], "web/img/media/" . $_FILES['imgfile']['name']);
+//     }
+//   }
+//   $p = new PostController();
+//   $p->newPost($_SESSION['userId'], $_POST['title'], $_POST['category'], $_FILES['imgfile']['name'], $_POST['description']);
+// }
 
 ?>
 
@@ -53,18 +55,11 @@ if (isset($_POST['submit'])) {
           <div class="form-group">
             <input type="file" name="imgfile" id="imgfile">
           </div>
-          <input type="submit" name="submit" value="Create">
-          <p class="message info-message"><?php echo isset($msg['database']) ? $msg['database'] : '' ?></p>
+          <div id="error-msg"></div>
+          <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm(2)"> Create</button>
+
         </form>
       </div>
     </section>
   </div>
-  <!-- <?php include_once('view/right_menu.php'); ?> -->
 </div>
-
-
-
-
-
-</div> <!-- header view container fluid div-->
-</body>

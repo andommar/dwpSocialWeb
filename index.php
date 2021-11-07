@@ -61,7 +61,8 @@ $userData = $c->getUserInfo();
     </div>
   </div> <!-- header view container fluid div-->
 </body>
+<script type="text/javascript" src="views/web/js/show_post.js"></script>
+<script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
+<script type="text/javascript" src="views/web/js/new_post.js"></script>
 
 </html>
-
-<script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
