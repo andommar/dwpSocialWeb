@@ -7,14 +7,26 @@ class Post
 
 
 
-  //It's missing userid parameter
-  public function loadUserFeedPosts()
+  //Filtered by latest posts
+  public function loadUserFeedLatestPosts($userId)
   {
     $db = new Dbconn();
-    $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name';
-    $result = $db->selectquery($sql);
+    $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY `datetime` desc';
+    $result = $db->selectQueryBind($sql, $userId);
     return $result;
   }
+
+
+  // public function loadUserFeedPopularPosts($userId)
+  // {
+  //   $db = new Dbconn();
+  //   $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY `datetime` desc';
+  //   $result = $db->selectQueryBind($sql, $userId);
+  //   return $result;
+  // }
+
+
+
   public function loadPostById($postId)
   {
     $db = new Dbconn();

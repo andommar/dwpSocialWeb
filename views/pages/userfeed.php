@@ -1,9 +1,27 @@
 <div class="row">
   <div class="col col-lg-10 col-xs-12">
+
+
     <?php
     $p = new PostController();
-    $posts = $p->loadUserFeedPosts(); ?>
-
+    $posts = $p->loadUserFeedLatestPosts($_SESSION['userId']);
+    ?>
+    <div id="userfeed_filters_section" class="dropdown d-flex justify-content-end">
+      <select name="userfeed_filters" id="userfeed_filters">
+        <option value="volvo">Popular posts</option>
+        <option value="saab">Oldest posts</option>
+        <option value="mercedes">Unpopular posts</option>
+      </select>
+      <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Latest posts
+        <i class="fa fa-sort"></i>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a class="dropdown-item" href="#">Popular posts</a></li>
+        <li><a class="dropdown-item" href="#">Oldest posts</a></li>
+        <li><a class="dropdown-item" href="#">Unpopular posts</a></li>
+      </ul> -->
+    </div>
     <?php foreach ($posts as $post) { ?>
       <div class="post">
         <div class="post_title">

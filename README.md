@@ -44,3 +44,7 @@
 - When signing up correctly, it redirects user to login, so the message of successful registration has no time to be shown
 - Check Image types when loading posts images, avatar, etc
 - Main page side menus overlap when resizing browser
+
+## Triggers useful commands
+
+- SHOW TRIGGERS
