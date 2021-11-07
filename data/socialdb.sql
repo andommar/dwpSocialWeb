@@ -317,6 +317,22 @@ INSERT INTO `USER_CATEGORY` (`user_id`, category_name) VALUES (7, 'Photography')
 /* Comment */
 INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
 VALUES (null, 1 , NULL, 1, 'Where banana', 200, 7809);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 7 , NULL, 1, 'So cute!!', 213, 22);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 4 , NULL, 1, 'The witch dog is in town', 94, 21);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 3 , NULL, 1, 'Doggo ipsum long bois tungg woofer boof he made many woofs, floofs extremely cuuuuuute wow very biscit. What a nice floof shibe super chub ruff, what a nice floof. Bork the neighborhood pupper big ol mlem, big ol. Very jealous pupper wow such tempt big ol sub woofer heckin good boys and girls wow such tempt, pupper super chub snoot long bois vvv, shibe stop it fren extremely cuuuuuute boof. Adorable doggo vvv h*ck wow very biscit h*ck, bork blop stop it fren. Long water shoob blop the neighborhood pupper doing me a frighten floofs doge heck, you are doin me a concern floofs porgo heckin good boys and girls shoob, you are doing me a frighten ruff floofs most angery pupper I have ever seen sub woofer. Woofer tungg fat boi you are doing me a frighten pats fluffer, borkf length boy heckin.', 213, 22);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 5 , NULL, 1, 'Doggo ipsum long bois tungg woofer boof he made many woofs, floofs extremely cuuuuuute wow very biscit. What a nice floof shibe super chub ruff, what a nice floof. Bork the neighborhood pupper big ol mlem, big ol. Very jealous pupper wow such tempt big ol sub woofer heckin good boys and girls wow such tempt, pupper super chub snoot long bois vvv', 37, 54);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 6 , NULL, 1, 'Doggo ipsum long bois tungg woofer boof he made many woofs, floofs extremely cuuuuuute wow very biscit. What a nice floof shibe super chub ruff, what a nice floof. Bork the neighborhood pupper big ol mlem, big ol. Very jealous pupper wow such tempt big ol sub woofer heckin good boys and girls wow such tempt, pupper super chub snoot long bois vvv', 87, 45);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 2 , NULL, 1, 'Doggo ipsum long bois tungg woofer boof he made many woofs, floofs extremely cuuuuuute wow very biscit. What a nice floof shibe super chub ruff, what a nice floof. Bork the neighborhood pupper big ol mlem, big ol. Very jealous pupper wow such tempt big ol sub woofer heckin good boys and girls wow such tempt, pupper super chub snoot long bois vvv', 543, 21);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 2 , NULL, 2, 'My first comment!', 3, 22);
+INSERT INTO `COMMENT` (comment_id, `user_id`, media_id, post_id, `description`, up_votes, down_votes) 
+VALUES (null, 2 , NULL, 6, 'This is the wrong category for this!', 200, 7809);
 
 -- By the moment we'll set the same description to all the categories.
 UPDATE `CATEGORY` SET `description` = 'Nullam ut porttitor lorem, sed maximus dolor. Vestibulum eget enim diam. Donec ut luctus leo, vitae pellentesque nibh.' 

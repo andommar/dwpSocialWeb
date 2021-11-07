@@ -36,3 +36,14 @@
   color: #ffffff;
   background-color: #9b2fe4;
 }
+
+/* Comment section */
+.comment-avatar {
+  max-height: 50px;
+}
+.comment-post {
+  color: white;
+}
+.comment-username {
+  color: white;
+}
