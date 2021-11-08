@@ -1,12 +1,12 @@
  
   
   $(document).ready(function() {
-    loadContent = function(pageName,id) {
-      if(id){
+    loadContent = function(pageName,data) {
+      if(data){
         $.ajax({
           url: "controller/PageController.php",
           method: "POST",
-          data: { pageName: pageName, id:id },
+          data: { pageName: pageName, data:data },
           success: function (data) {
             $('#content').html(data);
           },
@@ -35,6 +35,18 @@
     sendPostId = function(id){
         loadContent('show_post',id);
     }
+
+    // Scrolls to top when clicking Header Button
+    $("#scrollTop").click(function () {
+      // Scrolls to the top of the page
+      $( "html,body" ).animate({
+        scrollTop: $("body").offset().top
+        }, 200, function() {
+        // Animation complete.
+      });
+    });
+    
+
   });
 
   

@@ -3,10 +3,10 @@
 // $postID = $_GET['ID'];
 $p = new PostController();
 // $post = $p->loadPostById($postID);
-$post = $p->loadPostById($id);
+$post = $p->loadPostById($data);
 
 $c = new CommentController();
-$comments = $c->loadCommentsbyPostId($id);
+$comments = $c->loadCommentsbyPostId($data);
 
 ?>
 
@@ -67,17 +67,17 @@ $comments = $c->loadCommentsbyPostId($id);
                     </div> -->
 
                     <?php foreach ($comments as $comment) { ?>
-                    <div class="row">
-                        <div class="col col-lg-12 d-flex justify-content-left ml-3 mt-3">
-                            <div class="col-2 px-3">
-                                <img src="views/web/img/avatars/<?php echo $comment['avatar']; ?>" alt="user-avatar" class="rounded-circle comment-avatar">
-                                <span class="comment-username"><?php echo $comment['username']; ?></span>
-                            </div>
-                            <div class="col comment-post" >
-                                <p><?php echo $comment['description']; ?></p>
+                        <div class="row">
+                            <div class="col col-lg-12 d-flex justify-content-left ml-3 mt-3">
+                                <div class="col-2 px-3">
+                                    <img src="views/web/img/avatars/<?php echo $comment['avatar']; ?>" alt="user-avatar" class="rounded-circle comment-avatar">
+                                    <span class="comment-username"><?php echo $comment['username']; ?></span>
+                                </div>
+                                <div class="col comment-post">
+                                    <p><?php echo $comment['description']; ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <?php }; ?>
 
                 </div>
@@ -90,5 +90,5 @@ $comments = $c->loadCommentsbyPostId($id);
     </div>
     <!-- Post Content End -->
     <!-- Content Right | Not implemented yet -->
-    
+
 </div>

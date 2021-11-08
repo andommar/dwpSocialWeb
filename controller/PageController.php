@@ -4,8 +4,8 @@ require_once('../bootstrapping.php');
 
 if (isset($_POST["pageName"])) {
 
-    if (isset($_POST["id"])) {
-        $id = $_POST["id"];
+    if (isset($_POST["data"])) {
+        $data = $_POST["data"];
     }
     $pageName = $_POST["pageName"];
 
@@ -18,6 +18,9 @@ if (isset($_POST["pageName"])) {
             break;
         case 'show_post':
             include_once('../views/pages/show_post.php');
+            break;
+        case 'posts_filtered':
+            include_once('../views/pages/posts_filtered.php');
             break;
         default:
             $content = '<h1> This is what you came for' . $pageId . ' </h1>';

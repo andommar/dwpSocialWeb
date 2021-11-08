@@ -12,7 +12,10 @@
       </div>
 
       <div class="col col-6 navbar_right d-flex align-items-center flex-fill my-2">
-
+        <!-- Scroll to top button -->
+        <div class="d-flex align-items-center" id="scrollTop">
+          <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
+        </div>
         <div class="navbar_profile d-flex align-items-center">
           <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
           <span><?php echo $userData['username'] ?></span>

@@ -18,5 +18,13 @@ if (isset($_POST["option"])) {
             $p = new PostController();
             $p->newPost($userid, $title, $category, $imgfile, $description);
             break;
+
+        case "userfeed":
+            $userId = $_POST["userId"];
+            $filter = $_POST["userfeedFilter"];
+            $p = new PostController();
+            $posts2 = $p->loadUserFeedPostsFiltered($userId, $filter);
+            echo json_encode($posts2);
+            break;
     }
 }

@@ -58,22 +58,6 @@ body {
   outline: none;
 }
 
-.navbar_center a {
-  width: 150px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.2s;
-}
-
-.navbar_center a:hover {
-  background: #3a3b3c;
-  border-radius: 10px;
-  height: 55px;
-  border: none;
-}
-
 .active_icon {
   border-bottom: 3px solid #b64ffb;
 }
@@ -91,12 +75,16 @@ body {
 .navbar_profile {
   height: 40px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .navbar_profile:hover {
+  cursor: pointer;
   background: #3a3b3c;
-  border-radius: 15px;
-  padding: 0 5px;
+  padding: 0 7px;
+  transition: 0.3s;
+  transition-timing-function: ease-out;
+  border-radius: 2px;
 }
 
 .navbar_profile img {
@@ -324,6 +312,10 @@ body {
 .post_description {
   min-height: 287px;
 }
+.post_description p {
+  font-size: 17px;
+  font-weight: 400;
+}
 
 .post_subtitle {
   padding: 0 15px;
@@ -454,7 +446,13 @@ a:link {
   border-radius: 5px;
   cursor: pointer;
 }
-
+/* Header Scroll button */
+#scrollTop i {
+  font-size: 20px;
+  color: #404040;
+  cursor: pointer;
+  margin-right: 2em;
+}
 /* Small devices */
 @media (min-width: 577px) {
   .content_right div,

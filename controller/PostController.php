@@ -12,10 +12,10 @@ spl_autoload_register(function ($class) {
 class PostController
 {
 
-    public function loadUserFeedLatestPosts($userId)
+    public function loadUserFeedPostsFiltered($userId, $filter)
     {
         $p = new Post();
-        $res = $p->loadUserFeedLatestPosts($userId);
+        $res = $p->loadUserFeedPostsFiltered($userId, $filter);
         return $res;
     }
     public function loadPostById($postId)

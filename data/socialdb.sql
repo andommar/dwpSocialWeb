@@ -54,6 +54,14 @@ CREATE TABLE `POST` (
   FOREIGN KEY (category_name) REFERENCES CATEGORY (category_name)
 )ENGINE = InnoDB;
 
+CREATE TABLE `USER_VOTES_POST`(
+  `user_id` INT NOT NULL,
+  post_id INT NOT NULL,
+  is_positive BOOLEAN NOT NULL,
+  CONSTRAINT PK_UserVotesPost PRIMARY KEY (`user_id`,post_id),
+  FOREIGN KEY (post_id) REFERENCES POST (post_id),
+  FOREIGN KEY (`user_id`) REFERENCES USER (`user_id`)
+)ENGINE = InnoDB;
 
 CREATE TABLE `POST_TAG` (
   post_id INT NOT NULL,
@@ -79,6 +87,7 @@ CREATE TABLE `COMMENT` (
   `description` TEXT NOT NULL,
   up_votes INT,
   down_votes INT,
+  `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES USER (`user_id`),
   FOREIGN KEY (media_id) REFERENCES MEDIA (media_id),
   FOREIGN KEY (post_id) REFERENCES POST (post_id)

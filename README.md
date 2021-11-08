@@ -4,18 +4,20 @@
 
 - Index (home) imports 3 views: header, leftmenu, userfeed and rightmenu
 - For the style, we are using Using Bootstrap 5.1
+- Execute sql tables creation first and then the triggers
+- Only registered users can navigate
 
 ## Anna's Pending Tasks
 
 - Sign up > categories selection (jquery)
-- Post reading and comments
+- Votes on posts, new post styling
 - Datetime formatting on posts
 
 ## Pending Tasks
 
-- Join/Unjoin button not working
-- Total members of a category? (can be a view) !!!!
-- votes. Control voting twice. We should change the DB accordingly
+- Control negative values when executing triggers that substract a total (possible negative values)
+- Join/Unjoin button
+- Votes > Prevent voting twice.
 - Category page
 - Post descriptions, allow nulls??
 - Have in mind the possibility of posts with no images, external links, thumbnails, videos, etc
@@ -23,7 +25,7 @@
 - Assign categories to user when signing up
 - create general functions file (validate data function, for example)
 - Rank and Role
-- Only registered users can navigate
+
 - Fill database with real info
 - Password Hash
 - Add transactions in User Login, for example (IT'S NOT A REQUIREMENT FOR THE DWP)
@@ -48,3 +50,4 @@
 ## Triggers useful commands
 
 - SHOW TRIGGERS
+- DROP TRIGGER trigger_name
