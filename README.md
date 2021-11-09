@@ -58,3 +58,7 @@
 
 - SHOW TRIGGERS
 - DROP TRIGGER trigger_name
+
+## Comments page
+
+- When page has a lot of comments it. Page starts displaying from the bottom

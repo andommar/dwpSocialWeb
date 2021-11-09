@@ -24,7 +24,7 @@ $userData = $c->getUserInfo();
   <link rel="stylesheet" href="views/web/css/show_post.css" />
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <title>Monkia</title>
+  <title>Socially</title>
 </head>
 
 <body>
