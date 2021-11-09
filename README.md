@@ -61,4 +61,4 @@
 
 ## Comments page
 
-- When page has a lot of comments it. Page starts displaying from the bottom
+- When page has a lot of comments in it page starts displaying from the bottom
