@@ -54,18 +54,30 @@ $comments = $c->loadCommentsbyPostId($data);
                             <span>4 comments</span>
                         </div> -->
                     </div>
-                    <!-- Comment section -->
-                    <!-- <div class="row">
-                        <div class="col col-lg-12 d-flex justify-content-left ml-3 mt-3">
-                            <div class="col-2 px-3">
-                                <img src="views/web/img/avatars/avatar_7.png" alt="" class="rounded-circle comment-avatar">
-                            </div>
-                            <div class="col comment-post" >
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, velit! Provident temporibus aperiam quos saepe quae quaerat excepturi repellendus doloremque.</p>
+
+                    <!-- Post comment -->
+                    <section id="comment-form-section">
+                        <div class="row">
+                            <div class="col justify-content-center m-3 comment-form-wrapper">
+                                <form id="comment-form">
+                                    <div class="my-2">
+                                        <label for="exampleFormControlTextarea1">Write a comment</label>
+                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                    </div>
+                                    <div class="my-2">
+                                        <label for="exampleFormControlFile1">Upload image</label>
+                                        <input type="file" class="form-control-file" id="imageupload">
+                                    </div>
+                                    <div class="my-2">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div> -->
+                    </section>
 
+
+                    <!-- Comment section -->
                     <?php foreach ($comments as $comment) { ?>
                         <div class="row">
                             <div class="col col-lg-12 d-flex justify-content-left ml-3 mt-3">
