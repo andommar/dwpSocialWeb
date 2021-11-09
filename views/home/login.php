@@ -62,7 +62,7 @@ function validate_data($data)
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php } ?>
-                <div class="logo-position"><img id="logo" src="../web/img/assets/logo.png" alt="monkia logo" /></div>
+                <div class="logo-position"><img id="logo" src="../web/img/assets/logo.png" alt="socially logo" /></div>
                 <h1>Login</h1>
                 <!-- -->
                 <form method="post" action="" onsubmit="return validate();">

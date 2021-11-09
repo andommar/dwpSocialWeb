@@ -351,6 +351,12 @@ body {
   font-size: smaller;
 }
 /* votes */
+.purple_color {
+  color: #b64ffb;
+}
+.red_color {
+  color: #f03a17;
+}
 .votes_comments_area {
   display: flex;
   justify-content: space-between;
@@ -368,28 +374,30 @@ body {
 }
 
 .votes_comments_area .icons .votes_number {
-  color: #b7babe;
+  /* color: #b7babe; */
   margin-left: 3px;
   font-size: 11px;
   font-weight: bold;
   margin-right: 8px;
 }
 .upvote_default {
-  content: url("../img/assets/upvote_default.png");
-}
-.upvote_hover_purple {
-}
-.upvote_clicked_purple {
+  content: url("https://i.imgur.com/5FxIKEq.png");
 }
 .downvote_default {
-  content: url("../img/assets/downvote_default.png");
+  content: url("https://i.imgur.com/YNPnhou.png");
 }
-.downvote_hover_purple {
+.upvote_filled {
+  content: url("https://i.imgur.com/wTKcJRU.png");
 }
-.downvote_clicked_purple {
+.downvote_filled {
+  content: url("https://i.imgur.com/wM8jE7U.png");
 }
+
 .comment_counts {
   color: #b7babe;
+}
+.comment_counts:hover {
+  color: #959595;
 }
 
 .divider {
@@ -401,7 +409,7 @@ body {
   cursor: pointer;
 }
 .custom-link-text:hover {
-  color: #b64ffb;
+  color: #c1c1c1;
   transition: 0.3s;
 }
 
