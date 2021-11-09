@@ -1,12 +1,4 @@
 <?php
-spl_autoload_register(function ($class) {
-    $pathModel = '../models/' . $class . '.php';
-
-    if (file_exists($pathModel)) {
-        require_once $pathModel;
-    }
-});
-
 
 class CategoryController
 {

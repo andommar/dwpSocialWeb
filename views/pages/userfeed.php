@@ -17,7 +17,7 @@
       <?php foreach ($posts as $post) { ?>
         <div class="post">
           <div class="post_title">
-            <img src="./views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
+            <img src="views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
             <div class="post_title_content">
               <p class="mb-0">
                 <a href="#" class="text-decoration-none"><?php echo $post['category_name'] ?>
@@ -34,7 +34,7 @@
             </p>
             <?php if ($post['media_url']) { ?>
               <!-- <a href="views/pages/show_post.php?ID=<?php echo $post['post_id'] ?>" class="text-decoration-none custom-link"> -->
-              <img class="img-fluid custom-link" src="./views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
+              <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
               <!-- </a> -->
             <?php } ?>
             <div class="post_description_title">
@@ -48,12 +48,14 @@
           <div class="post-date-area">
             <span><?php echo $post['datetime'] ?></span>
           </div>
-          <div class="likes_area">
-            <div class="emojis">
-              <span>&#129373;</span>
-              <span><?php echo $post['up_votes'] ?></span>
-              <span>&#127813;</span>
-              <span><?php echo $post['down_votes'] ?></span>
+          <div class="votes_comments_area">
+            <div class="icons">
+              <!-- onclick="sendPostId(<?php //echo $post['post_id'] 
+                                        ?>)" -->
+              <img class="img-fluid vote_icon_size upvote_default" id="upvote_button" src="" alt="upvote button" />
+              <span class="votes_number"><?php echo $post['up_votes'] ?></span>
+              <img class="img-fluid vote_icon_size downvote_default" id="downvote_button" src="" alt="downvote button" />
+              <span class="votes_number"><?php echo $post['down_votes'] ?></span>
             </div>
             <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
               <!-- <a href="views/pages/show_post.php?ID=<?php echo $post['post_id'] ?>" class="text-decoration-none custom-link"> -->

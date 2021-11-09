@@ -350,64 +350,50 @@ body {
   color: #989898;
   font-size: smaller;
 }
-/* Likes */
-.likes_area {
+/* votes */
+.votes_comments_area {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
 }
 
-.emojis {
+.votes_comments_area .icons {
   display: flex;
   align-items: center;
 }
-
-.emojis span {
-  color: #b7babe;
-  margin-left: 10px;
+/* Vote icons */
+.votes_comments_area .icons img {
+  cursor: pointer;
 }
 
+.votes_comments_area .icons .votes_number {
+  color: #b7babe;
+  margin-left: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.upvote_default {
+  content: url("../img/assets/upvote_default.png");
+}
+.upvote_hover_purple {
+}
+.upvote_clicked_purple {
+}
+.downvote_default {
+  content: url("../img/assets/downvote_default.png");
+}
+.downvote_hover_purple {
+}
+.downvote_clicked_purple {
+}
 .comment_counts {
   color: #b7babe;
 }
 
 .divider {
   padding: 0 15px 0 15px;
-}
-
-.likes_buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 15px;
-  height: 35px;
-}
-.likes_buttons div {
-  cursor: pointer;
-}
-
-.likes_buttons_links {
-  width: 33.3%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #b4b7bb;
-  font-weight: 500;
-}
-
-.likes_buttons_links:hover {
-  background: #3a3b3c;
-  border-radius: 5px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.likes_buttons_links i {
-  font-size: 18px;
-  margin-right: 10px;
 }
 
 .custom-link,
@@ -447,11 +433,23 @@ a:link {
   cursor: pointer;
 }
 /* Header Scroll button */
+#scrollTop {
+  position: absolute;
+  top: 648px;
+  right: 249px;
+}
 #scrollTop i {
-  font-size: 20px;
-  color: #404040;
   cursor: pointer;
   margin-right: 2em;
+  background-color: hsl(0deg 0% 13%);
+  padding: 12px 14px;
+  border-radius: 100%;
+  font-size: 16px;
+  color: hsl(0deg 0% 30%);
+  box-shadow: 2px 2px 5px 0px #0000002b;
+}
+.vote_icon_size {
+  width: 20px;
 }
 /* Small devices */
 @media (min-width: 577px) {

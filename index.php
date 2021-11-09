@@ -1,26 +1,9 @@
 <?php
-//Session handler
-// spl_autoload_register(function ($class) {
-//   $pathController = 'controller/' . $class . '.php';
-//   $pathModel = 'models/' . $class . '.php';
-//   $file = str_replace('\\', '/', $class) . '.php';
-
-//   if(file_exists($pathController)) {
-//     require_once $pathController;
-//   } elseif (file_exists($pathModel)) {
-//     require_once $pathModel;
-//   } elseif (file_exists("$class.php")) {
-//     require_once "$class.php";
-//   }
-// });
-
 require_once('bootstrapping.php');
-
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
   $redirect = new Redirector("views/home/login.php");
 }
-
 $c = new UserController();
 $userData = $c->getUserInfo();
 ?>

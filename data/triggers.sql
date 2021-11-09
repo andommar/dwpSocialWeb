@@ -19,6 +19,3 @@ BEGIN
     WHERE post_id = old.post_id;
 END//
 DELIMITER ;
-
-
-

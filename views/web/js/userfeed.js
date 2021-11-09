@@ -42,4 +42,16 @@ $(document).ready(function() {
         });
     };
 
+    $('#upvote_button').mouseenter(
+        function () {
+            $(this).removeClass( "btn-primary-deselected" ).addClass( "btn-primary-selected" );
+        });
+
+$('#upvote_button').mouseleave(       function () {
+          $('#hover_tutor').show();
+        $(this).hide();
+        }
+    ).mouseleave();
+
+
 });

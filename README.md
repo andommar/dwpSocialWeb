@@ -7,6 +7,11 @@
 - Execute sql tables creation first and then the triggers
 - Only registered users can navigate
 
+## Domain database
+
+- Tables creation and insertion (except comments insertion)
+- Execute triggers (with UPPERCASE table names)
+
 ## Anna's Pending Tasks
 
 - Sign up > categories selection (jquery)
@@ -15,6 +20,8 @@
 
 ## Pending Tasks
 
+- Try catch and close the connection at the end of try (take a look at try catch finally, finally will always be run)
+- Security measures left: encrypting password and htmlspecialchars
 - Control negative values when executing triggers that substract a total (possible negative values)
 - Join/Unjoin button
 - Votes > Prevent voting twice.
