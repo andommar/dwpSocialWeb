@@ -1,10 +1,9 @@
 
 $(document).ready(function() {
-    // $("#userfeed_filters").change(function(){ 
-
-    // alert("filter changed");
-
-    // });
+    
+    // we take the user Id for the first time that the page will be loaded
+    userId = $("#usr").val();
+    // We retrieve the data and refresh the posts
     loadPosts = function(value,userId){ 
     
         var userfeedFilter = value;
@@ -17,9 +16,6 @@ $(document).ready(function() {
             $filteredPosts = $.parseJSON(data);
             //alert($.parseJSON(data));
             console.log($filteredPosts);
-
-            // ******* loadContent('test',$filteredPosts);
-
             $.ajax({
                 url: "controller/PageController.php",
                 method: "POST",
@@ -28,30 +24,54 @@ $(document).ready(function() {
                   $('#filtered-posts').html(data);
                 },
               });
-
-
             //Print object as string
             // $("#filteredPosts").html(JSON.stringify($filteredPosts));
-
-            // printPosts(){
-
-            // }
         })
         .fail(function( jqXHR, textStatus, errorThrown ) {
             console.log("ajax false");
         });
     };
+    // First thing that will be loaded. We send the user Id and the default query type that we'll execute
+    loadPosts('latest',userId);
 
-    $('#upvote_button').mouseenter(
-        function () {
-            $(this).removeClass( "btn-primary-deselected" ).addClass( "btn-primary-selected" );
-        });
+    ratePost = function(userId, postId, isPositive){ 
 
-$('#upvote_button').mouseleave(       function () {
-          $('#hover_tutor').show();
-        $(this).hide();
+        // Upvote button (click)
+        if(isPositive){
+            // If they already rated the post and they click again on the button
+            if($(".upvote_button").hasClass("upvote_filled")){
+                $(".upvote_button").removeClass( "upvote_filled" ).addClass( "upvote_default" );
+            }
+            else {
+                // Apply this if everything goes ok, otherwise, set again default upvote style
+                $(".upvote_button").removeClass( "upvote_default" ).addClass( "upvote_filled" );
+            }
         }
-    ).mouseleave();
+        // Downvote button (click)
+        else{
+            // If they already rated the post and they click again on the button
+            if($(".downvote_button").hasClass("downvote_filled")){
+                $(".downvote_button").removeClass( "downvote_filled" ).addClass( "downvote_default" );
+            }
+            else{
+                // Apply this if everything goes ok, otherwise, set again default downvote style
+                $(".downvote_button").removeClass( "downvote_default" ).addClass( "downvote_filled" );
+            }
+        }
+        
+        
+        
+        
+    };
 
+    // Vote buttons hover
+    // Upvote button
+    // $(document).on("mouseenter", ".upvote_button", function(e) {
+    //     $(this).removeClass( "upvote_default" ).addClass( "upvote_filled" );
+    // });
+    // $(document).on("mouseleave", ".upvote_button", function(e) {
+    //     $(this).removeClass( "upvote_filled" ).addClass( "upvote_default" );
+    // });
+    
 
 });

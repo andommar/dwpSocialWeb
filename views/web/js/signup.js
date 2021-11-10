@@ -129,9 +129,7 @@ function resetErrorMessages(){
     $('#termsofuse-error').text("");
 
 }
-// if($("#info-msg").hasClass("username")){
 
-// }
 
 $(document).ready(function() {
     // When user clicks on show/hide password (eye icon)
