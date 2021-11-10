@@ -69,7 +69,7 @@ $comments = $c->loadCommentsbyPostId($data);
                                         <input type="file" class="form-control-file" id="imageupload">
                                     </div>
                                     <div class="my-2">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" id="comment-submit" class="btn btn-primary" onclick="submitNewComment()">Submit</button>
                                     </div>
                                 </form>
                             </div>

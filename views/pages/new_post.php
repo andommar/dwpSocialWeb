@@ -61,8 +61,9 @@ $categories = $c->loadCategories();
           <div class="form-group">
             <input type="file" name="imgfile" id="imgfile">
           </div>
+          <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId']?>">
           <div id="error-msg"></div>
-          <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm(2)"> Create</button>
+          <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm()"> Create</button>
 
         </form>
       </div>
