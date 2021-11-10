@@ -17,4 +17,15 @@ class Comment
         $result = $db->selectQueryBind($sql, $postId);
         return $result;
     }
+    
+    public function newComment($userId, $postId, $description, $mediaUrl)
+    {
+        $db = new DbConn();
+        $date = date('Y-m-d H:i:s');
+        $arr = [$userId, $postId, $description, $mediaUrl, 0, 0, $date];
+        $sql = 'INSERT INTO `comment` (`user_id`, post_id, `description`, media_url, up_votes, down_votes, `datetime`)
+                VALUES (?,?,?,?,?,?,?)';
+        $result = $db->executeQueryBindArr($sql,$arr);
+        return $result;
+    }
 }

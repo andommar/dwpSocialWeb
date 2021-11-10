@@ -62,3 +62,4 @@
 ## Comments page
 
 - When page has a lot of comments in it page starts displaying from the bottom
+- AJAX .done response doesn't return values despite data has been inserted into database

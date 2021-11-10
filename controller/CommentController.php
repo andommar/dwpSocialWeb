@@ -11,4 +11,11 @@ class CommentController
         $res = $c->loadCommentsbyPostId($postId);
         return $res;
     }
+
+    public function newComment($userId, $postId, $description, $mediaUrl)
+    {
+        $c = new Comment();
+        $res = $c->newComment($userId, $postId, $description, $mediaUrl);
+        return $res;
+    }
 }
