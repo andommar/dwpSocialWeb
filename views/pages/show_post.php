@@ -1,12 +1,33 @@
 <?php
-// Load post info
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("views/home/login.php");
+}
+$u = new UserController();
+$userData = $u->getUserInfo();
+
+// Load POST INFO
 // $postID = $_GET['ID'];
+$post_id = $data;
 $p = new PostController();
 // $post = $p->loadPostById($postID);
-$post = $p->loadPostById($data);
+$post = $p->loadPostById($post_id);
 
+// Load right menu CATEGORY info
+$c = new CategoryController();
+$category_info = $c->loadCategoryById($post[0]['category_name']);
+$followers = $c->getCategoryFollowers($post[0]['category_name']);
+
+// Check if user follows the category
+if ($userData) {
+    $c = new CategoryController();
+    $category = $c->isUserFollower($category_info[0]['category_name'], (int)$userData['userId']);
+}
+
+// Load COMMENTS
 $c = new CommentController();
-$comments = $c->loadCommentsbyPostId($data);
+$comments = $c->loadCommentsbyPostId($post_id);
+
 
 ?>
 
@@ -24,6 +45,7 @@ $comments = $c->loadCommentsbyPostId($data);
                                 <?php echo $post[0]['category_name'] ?>
                                 <i class="<?php echo $post[0]['icon'] ?> mx-1"></i>
                             </p>
+                            <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId'] ?>">
                             <span>Posted by <b><?php echo $post[0]['username'] ?></b></span>
                         </div>
                     </div>
@@ -41,20 +63,28 @@ $comments = $c->loadCommentsbyPostId($data);
                     <div class="post-date-area">
                         <span><?php echo $post[0]['datetime'] ?></span>
                     </div>
-                    <div class="likes_area">
-                        <div class="emojis">
-                            <span>&#129373;</span>
-                            <span><?php echo $post[0]['up_votes'] ?></span>
-                            <span>&#127813;</span>
-                            <span><?php echo $post[0]['down_votes'] ?></span>
+                    <div class="votes_comments_area">
+                        <div class="icons" id="<?php echo $post[0]['post_id'] ?>">
+                            <!-- onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php //echo $post['post_id'] 
+                                                                                        ?>,1)" -->
+                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" />
+                            <span class="votes_number purple_color total_upvotes"><?php echo $post[0]['up_votes'] ?></span>
+                            <!-- onclick="ratePost(<?php //echo $_SESSION['userId'] 
+                                                    ?>,<?php echo $post['post_id'] ?>,0)" -->
+                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" />
+                            <span class="votes_number red_color total_downvotes"><?php echo $post[0]['down_votes'] ?></span>
                         </div>
-                        <!-- <div class="comment_counts">
-
+                        <div class="comment_counts">
                             <i class="far fa-comment-alt"></i>
-                            <span>4 comments</span>
-                        </div> -->
+                            <?php if ($post[0]['total_comments'] == 0) { ?>
+                                <span>No comments yet</span>
+                            <?php } else if (($post[0]['total_comments'] == 1)) { ?>
+                                <span><?php echo $post[0]['total_comments']; ?> comment</span>
+                            <?php } else { ?>
+                                <span><?php echo $post[0]['total_comments']; ?> comments</span>
+                            <?php } ?>
+                        </div>
                     </div>
-
                     <!-- Post comment -->
                     <section id="comment-form-section">
                         <div class="row">
@@ -69,7 +99,7 @@ $comments = $c->loadCommentsbyPostId($data);
                                         <input type="file" class="form-control-file" id="imageupload">
                                     </div>
                                     <div class="my-2">
-                                        <button type="submit" id="comment-submit" class="btn btn-primary" onclick="submitNewComment()">Submit</button>
+                                        <button type="button" id="comment-submit" class="btn btn-primary" onclick="submitNewComment(<?php echo (int)$userData['userId'] ?>,<?php echo $post_id ?>)">Submit</button>
                                     </div>
                                 </form>
                             </div>
@@ -79,14 +109,14 @@ $comments = $c->loadCommentsbyPostId($data);
 
                     <!-- Comment section -->
                     <?php foreach ($comments as $comment) { ?>
-                        <div class="row">
-                            <div class="col col-lg-12 d-flex justify-content-left ml-3 mt-3">
-                                <div class="col-2 px-3">
+                        <div>
+                            <div class="comment-row d-flex justify-content-left ml-3 mt-3">
+                                <div class="px-3">
                                     <img src="views/web/img/avatars/<?php echo $comment['avatar']; ?>" alt="user-avatar" class="rounded-circle comment-avatar">
-                                    <span class="comment-username"><?php echo $comment['username']; ?></span>
                                 </div>
-                                <div class="col comment-post">
-                                    <p><?php echo $comment['description']; ?></p>
+                                <div class="comment-post">
+                                    <span class="comment-username"><?php echo $comment['username']; ?></span>
+                                    <p class="mb-0"><?php echo $comment['description']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +128,27 @@ $comments = $c->loadCommentsbyPostId($data);
 
 
 
+
+    </div>
+    <!-- Right menu : CATEGORY Info -->
+    <div class="col col-lg-2 col-xs-12 content_right d-flex justify-content-center min-vh-100">
+
+        <div id="show-post_category-section" class="m-3 text-center">
+            <i class="<?php echo $category_info[0]['icon'] ?> mt-3"></i>
+            <p id="category-name"><?php echo $category_info[0]['category_name'] ?></p>
+            <p id="category-members"><strong><?php echo $followers[0]['total'] ?></strong> <span>Members</span></p>
+            </hr>
+            <p id="category-description"><?php echo $category_info[0]['description'] ?></p>
+
+            <!-- Follow category button. Depending on whether the user is a follower of the category or not-->
+            <?php if ((int)$category[0]['total'] > 0) { ?>
+                <button type="button" class="btn btn-leave">Leave Category</button>
+            <?php } else { ?>
+                <button type="button" class="btn btn-join">Join Category</button>
+            <?php } ?>
+
+
+        </div>
 
     </div>
     <!-- Post Content End -->

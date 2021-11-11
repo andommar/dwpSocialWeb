@@ -48,32 +48,34 @@ if (isset($_POST["option"])) {
             $v = $v->getPostVotes($postId);
             echo json_encode($v);
             break;
-    }
-} else if (isset($_POST["formtype"])) {
-    $form = $_POST["formtype"];
+        case "submit_post_comment":
 
-    $errors = [];
-    $data = [];
+            $formData = $_POST["formData"];
+            if ($formData["formtype"]) {
+                $form = $_POST["formtype"];
+                $errors = [];
+                $data = [];
+                $postId = $_POST["postId"];
+                $userId = $_POST["userId"];
+                if (empty($formData['description']) && empty($formData['image'])) {
+                    $errors['message'] = 'Type something or upload an image to send a comment';
+                } else {
+                    // Message and image validation
+                    $c = new CommentController();
+                    $result = $c->newComment($userId, $postId, $formData['description'], $formData['image']);
+                }
 
-    switch ($form) {
-        case "comment":
-            if (empty($_POST['description']) && empty($_POST['image'])) {
-                $errors['message'] = 'Type something or upload an image to send a comment';
-            } else {
-                // Message and image validation
-                $c = new CommentController();
-                $result = $c->newComment(1, 1, $_POST['description'], $_POST['image']);
-            }
+                if (!empty($errors)) {
+                    $data['sucess'] = false;
+                    $data['errors'] = $errors;
+                } else {
+                    $data['sucess'] = true;
+                    $data['errors'] = 'Success';
+                }
 
-            if (!empty($errors)) {
-                $data['sucess'] = false;
-                $data['errors'] = $errors;
-            } else {
-                $data['sucess'] = true;
-                $data['errors'] = 'Success';
+
+                echo json_encode($result);
             }
             break;
     }
-
-    echo json_encode($result);
-};
+}

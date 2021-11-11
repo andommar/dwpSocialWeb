@@ -1,27 +1,29 @@
 $(document).ready(function () {
-  submitNewComment = function (event) {
-    alert("Hola");
+  
+  if($("#userId").val()){
+    console.log($("#userId").val());
+  };
+  // getUserPostsRate(userId);
+  submitNewComment = function (userId,postId) {
     var formData = {
       formtype: "comment",
       description: $("#description").val(),
       image: $("#imgupload").val(),
     };
-    console.log(formData);
     $.ajax({
       method: "POST",
       url: "controller/ViewsController.php",
-      data: formData,
-      dataType: "json",
-      enconde: true,
+      data: {formData:formData, userId:userId, postId:postId, option:"submit_post_comment"},
+      encode: true,
     })
       .done(function (data) {
-        console.log(data);
+        // We clean the textarea input after the comment is made
+        $('#comment-form textarea').val('');
+        $('#comment-form textarea').text("");
       })
-      // .fail(function () {
-      //   console.log("Ajax failed");
-      // });
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus);
       });
   };
+
 });

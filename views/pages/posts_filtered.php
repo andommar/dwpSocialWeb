@@ -17,14 +17,15 @@
             </p>
             <?php if ($post['media_url']) { ?>
                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
-                <!-- </a> -->
             <?php } ?>
-            <div class="post_description_title">
-                <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
-                    <?php if ($post['description']) echo $post['description'] ?>
-                </p>
-                <!-- </a> -->
-            </div>
+            <?php if ($post['description']) { ?>
+                <div class="post_description_title">
+
+                    <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
+                        <?php if ($post['description']) echo $post['description'] ?>
+                    </p>
+                </div>
+            <?php } ?>
         </div>
         <div class="post-date-area">
             <span><?php echo $post['datetime'] ?></span>
