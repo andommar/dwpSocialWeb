@@ -1,15 +1,27 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "../models/" . $class . ".php";
+    $file = __DIR__ . '/../models/' . $class . '.php';
+    if (file_exists($file)) {
+        require $file;
+    }
 });
-
+// spl_autoload_register(function ($class) {
+//     include "../models/" . $class . ".php";
+// });
+// include "bootstrapping.php";
 class PostController
 {
 
-    public function loadUserFeedPosts()
+    public function loadUserFeedPostsFiltered($userId, $filter)
     {
         $p = new Post();
-        $res = $p->loadUserFeedPosts();
+        $res = $p->loadUserFeedPostsFiltered($userId, $filter);
+        return $res;
+    }
+    public function loadPostById($postId)
+    {
+        $p = new Post();
+        $res = $p->loadPostById($postId);
         return $res;
     }
 

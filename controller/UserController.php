@@ -22,6 +22,7 @@ class UserController
     {
         $u = new User($_SESSION['userId']);
         $data = [
+            'userId' => $u->getUserId(),
             'username' => $u->getUsername(),
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail()

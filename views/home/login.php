@@ -1,19 +1,9 @@
 <?php
-spl_autoload_register(function ($class) {
-    $pathController = '../../controller/' . $class . '.php';
-    $pathModel = '../../models/' . $class . '.php';
-
-    if (file_exists($pathController)) {
-        require_once $pathController;
-    } else if (file_exists($pathModel)) {
-        require_once $pathModel;
-    }
-});
+require_once('../../bootstrapping.php');
 $session = new SessionHandle;
 
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
-    $msg = "You are now logged out.";
     $redirect = new Redirector("login.php");
 } elseif ($session->logged_in()) {
     $redirect = new Redirector("../../index.php");
@@ -72,7 +62,7 @@ function validate_data($data)
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 <?php } ?>
-                <div class="logo-position"><img id="logo" src="../web/img/assets/logo.png" alt="monkia logo" /></div>
+                <div class="logo-position"><img id="logo" src="../web/img/assets/logo.png" alt="socially logo" /></div>
                 <h1>Login</h1>
                 <!-- -->
                 <form method="post" action="" onsubmit="return validate();">
