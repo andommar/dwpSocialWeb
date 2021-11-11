@@ -396,7 +396,7 @@ body {
 .comment_counts {
   color: #b7babe;
 }
-.comment_counts:hover {
+#filtered-posts .comment_counts:hover {
   color: #959595;
 }
 
