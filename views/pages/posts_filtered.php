@@ -13,16 +13,13 @@
         </div>
         <div class="post_description">
             <p class="post_subtitle">
-                <!-- href="views/pages/show_post.php?ID=<?php echo $post['post_id'] ?>" -->
                 <a class="text-decoration-none dynamic-content custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)"><?php echo $post['title'] ?></a>
             </p>
             <?php if ($post['media_url']) { ?>
-                <!-- <a href="views/pages/show_post.php?ID=<?php echo $post['post_id'] ?>" class="text-decoration-none custom-link"> -->
                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
                 <!-- </a> -->
             <?php } ?>
             <div class="post_description_title">
-                <!-- <a href="views/pages/show_post.php?ID=<?php echo $post['post_id'] ?>" class="text-decoration-none custom-link"> -->
                 <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
                     <?php if ($post['description']) echo $post['description'] ?>
                 </p>
@@ -35,13 +32,17 @@
         <div class="votes_comments_area">
             <div class="icons" id="<?php echo $post['post_id'] ?>">
                 <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post['post_id'] ?>,1)" />
-                <span class="votes_number purple_color"><?php echo $post['up_votes'] ?></span>
+                <span class="votes_number purple_color total_upvotes"><?php echo $post['up_votes'] ?></span>
                 <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post['post_id'] ?>,0)" />
-                <span class="votes_number red_color"><?php echo $post['down_votes'] ?></span>
+                <span class="votes_number red_color total_downvotes"><?php echo $post['down_votes'] ?></span>
             </div>
             <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
                 <i class="far fa-comment-alt"></i>
-                <span>4 comments</span>
+                <span><?php if ($post['total_comments'] > 0) {
+                            echo $post['total_comments'];
+                        } else {
+                            echo 'No';
+                        } ?> comments</span>
             </div>
         </div>
     </div>

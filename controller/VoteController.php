@@ -27,4 +27,16 @@ class VoteController
         $res = $v->isOldVotePositive($userId, $postId);
         return $res;
     }
+    public function getUserRatedPosts($userId)
+    {
+        $v = new Vote();
+        $res = $v->getUserRatedPosts($userId);
+        return $res;
+    }
+    public function getPostVotes($post_id)
+    {
+        $v = new Vote();
+        $res = $v->getPostVotes($post_id);
+        return $res;
+    }
 }

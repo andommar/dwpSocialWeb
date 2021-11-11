@@ -51,8 +51,23 @@ class DbConn
         return ($result);
     }
 
-    // Execute single query statement. Returns next row as an array indexed by column name
+
     public function selectQueryBind($sql, $bindParam)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            $stmt = $this->dbConn->prepare($sql);
+            if ($stmt) {
+                $stmt->bindParam(1, $bindParam);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+            }
+        }
+        return ($result);
+    }
+    // For retrieving counts or a single column and sending one parameter
+    public function selectQueryBindSingleFetch($sql, $bindParam)
     {
         $stmt = null;
         $result = false;
@@ -77,6 +92,22 @@ class DbConn
                 if ($stmt) {
                     $stmt->execute($bindArr);
                     $result = $stmt->fetchAll();
+                }
+            }
+        }
+        return ($result);
+    }
+    // For retrieving counts or a single column and sending more than one parameter
+    public function selectQueryBindArrSingleFetch($sql, $bindArr)
+    {
+        $stmt = null;
+        $result = false;
+        if (isset($sql) && $sql != "" && isset($this->dbConn)) {
+            if (isset($bindArr)) {
+                $stmt = $this->dbConn->prepare($sql);
+                if ($stmt) {
+                    $stmt->execute($bindArr);
+                    $result = $stmt->fetch();
                 }
             }
         }

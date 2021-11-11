@@ -36,11 +36,7 @@
       var pageName = $(this).attr("id");
       loadContent(pageName,'');
     });
-    // When we click something on a post that must redirect to that specific post page > we take the post id and the page name ("showpost" page) 
-    sendPostId = function(id){
-        loadContent('show_post',id);
-    }
-
+    
     // Scrolls to top when clicking Header Button
     $("#scrollTop").click(function () {
       // Scrolls to the top of the page

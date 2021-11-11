@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS socialdb;
-CREATE DATABASE socialdb;
-USE socialdb; 
+DROP DATABASE IF EXISTS sociallydb;
+CREATE DATABASE sociallydb;
+USE sociallydb; 
 
 
 /* Tables creation */

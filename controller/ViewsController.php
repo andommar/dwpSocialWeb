@@ -28,14 +28,25 @@ if (isset($_POST["option"])) {
             $posts2 = $p->loadUserFeedPostsFiltered($userId, $filter);
             echo json_encode($posts2);
             break;
-        case "userfeed_votes":
+        case "rate_post":
             $userId = $_POST["userId"];
             $postId = $_POST["postId"];
             $isPositive = $_POST["isPositive"];
             $v = new VoteController();
             $v = $v->ratePost($userId, $postId, $isPositive);
+            echo $v;
+            break;
+        case "user_votes":
+            $userId = $_POST["userId"];
+            $v = new VoteController();
+            $v = $v->getUserRatedPosts($userId);
             echo json_encode($v);
-            // echo $v;
+            break;
+        case "post_votes":
+            $postId = $_POST["postId"];
+            $v = new VoteController();
+            $v = $v->getPostVotes($postId);
+            echo json_encode($v);
             break;
     }
 } else if (isset($_POST["formtype"])) {
