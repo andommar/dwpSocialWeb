@@ -38,11 +38,13 @@
             </div>
             <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
                 <i class="far fa-comment-alt"></i>
-                <span><?php if ($post['total_comments'] > 0) {
-                            echo $post['total_comments'];
-                        } else {
-                            echo 'No';
-                        } ?> comments</span>
+                <?php if ($post['total_comments'] == 0) { ?>
+                    <span>No comments yet</span>
+                <?php } else if (($post['total_comments'] == 1)) { ?>
+                    <span><?php echo $post['total_comments']; ?> comment</span>
+                <?php } else { ?>
+                    <span><?php echo $post['total_comments']; ?> comments</span>
+                <?php } ?>
             </div>
         </div>
     </div>
