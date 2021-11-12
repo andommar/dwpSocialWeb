@@ -1,12 +1,4 @@
-/*	
-    `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    *avatar VARCHAR(255) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    *`rank` VARCHAR (255),
-    *role_name VARCHAR (100) NOT NULL,
-*/
+
 function validate()
 {
 
@@ -23,10 +15,6 @@ function validate()
     var username_regexp = /^[0-9A-Za-z\_]+$/;
     var email_regexp = /^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/;
     var password_regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/;
-    // console.log('username: ',username,'\n');
-    // console.log('email: ',email,'\n');
-    // console.log('password: ',password,'\n');
-    // console.log('password2: ',password2,'\n');
 
     
     // USERNAME

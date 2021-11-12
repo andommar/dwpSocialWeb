@@ -1,15 +1,9 @@
-  <ul>
-    <!-- <li>
-      <a href="#">
-        <img src="web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
-        <span><?php echo $userData['username'] ?></span>
-      </a>
-    </li> -->
+  <ul id="left-menu_categories">
     <li>My Categories</li>
     <?php
     $c = new CategoryController();
     $categories = $c->getUserCategories();
-    // $c = new Controller();
+    // $c = new CategoryController();
     // $categories = $c->loadCategories();
     foreach ($categories as $category) { ?>
       <li>
@@ -19,10 +13,4 @@
         </a>
       </li>
     <?php }; ?>
-    <li>
-      <a href="#">
-        <i class="fas fa-arrow-down"></i>
-        <span class="see_more">See more</span>
-      </a>
-    </li>
   </ul>

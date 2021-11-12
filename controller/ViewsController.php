@@ -42,6 +42,13 @@ if (isset($_POST["option"])) {
             $v = $v->getUserRatedPosts($userId);
             echo json_encode($v);
             break;
+        case "singlepost_user_votes":
+            $userId = $_POST["userId"];
+            $postId = $_POST["postId"];
+            $v = new VoteController();
+            $v = $v->getUserRatedPostByPostId($userId, $postId);
+            echo json_encode($v);
+            break;
         case "post_votes":
             $postId = $_POST["postId"];
             $v = new VoteController();
@@ -49,7 +56,6 @@ if (isset($_POST["option"])) {
             echo json_encode($v);
             break;
         case "submit_post_comment":
-
             $formData = $_POST["formData"];
             if ($formData["formtype"]) {
                 $form = $_POST["formtype"];
@@ -72,8 +78,6 @@ if (isset($_POST["option"])) {
                     $data['sucess'] = true;
                     $data['errors'] = 'Success';
                 }
-
-
                 echo json_encode($result);
             }
             break;

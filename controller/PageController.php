@@ -3,7 +3,7 @@ require_once('../bootstrapping.php');
 
 
 if (isset($_POST["pageName"])) {
-
+    // The variables we define here, can be called on the views below (when loaded)
     if (isset($_POST["data"])) {
         $data = $_POST["data"];
     }
