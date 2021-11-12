@@ -33,6 +33,12 @@ class VoteController
         $res = $v->getUserRatedPosts($userId);
         return $res;
     }
+    public function getUserRatedPostByPostId($user_id, $post_id)
+    {
+        $v = new Vote();
+        $res = $v->getUserRatedPostByPostId($user_id, $post_id);
+        return $res;
+    }
     public function getPostVotes($post_id)
     {
         $v = new Vote();

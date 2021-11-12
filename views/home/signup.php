@@ -55,15 +55,6 @@ function generate_rnd_avatar()
       <div id="signup-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap">
 
         <h1>Sign Up</h1>
-        <!-- 	
-          `user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-          username VARCHAR(100) NOT NULL,
-          *avatar VARCHAR(255) NOT NULL,
-          `password` VARCHAR(255) NOT NULL,
-          email VARCHAR(255) NOT NULL,
-          *`rank` VARCHAR (255),
-          *role_name VARCHAR (100) NOT NULL,
-        -->
         <form action="" method="post" onsubmit="return validate();">
           <!-- USERNAME -->
           <div class="form-group">

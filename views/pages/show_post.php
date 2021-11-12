@@ -7,7 +7,7 @@ $u = new UserController();
 $userData = $u->getUserInfo();
 
 // Load POST INFO
-// $postID = $_GET['ID'];
+// this data comed from the Page Controller
 $post_id = $data;
 $p = new PostController();
 // $post = $p->loadPostById($postID);
@@ -27,10 +27,7 @@ if ($userData) {
 // Load COMMENTS
 $c = new CommentController();
 $comments = $c->loadCommentsbyPostId($post_id);
-
-
 ?>
-
 
 <!-- Main content -->
 <div class="row">
@@ -45,7 +42,6 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                 <?php echo $post[0]['category_name'] ?>
                                 <i class="<?php echo $post[0]['icon'] ?> mx-1"></i>
                             </p>
-                            <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId'] ?>">
                             <span>Posted by <b><?php echo $post[0]['username'] ?></b></span>
                         </div>
                     </div>
@@ -65,13 +61,13 @@ $comments = $c->loadCommentsbyPostId($post_id);
                     </div>
                     <div class="votes_comments_area">
                         <div class="icons" id="<?php echo $post[0]['post_id'] ?>">
-                            <!-- onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php //echo $post['post_id'] 
-                                                                                        ?>,1)" -->
-                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" />
+                            <?php
+                            echo '<script type="text/javascript">sendUsrPostIds(' . $_SESSION['userId'] . ',' . $post[0]['post_id'] . ');</script>';
+                            ?>
+                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post[0]['post_id'] ?>,1)" />
                             <span class="votes_number purple_color total_upvotes"><?php echo $post[0]['up_votes'] ?></span>
-                            <!-- onclick="ratePost(<?php //echo $_SESSION['userId'] 
-                                                    ?>,<?php echo $post['post_id'] ?>,0)" -->
-                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" />
+
+                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post[0]['post_id'] ?>,0)" />
                             <span class="votes_number red_color total_downvotes"><?php echo $post[0]['down_votes'] ?></span>
                         </div>
                         <div class="comment_counts">
@@ -125,11 +121,8 @@ $comments = $c->loadCommentsbyPostId($post_id);
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
+    <!-- Post Content End -->
     <!-- Right menu : CATEGORY Info -->
     <div class="col col-lg-2 col-xs-12 content_right d-flex justify-content-center min-vh-100">
 
@@ -151,7 +144,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
         </div>
 
     </div>
-    <!-- Post Content End -->
-    <!-- Content Right | Not implemented yet -->
 
+
+    ;
 </div>
