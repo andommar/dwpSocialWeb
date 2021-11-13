@@ -24,6 +24,8 @@ $userData = $c->getUserInfo();
   <link rel="stylesheet" href="views/web/css/styles.css" />
   <link rel="stylesheet" href="views/web/css/new_post.css" />
   <link rel="stylesheet" href="views/web/css/show_post.css" />
+  <link rel="stylesheet" href="views/web/css/messages-styles.css" />
+
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>Socially</title>
