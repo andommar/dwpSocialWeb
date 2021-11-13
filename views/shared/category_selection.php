@@ -1,41 +1,11 @@
 <?php
 
-spl_autoload_register(function ($class) {
-    $pathController = '../../controller/' . $class . '.php';
-    $pathModel = '../../models/' . $class . '.php';
-
-    if (file_exists($pathController)) {
-        require_once $pathController;
-    } else if (file_exists($pathModel)) {
-        require_once $pathModel;
-    }
-});
-
-$session = new SessionHandle;
-
-if (isset($_GET['logout']) && $_GET['logout'] == 1) {
-    $logout = new LogOut();
-    $msg = "You are now logged out.";
-    $redirect = new Redirector("login.php");
-} elseif ($session->logged_in()) {
-    $redirect = new Redirector("./views/shared/category_selection.php");
-}
-
-// php validation after js validation it's okay
-
-// if (isset($_POST['submit'])) {
-
+require_once('../../bootstrapping.php');
 $c = new CategoryController();
 $categories = $c->loadCategories();
-// }
-// function validate_data($data)
-// {
-//     $data = trim($data);
-//     $data = stripslashes($data);
-//     $data = strip_tags($data);
-//     $data = htmlspecialchars($data);
-//     return $data;
-// }
+$userId = $_SESSION['userId'];
+
+
 ?>
 
 <!doctype html>
@@ -64,21 +34,53 @@ $categories = $c->loadCategories();
             <div id="category-selection-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap extra-margin">
                 <h3 class="text-center">Choose the categories that you are interested in</h3>
                 <!-- -->
-                <form method="post" action="" onsubmit="return validate();">
+                <form method="post" action="" onsubmit="return false">
                     <div class="form-group d-flex flex-wrap justify-content-between">
+                        <?php $count = 1; ?>
                         <?php foreach ($categories as $category) { ?>
-                            <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-primary-deselected btn-style d-flex">
-                                <i class="<?php echo $category['icon'] ?> my-auto"></i>
-                                <?php echo $category['category_name'] ?>
-                            </button>
-                            <!-- <button type="button" id="1" class="btn btn-primary-deselected btn-spacing">Primary</button>
-                        <button type="button" id="12" class="btn btn-secondary-deselected btn-spacing">Dark</button>-->
+                            <?php if ($count == 1 || $count == 8 || $count == 15) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-blue-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } elseif ($count == 2 || $count == 9 || $count == 16) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-green-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } elseif ($count == 3 || $count == 10 || $count == 17) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-red-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } elseif ($count == 4 || $count == 11 || $count == 18) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-yellow-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } elseif ($count == 5 || $count == 12) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-orange-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } elseif ($count == 6 || $count == 13) { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-pink-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } else { ?>
+                                <button type=" button" id="<?php echo $category['category_name'] ?>" class="category btn btn-style d-flex <?php echo 'btn-category-' . $count ?> btn-purple-deselected" onclick="selectCategory(<?php echo $count ?>,'<?php echo $category['category_name'] ?>')">
+                                    <i class="<?php echo $category['icon'] ?> my-auto"></i>
+                                    <?php echo $category['category_name'] ?>
+                                </button>
+                            <?php } ?>
+                            <?php $count++; ?>
                         <?php }; ?>
                     </div>
-                    <h6 class="text-center mt-3">Please, pick at least <u>two</u></h6>
+                    <h6 id="category-info-text" class="text-center mt-3">Please, pick at least <u>two</u></h6>
 
-                    <input type="submit" name="submit" value="Next" id="submit">
-                    <div id="omit-link" class="text-center mt-2"><u><a href="../../index.php">Omit</a></u></div>
+                    <button disabled class="btn" type="button" name="submit" id="category-submit-btn" onclick="validate_category_selection(<?php echo $userId ?>)">Next</button>
+                    <!-- <div id="omit-link" class="text-center mt-2"><u><a href="../../index.php">Omit</a></u></div> -->
                 </form>
 
             </div>
@@ -86,7 +88,8 @@ $categories = $c->loadCategories();
     </div>
     <!-- Validation -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-    <script type="text/javascript" src="../web/js/category-selection.js"></script>
+
 </body>
+<script type="text/javascript" src="../web/js/category-selection.js"></script>
 
 </html>

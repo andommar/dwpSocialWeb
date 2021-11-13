@@ -42,7 +42,7 @@ if (isset($_POST["option"])) {
                 $errors['category'] = 'Select the category of your post';
             } 
             if (empty($_POST["description"])) {
-                $errors['description'] = 'Select the category of your post';
+                $errors['description'] = 'Select the description of your post';
             }
 
             // If inputs arent empty and user has chosen a category
@@ -149,6 +149,13 @@ if (isset($_POST["option"])) {
                 }
                 echo json_encode($result);
             }
+            break;
+        case "category_selection":
+            $userId = $_POST["userId"];
+            $categories = $_POST["categories"];
+            $c = new CategoryController();
+            $result = $c->registerUserCategories($userId, $categories);
+            echo $result;
             break;
     }
 }

@@ -15,7 +15,7 @@ class UserController
         $u = new User($username, $email, $password);
         $res = $u->registerUser($username, $email, $password, $avatar);
         $this->msg = $u->message;
-        return $res;
+        return $res; // If user is successfully created, returns their user Id
     }
 
     public function getUserInfo()

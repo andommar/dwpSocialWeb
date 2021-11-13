@@ -77,72 +77,84 @@ class User
 
     public function isEmailRegistered($email)
     {
-        $db = new Dbconn();
-        $result = false;
-        if ($db->isConnected()) {
-            $sql = 'SELECT count(*) as total from user where email = ?';
-            $result = $db->selectQueryBind($sql, $email);
-            if ($result['total'] == 0) {
-                $result = false;
-            } else {
-                $result = true;
+        try {
+            $db = new Dbconn();
+            $result = false;
+            if ($db->isConnected()) {
+                $sql = 'SELECT count(*) as total from user where email = ?';
+                $result = $db->selectQueryBindSingleFetch($sql, $email);
+                if ($result[0]['total'] == 0) {
+                    $result = false;
+                } else {
+                    $result = true;
+                }
             }
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
         }
-        print_r($result);
-
-        return $result;
     }
     public function isUsernameRegistered($username)
     {
-        $db = new Dbconn();
-        $result = false;
-        if ($db->isConnected()) {
-            $sql = 'SELECT count(*) as total from user where `username` = ?';
-            $result = $db->selectQueryBind($sql, $username);
-            if ($result['total'] == 0) {
-                $result = false;
-            } else {
-                $result = true;
+        try {
+            $db = new Dbconn();
+            $result = false;
+            if ($db->isConnected()) {
+                $sql = 'SELECT count(*) as total from user where `username` = ?';
+                $result = $db->selectQueryBindSingleFetch($sql, $username);
+                if ($result[0]['total'] == 0) {
+                    $result = false;
+                } else {
+                    $result = true;
+                }
             }
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
         }
-        print_r($result);
-
-        return $result;
     }
 
     public function isUserRegisteredId($userId)
     {
-        $db = new Dbconn();
-        $result = false;
-        if ($db->isConnected()) {
-            $sql = 'SELECT count(*) from user where user_id = ?';
-            $result = $db->selectQueryBind($sql, $userId);
+        try {
+            $db = new Dbconn();
+            $result = false;
+            if ($db->isConnected()) {
+                $sql = 'SELECT count(*) from user where user_id = ?';
+                $result = $db->selectQueryBind($sql, $userId);
+            }
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
         }
-        return $result;
     }
 
     public function registerUser($username, $email, $password, $avatar)
     {
-        $db = new Dbconn();
-        $result = false;
-        if ($db->isConnected()) {
+        try {
+            $db = new Dbconn();
+            $result = false;
+            if ($db->isConnected()) {
 
-            if ($this->isUsernameRegistered($username)) {
-                $this->message["id"] = "username";
-                $this->message["text"] = "This username is currently being used by another user.";
-            } else if ($this->isEmailRegistered($email)) {
-                $this->message["id"] = "email";
-                $this->message["text"] = "This email is currently being used by another user.";
-            } else {
-                $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
+                if ($this->isUsernameRegistered($username)) {
+                    $this->message["id"] = "username";
+                    $this->message["text"] = "This username is currently being used by another user.";
+                } else if ($this->isEmailRegistered($email)) {
+                    $this->message["id"] = "email";
+                    $this->message["text"] = "This email is currently being used by another user.";
+                } else {
+                    $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
                     VALUES (?, ?, ?, ?, ?, ?)';
-                $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
-                $result = $db->executeQueryBindArr($sql, $arr);
-                if ($result) $redirect = new Redirector("../shared/category_selection.php");
+                    $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
+                    $result = $db->executeQueryBindArr($sql, $arr);
+                    // If the user is succesfully created, we retrieve the user Id when inserted
+                    if ($result) $result = $db->dbConn->lastInsertId();
+                }
             }
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
         }
-        print_r($this->message);
-        return $result;
     }
 
     //Not implemented yet. Missing binded parameters array

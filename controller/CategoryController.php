@@ -34,4 +34,10 @@ class CategoryController
         $res = $c->isUserFollower($categoryName, $userId);
         return $res;
     }
+    public function registerUserCategories($userId, $categories)
+    {
+        $c = new Category();
+        $res = $c->registerUserCategories($userId, $categories);
+        return $res;
+    }
 }
