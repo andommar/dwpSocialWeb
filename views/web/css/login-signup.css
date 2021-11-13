@@ -59,7 +59,16 @@ input[type="submit"]:hover {
 }
 
 a {
-  text-decoration: none;
+  color: #aa6eb7;
+}
+a:hover,
+a:active,
+a:link,
+a:visited {
+  color: #aa6eb7;
+}
+a:hover {
+  color: #aa6eb7;
 }
 
 .form-wrap h1,

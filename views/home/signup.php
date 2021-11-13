@@ -1,5 +1,5 @@
 <?php
-include_once "../../controller/UserController.php";
+require_once('../../bootstrapping.php');
 
 if (isset($_POST['submit'])) {
   $username = validate_data($_POST['username']);
@@ -7,9 +7,12 @@ if (isset($_POST['submit'])) {
   $password = validate_data($_POST['password']);
   $avatar = generate_rnd_avatar();
   $c = new UserController();
-  $c->registerUser($username, $email, $password, $avatar);
+  $newUserId = $c->registerUser($username, $email, $password, $avatar);
   $msg = $c->msg;
-  echo "SUBMIT";
+  if ($newUserId) { // User succesfully created 
+    $_SESSION['userId'] = $newUserId;
+    $redirect = new Redirector("../shared/category_selection.php");
+  }
 }
 function validate_data($data)
 {
