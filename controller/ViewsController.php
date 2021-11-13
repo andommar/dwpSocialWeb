@@ -1,25 +1,93 @@
 <?php
 
-include_once("PostController.php");
-include_once("VoteController.php");
-include_once("CommentController.php");
-include_once("CategoryController.php");
+// ----Requires----
 
-// ini_set('mssql.charset','utf-8');
+require_once('../bootstrapping.php');
+// include_once("PostController.php");
+// include_once("VoteController.php");
+// include_once("CommentController.php");
+
+// ----End of requires----
+
+// ----Declarations----
+
+// File size 
+define('KB', 1024);
+define('MB', 1048576);
+define('GB', 1073741824);
+define('TB', 1099511627776);
+
+$mediaPath = "../views/web/img/media/";
+
+// ----End of declarations----
+
+
+//Views send through POST variables/forms and the switch-case handles the incoming data
 if (isset($_POST["option"])) {
 
     $option = $_POST["option"];
 
     switch ($option) {
-        case "create_post":
-            $userid = $_POST["userId"];
-            $title = $_POST["title"];
-            $category = $_POST["category"];
-            $description = $_POST["description"];
-            $imgfile = $_POST["imgfile"];
 
-            $p = new PostController();
-            $p->newPost($userid, $title, $category, $imgfile, $description);
+        // Validations cases
+        case "new_post_form":
+
+            $errors = [];
+            $data = [];
+
+            if (empty($_POST["title"])) {
+                $errors['title'] = 'New post must have a title';
+            } 
+            if ($_POST["category"] == 'Category') {
+                $errors['category'] = 'Select the category of your post';
+            } 
+            if (empty($_POST["description"])) {
+                $errors['description'] = 'Select the description of your post';
+            }
+
+            // If inputs arent empty and user has chosen a category
+            if (empty($errors)){
+                $userid = $_POST["userId"];
+                $title = $_POST["title"];
+                $category = $_POST["category"];
+                $description = $_POST["description"];
+                $imgFile = $_FILES['imgfile'];
+                $imgFileName = strtolower($_FILES['imgfile']['name']);
+                $imgFiltype = $imgFile['type'];
+                // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
+                // $imgFileName = $imgFileName . '.' . $imgFileExtension;
+
+                // Image upload validation. Verify image file extension. 
+                if (($imgFiltype == "image/jpeg" ||
+                    $imgFiltype == "image/jpg"   ||
+                    $imgFiltype == "image/png"   ||
+                    $imgFiltype == "image/gif")) {
+                        //and size meet the criteria 
+                    if ($imgFile['size'] > 5*MB) {
+                        $error['image'] = "Max image size is 5MB";
+                    } else {
+                        // If there's no errors we add a unique string as a prefix to the file name
+                        $prefix = uniqid();
+                        $imgFileName = $prefix . '_' . $imgFileName;
+                        move_uploaded_file($imgFile['tmp_name'], $mediaPath . $imgFileName);
+                        $p = new PostController();
+                        $p->newPost($userid, $title, $category, $imgFileName, $description);
+                    }
+                } else {
+                    $error['image'] = "Only jpeg, jpg, png or gif images allowed";
+                }
+
+            }
+
+            if (!empty($errors)) {
+                $data['success'] = false;
+                $data['errors'] = $errors;
+            } else {
+                $data['success'] = true;
+                $data['message'] = 'Success!';
+            }
+
+            echo json_encode($data);
             break;
 
         case "userfeed":
