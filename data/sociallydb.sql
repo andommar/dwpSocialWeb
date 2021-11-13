@@ -266,16 +266,16 @@ values (null, 'Finance', 8, 'Embrace collaborative applications', 2759, 91, 'fin
 
 -- fin posts personalizados
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02',0);
+VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1.png', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02',0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'capture', 'Howler zoo arboreal primate space monkey exotic new world tree endangered baby banana spider poo.', '2021-10-03',0);
+VALUES (null, 'Sports', 2, 'I should be working', 246, 321,'capture.png', 'Howler zoo arboreal primate space monkey exotic new world tree endangered baby banana spider poo.', '2021-10-03',0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-VALUES (null, 'Music', 3, "I am a freelancer, but this does not mean I'll work for free", 122, 5,'doggo2', '', '2021-10-06',0);
+VALUES (null, 'Music', 3, "I am a freelancer, but this does not mean I'll work for free", 122, 5,'doggo2.jpg', '', '2021-10-06',0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-VALUES (null, 'Photography', 4, 'Where banana', 23, 7,'monke2', "I'm baby offal vegan messenger bag gluten-free tote bag. Brooklyn schlitz cronut fixie, pork belly lo-fi gentrify bushwick slow-carb.", '2021-10-08',0);
+VALUES (null, 'Photography', 4, 'Where banana', 23, 7,'monke2.jpg', "I'm baby offal vegan messenger bag gluten-free tote bag. Brooklyn schlitz cronut fixie, pork belly lo-fi gentrify bushwick slow-carb.", '2021-10-08',0);
 
 /* User_Category (23 users) */
 

@@ -3,6 +3,7 @@
 include_once("PostController.php");
 include_once("VoteController.php");
 include_once("CommentController.php");
+include_once("CategoryController.php");
 
 // ini_set('mssql.charset','utf-8');
 if (isset($_POST["option"])) {
@@ -80,6 +81,13 @@ if (isset($_POST["option"])) {
                 }
                 echo json_encode($result);
             }
+            break;
+        case "category_selection":
+            $userId = $_POST["userId"];
+            $categories = $_POST["categories"];
+            $c = new CategoryController();
+            $result = $c->registerUserCategories($userId, $categories);
+            echo $result;
             break;
     }
 }

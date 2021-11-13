@@ -22,7 +22,7 @@
         </div>
         <div class="navbar_links">
           <i class="fa fa-plus" id="new_post"></i>
-          <i class="fas fa-comment-dots"></i>
+          <i class="fas fa-comment-dots" style="cursor: initial;"></i>
           <!-- <i class="fa fa-bell"></i> -->
           <a href="./views/home/login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
         </div>
