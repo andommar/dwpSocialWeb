@@ -29,7 +29,7 @@ if (isset($_POST["option"])) {
 
     switch ($option) {
 
-        // Validations cases
+            // Validations cases
         case "new_post_form":
 
             $errors = [];
@@ -37,16 +37,16 @@ if (isset($_POST["option"])) {
 
             if (empty($_POST["title"])) {
                 $errors['title'] = 'New post must have a title';
-            } 
+            }
             if ($_POST["category"] == 'Category') {
                 $errors['category'] = 'Select the category of your post';
-            } 
+            }
             if (empty($_POST["description"])) {
                 $errors['description'] = 'Select the description of your post';
             }
 
             // If inputs arent empty and user has chosen a category
-            if (empty($errors)){
+            if (empty($errors)) {
                 $userid = $_POST["userId"];
                 $title = $_POST["title"];
                 $category = $_POST["category"];
@@ -62,8 +62,8 @@ if (isset($_POST["option"])) {
                     $imgFiltype == "image/jpg"   ||
                     $imgFiltype == "image/png"   ||
                     $imgFiltype == "image/gif")) {
-                        //and size meet the criteria 
-                    if ($imgFile['size'] > 5*MB) {
+                    //and size meet the criteria 
+                    if ($imgFile['size'] > 2 * MB) {
                         $error['image'] = "Max image size is 5MB";
                     } else {
                         // If there's no errors we add a unique string as a prefix to the file name
@@ -76,7 +76,6 @@ if (isset($_POST["option"])) {
                 } else {
                     $error['image'] = "Only jpeg, jpg, png or gif images allowed";
                 }
-
             }
 
             if (!empty($errors)) {

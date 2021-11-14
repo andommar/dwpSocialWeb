@@ -168,7 +168,7 @@ VALUES ('Tech', null, null, 'fas fa-mobile-alt');
 INSERT INTO `category` (category_name, `description`, rules, `icon`) 
 VALUES ('Books', null, null, 'fas fa-book-open');
 
-/* User (23 users) */
+/* User (13 users) */
 
 INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
 VALUES (null, 'monke1', 'avatar_1.png', 'monke1', 'monke1@gmail.com', 'Beginner', 'registeredUser');
@@ -196,64 +196,42 @@ INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role
 values (null, 'tmatkin8', 'avatar_4.png','M2nGgFiAu', 'nellum8@tiny.cc','Beginner', 'registeredUser');
 INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
 values (null, 'wbeany9', 'avatar_6.png', 'DslPJgeHR', 'korrick9@statcounter.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'pbotterilla', 'avatar_3.png', 'CeOMcv2Cnt', 'bbrunelleschia@comcast.net','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'gtreffreyb', 'avatar_5.png', 'T92E04T9jj', 'hfittallb@clickbank.net','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'jtruettc', 'avatar_6.png', 'tWZgce', 'rlowyc@privacy.gov.au','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'evinnicombed', 'avatar_2.png', '95TVou6zyDG', 'ashaudfurthd@flickr.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'epartone', 'avatar_1.png', 'MmmYWiE4rkbY', 'brearye@yolasite.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'tburdfieldf', 'avatar_8.png', 'L3Dry8S8jXbb', 'dskeelf@yale.edu','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'smacgregorg', 'avatar_3.png', 'UNNg2u0iKcGc', 'mmaccarrickg@t-online.de','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'ibehnh', 'avatar_7.png', '1NrFGxFMP8yD', 'sselwynh@woothemes.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'atoopini', 'avatar_4.png', 'QA9uL9ADNyub', 'rfiennesi@bloglines.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'arougheyj', 'avatar_2.png', 'kHDGlJMK9P', 'sthorouggoodj@unicef.org','Beginner', 'registeredUser');
 
 
-/* Post , 40 Posts */
-
-
+/* Posts */
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Animals', 19, 'Innovate interactive communities', 251, 21, 'halloween.png', 'Amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus', '2021-10-19 13:06:43', 0);
+values (null, 'Animals', 7, 'Innovate interactive communities', 251, 21, 'halloween.png', 'Amet consectetuer adipiscing elit proin interdum mauris non ligula pellentesque ultrices phasellus id sapien in sapien iaculis congue vivamus metus arcu adipiscing molestie hendrerit at vulputate vitae nisl aenean lectus', '2021-10-19 13:06:43', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
 values (null, 'Animals', 9, 'Innovate sexy architectures', 1758, 46, 'monke1.png', 'Amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt', '2021-10-17 11:58:13', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Gaming', 20, 'Drive wireless paradigms', 1208, 46, 'nameagame.jpg', 'Dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac', '2021-10-01 18:25:16', 0);
+values (null, 'Gaming', 10, 'Drive wireless paradigms', 1208, 46, 'nameagame.jpg', 'Dolor vel est donec odio justo sollicitudin ut suscipit a feugiat et eros vestibulum ac', '2021-10-01 18:25:16', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Art', 14, 'Benchmark seamless users', 2281, 29, 'summertime.jpg', 'Pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra', '2021-10-09 00:21:48', 0);
+values (null, 'Art', 4, 'Benchmark seamless users', 2281, 29, 'summertime.jpg', 'Pharetra magna ac consequat metus sapien ut nunc vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra', '2021-10-09 00:21:48', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Films', 15, 'Implement efficient architectures', 2092, 43, null, 'Purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio', '2021-10-11 13:29:15', 0);
+values (null, 'Films', 5, 'Implement efficient architectures', 2092, 43, null, 'Purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio', '2021-10-11 13:29:15', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'News', 16, 'Maximize cross-platform functionalities', 533, 100, null, 'Duis mattis egestas metus aenean fermentum donec ut mauris eget massa', '2021-10-12 01:16:01', 0);
+values (null, 'News', 6, 'Maximize cross-platform functionalities', 533, 100, null, 'Duis mattis egestas metus aenean fermentum donec ut mauris eget massa', '2021-10-12 01:16:01', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
 values (null, 'Films', 5, 'Morph interactive e-commerce', 2567, 2, 'spencermovie.png', 'Posuere felis sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui vel sem sed sagittis nam congue risus semper', '2021-10-07 02:08:16', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Shows', 22, 'Incentivize viral convergence', 1247, 50, 'thewitcher.png', 'Vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et', '2021-10-31 09:30:38', 0);
+values (null, 'Shows', 12, 'Incentivize viral convergence', 1247, 50, 'thewitcher.png', 'Vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus et', '2021-10-31 09:30:38', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Music', 18, 'Deliver granular relationships', 1652, 89, null, 'Faucibus orci luctus et ultrices posuere cubilia curae duis faucibus', '2021-10-30 04:08:43', 0);
+values (null, 'Music', 11, 'Deliver granular relationships', 1652, 89, null, 'Faucibus orci luctus et ultrices posuere cubilia curae duis faucibus', '2021-10-30 04:08:43', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
 values (null, 'Humor', 3, 'Maximize open-source networks', 2173, 85, 'mlordmlady.jpg', 'Mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed vel enim sit amet nunc', '2021-10-24 18:37:43', 0);
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
-values (null, 'Sports', 23, 'Reintermediate proactive applications', 1267, 89, 'miamigame.png', 'Nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis', '2021-10-18 17:56:33', 0);
+values (null, 'Sports', 11, 'Reintermediate proactive applications', 1267, 89, 'miamigame.png', 'Nisl duis ac nibh fusce lacus purus aliquet at feugiat non pretium quis lectus suspendisse potenti in eleifend quam a odio in hac habitasse platea dictumst maecenas ut massa quis', '2021-10-18 17:56:33', 0);
 
 
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
@@ -264,7 +242,6 @@ INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_vot
 values (null, 'Finance', 8, 'Embrace collaborative applications', 2759, 91, 'financestats.png', 'Lobortis ligula sit amet eleifend pede libero quis orci nullam molestie nibh in lectus pellentesque at nulla suspendisse potenti cras in purus eu magna vulputate luctus', '2021-10-24 05:15:19', 0);
 
 
--- fin posts personalizados
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
 VALUES (null, 'News', 1, 'Monke first post', 3546, 98531,'monke1.png', 'Monkeys are going to rule the world in the next 30 years', '2021-10-02',0);
 
@@ -277,7 +254,7 @@ VALUES (null, 'Music', 3, "I am a freelancer, but this does not mean I'll work f
 INSERT INTO `post` (post_id, category_name, `user_id`, title, up_votes, down_votes, media_url, `description`, `datetime`,`total_comments`)
 VALUES (null, 'Photography', 4, 'Where banana', 23, 7,'monke2.jpg', "I'm baby offal vegan messenger bag gluten-free tote bag. Brooklyn schlitz cronut fixie, pork belly lo-fi gentrify bushwick slow-carb.", '2021-10-08',0);
 
-/* User_Category (23 users) */
+/* User_Category (12 users) */
 
 -- User 1
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (1, 'Animals');
@@ -289,12 +266,23 @@ INSERT INTO `user_category` (`user_id`, category_name) VALUES (1, 'Tech');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (1, 'Art');
 -- User 2
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Animals');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Art');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Books');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Films');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Finance');
-INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Videos');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Fitness');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Food');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Gaming');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Health');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Humor');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Music');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'News');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Photography');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Science');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Shows');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Sports');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Tech');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (2, 'Videos');
 -- User 3
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (3, 'Humor');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (3, 'Science');
@@ -319,8 +307,36 @@ INSERT INTO `user_category` (`user_id`, category_name) VALUES (6, 'Humor');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (7, 'Art');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (7, 'Animals');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (7, 'Food');
-INSERT INTO `user_category` (`user_id`, category_name) VALUES (7, 'Music');
-INSERT INTO `user_category` (`user_id`, category_name) VALUES (7, 'Photography');
+
+-- User 8
+
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (8, 'Food');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (8, 'Music');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (8, 'Photography');
+
+-- User 9
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (9, 'News');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (9, 'Sports');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (9, 'Tech');
+
+-- User 10
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (10, 'Gaming');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (10, 'Shows');
+
+-- User 11
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (11, 'Finance');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (11, 'Videos');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (11, 'Food');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (11, 'Music');
+
+-- User 12
+
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (12, 'Music');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (12, 'Photography');
+
+-- User 13
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (13, 'Art');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (13, 'Animals');
 
 -- By the moment we'll set the same description to all the categories.
 UPDATE `category` SET `description` = 'Nullam ut porttitor lorem, sed maximus dolor. Vestibulum eget enim diam. Donec ut luctus leo, vitae pellentesque nibh.';
@@ -345,8 +361,3 @@ VALUES (null, 2 , null, 2, 'My first comment!', 3, 22);
 INSERT INTO `comment` (comment_id, `user_id`, media_url, post_id, `description`, up_votes, down_votes) 
 VALUES (null, 2 , null, 6, 'This is the wrong category for this!', 200, 7809);
 
-
-
-/* Post_tag MISSING
-   Media MISSING
-   User_message MISSING */
