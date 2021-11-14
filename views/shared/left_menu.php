@@ -3,12 +3,11 @@
     <?php
     $c = new CategoryController();
     $categories = $c->getUserCategories();
-    // $c = new CategoryController();
-    // $categories = $c->loadCategories();
+
     foreach ($categories as $category) { ?>
-      <li>
-        <a href="#">
-          <i class="<?php echo $category['icon'] ?>"></i>
+      <li class="category_names">
+        <a onclick="loadSpecificCategory('<?php echo $category['category_name'] ?>')">
+          <i class="<?php echo $category['icon'] ?>" id="<?php echo $category['category_name'] ?>"></i>
           <span><?php echo $category['category_name'] ?></span>
         </a>
       </li>

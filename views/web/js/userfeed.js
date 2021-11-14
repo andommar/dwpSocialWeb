@@ -122,14 +122,4 @@ $(document).ready(function() {
     };
 
 
-    // Vote buttons hover
-    // Upvote button
-    // $(document).on("mouseenter", ".upvote_button", function(e) {
-    //     $(this).removeClass( "upvote_default" ).addClass( "upvote_filled" );
-    // });
-    // $(document).on("mouseleave", ".upvote_button", function(e) {
-    //     $(this).removeClass( "upvote_filled" ).addClass( "upvote_default" );
-    // });
-    
-
 });

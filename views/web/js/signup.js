@@ -6,7 +6,12 @@ function validate()
     resetErrorMessages();
    
 
-    var username =$('#username').val();
+    // var username = $('#username').val().replace(/\s/g, '');
+    // var email =$('#email').val().replace(/\s/g, '');
+    // var password =$('#password').val().replace(/\s/g, '');
+    // var password2 =$('#password2').val().replace(/\s/g, '');
+    
+    var username = $('#username').val();
     var email =$('#email').val();
     var password =$('#password').val();
     var password2 =$('#password2').val();
@@ -24,61 +29,61 @@ function validate()
         return false;
     }
     // Username length
-    if(username.length<4){
+    else if(username.length<4){
         $('#username-error').text("Username must have at least 4 characters");
         return false;
     }
-    if(username.length>30){
+    else if(username.length>30){
         $('#username-error').text("Username cannot exceed 30 characters");
         return false;
     }
     // Username is not the accepted type
-    if(!(username_regexp.test(username))){
+    else if(!(username_regexp.test(username))){
         $('#username-error').text("Username can only contain letters, numbers and underscores");
         return false;
     }
     // EMAIL
-    if( isEmptyOrSpaces(email) ){
+    else if( isEmptyOrSpaces(email) ){
         $('#email-error').text("Email cannot be empty");
         return false;
     }
     // Email is not the accepted type
-    if(!(email_regexp.test(email))){
+    else if(!(email_regexp.test(email))){
         $('#email-error').text("This email is not valid");
         return false;
     }
     // PASSWORD
-    if( isEmptyOrSpaces(password) ){
+    else if( isEmptyOrSpaces(password) ){
         $('#password-error').text("Password cannot be empty");
         return false;
     }
-     // Password length
-     if(password.length<6){
+    // Password length
+    else if(password.length<6){
         $('#password-error').text("Password must have at least 6 characters");
         return false;
     }
-    if(password.length>30){
+    else if(password.length>30){
         $('#password-error').text("Password cannot exceed 30 characters");
         return false;
     }
     // Password is not the accepted type
-    if(!(password_regexp.test(password))){
+    else if(!(password_regexp.test(password))){
         $('#password-error').text("Password must contain at least one uppercase letter, one lowercase letter, one number and one special character");
         return false;
     }
     // PASSWORD 2
-    if( isEmptyOrSpaces(password2) ){
+    else if( isEmptyOrSpaces(password2) ){
         $('#password2-error').text("Password cannot be empty");
         return false;
     }
     // PASSWORD VS PASSWORD  2
     // Passwords have different values
-    if(!(password===password2)){
+    else if(!(password===password2)){
         $('#password2-error').text("Passwords must be identical");
         return false;
     }
     // TERMS OF USE
-    if(!$('#termsofuse').prop('checked')){
+    else if(!$('#termsofuse').prop('checked')){
         $('#termsofuse-error').text("You must accept our Terms of Use");
         return false;
     }
@@ -89,9 +94,7 @@ function validate()
     }
 }
 
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
+
 function cleanPasswordField(){
     $('#password').val('');
     $('#password').text("");

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  sendUsrPostIds = function (userId,postId){
+  sendUsrPostId = function (userId,postId){
     getUserSinglePostRate(userId,postId);
   };
   submitNewComment = function (userId,postId) {

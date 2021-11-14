@@ -121,6 +121,7 @@ function generate_rnd_avatar()
     </div> <!-- container -->
   </div>
   <!-- Validation -->
+  <script type="text/javascript" src="../web/js/utils.js"></script>
   <script type="text/javascript" src="../web/js/signup.js"></script>
 </body>
 

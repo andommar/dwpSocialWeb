@@ -31,9 +31,7 @@ function cleanPasswordField(){
     $('#password').val('');
     $('#password').text("");
 }
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
+
 function resetErrorMessages(){
     $('#username-error').val('');
     $('#username-error').text("");
