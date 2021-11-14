@@ -1,29 +1,28 @@
 <?php
 spl_autoload_register(function ($class) {
-    include "models/" . $class . ".php";
+    $file = __DIR__ . '/../models/' . $class . '.php';
+    if (file_exists($file)) {
+        require $file;
+    }
 });
 
 class UserController
 {
+    public $msg;
 
-    public function registerUser($username, $email, $password)
+    public function registerUser($username, $email, $password, $avatar)
     {
         $u = new User($username, $email, $password);
-        $res = $u->registerUser($username, $email, $password);
-        return $res;
-    }
-
-    public function isUserRegistered($username, $email, $password)
-    {
-        $u = new User($_SESSION['userId']);
-        $res = $u->isUserRegistered($username, $email, $password);
-        return $res;
+        $res = $u->registerUser($username, $email, $password, $avatar);
+        $this->msg = $u->message;
+        return $res; // If user is successfully created, returns their user Id
     }
 
     public function getUserInfo()
     {
         $u = new User($_SESSION['userId']);
         $data = [
+            'userId' => $u->getUserId(),
             'username' => $u->getUsername(),
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail()
