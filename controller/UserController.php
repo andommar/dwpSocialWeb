@@ -25,8 +25,21 @@ class UserController
             'userId' => $u->getUserId(),
             'username' => $u->getUsername(),
             'avatar' => $u->getUserAvatar(),
-            'email' => $u->getUserEmail()
+            'email' => $u->getUserEmail(),
+            'rank' => $u->getUserRank()
         ];
         return $data;
+    }
+    public function getUserPassword()
+    {
+        $u = new User($_SESSION['userId']);
+        $data = $u->getUserPassword();
+        return $data;
+    }
+
+    // Instances a user object. Mostly used to set user info
+    public function setUser(){
+        $u = new User($_SESSION['userId']);
+        return $u;
     }
 }

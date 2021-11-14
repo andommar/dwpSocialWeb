@@ -8,6 +8,7 @@ class User
     private $email;
     private $avatar;
     private $password;
+    private $rank;
     public $userCategories = array();
     public $message = array(
         "id" => "",
@@ -20,7 +21,7 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = "SELECT `user_id`, username, email, avatar
+            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`
                     from user where `user_id` = ?";
             $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
@@ -28,7 +29,9 @@ class User
                     $this->userId = $values['user_id'];
                     $this->username = $values['username'];
                     $this->email = $values['email'];
+                    $this->password = $values['password'];
                     $this->avatar = $values['avatar'];
+                    $this->rank = $values['rank'];
                 }
             }
             $sql = "SELECT c.category_name, c.icon
@@ -56,6 +59,10 @@ class User
     {
         return $this->userId;
     }
+    public function getUserPassword()
+    {
+        return $this->password;
+    }
 
     public function getUserCategories()
     {
@@ -66,12 +73,54 @@ class User
     {
         return $this->avatar;
     }
+    public function getUserRank()
+    {
+        return $this->rank;
+    }
 
     public function getUserEmail()
     {
         return $this->email;
     }
 
+    //Setters
+
+    public function setUsername($newUsername)
+    {
+        $this->username = $newUsername;
+        $this->updateUserInfo('username',$newUsername);
+    }
+
+    public function setUserId($userId)
+    {
+        $this->userId;
+        $this->updateUserInfo('userId', $userId);
+    }
+    public function setUserPassword($password)
+    {
+        $this->password =$password;
+        $this->updateUserInfo('password', $password);
+    }
+
+    // Needs re-work. It's not like the others. We pass an array
+    public function setUserCategories($userCategories)
+    {
+        $this->userCategories = $userCategories;
+        // $this->updateUserInfo('avatar', $userCategories);
+
+    }
+
+    public function setUserAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+        $this->updateUserInfo('avatar', $avatar);
+    }
+
+    public function setUserEmail($email)
+    {
+        $this->email = $email;
+        $this->updateUserInfo('email', $email);
+    }
 
     // Methods
 
@@ -173,5 +222,18 @@ class User
             $result = $db->executeQueryBindArr($sql, $arr);
         }
         return $result;
+    }
+
+    private function updateUserInfo ($field,$data) {
+        $db = new Dbconn();
+        $result = false;
+        $data;
+        if ($db->isConnected()) {
+            $sql = "UPDATE user 
+                    SET {$field}  = ?
+                    WHERE user_id = {$this->userId}";
+            $result = $db->executeQueryBind($sql, $data);
+        }
+        return $result; 
     }
 }

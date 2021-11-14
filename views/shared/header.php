@@ -16,8 +16,8 @@
         <div class="d-flex align-items-center" id="scrollTop">
           <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
         </div>
-        <div class="navbar_profile d-flex align-items-center">
-          <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" />
+        <div class="navbar_profile d-flex align-items-center" id="user_profile">
+          <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile"/>
           <span><?php echo $userData['username'] ?></span>
         </div>
         <div class="navbar_links">
