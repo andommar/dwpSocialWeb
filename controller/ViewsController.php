@@ -18,6 +18,7 @@ define('GB', 1073741824);
 define('TB', 1099511627776);
 
 $mediaPath = "../views/web/img/media/";
+$avatarPath = "../views/web/img/avatars/";
 
 // ----End of declarations----
 
@@ -88,6 +89,103 @@ if (isset($_POST["option"])) {
 
             echo json_encode($data);
             break;
+        
+        case "profile_form":
+            $errors = [];
+            $data = [];
+
+            if (!empty($_POST["password"])) {
+                $inputPassword =$_POST["password"];
+                $u = new UserController();
+                if($inputPassword == $u->getUserPassword()){
+
+                    if (!empty($_POST["email"])) {
+                        $email = $_POST["email"];
+                        $u->setUser()->setUserEmail($email);
+                    }
+
+                    if (!empty($_POST["password1"]) && !empty($_POST["password2"])) {
+                        $password1 = $_POST["password1"];
+                        $password2 = $_POST["password2"];
+                        if(($password1===$password2)){
+                            $u->setUser()->setUserPassword($password1);
+                        } else {
+                            $errors['password1'] = "The passwords don't match";
+                            $errors['password2'] = "The passwords don't match";
+                        }
+                    } else {
+                        if (empty($_POST["password1"]) ){
+                            if(!empty($_POST["password2"])){
+                                $errors['password1'] = "Type the new password";
+                            }
+                        } elseif (!empty($_POST["password1"])){
+                            if(empty($_POST["password2"])){
+                                $errors['password2'] = "Type the new password";
+                            } 
+                        }
+                    }
+
+
+                }else {
+                    $errors['password'] = 'Incorrect password';
+                }
+            } else {
+                $errors['password'] = 'Type your password to save your changes';
+            }
+
+            if (!empty($errors)) {
+                $data['success'] = false;
+                $data['errors'] = $errors;
+            } else {
+                $data['success'] = true;
+                $data['message'] = 'Success!';
+            }
+            echo json_encode($data);
+
+
+            break;
+
+        case "new_avatar_form":
+
+            // Code similar to above. An image validation function needs to be done
+
+            $errors = [];
+            $data = [];
+
+            $imgFile = $_FILES['new-avatar-upload'];
+            $imgFileName = strtolower($_FILES['new-avatar-upload']['name']);
+            $imgFiltype = $imgFile['type'];
+
+            if (($imgFiltype == "image/jpeg" ||
+            $imgFiltype == "image/jpg"   ||
+            $imgFiltype == "image/png"   ||
+            $imgFiltype == "image/gif")) {
+                //and size meet the criteria 
+                if ($imgFile['size'] > 2*MB) {
+                    $error['avatar'] = "Max image size is 2MB";
+                } else {
+                    // If there's no errors we add a unique string as a prefix to the file name
+                    $prefix = uniqid();
+                    $imgFileName = $prefix . '_' . $imgFileName;
+                    move_uploaded_file($imgFile['tmp_name'], $avatarPath . $imgFileName);
+                    $u = new UserController();
+                    $u->setUser()->setUserAvatar($imgFileName);
+                }
+            } else {
+                $error['avatar'] = "Only jpeg, jpg, png or gif images allowed";
+            }
+            if (!empty($errors)) {
+                $data['success'] = false;
+                $data['errors'] = $errors;
+            } else {
+                $data['success'] = true;
+                $data['message'] = 'Success!';
+            }
+            echo json_encode($data);
+
+            break;
+
+
 
         case "userfeed":
             $userId = $_POST["userId"];

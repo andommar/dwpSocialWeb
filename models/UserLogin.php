@@ -14,13 +14,14 @@ class UserLogin
         $db = new DbConn();
         $user = trim($username);
         $pass = trim($password);
-        $sql = 'SELECT user_id, username, `password` from user where username = ? LIMIT 1';
+        $sql = 'SELECT user_id, username, avatar,`password` from user where username = ? LIMIT 1';
         $result = $db->selectQueryBind($sql, $user);
         // User exists
         if (count($result) == 1) {
             if ($result[0]['password'] == $pass) {
                 $_SESSION['userId'] = $result[0]['user_id'];
                 $_SESSION['username'] = $result[0]['username'];
+                $_SESSION['avatar'] = $result[0]['avatar'];
                 $redirect = new Redirector("../../index.php");
             } else {
                 $this->message["id"] = "general";
