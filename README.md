@@ -2,9 +2,8 @@
 
 ## Project Structure
 
-- Index (home) imports 3 views: header, leftmenu, userfeed and rightmenu
+- Index (home) imports 3 views: header, leftmenu and userfeed
 - For the style, we are using Using Bootstrap 5.1
-- Execute sql tables creation first and then the triggers
 - Only registered users can navigate
 
 ## Domain database
@@ -12,14 +11,9 @@
 - Tables creation and insertion (except comments insertion)
 - Execute triggers (with UPPERCASE table names)
 
-## Anna's Pending Tasks
-
-- Sign up > categories selection (jquery)
-- Votes on posts, new post styling
-- Datetime formatting on posts
-
 ## Pending Tasks
 
+- Datetime formatting
 - Try catch and close the connection at the end of try (take a look at try catch finally, finally will always be run)
 - Security measures left: encrypting password and htmlspecialchars
 - Control negative values when executing triggers that substract a total (possible negative values)
@@ -49,7 +43,7 @@
 
 ## Issues
 
-- SignUp and other forms: page reloads after validation errors (when submitting) and the user must rewrite everything!
+- SignUp reload when validating
 - When signing up correctly, it redirects user to login, so the message of successful registration has no time to be shown
 - Check Image types when loading posts images, avatar, etc
 - Main page side menus overlap when resizing browser

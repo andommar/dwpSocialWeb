@@ -7,6 +7,9 @@
 .error-message {
   color: red;
 }
+.error-message-dark {
+  color: #a82222;
+}
 .info-message {
   color: #fff;
 }
@@ -15,4 +18,14 @@
 }
 .danger-message {
   color: rgb(255, 197, 6);
+}
+
+.no-posts-message {
+  color: grey;
+  border: 2px solid #1a1a1a;
+  background-color: #80808021;
+  border-radius: 6px;
+  text-align: center;
+  margin: 3em;
+  padding: 9em 0em;
 }

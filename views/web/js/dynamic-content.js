@@ -31,18 +31,4 @@ $(document).ready(function () {
     var pageName = $(this).attr("id");
     loadContent(pageName, "");
   });
-
-  // Scrolls to top when clicking Header Button
-  $("#scrollTop").click(function () {
-    // Scrolls to the top of the page
-    $("html,body").animate(
-      {
-        scrollTop: $("body").offset().top,
-      },
-      200,
-      function () {
-        // Animation complete.
-      }
-    );
-  });
 });

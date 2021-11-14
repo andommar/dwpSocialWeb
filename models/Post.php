@@ -45,17 +45,6 @@ class Post
     return $result;
   }
 
-
-  // public function loadUserFeedPopularPosts($userId)
-  // {
-  //   $db = new Dbconn();
-  //   $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY `datetime` desc';
-  //   $result = $db->selectQueryBind($sql, $userId);
-  //   return $result;
-  // }
-
-
-
   public function loadPostById($postId)
   {
     $db = new Dbconn();
@@ -66,7 +55,7 @@ class Post
   public function loadCategoryPosts($categoryName)
   {
     $db = new Dbconn();
-    $sql = 'SELECT * FROM post where category_name = ?';
+    $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY `datetime` DESC';
     $result = $db->selectQueryBind($sql, $categoryName);
     return $result;
   }

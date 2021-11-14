@@ -307,7 +307,10 @@ body {
 .post {
   background-color: #242526;
   border-radius: 10px;
-  margin: 2em 13em;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  margin-right: 27em;
+  margin-left: 16em;
 }
 
 .post_title {
@@ -446,18 +449,12 @@ a:active {
   color: #adadad;
 }
 
-a span:hover,
-a:hover {
-  color: #b64ffb;
-  transition: 0.3s;
-}
-
 a,
 a:link {
   color: inherit;
 }
 #userfeed_filters_section {
-  margin: 2em 13em;
+  margin: 2em 27em;
 }
 #userfeed_filters_section #userfeed_filters {
   background-color: #242526;
@@ -486,6 +483,9 @@ a:link {
 .vote_icon_size {
   width: 20px;
 }
+.category_names span {
+  cursor: pointer;
+}
 /* Small devices */
 @media (min-width: 577px) {
   .content_right div,
@@ -494,18 +494,37 @@ a:link {
   }
 }
 
-@media (min-width: 575px) and (max-width: 1230px) {
-  .news_feed {
-    margin: 1em 1em;
-  }
-}
-
 @media (max-width: 576px) {
   .content_right ul,
   .content_left ul {
     position: unset;
   }
-  .news_feed {
-    margin: 1em 1em;
+}
+@media (max-width: 1300px) {
+  .post {
+    margin: 2em 0em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 14em;
+    margin-right: 16em;
+  }
+}
+
+@media (max-width: 1160px) {
+  .post {
+    margin: 2em 0em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 10em;
+    margin-right: 13em;
+  }
+}
+@media (max-width: 948px) {
+  .post {
+    margin: 2em 0em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 3em;
+    margin-right: 3em;
   }
 }
