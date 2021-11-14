@@ -25,6 +25,7 @@ $userData = $c->getUserInfo();
   <link rel="stylesheet" href="views/web/css/new_post.css" />
   <link rel="stylesheet" href="views/web/css/show_post.css" />
   <link rel="stylesheet" href="views/web/css/messages-styles.css" />
+  <link rel="stylesheet" href="views/web/css/profile-style.css" />
 
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -54,5 +55,6 @@ $userData = $c->getUserInfo();
 <script type="text/javascript" src="views/web/js/userfeed.js"></script>
 <script type="text/javascript" src="views/web/js/show_post.js"></script>
 <script type="text/javascript" src="views/web/js/new_post.js"></script>
+<script type="text/javascript" src="views/web/js/profile_settings.js"></script>
 
 </html>
