@@ -2,9 +2,8 @@
 
 ## Project Structure
 
-- Index (home) imports 3 views: header, leftmenu, userfeed and rightmenu
+- Index (home) imports 3 views: header, leftmenu and userfeed
 - For the style, we are using Using Bootstrap 5.1
-- Execute sql tables creation first and then the triggers
 - Only registered users can navigate
 
 ## Domain database

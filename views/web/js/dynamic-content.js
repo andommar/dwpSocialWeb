@@ -1,7 +1,10 @@
- 
+
   
   $(document).ready(function() {
-    loadContent = function(pageName,data) {
+
+     // We use this function when we need to load a new view and send a parameter, or just load a view
+     loadContent = function(pageName,data) {
+       
       // In case we are sending the page name and a param
       if(data){
         $.ajax({
@@ -35,16 +38,6 @@
     $(".navbar_links i").click(function () {
       var pageName = $(this).attr("id");
       loadContent(pageName,'');
-    });
-    
-    // Scrolls to top when clicking Header Button
-    $("#scrollTop").click(function () {
-      // Scrolls to the top of the page
-      $( "html,body" ).animate({
-        scrollTop: $("body").offset().top
-        }, 200, function() {
-        // Animation complete.
-      });
     });
     
 

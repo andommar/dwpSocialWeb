@@ -89,9 +89,7 @@ function validate()
     }
 }
 
-function isEmptyOrSpaces(str){
-    return str === null || str.match(/^ *$/) !== null;
-}
+
 function cleanPasswordField(){
     $('#password').val('');
     $('#password').text("");

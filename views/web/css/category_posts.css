@@ -1,0 +1,11 @@
+#category-header {
+  color: white;
+  font-size: 30px;
+  background-color: #151515;
+  padding: 1em;
+  margin: 0;
+}
+
+#category-header p {
+  margin-right: 7em;
+}

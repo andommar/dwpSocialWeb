@@ -8,7 +8,7 @@ $(document).ready(function () {
     let mydata = $("#new-post-form")[0];
     let formData = new FormData(mydata);
     formData.append("option", "new_post_form");
-    console.log(formData);
+    console.log(formData.get('description'));
     console.log(mydata);
 
     $.ajax({
@@ -20,23 +20,21 @@ $(document).ready(function () {
       dataType: "json",
     })
       .done(function (data) {
-        console.log(data);
-
         if (!data.success) {
           if (data.errors.title) {
             $("#title-error").text(data.errors.title);
           }
-          if (data.errors.category) {
+          else if (data.errors.category) {
             $("#category-error").text(data.errors.category);
           }
-          if (data.errors.description) {
+          else if (data.errors.description) {
             $("#description-error").text(data.errors.description);
           }
-          if (data.errors.image) {
+          else if (data.errors.image) {
             $("#image-error").text(data.errors.image);
           }
         } else {
-          $("#error-msg").text("New post successfuly created");
+          location.reload();
         }
       })
       .fail(function (jqXHR, textStatus, errorThrown) {

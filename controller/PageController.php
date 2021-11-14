@@ -22,6 +22,9 @@ if (isset($_POST["pageName"])) {
         case 'posts_filtered':
             include_once('../views/pages/posts_filtered.php');
             break;
+        case 'category_posts':
+            include_once('../views/pages/category_posts.php');
+            break;
         default:
             $content = '<h1> This is what you came for' . $pageId . ' </h1>';
             break;

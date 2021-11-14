@@ -30,16 +30,16 @@
 }
 
 #post-form section textarea {
-  height: 200px;
+  height: 150px;
 }
 
 #post-form section input:focus,
 #post-form section textarea:focus {
   outline: none;
-  border-color: red;
+  border-color: #a6a6a6;
 }
 
-#post-form section input[type="submit"] {
+#post-form #new_post-submit-btn {
   color: #fff;
   background-color: #202020;
   padding: 13px;
@@ -52,4 +52,12 @@
   font-weight: 500;
   width: 100%;
   display: block;
+}
+
+#post-form #new_post-submit-btn:hover {
+  background-color: hsl(0deg 0% 11%);
+  -webkit-transition: background-color 0.4s ease-out;
+  -moz-transition: background-color 0.4s ease-out;
+  -o-transition: background-color 0.4s ease-out;
+  transition: background-color 0.4s ease-out;
 }

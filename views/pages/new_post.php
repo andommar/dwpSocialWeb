@@ -1,29 +1,4 @@
 <?php
-// include_once('header.php');
-// include_once "controller/ViewController.php";
-// include_once('models/SessionHandle.php');
-
-// echo (__FILE__);
-
-// if (isset($_POST['submit'])) {
-
-//   if (($_FILES['imgfile']['type'] == 'image/jpeg'  ||
-//       $_FILES['imgfile']['type'] == 'image/jpg'   ||
-//       $_FILES['imgfile']['type'] == 'image/png'   ||
-//       $_FILES['imgfile']['type'] == 'image/gif') &&
-//     ($_FILES['imgfile']['size'] < 10000000)
-//   ) {
-//     if ($_FILES['imgfile']['error'] > 0) {
-//       echo "Error: " . $_FILES['imgfile']['error'];
-//     } else {
-//       move_uploaded_file($_FILES['imgfile']['tmp_name'], "web/img/media/" . $_FILES['imgfile']['name']);
-//     }
-//   }
-//   $p = new PostController();
-//   $p->newPost($_SESSION['userId'], $_POST['title'], $_POST['category'], $_FILES['imgfile']['name'], $_POST['description']);
-// }
-
-
 
 $c = new CategoryController();
 $categories = $c->loadCategories();
@@ -32,11 +7,11 @@ $categories = $c->loadCategories();
 ?>
 
 
-<div class="row d-flex justify-content-center">
+<div class="row d-flex justify-content-center min-vh-100">
 
   <div id="post-form" class="col col-lg-10">
     <section>
-      <div class="container-form">
+      <div class="container-form min-vh-100">
         <h2 class="f-heading">
           <span>New post</span>
         </h2>
@@ -44,7 +19,7 @@ $categories = $c->loadCategories();
           <div class="form-group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
-            <span class="msg error-message my-2" id="title-error">
+            <span class="msg error-message-dark my-2" id="title-error">
           </div>
           <div class="form-group">
             <label for="category">Category</label>
@@ -52,20 +27,20 @@ $categories = $c->loadCategories();
               <option value="Category">Select category</option>
               <?php foreach ($categories as $category) { ?>
                 <option value="<?php echo $category['category_name'] ?>"><?php echo $category['category_name'] ?></option>
-              <?php } ?> 
+              <?php } ?>
             </select>
-            <span class="msg error-message my-2" id="category-error">
+            <span class="msg error-message-dark my-2" id="category-error">
           </div>
           <div class="form-group">
             <label for="title">Description</label>
             <textarea type="text" name="description" id="description"></textarea>
-            <span class="msg error-message my-2" id="description-error">
+            <span class="msg error-message-dark my-2" id="description-error">
           </div>
           <div class="form-group">
             <input type="file" name="imgfile" id="imgfile">
-            <span class="msg error-message my-2" id="image-error">
+            <span class="msg error-message-dark my-2" id="image-error">
           </div>
-          <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId']?>">
+          <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId'] ?>">
           <div id="error-msg"></div>
           <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm()"> Create</button>
 
