@@ -1,34 +1,5 @@
 <?php
 require_once('../../bootstrapping.php');
-
-if (isset($_POST['submit'])) {
-  $username = validate_data($_POST['username']);
-  $email = validate_data($_POST['email']);
-  $password = validate_data($_POST['password']);
-  $avatar = generate_rnd_avatar();
-  $c = new UserController();
-  $newUserId = $c->registerUser($username, $email, $password, $avatar);
-  $msg = $c->msg;
-  if ($newUserId) { // User succesfully created 
-    $_SESSION['userId'] = $newUserId;
-    $redirect = new Redirector("../shared/category_selection.php");
-  }
-}
-function validate_data($data)
-{
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = strip_tags($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-function generate_rnd_avatar()
-{
-  $rnd_number = rand(1, 8);
-  $avatar = 'avatar_' . $rnd_number . '.png';
-  return $avatar;
-}
-
 ?>
 
 <!doctype html>
@@ -58,9 +29,12 @@ function generate_rnd_avatar()
   <div class="container-fluid d-flex flex-column">
     <div class="row">
       <div id="signup-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap">
-
+        <!-- Standard top popup message -->
+        <div class="text-center mb-3 alert alert-danger py-2 fade show d-none" role="alert" id="general-message">
+          <span class="my-2 " id="general"></span>
+        </div>
         <h1>Sign Up</h1>
-        <form action="" method="post" onsubmit="return validate();">
+        <form action="" method="post">
           <!-- USERNAME -->
           <div class="form-group">
             <label for="username">Username</label>
@@ -68,22 +42,14 @@ function generate_rnd_avatar()
             <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()" />
           </div>
           <!-- USERNAME Error -->
-          <span class="msg error-message my-2" id="username-error">
-            <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'username') {
-              echo $msg["text"];
-            } ?>
-          </span>
+          <span class="msg error-message my-2" id="username-error"></span>
           <!-- EMAIL -->
           <div class="form-group">
             <label for="email">Email</label>
             <input type="text" name="email" id="email" autocomplete="off" />
           </div>
           <!-- EMAIL Error -->
-          <span class="msg error-message my-2" id="email-error">
-            <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'email') {
-              echo $msg["text"];
-            } ?>
-          </span>
+          <span class="msg error-message my-2" id="email-error"></span>
           <!-- PASSWORD -->
           <div class="form-group" id="password-parent">
             <label for="password">Password</label>
@@ -107,7 +73,7 @@ function generate_rnd_avatar()
           </div>
           <!-- TERMS OF USE Error -->
           <span class="msg error-message my-2" id="termsofuse-error"></span>
-          <input type="submit" name="submit" value="Submit" id="submit">
+          <input type="button" name="submit" value="Submit" id="submit" onclick="validate_signup()">
           <p class="bottom-text">
             By continuing, you agree to our
             <a class="purple-color" href="#">Terms & Conditions</a> and

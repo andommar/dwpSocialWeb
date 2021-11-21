@@ -79,7 +79,7 @@ $userId = $_SESSION['userId'];
                     </div>
                     <h6 id="category-info-text" class="text-center mt-3">Please, pick at least <u>two</u></h6>
 
-                    <button disabled class="btn" type="button" name="submit" id="category-submit-btn" onclick="validate_category_selection(<?php echo $userId ?>)">Next</button>
+                    <button disabled class="btn" type="button" name="submit" id="category-submit-btn" onclick="validate_category_selection()">Next</button>
                     <!-- <div id="omit-link" class="text-center mt-2"><u><a href="../../index.php">Omit</a></u></div> -->
                 </form>
 

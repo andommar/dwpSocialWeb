@@ -88,7 +88,7 @@ class User
     public function setUsername($newUsername)
     {
         $this->username = $newUsername;
-        $this->updateUserInfo('username',$newUsername);
+        $this->updateUserInfo('username', $newUsername);
     }
 
     public function setUserId($userId)
@@ -98,7 +98,7 @@ class User
     }
     public function setUserPassword($password)
     {
-        $this->password =$password;
+        $this->password = $password;
         $this->updateUserInfo('password', $password);
     }
 
@@ -203,6 +203,8 @@ class User
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());
+            // $this->message["id"] = "general";
+            // $this->message["text"] = $ex->getMessage();
         }
     }
 
@@ -224,7 +226,8 @@ class User
         return $result;
     }
 
-    private function updateUserInfo ($field,$data) {
+    private function updateUserInfo($field, $data)
+    {
         $db = new Dbconn();
         $result = false;
         $data;
@@ -234,6 +237,6 @@ class User
                     WHERE user_id = {$this->userId}";
             $result = $db->executeQueryBind($sql, $data);
         }
-        return $result; 
+        return $result;
     }
 }

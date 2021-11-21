@@ -1,8 +1,10 @@
 
-function validate()
+function validate_signup()
 {
 
+    hideGeneralMessage();   // Hides general messages div every time the function is launched
     // Reset error messages
+    
     resetErrorMessages();
    
 
@@ -26,71 +28,109 @@ function validate()
 
     if( isEmptyOrSpaces(username) ){
         $('#username-error').text("Username cannot be empty");
-        return false;
+        
     }
     // Username length
     else if(username.length<4){
         $('#username-error').text("Username must have at least 4 characters");
-        return false;
+        
     }
     else if(username.length>30){
         $('#username-error').text("Username cannot exceed 30 characters");
-        return false;
+        
     }
     // Username is not the accepted type
     else if(!(username_regexp.test(username))){
         $('#username-error').text("Username can only contain letters, numbers and underscores");
-        return false;
+        
     }
     // EMAIL
     else if( isEmptyOrSpaces(email) ){
         $('#email-error').text("Email cannot be empty");
-        return false;
+        
     }
     // Email is not the accepted type
     else if(!(email_regexp.test(email))){
         $('#email-error').text("This email is not valid");
-        return false;
+        
     }
     // PASSWORD
     else if( isEmptyOrSpaces(password) ){
         $('#password-error').text("Password cannot be empty");
-        return false;
+        
     }
     // Password length
     else if(password.length<6){
         $('#password-error').text("Password must have at least 6 characters");
-        return false;
+        
     }
     else if(password.length>30){
         $('#password-error').text("Password cannot exceed 30 characters");
-        return false;
+        
     }
     // Password is not the accepted type
     else if(!(password_regexp.test(password))){
         $('#password-error').text("Password must contain at least one uppercase letter, one lowercase letter, one number and one special character");
-        return false;
+        
     }
     // PASSWORD 2
     else if( isEmptyOrSpaces(password2) ){
         $('#password2-error').text("Password cannot be empty");
-        return false;
+        
     }
     // PASSWORD VS PASSWORD  2
     // Passwords have different values
     else if(!(password===password2)){
         $('#password2-error').text("Passwords must be identical");
-        return false;
+        
     }
     // TERMS OF USE
     else if(!$('#termsofuse').prop('checked')){
         $('#termsofuse-error').text("You must accept our Terms of Use");
-        return false;
+        
     }
     
     else
     {
-    return true;
+        // ajax
+        $.ajax({
+            url: "../../controller/ViewsController.php",
+            method: "POST",
+            data: { option:"signup", username:username, email:email, password:password, password2:password2}
+        })
+        .done(function(data) {
+            if(data){ 
+                var parsedData = $.parseJSON(data);
+                if(parsedData["id"].length==0 || parsedData["id"]==""){   // No PHP validation errors & User is new 
+                    // Redirection to next step (category selection) 
+                    window.location.replace('../shared/category_selection.php');
+                }
+                else{ // PHP validation error ||  User doesn't exist
+                    
+                    if(parsedData["id"] == "username"){
+                        $('#username-error').text(parsedData["text"]);
+                    }
+                    else if(parsedData["id"] == "email"){
+                        $('#email-error').text(parsedData["text"]);
+                    }
+                    else if(parsedData["id"] == "password"){
+                        $('#password-error').text(parsedData["text"]);
+                    }
+                    else if(parsedData["id"] == "password2"){
+                        $('#password2-error').text(parsedData["text"]);
+                    }
+                }
+            }
+            else{
+                 $('#general').text("Ooops! Something went wrong.");
+                showGeneralMessage();
+            }
+            
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+             $('#general').text("Ooops! Something went wrong.");
+            showGeneralMessage();
+        }); 
     }
 }
 

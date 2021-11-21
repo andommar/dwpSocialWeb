@@ -1,15 +1,11 @@
 <?php
 
-// ----Requires----
+// Requires 
 
 require_once('../bootstrapping.php');
-// include_once("PostController.php");
-// include_once("VoteController.php");
-// include_once("CommentController.php");
 
-// ----End of requires----
 
-// ----Declarations----
+// Declarations 
 
 // File size 
 define('KB', 1024);
@@ -19,17 +15,52 @@ define('TB', 1099511627776);
 
 $mediaPath = "../views/web/img/media/";
 $avatarPath = "../views/web/img/avatars/";
+$msg = array(
+    "id" => "",
+    "text" => "",
+);
 
-// ----End of declarations----
 
-
-//Views send through POST variables/forms and the switch-case handles the incoming data
+//This handles the incoming data from AJAX - Post requests 
 if (isset($_POST["option"])) {
 
     $option = $_POST["option"];
 
     switch ($option) {
 
+        case "login":
+            global $msg;
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+
+            // Data validation 
+            if (validateUsername($username) && validatePassword($password)) {
+                $c = new LoginController();
+                $msg = $c->loginUser($username, $password);
+                if ($msg) echo json_encode($msg); // We send the validation error message
+            } else {
+                echo json_encode($msg); // We send the validation error message
+            }
+            break;
+        case "signup":
+            global $msg;
+            global $newUserId;
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $password2 = $_POST['password2'];
+            $avatar = generate_rnd_avatar();
+            // Data validation 
+            if (validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
+                $c = new UserController();
+                $newUserId = $c->registerUser($username, $email, $password, $avatar);
+                // If it's not retrieved, it returns a false
+                if ($newUserId) {
+                    $_SESSION['userId'] = $newUserId;
+                }
+            }
+            echo json_encode($msg);
+            break;
             // Validations cases
         case "new_post_form":
 
@@ -89,15 +120,15 @@ if (isset($_POST["option"])) {
 
             echo json_encode($data);
             break;
-        
+
         case "profile_form":
             $errors = [];
             $data = [];
 
             if (!empty($_POST["password"])) {
-                $inputPassword =$_POST["password"];
+                $inputPassword = $_POST["password"];
                 $u = new UserController();
-                if($inputPassword == $u->getUserPassword()){
+                if ($inputPassword == $u->getUserPassword()) {
 
                     if (!empty($_POST["email"])) {
                         $email = $_POST["email"];
@@ -107,26 +138,24 @@ if (isset($_POST["option"])) {
                     if (!empty($_POST["password1"]) && !empty($_POST["password2"])) {
                         $password1 = $_POST["password1"];
                         $password2 = $_POST["password2"];
-                        if(($password1===$password2)){
+                        if (($password1 === $password2)) {
                             $u->setUser()->setUserPassword($password1);
                         } else {
                             $errors['password1'] = "The passwords don't match";
                             $errors['password2'] = "The passwords don't match";
                         }
                     } else {
-                        if (empty($_POST["password1"]) ){
-                            if(!empty($_POST["password2"])){
+                        if (empty($_POST["password1"])) {
+                            if (!empty($_POST["password2"])) {
                                 $errors['password1'] = "Type the new password";
                             }
-                        } elseif (!empty($_POST["password1"])){
-                            if(empty($_POST["password2"])){
+                        } elseif (!empty($_POST["password1"])) {
+                            if (empty($_POST["password2"])) {
                                 $errors['password2'] = "Type the new password";
-                            } 
+                            }
                         }
                     }
-
-
-                }else {
+                } else {
                     $errors['password'] = 'Incorrect password';
                 }
             } else {
@@ -157,11 +186,11 @@ if (isset($_POST["option"])) {
             $imgFiltype = $imgFile['type'];
 
             if (($imgFiltype == "image/jpeg" ||
-            $imgFiltype == "image/jpg"   ||
-            $imgFiltype == "image/png"   ||
-            $imgFiltype == "image/gif")) {
+                $imgFiltype == "image/jpg"   ||
+                $imgFiltype == "image/png"   ||
+                $imgFiltype == "image/gif")) {
                 //and size meet the criteria 
-                if ($imgFile['size'] > 2*MB) {
+                if ($imgFile['size'] > 2 * MB) {
                     $error['avatar'] = "Max image size is 2MB";
                 } else {
                     // If there's no errors we add a unique string as a prefix to the file name
@@ -248,11 +277,137 @@ if (isset($_POST["option"])) {
             }
             break;
         case "category_selection":
-            $userId = $_POST["userId"];
+
+            $userId = $_SESSION['userId'];
             $categories = $_POST["categories"];
             $c = new CategoryController();
             $result = $c->registerUserCategories($userId, $categories);
             echo $result;
             break;
     }
+}
+
+// Validation 
+function validateUsername($username)
+{
+
+    $dataIsValid = true;
+    global $msg;
+    $username = htmlspecialchars(trim($username)); // sanitizes input before sql query and removes spaces
+    $username = str_replace(' ', '', $username);    // removes any space between characters
+    if (empty($username)) {
+
+        $msg["id"] = "username";
+        $msg["text"] = "Username cannot be empty.";
+        $dataIsValid = false;
+    }
+
+    return $dataIsValid;
+}
+function validatePassword($password)
+{
+
+    $dataIsValid = true;
+    global $msg;
+    $password = htmlspecialchars(trim($password));
+    $password = str_replace(' ', '', $password);
+    if (empty($password)) {
+
+        $msg["id"] = "password";
+        $msg["text"] = "Password cannot be empty.";
+        $dataIsValid = false;
+    }
+
+    return $dataIsValid;
+}
+
+function generate_rnd_avatar()
+{
+    $rnd_number = rand(1, 8);
+    $avatar = 'avatar_' . $rnd_number . '.png';
+    return $avatar;
+}
+function validateSignUpFields($username, $email, $password, $password2)
+{
+    global $msg;
+    $isDataValid = false;
+    // Variables sanitizing
+    $username = htmlspecialchars(trim($username));
+    $username = str_replace(' ', '', $username);
+
+    $email = htmlspecialchars(trim($email));
+    $email = str_replace(' ', '', $email);
+
+    $password = htmlspecialchars(trim($password));
+    $password = str_replace(' ', '', $password);
+
+    $password2 = htmlspecialchars(trim($password2));
+    $password2 = str_replace(' ', '', $password2);
+
+    // Regex
+    $username_regexp = "/^[0-9A-Za-z\_]+$/";
+    $email_regexp = "/^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/";
+    $password_regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/";
+
+
+    // USERNAME
+    if (empty($username)) {
+        $msg["id"] = "username";
+        $msg["text"] = "Username cannot be empty.";
+    }
+    // Username length
+    else if (strlen($username) < 4) {
+        $msg["id"] = "username";
+        $msg["text"] = "Username must have at least 4 characters.";
+    } else if (strlen($username) > 30) {
+        $msg["id"] = "username";
+        $msg["text"] = "Username cannot exceed 30 characters.";
+    }
+    // Username is not the accepted type
+    else if (!preg_match($username_regexp, $username)) {
+        $msg["id"] = "username";
+        $msg["text"] = "Username can only contain letters, numbers and underscores.";
+    }
+    // EMAIL
+    else if (empty($email)) {
+        $msg["id"] = "email";
+        $msg["text"] = "Email cannot be empty.";
+    }
+    // Email is not the accepted type
+    else if (!preg_match($email_regexp, $email)) {
+        $msg["id"] = "email";
+        $msg["text"] = "This email is not valid.";
+    }
+    // PASSWORD
+    else if (empty($password)) {
+        $msg["id"] = "password";
+        $msg["text"] = "Password cannot be empty.";
+    }
+    // Password length
+    else if (strlen($password) < 6) {
+        $msg["id"] = "password";
+        $msg["text"] = "Password must have at least 6 characters.";
+    } else if (strlen($password) > 30) {
+        $msg["id"] = "password";
+        $msg["text"] = "Password cannot exceed 30 characters.";
+    }
+    // Password is not the accepted type
+    else if (!preg_match($password_regexp, $password)) {
+        $msg["id"] = "password";
+        $msg["text"] = "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
+    }
+    // PASSWORD 2
+    else if (empty($password2)) {
+        $msg["id"] = "password2";
+        $msg["text"] = "Password cannot be empty.";
+    }
+    // PASSWORD VS PASSWORD  2
+    // Passwords have different values
+    else if (!($password === $password2)) {
+        $msg["id"] = "password2";
+        $msg["text"] = "Passwords must be identical.";
+    } else {
+        $isDataValid = true;
+    }
+    return $isDataValid;
 }
