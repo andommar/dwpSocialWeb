@@ -1,30 +1,11 @@
 <?php
 require_once('../../bootstrapping.php');
 $session = new SessionHandle;
-
 if (isset($_GET['logout']) && $_GET['logout'] == 1) {
     $logout = new LogOut();
     $redirect = new Redirector("login.php");
 } elseif ($session->logged_in()) {
     $redirect = new Redirector("../../index.php");
-}
-
-// php validation after js validation it's okay
-
-if (isset($_POST['submit'])) {
-
-    $username = validate_data($_POST['username']);
-    $password = validate_data($_POST['password']);
-    $c = new LoginController();
-    $msg = $c->loginUser($username, $password);
-}
-function validate_data($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = strip_tags($data);
-    $data = htmlspecialchars($data);
-    return $data;
 }
 ?>
 
@@ -53,27 +34,16 @@ function validate_data($data)
         <div class="row">
             <div id="login-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap extra-margin">
                 <!-- Standard top popup message -->
-                <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'general') { ?>
-                    <div class="text-center mb-3 alert alert-danger py-2 alert-dismissible fade show" role="alert">
-                        <span class="my-2 " id="general">
-
-                            <?php echo $msg["text"]; ?>
-
-                        </span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                <?php } ?>
+                <div class="text-center mb-3 alert alert-danger py-2 fade show d-none" role="alert" id="general-message">
+                    <span class="my-2 " id="general"></span>
+                </div>
                 <div class="logo-position"><img id="logo" src="../web/img/assets/logo.png" alt="socially logo" /></div>
                 <h1>Login</h1>
-                <!-- -->
-                <form method="post" action="" onsubmit="return validate();">
+                <form method="post" action="">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()">
                         <span class="msg error-message my-2" id="username-error">
-                            <?php if (!empty($msg["id"]) && !empty($msg["text"]) && $msg["id"] == 'username') {
-                                echo $msg["text"];
-                            } ?>
                         </span>
                     </div>
                     <div class="form-group" id="password-parent">
@@ -82,7 +52,7 @@ function validate_data($data)
                         <input type="password" name="password" maxlength="30" autocomplete="off" id="password">
                         <span class="msg error-message my-2" id="password-error"></span>
                     </div>
-                    <input type="submit" name="submit" value="Submit" id="submit">
+                    <input type="button" name="submit" value="Submit" id="submit" onclick="validate_login()">
                 </form>
                 <footer>
                     <p>Don't have an account yet? <a class="purple-color" href="signup.php">Sign up Here</a></p>

@@ -141,7 +141,7 @@ function validate_category_selection(userId)
             $.ajax({
                 url: "../../controller/ViewsController.php",
                 method: "POST",
-                data: { option:"category_selection", userId:userId, categories:selectedCategories}
+                data: { option:"category_selection", categories:selectedCategories}
             })
             .done(function(data) {
                 if(data){ // Categories correctly added to registered user

@@ -16,6 +16,19 @@
 
  });
 
- function isEmptyOrSpaces(str){
+function isEmptyOrSpaces(str){
   return str === null || str.match(/^ *$/) !== null;
+}
+
+// Bootstrap generic message (red) for showing info/error messages
+function showGeneralMessage(){
+  if( $('#general-message').hasClass("d-none")){    // It unhides the html div. Take login.php as an example
+      $('#general-message').removeClass( "d-none" ).addClass( "d-block" );
+  }
+}
+
+function hideGeneralMessage(){
+  if( $('#general-message').hasClass("d-block")){   // It hides the html div. Take login.php as an example
+    $('#general-message').removeClass( "d-block" ).addClass( "d-none" );
+}
 }
