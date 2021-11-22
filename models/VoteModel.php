@@ -2,7 +2,7 @@
 
 require_once('DbConn.php');
 
-class Vote
+class VoteModel
 {
 
     public function isPostPreviouslyRated($user_id, $post_id)

@@ -12,7 +12,7 @@ class UserController
 
     public function registerUser($username, $email, $password, $avatar)
     {
-        $u = new User($username, $email, $password);
+        $u = new UserModel($username, $email, $password);
         $res = $u->registerUser($username, $email, $password, $avatar);
         $this->msg = $u->message;
         return $res; // If user is successfully created, returns their user Id
@@ -20,7 +20,7 @@ class UserController
 
     public function getUserInfo()
     {
-        $u = new User($_SESSION['userId']);
+        $u = new UserModel($_SESSION['userId']);
         $data = [
             'userId' => $u->getUserId(),
             'username' => $u->getUsername(),
@@ -32,14 +32,15 @@ class UserController
     }
     public function getUserPassword()
     {
-        $u = new User($_SESSION['userId']);
+        $u = new UserModel($_SESSION['userId']);
         $data = $u->getUserPassword();
         return $data;
     }
 
     // Instances a user object. Mostly used to set user info
-    public function setUser(){
-        $u = new User($_SESSION['userId']);
+    public function setUser()
+    {
+        $u = new UserModel($_SESSION['userId']);
         return $u;
     }
 }

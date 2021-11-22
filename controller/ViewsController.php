@@ -291,7 +291,7 @@ if (isset($_POST["option"])) {
     }
 }
 
-// Validation 
+// Validation functions
 function validateUsername($username)
 {
 

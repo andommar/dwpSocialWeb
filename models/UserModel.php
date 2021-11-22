@@ -1,7 +1,7 @@
 <?php
 require_once('DbConn.php');
 
-class User
+class UserModel
 {
     private $userId;
     private $username;

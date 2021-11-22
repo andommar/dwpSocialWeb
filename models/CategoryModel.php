@@ -1,7 +1,7 @@
 <?php
 require_once('DbConn.php');
 require_once('User.php');
-class Category
+class CategoryModel
 {
     //loadUserCategories not implemented yet
     public function loadCategories()

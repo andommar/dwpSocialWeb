@@ -2,7 +2,7 @@
 
 require_once('DbConn.php');
 
-class Post
+class PostModel
 {
 
 

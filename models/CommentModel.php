@@ -3,7 +3,7 @@
 
 require_once('DbConn.php');
 
-class Comment
+class CommentModel
 {
 
     public function loadCommentsbyPostId($postId)
