@@ -13,6 +13,7 @@
 
 ## Pending Tasks
 
+- General feed not related to the categories the user follows
 - Datetime formatting
 - Try catch and close the connection at the end of try (take a look at try catch finally, finally will always be run)
 - Security measures left: encrypting password and htmlspecialchars
@@ -26,9 +27,7 @@
 - Assign categories to user when signing up
 - create general functions file (validate data function, for example)
 - Rank and Role
-
 - Fill database with real info
-- Password Hash
 - Add transactions in User Login, for example (IT'S NOT A REQUIREMENT FOR THE DWP)
 - Consider Batch processing pdo sql (If we have multiple queries to run)
 - User login > A user should login with username or email ??

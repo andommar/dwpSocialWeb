@@ -18,7 +18,10 @@ class UserLogin
         $result = $db->selectQueryBind($sql, $user);
         // User exists
         if (count($result) == 1) {
-            if ($result[0]['password'] == $pass) {
+            // Hashed password comparison
+            // We compare the input pass to one found on the database (hashed) 
+            if (password_verify($pass, $result[0]['password'])) {
+                // if ($result[0]['password'] == $pass) {
                 $_SESSION['userId'] = $result[0]['user_id'];
                 $_SESSION['username'] = $result[0]['username'];
                 $_SESSION['avatar'] = $result[0]['avatar'];

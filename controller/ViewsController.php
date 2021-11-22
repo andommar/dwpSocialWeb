@@ -52,8 +52,12 @@ if (isset($_POST["option"])) {
             $avatar = generate_rnd_avatar();
             // Data validation 
             if (validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
+                // Password hashing
+                $iterations = ['cost' => 15];
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT, $iterations);
+
                 $c = new UserController();
-                $newUserId = $c->registerUser($username, $email, $password, $avatar);
+                $newUserId = $c->registerUser($username, $email, $hashed_password, $avatar);
                 // If it's not retrieved, it returns a false
                 if ($newUserId) {
                     $_SESSION['userId'] = $newUserId;
