@@ -1,3 +1,11 @@
+<?php
+// Session handling
+require_once('../../bootstrapping.php');
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+  $redirect = new Redirector("../home/login.php");
+}
+?>
 <div class="row">
   <div class="col col-lg-12 col-xs-12">
     <div id="userfeed_filters_section" class="dropdown d-flex justify-content-end">

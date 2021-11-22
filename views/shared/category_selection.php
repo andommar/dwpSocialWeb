@@ -1,10 +1,14 @@
 <?php
 
+// Session handling
 require_once('../../bootstrapping.php');
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("../home/login.php");
+}
 $c = new CategoryController();
 $categories = $c->loadCategories();
 $userId = $_SESSION['userId'];
-
 
 ?>
 

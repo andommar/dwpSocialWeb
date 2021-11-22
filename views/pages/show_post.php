@@ -1,8 +1,11 @@
 <?php
+// Session handling
+require_once('../../bootstrapping.php');
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("views/home/login.php");
+    $redirect = new Redirector("../home/login.php");
 }
+
 $u = new UserController();
 $userData = $u->getUserInfo();
 

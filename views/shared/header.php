@@ -1,3 +1,12 @@
+    <?php
+    // Session handling
+    require_once('../../bootstrapping.php');
+    $session = new SessionHandle();
+    if ($session->confirm_logged_in()) {
+      $redirect = new Redirector("../home/login.php");
+    }
+    ?>
+
     <div class="row navbar d-flex align-items-center h-auto sticky-top">
       <div class="col col-6 navbar_left d-flex align-items-center flex-fill my-2">
         <div>
@@ -17,7 +26,7 @@
           <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
         </div>
         <div class="navbar_profile d-flex align-items-center" id="user_profile">
-          <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile"/>
+          <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" />
           <span><?php echo $userData['username'] ?></span>
         </div>
         <div class="navbar_links">
