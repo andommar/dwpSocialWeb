@@ -32,7 +32,7 @@ class UserLogin
             // User doesn't exist
         } else {
             $this->message["id"] = "general";
-            $this->message["text"] = "No such Username in the database. Please make sure your caps lock key is off and try again.";
+            $this->message["text"] = "No such username in the database. Please make sure your caps lock key is off and try again.";
         }
 
         return $this->message;

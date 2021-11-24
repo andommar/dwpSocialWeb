@@ -1,8 +1,13 @@
 <?php
 require_once('DbConn.php');
-require_once('User.php');
+require_once('UserModel.php');
 class CategoryModel
 {
+    public $message = array(
+        "id" => "",
+        "text" => "",
+    );
+
     //loadUserCategories not implemented yet
     public function loadCategories()
     {
@@ -53,6 +58,7 @@ class CategoryModel
     public function registerUserCategories($userId, $categories)
     {
         try {
+            $result = false;
             $db = new DbConn();
             $db->dbConn->beginTransaction();
             for ($i = 0; $i < count($categories); $i++) {

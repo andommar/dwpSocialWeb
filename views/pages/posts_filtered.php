@@ -1,12 +1,5 @@
 <?php
 
-// Session handling
-require_once('../../bootstrapping.php');
-$session = new SessionHandle();
-if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("../home/login.php");
-}
-
 foreach ($data as $post) { ?>
     <div class="post">
         <div class="post_title">

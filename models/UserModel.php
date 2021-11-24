@@ -183,6 +183,7 @@ class UserModel
         try {
             $db = new Dbconn();
             $result = false;
+            $newUserId = 0;
             if ($db->isConnected()) {
 
                 if ($this->isUsernameRegistered($username)) {
@@ -197,10 +198,14 @@ class UserModel
                     $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
                     $result = $db->executeQueryBindArr($sql, $arr);
                     // If the user is succesfully created, we retrieve the user Id when inserted
-                    if ($result) $result = $db->dbConn->lastInsertId();
+                    if ($result) $newUserId = $db->dbConn->lastInsertId();
                 }
             }
-            return $result;
+            if ($result) {
+                return $newUserId;
+            } else {
+                return $this->message;
+            }
         } catch (\PDOException $ex) {
             print($ex->getMessage());
             // $this->message["id"] = "general";

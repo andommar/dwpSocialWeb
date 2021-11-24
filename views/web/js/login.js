@@ -62,6 +62,16 @@ function validate_login()
     
 }
 
+// When user presses enter key on password field 
+
+$('#password').keypress(function (e) {
+    var key = e.which;
+    if(key == 13)  // the enter key code
+     {
+        validate_login();  // we submit the form
+     }
+   });   
+
 function cleanPasswordField(){
     $('#password').val('');
     $('#password').text("");

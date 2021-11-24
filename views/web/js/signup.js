@@ -101,7 +101,7 @@ function validate_signup()
         .done(function(data) {
             if(data){ 
                 var parsedData = $.parseJSON(data);
-                if(parsedData["id"].length==0 || parsedData["id"]==""){   // No PHP validation errors & User is new 
+                if(typeof parsedData === 'string'){   // No PHP validation errors & User is new 
                     // Redirection to next step (category selection) 
                     window.location.replace('../shared/category_selection.php');
                 }

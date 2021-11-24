@@ -9,12 +9,6 @@ body {
   line-height: 1.8;
 }
 
-body,
-.container-fluid,
-.row,
-.col {
-  height: 100vh;
-}
 .container-fluid {
   background: -webkit-linear-gradient(130deg, #b06ab3, #61a9f3);
   background: linear-gradient(130deg, #b06ab3, #61a9f3);

@@ -1,10 +1,5 @@
 <?php
-// Session handling
-require_once('../../bootstrapping.php');
-$session = new SessionHandle();
-if ($session->confirm_logged_in()) {
-    $redirect = new Redirector("../home/login.php");
-}
+
 // We load the category posts (it's possible there are no posts yet)
 $categoryName = $data;
 $p = new PostController();

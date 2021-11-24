@@ -31,7 +31,7 @@ if (isset($_GET['logout']) && $_GET['logout'] == 1) {
 
 <body id="login">
     <div class="container-fluid d-flex flex-column">
-        <div class="row">
+        <div class="row min-vh-100">
             <div id="login-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap extra-margin">
                 <!-- Standard top popup message -->
                 <div class="text-center mb-3 alert alert-danger py-2 fade show d-none" role="alert" id="general-message">

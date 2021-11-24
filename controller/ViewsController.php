@@ -57,13 +57,13 @@ if (isset($_POST["option"])) {
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT, $iterations);
 
                 $c = new UserController();
-                $newUserId = $c->registerUser($username, $email, $hashed_password, $avatar);
-                // If it's not retrieved, it returns a false
-                if ($newUserId) {
+                $result = $c->registerUser($username, $email, $hashed_password, $avatar);
+                if (is_string($result)) {
+                    $newUserId = $result;
                     $_SESSION['userId'] = $newUserId;
                 }
             }
-            echo json_encode($msg);
+            echo json_encode($result);
             break;
             // Validations cases
         case "new_post_form":
@@ -283,10 +283,28 @@ if (isset($_POST["option"])) {
         case "category_selection":
 
             $userId = $_SESSION['userId'];
-            $categories = $_POST["categories"];
-            $c = new CategoryController();
-            $result = $c->registerUserCategories($userId, $categories);
-            echo $result;
+            // categories parameter is not null
+            if (isset($_POST["categories"]) && $_POST["categories"] != null) {
+
+                $categories = $_POST["categories"];
+
+                if (sizeof($categories) < 2 || empty($categories)) {
+                    $msg["id"] = "categories";
+                    $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+                    echo json_encode($msg); // We send the validation error message
+                } else {
+                    $c = new CategoryController();
+                    $result = $c->registerUserCategories($userId, $categories);
+                    echo $result;
+                }
+            }
+            // categories parameter is null
+            else {
+                $msg["id"] = "categories";
+                $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+                echo json_encode($msg); // We send the validation error message
+            }
+
             break;
     }
 }
