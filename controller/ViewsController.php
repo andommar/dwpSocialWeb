@@ -53,7 +53,7 @@ if (isset($_POST["option"])) {
             // Data validation 
             if (validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
                 // Password hashing
-                $iterations = ['cost' => 15];
+                $iterations = ['cost' => 12];
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT, $iterations);
 
                 $c = new UserController();
@@ -83,7 +83,7 @@ if (isset($_POST["option"])) {
 
             // If inputs arent empty and user has chosen a category
             if (empty($errors)) {
-                $userid = $_POST["userId"];
+                $userid = $_SESSION['userId'];
                 $title = $_POST["title"];
                 $category = $_POST["category"];
                 $description = $_POST["description"];
@@ -221,14 +221,14 @@ if (isset($_POST["option"])) {
 
 
         case "userfeed":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $filter = $_POST["userfeedFilter"];
             $p = new PostController();
             $posts2 = $p->loadUserFeedPostsFiltered($userId, $filter);
             echo json_encode($posts2);
             break;
         case "rate_post":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $postId = $_POST["postId"];
             $isPositive = $_POST["isPositive"];
             $v = new VoteController();
@@ -236,7 +236,7 @@ if (isset($_POST["option"])) {
             echo $v;
             break;
         case "user_votes":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $v = new VoteController();
             $v = $v->getUserRatedPosts($userId);
             echo json_encode($v);

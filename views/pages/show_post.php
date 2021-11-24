@@ -62,10 +62,10 @@ $comments = $c->loadCommentsbyPostId($post_id);
                             <?php
                             echo '<script type="text/javascript">sendUsrPostId(' . $_SESSION['userId'] . ',' . $post[0]['post_id'] . ');</script>';
                             ?>
-                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post[0]['post_id'] ?>,1)" />
+                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,1)" />
                             <span class="votes_number purple_color total_upvotes"><?php echo $post[0]['up_votes'] ?></span>
 
-                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post[0]['post_id'] ?>,0)" />
+                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,0)" />
                             <span class="votes_number red_color total_downvotes"><?php echo $post[0]['down_votes'] ?></span>
                         </div>
                         <div class="comment_counts">
