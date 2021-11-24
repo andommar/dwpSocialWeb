@@ -12,7 +12,7 @@ $categories = $c->loadCategories();
 ?>
 <div class="row">
     <?php
-    echo '<script type="text/javascript">sendUsrCategoryPostId(' . $_SESSION['userId'] . ');</script>';
+    echo '<script type="text/javascript">sendUsrCategoryPostId();</script>';
     ?>
     <div class="col col-lg-12 col-xs-12 p-0">
         <div id="category-header">

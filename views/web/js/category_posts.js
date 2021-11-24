@@ -2,6 +2,6 @@
 $(document).ready(function() {
    
 }); 
-function sendUsrCategoryPostId(userId){
-    getUserPostsRate(userId);
+function sendUsrCategoryPostId(){
+    getUserPostsRate();
     }

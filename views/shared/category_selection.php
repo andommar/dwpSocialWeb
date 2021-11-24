@@ -8,7 +8,6 @@ if ($session->confirm_logged_in()) {
 }
 $c = new CategoryController();
 $categories = $c->loadCategories();
-$userId = $_SESSION['userId'];
 
 ?>
 

@@ -8,7 +8,18 @@ class CategoryModel
         "text" => "",
     );
 
-    //loadUserCategories not implemented yet
+    public function getUserCategories($userId)
+    {
+        try {
+            $result = false;
+            $db = new Dbconn();
+            $sql = 'SELECT c.category_name,c.icon FROM category c INNER JOIN `user_category` uc WHERE c.category_name = uc.category_name AND user_id = ?';
+            $result = $db->selectQueryBind($sql, $userId);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
     public function loadCategories()
     {
         try {

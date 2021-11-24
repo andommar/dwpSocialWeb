@@ -242,7 +242,7 @@ if (isset($_POST["option"])) {
             echo json_encode($v);
             break;
         case "singlepost_user_votes":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $postId = $_POST["postId"];
             $v = new VoteController();
             $v = $v->getUserRatedPostByPostId($userId, $postId);
@@ -261,7 +261,7 @@ if (isset($_POST["option"])) {
                 $errors = [];
                 $data = [];
                 $postId = $_POST["postId"];
-                $userId = $_POST["userId"];
+                $userId = $_SESSION['userId'];
                 if (empty($formData['description']) && empty($formData['image'])) {
                     $errors['message'] = 'Type something or upload an image to send a comment';
                 } else {

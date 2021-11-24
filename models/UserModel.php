@@ -9,7 +9,6 @@ class UserModel
     private $avatar;
     private $password;
     private $rank;
-    public $userCategories = array();
     public $message = array(
         "id" => "",
         "text" => "",
@@ -34,15 +33,6 @@ class UserModel
                     $this->rank = $values['rank'];
                 }
             }
-            $sql = "SELECT c.category_name, c.icon
-            from category c 
-            inner join user_category uc on c.category_name = uc.category_name  
-            where uc.user_id = ?";
-            $stmt = $db->selectQueryBind($sql, $userId);
-            if ($stmt) {
-                foreach ($stmt as $data)
-                    array_push($this->userCategories, $data);
-            }
             $result = true;
         }
 
@@ -62,11 +52,6 @@ class UserModel
     public function getUserPassword()
     {
         return $this->password;
-    }
-
-    public function getUserCategories()
-    {
-        return $this->userCategories;
     }
 
     public function getUserAvatar()

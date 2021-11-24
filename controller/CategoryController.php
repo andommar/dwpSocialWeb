@@ -1,5 +1,6 @@
 <?php
 
+
 class CategoryController
 {
     // Categories
@@ -12,8 +13,9 @@ class CategoryController
 
     public function getUserCategories()
     {
-        $c = new UserModel($_SESSION['userId']);
-        $res = $c->getUserCategories();
+        $userId = $_SESSION['userId'];
+        $c = new CategoryModel();
+        $res = $c->getUserCategories($userId);
         return $res;
     }
     public function loadCategoryById($categoryName)
@@ -28,8 +30,9 @@ class CategoryController
         $res = $c->getCategoryFollowers($categoryName);
         return $res;
     }
-    public function isUserFollower($categoryName, $userId)
+    public function isUserFollower($categoryName)
     {
+        $userId = $_SESSION['userId'];
         $c = new CategoryModel();
         $res = $c->isUserFollower($categoryName, $userId);
         return $res;

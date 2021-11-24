@@ -19,7 +19,7 @@ $followers = $c->getCategoryFollowers($post[0]['category_name']);
 // Check if user follows the category
 if ($userData) {
     $c = new CategoryController();
-    $category = $c->isUserFollower($category_info[0]['category_name'], (int)$userData['userId']);
+    $category = $c->isUserFollower($category_info[0]['category_name']);
 }
 
 // Load COMMENTS
@@ -60,7 +60,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
                     <div class="votes_comments_area">
                         <div class="icons" id="<?php echo $post[0]['post_id'] ?>">
                             <?php
-                            echo '<script type="text/javascript">sendUsrPostId(' . $_SESSION['userId'] . ',' . $post[0]['post_id'] . ');</script>';
+                            echo '<script type="text/javascript">sendUsrPostId(' . $post[0]['post_id'] . ');</script>';
                             ?>
                             <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,1)" />
                             <span class="votes_number purple_color total_upvotes"><?php echo $post[0]['up_votes'] ?></span>
@@ -93,7 +93,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                         <input type="file" class="form-control-file" id="imageupload">
                                     </div>
                                     <div class="my-2">
-                                        <button type="button" id="comment-submit" class="btn btn-primary" onclick="submitNewComment(<?php echo (int)$userData['userId'] ?>,<?php echo $post_id ?>)">Submit</button>
+                                        <button type="button" id="comment-submit" class="btn btn-primary" onclick="submitNewComment(<?php echo $post_id ?>)">Submit</button>
                                     </div>
                                 </form>
                             </div>
