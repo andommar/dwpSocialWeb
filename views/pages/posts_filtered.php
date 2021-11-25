@@ -6,7 +6,7 @@ foreach ($data as $post) { ?>
             <img src="views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
             <div class="post_title_content">
                 <p class="mb-0">
-                    <a href="#" class="text-decoration-none"><?php echo $post['category_name'] ?>
+                    <a onclick="loadSpecificCategory('<?php echo $post['category_name'] ?>')" class="text-decoration-none"><?php echo $post['category_name'] ?>
                         <i class="<?php echo $post['icon'] ?> mx-1"></i>
                     </a>
                 </p>

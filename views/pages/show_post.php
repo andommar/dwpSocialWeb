@@ -110,6 +110,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                 </div>
                                 <div class="comment-post">
                                     <span class="comment-username"><?php echo $comment['username']; ?></span>
+                                    <span class="comment-datetime"><?php echo $comment['datetime']; ?></span>
                                     <p class="mb-0"><?php echo $comment['description']; ?></p>
                                 </div>
                             </div>

@@ -1,6 +1,12 @@
 $(document).ready(function () {
   sendUsrPostId = function (postId){
     getUserSinglePostRate(postId);
+     // Scrolls to the top of the page
+     $( "html,body" ).animate({
+        scrollTop: $("body").offset().top
+        }, 200, function() {
+        // Animation complete.
+    });
   };
   submitNewComment = function (postId) {
     var formData = {
