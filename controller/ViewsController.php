@@ -217,15 +217,13 @@ if (isset($_POST["option"])) {
             echo json_encode($data);
 
             break;
-
-
-
         case "userfeed":
             $userId = $_SESSION['userId'];
             $filter = $_POST["userfeedFilter"];
             $p = new PostController();
-            $posts2 = $p->loadUserFeedPostsFiltered($userId, $filter);
-            echo json_encode($posts2);
+            $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
+            $_SESSION['userfeed_dropdown'] = $filter;
+            echo json_encode($posts);
             break;
         case "rate_post":
             $userId = $_SESSION['userId'];

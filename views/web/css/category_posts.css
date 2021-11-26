@@ -9,3 +9,15 @@
 #category-header p {
   margin-right: 7em;
 }
+
+#category-posts_filters_section {
+  margin: 2em 27em;
+}
+#category-posts_filters_section #category-posts_filters {
+  background-color: #242526;
+  color: white;
+  border: 1px solid #2a2b2d;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}

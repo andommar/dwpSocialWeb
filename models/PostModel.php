@@ -59,6 +59,33 @@ class PostModel
     $result = $db->selectQueryBind($sql, $categoryName);
     return $result;
   }
+  public function loadCategoryPostsFiltered($categoryName, $filter)
+  {
+    // Filter: latest, popular, oldest, unpopular
+    $db = new Dbconn();
+    $sql = "";
+    switch ($filter) {
+        // Most recent posts
+      case "latest":
+        $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY `datetime` DESC';
+        break;
+        // Oldest posts
+      case "oldest":
+        $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY `datetime`';
+        break;
+        // Most voted posts
+      case "popular":
+        $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY p.up_votes DESC';
+        break;
+
+        // Most unvoted posts
+      case "unpopular":
+        $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY p.down_votes DESC';
+        break;
+    }
+    $result = $db->selectQueryBind($sql, $categoryName);
+    return $result;
+  }
 
   public function newPost($userId, $title, $categoryName, $mediaUrl, $description)
   {

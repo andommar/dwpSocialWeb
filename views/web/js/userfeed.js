@@ -5,7 +5,7 @@ $(document).ready(function() {
         loadContent('show_post',id);
     }
     
-     // We retrieve the data and refresh the posts
+    // We retrieve the data and refresh the posts
     loadPosts = function(value){ 
     
         var userfeedFilter = value;
@@ -16,16 +16,9 @@ $(document).ready(function() {
         })
         .done(function(data) {
             var filteredPosts = $.parseJSON(data);
-            $.ajax({
-                url: "controller/PageController.php",
-                method: "POST",
-                data: { pageName:'posts_filtered', data:filteredPosts },
-                success: function (data) {
-                  $('#filtered-posts').html(data);
-                  // We load the rates in each post
-                  getUserPostsRate();
-                },
-              });
+            loadContent('userfeed', filteredPosts);
+            //We load the rates in each post
+            getUserPostsRate();
         });
     };
 
@@ -56,7 +49,7 @@ $(document).ready(function() {
        $("#"+postId+" .total_downvotes").html(totalVotes[0]['down_votes']);
     };
 
-    // First thing that will be loaded. We send the user Id and the default query type that we'll execute
+    // First thing that will be loaded. We send the default filter for the query that retrieves the userfeed posts
     loadPosts('latest');
     
 

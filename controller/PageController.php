@@ -19,9 +19,6 @@ if (isset($_POST["pageName"])) {
         case 'show_post':
             include_once('../views/pages/show_post.php');
             break;
-        case 'posts_filtered':
-            include_once('../views/pages/posts_filtered.php');
-            break;
         case 'user_profile':
             include_once('../views/pages/user_profile.php');
             break;
