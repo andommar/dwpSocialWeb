@@ -8,7 +8,6 @@ if (isset($_POST["pageName"])) {
         $data = $_POST["data"];
     }
     $pageName = $_POST["pageName"];
-
     switch ($pageName) {
         case 'userfeed':
             include_once('../views/pages/userfeed.php');

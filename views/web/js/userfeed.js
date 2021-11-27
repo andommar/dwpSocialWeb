@@ -21,7 +21,6 @@ $(document).ready(function() {
             getUserPostsRate();
         });
     };
-
     getUserPostsRate = function(){ 
         $.ajax({
             url: "controller/ViewsController.php",

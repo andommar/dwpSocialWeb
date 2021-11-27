@@ -225,6 +225,16 @@ if (isset($_POST["option"])) {
             $_SESSION['userfeed_dropdown'] = $filter;
             echo json_encode($posts);
             break;
+        case "specific_category":
+            $_SESSION['category_name'] = $_POST['categoryName'];
+            break;
+        case "category_posts":
+            $filter = $_POST["categoryPostsFilter"];
+            $_SESSION['categoryPosts_dropdown'] = $filter;
+            $p = new PostController();
+            $posts = $p->loadCategoryPostsFiltered($_SESSION['category_name'], $filter);
+            echo json_encode($posts);
+            break;
         case "rate_post":
             $userId = $_SESSION['userId'];
             $postId = $_POST["postId"];
