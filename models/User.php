@@ -194,7 +194,7 @@ class User
                 } else {
                     $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
                     VALUES (?, ?, ?, ?, ?, ?)';
-                    $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
+                    $arr = [$username, $avatar, $password, $email, 'Beginner', 'User'];
                     $result = $db->executeQueryBindArr($sql, $arr);
                     // If the user is succesfully created, we retrieve the user Id when inserted
                     if ($result) $result = $db->dbConn->lastInsertId();
