@@ -122,8 +122,9 @@ selectCategory = function(buttonNumber,categoryId){
 
 });
 
-function validate_category_selection(userId)
+function validate_category_selection()
 {
+    hideGeneralMessage();   // Hides general messages div every time the function is launched
     // If the button, for some reason, enables but the user selected less than 2 categories
     if(totalSelectedCategories<2 && !($('#category-submit-btn').prop('disabled'))){
         $("#category-info-text").addClass("text-danger");
@@ -144,17 +145,31 @@ function validate_category_selection(userId)
                 data: { option:"category_selection", categories:selectedCategories}
             })
             .done(function(data) {
-                if(data){ // Categories correctly added to registered user
-                    // We send the user to the main page, logged in
-                    window.location.replace('../../index.php');
+                if(data){ 
+                    var parsedData = $.parseJSON(data);
+                    if(parsedData["id"] == "categories"){
+                        // if there's a PHP validation error 
+                        $('#general').text(parsedData["text"]);
+                        showGeneralMessage();
+                        $('#category-submit-btn').prop('disabled', false);
+                    }
+                    else{
+                        // Categories correctly added to registered user
+                        // We send the user to the main page, logged in
+                        window.location.replace('../../index.php');
+                    }
                 }
+                else{
+                    $('#general').text("Ooops! Something went wrong.");
+                   showGeneralMessage();
+               }
                 
             })
             .fail(function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus);
+                $('#general').text("Ooops! Something went wrong.");
+                showGeneralMessage();
             }); 
         }
-
     }
 }
 

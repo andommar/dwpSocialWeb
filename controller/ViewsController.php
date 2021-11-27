@@ -52,14 +52,18 @@ if (isset($_POST["option"])) {
             $avatar = generate_rnd_avatar();
             // Data validation 
             if (validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
+                // Password hashing
+                $iterations = ['cost' => 12];
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT, $iterations);
+
                 $c = new UserController();
-                $newUserId = $c->registerUser($username, $email, $password, $avatar);
-                // If it's not retrieved, it returns a false
-                if ($newUserId) {
+                $result = $c->registerUser($username, $email, $hashed_password, $avatar);
+                if (is_string($result)) {
+                    $newUserId = $result;
                     $_SESSION['userId'] = $newUserId;
                 }
             }
-            echo json_encode($msg);
+            echo json_encode($result);
             break;
             // Validations cases
         case "new_post_form":
@@ -79,7 +83,7 @@ if (isset($_POST["option"])) {
 
             // If inputs arent empty and user has chosen a category
             if (empty($errors)) {
-                $userid = $_POST["userId"];
+                $userid = $_SESSION['userId'];
                 $title = $_POST["title"];
                 $category = $_POST["category"];
                 $description = $_POST["description"];
@@ -213,18 +217,26 @@ if (isset($_POST["option"])) {
             echo json_encode($data);
 
             break;
-
-
-
         case "userfeed":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $filter = $_POST["userfeedFilter"];
             $p = new PostController();
-            $posts2 = $p->loadUserFeedPostsFiltered($userId, $filter);
-            echo json_encode($posts2);
+            $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
+            $_SESSION['userfeed_dropdown'] = $filter;
+            echo json_encode($posts);
+            break;
+        case "specific_category":
+            $_SESSION['category_name'] = $_POST['categoryName'];
+            break;
+        case "category_posts":
+            $filter = $_POST["categoryPostsFilter"];
+            $_SESSION['categoryPosts_dropdown'] = $filter;
+            $p = new PostController();
+            $posts = $p->loadCategoryPostsFiltered($_SESSION['category_name'], $filter);
+            echo json_encode($posts);
             break;
         case "rate_post":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $postId = $_POST["postId"];
             $isPositive = $_POST["isPositive"];
             $v = new VoteController();
@@ -232,13 +244,13 @@ if (isset($_POST["option"])) {
             echo $v;
             break;
         case "user_votes":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $v = new VoteController();
             $v = $v->getUserRatedPosts($userId);
             echo json_encode($v);
             break;
         case "singlepost_user_votes":
-            $userId = $_POST["userId"];
+            $userId = $_SESSION['userId'];
             $postId = $_POST["postId"];
             $v = new VoteController();
             $v = $v->getUserRatedPostByPostId($userId, $postId);
@@ -257,7 +269,7 @@ if (isset($_POST["option"])) {
                 $errors = [];
                 $data = [];
                 $postId = $_POST["postId"];
-                $userId = $_POST["userId"];
+                $userId = $_SESSION['userId'];
                 if (empty($formData['description']) && empty($formData['image'])) {
                     $errors['message'] = 'Type something or upload an image to send a comment';
                 } else {
@@ -279,15 +291,33 @@ if (isset($_POST["option"])) {
         case "category_selection":
 
             $userId = $_SESSION['userId'];
-            $categories = $_POST["categories"];
-            $c = new CategoryController();
-            $result = $c->registerUserCategories($userId, $categories);
-            echo $result;
+            // categories parameter is not null
+            if (isset($_POST["categories"]) && $_POST["categories"] != null) {
+
+                $categories = $_POST["categories"];
+
+                if (sizeof($categories) < 2 || empty($categories)) {
+                    $msg["id"] = "categories";
+                    $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+                    echo json_encode($msg); // We send the validation error message
+                } else {
+                    $c = new CategoryController();
+                    $result = $c->registerUserCategories($userId, $categories);
+                    echo $result;
+                }
+            }
+            // categories parameter is null
+            else {
+                $msg["id"] = "categories";
+                $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+                echo json_encode($msg); // We send the validation error message
+            }
+
             break;
     }
 }
 
-// Validation 
+// Validation functions
 function validateUsername($username)
 {
 

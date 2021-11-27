@@ -54,7 +54,6 @@
 .comment-avatar {
   max-height: 50px;
   width: 33px;
-  cursor: pointer;
 }
 .comment-post {
   background-color: #373737;
@@ -68,5 +67,10 @@
   color: white;
   font-size: 12px;
   font-weight: bold;
-  cursor: pointer;
+}
+.comment-datetime {
+  font-size: 10px;
+  color: #a4a4a4;
+  margin-bottom: 4px;
+  display: block;
 }

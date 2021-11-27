@@ -1,7 +1,7 @@
 <?php
 require_once('DbConn.php');
 
-class User
+class UserModel
 {
     private $userId;
     private $username;
@@ -9,7 +9,6 @@ class User
     private $avatar;
     private $password;
     private $rank;
-    public $userCategories = array();
     public $message = array(
         "id" => "",
         "text" => "",
@@ -34,15 +33,6 @@ class User
                     $this->rank = $values['rank'];
                 }
             }
-            $sql = "SELECT c.category_name, c.icon
-            from category c 
-            inner join user_category uc on c.category_name = uc.category_name  
-            where uc.user_id = ?";
-            $stmt = $db->selectQueryBind($sql, $userId);
-            if ($stmt) {
-                foreach ($stmt as $data)
-                    array_push($this->userCategories, $data);
-            }
             $result = true;
         }
 
@@ -62,11 +52,6 @@ class User
     public function getUserPassword()
     {
         return $this->password;
-    }
-
-    public function getUserCategories()
-    {
-        return $this->userCategories;
     }
 
     public function getUserAvatar()
@@ -183,6 +168,7 @@ class User
         try {
             $db = new Dbconn();
             $result = false;
+            $newUserId = 0;
             if ($db->isConnected()) {
 
                 if ($this->isUsernameRegistered($username)) {
@@ -197,10 +183,14 @@ class User
                     $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
                     $result = $db->executeQueryBindArr($sql, $arr);
                     // If the user is succesfully created, we retrieve the user Id when inserted
-                    if ($result) $result = $db->dbConn->lastInsertId();
+                    if ($result) $newUserId = $db->dbConn->lastInsertId();
                 }
             }
-            return $result;
+            if ($result) {
+                return $newUserId;
+            } else {
+                return $this->message;
+            }
         } catch (\PDOException $ex) {
             print($ex->getMessage());
             // $this->message["id"] = "general";
