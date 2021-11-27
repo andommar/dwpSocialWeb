@@ -1,9 +1,12 @@
 <?php
-$session = new SessionHandle();
+
+
+if (isset($_SESSION['categoryPosts_dropdown'])) $categoryPosts_dropdown = $_SESSION['categoryPosts_dropdown'];
+
 // We load the category posts (it's possible there are no posts yet)
-$categoryName = $data;
-$p = new PostController();
-$categoryPosts = $p->loadCategoryPosts($categoryName);
+if (isset($_SESSION['category_name'])) {
+    $categoryName = $_SESSION['category_name'];
+}
 
 // We load the categories as well to get the icons (we need them in case the category doesn't have posts)
 $c = new CategoryController();
@@ -12,7 +15,7 @@ $categories = $c->loadCategories();
 ?>
 <div class="row">
     <?php
-    echo '<script type="text/javascript">sendUsrCategoryPostId(' . $_SESSION['userId'] . ');</script>';
+    echo '<script type="text/javascript">scrollToTop();</script>';
     ?>
     <div class="col col-lg-12 col-xs-12 p-0">
         <div id="category-header">
@@ -23,17 +26,19 @@ $categories = $c->loadCategories();
                 <?php echo $categoryName ?>
             </p>
         </div>
-        <!-- <div id="userfeed_filters_section" class="dropdown d-flex justify-content-end">
-            <select name="userfeed_filters" id="userfeed_filters" onchange="loadPosts(this.value, <?php echo $_SESSION['userId'] ?>);">
-                <option value="latest">Latest posts</option>
-                <option value="popular">Popular posts</option>
-                <option value="oldest">Oldest posts</option>
-                <option value="unpopular">Unpopular posts</option>
-            </select>
-        </div> -->
+        <?php if (isset($categoryPosts_dropdown) && isset($data)) { ?>
+            <div id="category-posts_filters_section" class="dropdown d-flex justify-content-end">
+                <select name="category-posts_filters" id="category-posts_filters" onchange="loadCategoryPosts(this.value);">
+                    <option value="latest" <?php if ($categoryPosts_dropdown == 'latest') echo 'selected="selected"' ?>>Latest posts</option>
+                    <option value="popular" <?php if ($categoryPosts_dropdown == 'popular') echo 'selected="selected"' ?>>Popular posts</option>
+                    <option value="oldest" <?php if ($categoryPosts_dropdown == 'oldest') echo 'selected="selected"' ?>>Oldest posts</option>
+                    <option value="unpopular" <?php if ($categoryPosts_dropdown == 'unpopular') echo 'selected="selected"' ?>>Unpopular posts</option>
+                </select>
+            </div>
+        <?php } ?>
         <div id="category-posts">
-            <?php if ($categoryPosts) {
-                foreach ($categoryPosts as $post) { ?>
+            <?php if (isset($data)) {
+                foreach ($data as $post) { ?>
                     <div class="post">
                         <div class="post_title">
                             <img src="views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
@@ -62,9 +67,9 @@ $categories = $c->loadCategories();
                         </div>
                         <div class="votes_comments_area">
                             <div class="icons" id="<?php echo $post['post_id'] ?>">
-                                <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post['post_id'] ?>,1)" />
+                                <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,1)" />
                                 <span class="votes_number purple_color total_upvotes"><?php echo $post['up_votes'] ?></span>
-                                <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $_SESSION['userId'] ?>,<?php echo $post['post_id'] ?>,0)" />
+                                <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,0)" />
                                 <span class="votes_number red_color total_downvotes"><?php echo $post['down_votes'] ?></span>
                             </div>
                             <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">

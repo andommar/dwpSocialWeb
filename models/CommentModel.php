@@ -3,7 +3,7 @@
 
 require_once('DbConn.php');
 
-class Comment
+class CommentModel
 {
 
     public function loadCommentsbyPostId($postId)
@@ -12,7 +12,7 @@ class Comment
 
             $result = false;
             $db = new Dbconn();
-            $sql = 'SELECT c.comment_id, c.description, c.user_id, u.username, u.avatar, c.media_url, c.up_votes, c.down_votes
+            $sql = 'SELECT c.comment_id, c.description, c.user_id, u.username, u.avatar, c.media_url, c.up_votes, c.down_votes, c.`datetime`
                 FROM `comment` c 
                 INNER JOIN post p ON c.post_id = p.post_id
                 INNER JOIN `user` u ON u.user_id = c.user_id

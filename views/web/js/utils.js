@@ -15,7 +15,14 @@
    });
 
  });
-
+ function scrollToTop(){
+   // Scrolls to the top of the page
+   $( "html,body" ).animate({
+    scrollTop: $("body").offset().top
+    }, 200, function() {
+    // Animation complete.
+  });
+ }
 function isEmptyOrSpaces(str){
   return str === null || str.match(/^ *$/) !== null;
 }
@@ -30,5 +37,5 @@ function showGeneralMessage(){
 function hideGeneralMessage(){
   if( $('#general-message').hasClass("d-block")){   // It hides the html div. Take login.php as an example
     $('#general-message').removeClass( "d-block" ).addClass( "d-none" );
-}
+  }
 }

@@ -27,6 +27,7 @@ $userData = $c->getUserInfo();
   <link rel="stylesheet" href="views/web/css/messages-styles.css" />
   <link rel="stylesheet" href="views/web/css/profile-style.css" />
   <link rel="stylesheet" href="views/web/css/category_posts.css" />
+  <link rel="stylesheet" href="views/web/css/all_categories.css" />
 
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -35,16 +36,16 @@ $userData = $c->getUserInfo();
 
 <body>
   <div class="container-fluid d-flex flex-column">
-    <?php include_once('views/shared/header.php'); ?>
+    <?php require_once('views/shared/header.php'); ?>
     <div class="row">
       <!-- Left content -->
       <div class="content_left col col-lg-2 col-sm-3 col-xs-12 d-flex min-vh-100">
-        <?php include_once('views/shared/left_menu.php'); ?>
+        <?php require_once('views/shared/left_menu.php'); ?>
       </div>
 
       <!-- Main content -->
       <div class="col col-lg-10 col-sm-9 col-xs-12" id='content'>
-        <?php include_once('views/pages/userfeed.php'); ?>
+        <?php require_once('views/pages/userfeed.php'); ?>
       </div>
 
     </div>
@@ -54,11 +55,13 @@ $userData = $c->getUserInfo();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript" src="views/web/js/utils.js"></script>
 <script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
+<script type="text/javascript" src="views/web/js/header.js"></script>
 <script type="text/javascript" src="views/web/js/left-menu.js"></script>
 <script type="text/javascript" src="views/web/js/userfeed.js"></script>
 <script type="text/javascript" src="views/web/js/show_post.js"></script>
 <script type="text/javascript" src="views/web/js/new_post.js"></script>
 <script type="text/javascript" src="views/web/js/profile_settings.js"></script>
 <script type="text/javascript" src="views/web/js/category_posts.js"></script>
+<script type="text/javascript" src="views/web/js/all_categories.js"></script>
 
 </html>

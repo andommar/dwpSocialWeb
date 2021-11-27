@@ -1,7 +1,9 @@
 <?php
 
+
 $c = new CategoryController();
 $categories = $c->loadCategories();
+
 
 
 ?>
@@ -40,7 +42,6 @@ $categories = $c->loadCategories();
             <input type="file" name="imgfile" id="imgfile">
             <span class="msg error-message-dark my-2" id="image-error">
           </div>
-          <input type="hidden" name="userId" id="userId" value="<?php echo $_SESSION['userId'] ?>">
           <div id="error-msg"></div>
           <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm()"> Create</button>
 

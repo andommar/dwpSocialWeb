@@ -4,38 +4,28 @@ $(document).ready(function() {
     sendPostId = function(id){
         loadContent('show_post',id);
     }
-    // we take the user Id for the first time that the page will be loaded
-    var userId = $("#usr").val();
     
-     // We retrieve the data and refresh the posts
-    loadPosts = function(value,userId){ 
+    // We retrieve the data and refresh the posts
+    loadPosts = function(value){ 
     
         var userfeedFilter = value;
         $.ajax({
             url: "controller/ViewsController.php",
             method: "POST",
-            data: { option:"userfeed", userfeedFilter: userfeedFilter, userId:userId }
+            data: { option:"userfeed", userfeedFilter: userfeedFilter}
         })
         .done(function(data) {
             var filteredPosts = $.parseJSON(data);
-            $.ajax({
-                url: "controller/PageController.php",
-                method: "POST",
-                data: { pageName:'posts_filtered', data:filteredPosts },
-                success: function (data) {
-                  $('#filtered-posts').html(data);
-                  // We load the rates in each post
-                  getUserPostsRate(userId);
-                },
-              });
+            loadContent('userfeed', filteredPosts);
+            //We load the rates in each post
+            getUserPostsRate();
         });
     };
-
-    getUserPostsRate = function(userId){ 
+    getUserPostsRate = function(){ 
         $.ajax({
             url: "controller/ViewsController.php",
             method: "POST",
-            data: { option:"user_votes", userId:userId}
+            data: { option:"user_votes"}
         })
         .done(function(data) {
             fillVotesWhenLoadedPost($.parseJSON(data));
@@ -58,17 +48,17 @@ $(document).ready(function() {
        $("#"+postId+" .total_downvotes").html(totalVotes[0]['down_votes']);
     };
 
-    // First thing that will be loaded. We send the user Id and the default query type that we'll execute
-    loadPosts('latest',userId);
+    // First thing that will be loaded. We send the default filter for the query that retrieves the userfeed posts
+    loadPosts('latest');
     
 
     // When user clicks on a post voting icon
-    ratePost = function(userId, postId, isPositive){ 
+    ratePost = function(postId, isPositive){ 
         if(isPositive || !isPositive){
             $.ajax({
                 url: "controller/ViewsController.php",
                 method: "POST",
-                data: { option:"rate_post", userId:userId, postId:postId, isPositive:isPositive }
+                data: { option:"rate_post", postId:postId, isPositive:isPositive }
             })
             .done(function(data) {
                 var rate = data;

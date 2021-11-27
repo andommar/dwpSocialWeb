@@ -18,7 +18,10 @@ class UserLogin
         $result = $db->selectQueryBind($sql, $user);
         // User exists
         if (count($result) == 1) {
-            if ($result[0]['password'] == $pass) {
+            // Hashed password comparison
+            // We compare the input pass to one found on the database (hashed) 
+            if (password_verify($pass, $result[0]['password'])) {
+                // if ($result[0]['password'] == $pass) {
                 $_SESSION['userId'] = $result[0]['user_id'];
                 $_SESSION['username'] = $result[0]['username'];
                 $_SESSION['avatar'] = $result[0]['avatar'];
@@ -29,7 +32,7 @@ class UserLogin
             // User doesn't exist
         } else {
             $this->message["id"] = "general";
-            $this->message["text"] = "No such Username in the database. Please make sure your caps lock key is off and try again.";
+            $this->message["text"] = "No such username in the database. Please make sure your caps lock key is off and try again.";
         }
 
         return $this->message;
