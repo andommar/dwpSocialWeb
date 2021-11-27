@@ -1,5 +1,9 @@
 # dwpSocialWeb
 
+## Database
+
+- ON DELETE CASCADE. Check if in one.com works. Only works in some engines e.g. InnoDB https://www.mysqltutorial.org/mysql-on-delete-cascade/
+
 ## Project Structure
 
 - Index (home) imports 3 views: header, leftmenu and userfeed
@@ -40,6 +44,7 @@
 - Voting
 - Validations and errors (delete viewcontroller)
 - Prevent re submit (just once)
+- Redirector timer e.g. header( "refresh:5;url=wherever.php" );
 
 ## Issues
 
