@@ -19,9 +19,10 @@ CREATE TABLE `user` (
   avatar VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
+  banned BOOLEAN DEFAULT FALSE,
   `rank` VARCHAR (255),
   role_name VARCHAR (100) NOT NULL,
-  FOREIGN KEY (role_name) REFERENCES `role` (role_name)
+  FOREIGN KEY (role_name) REFERENCES `role` (role_name) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `category` (
@@ -35,8 +36,8 @@ CREATE TABLE `user_category` (
   `user_id` INT NOT NULL,
   category_name VARCHAR (100) NOT NULL,
   CONSTRAINT PK_UserCategory PRIMARY KEY (`user_id`,category_name),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  FOREIGN KEY (category_name) REFERENCES category (category_name)
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (category_name) REFERENCES category (category_name) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `post` (
@@ -50,8 +51,8 @@ CREATE TABLE `post` (
   `description` TEXT,
   `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   `total_comments` INT NOT NULL DEFAULT 0,
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  FOREIGN KEY (category_name) REFERENCES category (category_name)
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (category_name) REFERENCES category (category_name) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `user_votes_post`(
@@ -59,16 +60,16 @@ CREATE TABLE `user_votes_post`(
   post_id INT NOT NULL,
   is_positive BOOLEAN NOT NULL,
   CONSTRAINT PK_UserVotesPost PRIMARY KEY (`user_id`,post_id),
-  FOREIGN KEY (post_id) REFERENCES post (post_id),
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE,
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `post_tag` (
   post_id INT NOT NULL,
   tag_name VARCHAR (100) NOT NULL,
   CONSTRAINT PK_PostTag PRIMARY KEY (post_id,tag_name),
-  FOREIGN KEY (post_id) REFERENCES post (post_id),
-  FOREIGN KEY (tag_name) REFERENCES tag (tag_name)
+  FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE,
+  FOREIGN KEY (tag_name) REFERENCES tag (tag_name) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `media` (
@@ -76,7 +77,7 @@ CREATE TABLE `media` (
   comment_id INT,
   post_id INT,
   `url` VARCHAR(255) NOT NULL,
-  FOREIGN KEY (post_id) REFERENCES post (post_id)
+  FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 CREATE TABLE `comment` (
@@ -88,9 +89,9 @@ CREATE TABLE `comment` (
   up_votes INT DEFAULT 0,
   down_votes INT DEFAULT 0,
   `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
   -- FOREIGN KEY (media_id) REFERENCES media (media_id),
-  FOREIGN KEY (post_id) REFERENCES post (post_id)
+  FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 ALTER TABLE `media` ADD FOREIGN KEY (comment_id) REFERENCES `comment` (comment_id);
@@ -102,19 +103,19 @@ CREATE TABLE user_message(
   receiver_id INT NOT NULL,
   `description` TEXT NOT NULL,
   `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  FOREIGN KEY (sender_id) REFERENCES `user` (`user_id`),
-  FOREIGN KEY (receiver_id) REFERENCES `user` (`user_id`),
-  FOREIGN KEY (media_id) REFERENCES media (media_id)
+  FOREIGN KEY (sender_id) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (receiver_id) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (media_id) REFERENCES media (media_id) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
 
 /* Data insertion */
 
 /* Role */
-INSERT INTO `role` (role_name) VALUES ('guest');
-INSERT INTO `role` (role_name) VALUES ('registeredUser');
-INSERT INTO `role` (role_name) VALUES ('moderator');
-INSERT INTO `role` (role_name) VALUES ('admin') ;
+INSERT INTO `role` (role_name) VALUES ('Guest');
+INSERT INTO `role` (role_name) VALUES ('User');
+INSERT INTO `role` (role_name) VALUES ('Moderator');
+INSERT INTO `role` (role_name) VALUES ('Admin') ;
 
 /* Tag */
 INSERT INTO `tag` (tag_name) VALUES ('Cristiano Ronaldo');
@@ -168,34 +169,36 @@ VALUES ('Tech', null, null, 'fas fa-mobile-alt');
 INSERT INTO `category` (category_name, `description`, rules, `icon`) 
 VALUES ('Books', null, null, 'fas fa-book-open');
 
-/* User (13 users) */
+/* User (14 users) */
 
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
-VALUES (null, 'monke1', 'avatar_1.png', 'monke1', 'monke1@gmail.com', 'Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
-VALUES (null, 'monke2', 'avatar_2.png', 'monke2', 'monke2@gmail.com', 'Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name)  
-VALUES (null, 'monke3', 'avatar_3.png', 'monke3', 'monke3@gmail.com', 'Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'osijmons0','avatar_1.png', 'Rqi1deY', 'schippendale0@so-net.ne.jp','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'jjeannesson1', 'avatar_2.png','csu4Ztv', 'radrien1@springer.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'cgrubey2', 'avatar_3.png', 'PnutLllv4', 'gmacaree2@icq.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'tcaulwell3', 'avatar_4.png', 'eHfGam9BH3Ka', 'anott3@stumbleupon.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'tscantlebury4', 'avatar_5.png', 'fdPDyBTe', 'sbroxis4@jiathis.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'crigbye5', 'avatar_6.png', 'pd5nhIa99', 'sdalwood5@omniture.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'jtruran6', 'avatar_7.png', 'LwA6HH3', 'agourley6@wunderground.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'vbullimore7', 'avatar_8.png', '0tgBclGS', 'cwhaymand7@scientificamerican.com','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'tmatkin8', 'avatar_4.png','M2nGgFiAu', 'nellum8@tiny.cc','Beginner', 'registeredUser');
-INSERT INTO `user` (`user_id`, username, avatar, `password`, email, `rank`, role_name) 
-values (null, 'wbeany9', 'avatar_6.png', 'DslPJgeHR', 'korrick9@statcounter.com','Beginner', 'registeredUser');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name)  
+VALUES (null, 'monke1', 'avatar_1.png', 'monke1', 'monke1@gmail.com', FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name)  
+VALUES (null, 'monke2', 'avatar_2.png', 'monke2', 'monke2@gmail.com', FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name)  
+VALUES (null, 'monke3', 'avatar_3.png', 'monke3', 'monke3@gmail.com', FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'osijmons0','avatar_1.png', 'Rqi1deY', 'schippendale0@so-net.ne.jp',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'jjeannesson1', 'avatar_2.png','csu4Ztv', 'radrien1@springer.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'cgrubey2', 'avatar_3.png', 'PnutLllv4', 'gmacaree2@icq.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'tcaulwell3', 'avatar_4.png', 'eHfGam9BH3Ka', 'anott3@stumbleupon.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'tscantlebury4', 'avatar_5.png', 'fdPDyBTe', 'sbroxis4@jiathis.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'crigbye5', 'avatar_6.png', 'pd5nhIa99', 'sdalwood5@omniture.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'jtruran6', 'avatar_7.png', 'LwA6HH3', 'agourley6@wunderground.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'vbullimore7', 'avatar_8.png', '0tgBclGS', 'cwhaymand7@scientificamerican.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'tmatkin8', 'avatar_4.png','M2nGgFiAu', 'nellum8@tiny.cc',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'wbeany9', 'avatar_6.png', 'DslPJgeHR', 'korrick9@statcounter.com',FALSE, 'Beginner', 'User');
+INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
+values (null, 'socially', 'avatar_6.png', 'social1', 'admin@socially.com',FALSE, 'Beginner', 'Admin');
 
 
 /* Posts */
@@ -337,6 +340,26 @@ INSERT INTO `user_category` (`user_id`, category_name) VALUES (12, 'Photography'
 -- User 13
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (13, 'Art');
 INSERT INTO `user_category` (`user_id`, category_name) VALUES (13, 'Animals');
+
+-- User 14 (admin)
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Animals');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Art');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Books');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Films');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Finance');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Fitness');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Food');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Gaming');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Health');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Humor');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Music');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'News');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Photography');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Science');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Shows');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Sports');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Tech');
+INSERT INTO `user_category` (`user_id`, category_name) VALUES (14, 'Videos');
 
 -- By the moment we'll set the same description to all the categories.
 UPDATE `category` SET `description` = 'Nullam ut porttitor lorem, sed maximus dolor. Vestibulum eget enim diam. Donec ut luctus leo, vitae pellentesque nibh.';
