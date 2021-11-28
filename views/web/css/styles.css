@@ -1,3 +1,5 @@
+/* General style, Header, Side menus and Main content (posts) */
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -9,7 +11,8 @@ body {
   overflow-x: hidden;
 }
 
-/* NAVBAR */
+/* ------------ HEADER ------------ */
+/* Top Navbar */
 .navbar {
   background: #242526;
   width: 100vw;
@@ -19,11 +22,6 @@ body {
   box-shadow: 0 2px 2px -2px rgba(255, 255, 255, 0.4);
 }
 
-.navbar_center {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
 .navbar_right {
   text-align: right;
   justify-content: flex-end;
@@ -38,95 +36,14 @@ body {
   cursor: pointer;
 }
 
-.input-icons i {
-  position: absolute;
-}
-
-.icon {
-  padding: 13px 10px;
-  color: #a8abaf;
-  min-width: 20px;
-  text-align: center;
-  margin-right: 20px;
-}
-
-.input-field {
-  width: 56%;
-  background: #3a3b3c;
-  border: none;
-  color: #a8abaf;
-}
-
-.input-field:focus {
-  outline: none;
-}
-
-.active_icon {
-  border-bottom: 3px solid #b64ffb;
-}
-
-.active_icon i {
-  color: #b64ffb; /*!important*/
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #b8bbbf;
-  font-size: 23px;
-}
-
-.navbar_profile {
-  height: 40px;
-  margin-right: 20px;
-  cursor: pointer;
-}
-
-.navbar_profile:hover {
-  cursor: pointer;
-  background: #3a3b3c;
-  padding: 0 7px;
-  transition: 0.3s;
-  transition-timing-function: ease-out;
-  border-radius: 2px;
-}
-
-.navbar_profile img {
-  width: 30px;
-  height: 30px;
-  margin-right: 5px;
-}
-
-.navbar_profile span {
-  color: #e7e9ed;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.navbar_links a {
-  font-size: 16px;
-}
-.navbar_links i {
-  margin-right: 5px;
-  background: #404041;
-  padding: 12px;
-  border-radius: 100%;
-  color: #e7e9ed;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 16px;
-}
-
-.navbar_links i:hover {
-  background: #4e4f50;
-}
-
-/* Header Collapse Dropdown */
+/* Collapse Dropdown */
 #header-dropdown ul {
   background-color: #242526;
   box-shadow: -7px 9px 20px 8px #00000045;
 }
 #header-dropdown ul a {
   font-size: 15px;
+  color: white;
 }
 #header-dropdown ul a:hover,
 #header-dropdown ul a:active,
@@ -153,10 +70,67 @@ body {
   transition: 0.5s;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Search bar */
+#search-bar .input-field {
+  width: 56%;
+  /* background: #3a3b3c; */
+  border: none;
+  /* color: #a8abaf; */
+}
+
+#search-bar .input-field:focus {
+  outline: none;
+}
+/* User profile name */
+.navbar_profile {
+  height: 40px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.navbar_profile:hover {
+  cursor: pointer;
+  background: #3a3b3c;
+  padding: 0 7px;
+  transition: 0.3s;
+  transition-timing-function: ease-out;
+  border-radius: 2px;
+}
+
+.navbar_profile img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.navbar_profile span {
+  color: #e7e9ed;
+  font-size: 15px;
+  font-weight: 500;
+}
+/* Top right buttons (new post and logout)*/
+.navbar_links a {
+  font-size: 16px;
+}
+.navbar_links i {
+  margin-right: 5px;
+  background: #404041;
+  padding: 12px;
+  border-radius: 100%;
+  color: #e7e9ed;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.navbar_links i:hover {
+  background: #4e4f50;
+}
+
+/* ------------ LEFT MENU (Categories) and RIGHT MENU (Category info in Show Post) ------------ */
+
+.category_names span {
+  cursor: pointer;
 }
 
 .content_left,
@@ -202,10 +176,10 @@ body {
 
 .content_left ul li i,
 .content_right ul li i {
-  background: #2b2b2b; /*background: #404041;*/
+  background: #2b2b2b;
   padding: 10px;
   border-radius: 100%;
-  color: #b64ffb; /* color: #e7e9ed; */
+  color: #b64ffb;
   cursor: pointer;
   transition: 0.3s;
   font-size: 16px;
@@ -248,98 +222,21 @@ body {
   background: #454545;
 }
 
-/* Center content */
+/* --------------------  CENTRAL CONTENT  (userfeed, category_posts, show_post) ---------------------  */
 
-.media_container {
-  padding: 5px 92px;
+/* Dropdown filter on Posts */
+#userfeed_filters_section {
+  margin: 2em 27em;
 }
-
-.share {
+#userfeed_filters_section #userfeed_filters {
   background-color: #242526;
-  border-radius: 10px;
-  padding: 15px;
+  color: white;
+  border: 1px solid #2a2b2d;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-.share_upside {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.share_upside img {
-  margin-right: 7px;
-  width: 38px;
-}
-
-.share_upside input {
-  flex: 1;
-  padding: 12px 0 12px 12px;
-  background: #3a3b3c;
-  border: none;
-  border-radius: 25px;
-  font-size: 1em;
-  color: #a8abaf;
-}
-
-.share_upside input:focus {
-  outline: none;
-}
-
-.media_container hr {
-  border-style: solid;
-  border-color: rga(255, 255, 255, 0.08);
-  border-width: 1px;
-}
-
-.share_downside {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 15px;
-  height: 40px;
-}
-
-.share_downside_link {
-  width: 33.3%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.share_downside_link:hover {
-  background: #3a3b3c;
-  border-radius: 10px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.share_downside_link i {
-  font-size: 25px;
-  margin-right: 5px;
-}
-
-.share_downside_link span {
-  color: #b7babe;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.live-video-icon {
-  color: #f23e5c;
-}
-
-.photo-video-icon {
-  color: #58c472;
-}
-
-.feeling-icon {
-  color: #f8c03e;
-}
-
-/* Post */
-
+/* Posts */
 .post {
   background-color: #242526;
   border-radius: 10px;
@@ -412,20 +309,15 @@ body {
   font-size: 15px;
 }
 
-/* Post date area */
 .post-date-area {
   text-align: right;
   padding: 10px 15px;
   color: #989898;
   font-size: smaller;
 }
-/* votes */
-.purple_color {
-  color: #b64ffb;
-}
-.red_color {
-  color: #f03a17;
-}
+
+/* Post Votes */
+
 .votes_comments_area {
   display: flex;
   justify-content: space-between;
@@ -433,21 +325,33 @@ body {
   padding: 10px 15px;
 }
 
+.votes_comments_area .purple_color {
+  color: #b64ffb;
+}
+.votes_comments_area .red_color {
+  color: #f03a17;
+}
+
 .votes_comments_area .icons {
   display: flex;
   align-items: center;
 }
-/* Vote icons */
+
 .votes_comments_area .icons img {
   cursor: pointer;
 }
 
 .votes_comments_area .icons .votes_number {
-  /* color: #b7babe; */
   margin-left: 3px;
   font-size: 11px;
   font-weight: bold;
   margin-right: 8px;
+}
+
+/* Vote icons */
+
+.vote_icon_size {
+  width: 20px;
 }
 .upvote_default {
   content: url("https://i.imgur.com/5FxIKEq.png");
@@ -468,11 +372,6 @@ body {
 #filtered-posts .comment_counts:hover {
   color: #959595;
 }
-
-.divider {
-  padding: 0 15px 0 15px;
-}
-
 .custom-link,
 .custom-link-text {
   cursor: pointer;
@@ -492,18 +391,9 @@ a,
 a:link {
   color: inherit;
 }
-#userfeed_filters_section {
-  margin: 2em 27em;
-}
-#userfeed_filters_section #userfeed_filters {
-  background-color: #242526;
-  color: white;
-  border: 1px solid #2a2b2d;
-  padding: 7px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-/* Header Scroll button */
+
+/* Scroll to top Button */
+
 #scrollTop {
   position: absolute;
   top: 648px;
@@ -519,26 +409,22 @@ a:link {
   color: hsl(0deg 0% 30%);
   box-shadow: 2px 2px 5px 0px #0000002b;
 }
-.vote_icon_size {
-  width: 20px;
-}
-.category_names span {
-  cursor: pointer;
-}
-/* Small devices */
+/* --------------------------  Media Queries  ------------------------ */
+
+/* Left and right menu behavior when resizing viewport */
 @media (min-width: 577px) {
   .content_right div,
   .content_left ul {
     position: fixed;
   }
 }
-
 @media (max-width: 576px) {
   .content_right ul,
   .content_left ul {
     position: unset;
   }
 }
+/* Posts behavior when resizing viewport */
 @media (max-width: 1300px) {
   .post {
     margin: 2em 0em;
@@ -548,7 +434,6 @@ a:link {
     margin-right: 16em;
   }
 }
-
 @media (max-width: 1160px) {
   .post {
     margin: 2em 0em;

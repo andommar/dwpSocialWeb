@@ -24,7 +24,7 @@ class CategoryModel
     {
         try {
             $db = new Dbconn();
-            $sql = 'SELECT * FROM category';
+            $sql = 'SELECT * FROM category ORDER BY category_name';
             $result = $db->selectquery($sql);
             return $result;
         } catch (\PDOException $ex) {

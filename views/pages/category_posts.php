@@ -5,7 +5,7 @@ if (isset($_SESSION['categoryPosts_dropdown'])) $categoryPosts_dropdown = $_SESS
 
 if (isset($data)) {
     $posts = $data[0];
-    $votes = $data[1];
+    if (isset($data[1])) $votes = $data[1]; // There's a possibility that there are no votes in posts 
     $upvote_class = "upvote_default";
     $downvote_class = "downvote_default";
 }
@@ -60,7 +60,7 @@ $categories = $c->loadCategories();
                             <?php if ($post['media_url']) { ?>
                                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
                             <?php } ?>
-                            <?php if ($post['description']) { ?>
+                            <?php if (isset($post['description'])) { ?>
                                 <div class="post_description_title">
 
                                     <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
@@ -75,10 +75,10 @@ $categories = $c->loadCategories();
                         <div class="votes_comments_area">
                             <div class="icons" id="<?php echo $post['post_id'] ?>">
                                 <?php
-                                if (isset($votes[$post['post_id']])) {
+                                if (isset($votes) && isset($votes[$post['post_id']])) {
                                     if ($votes[$post['post_id']] == "0") {
                                         $downvote_class = 'downvote_filled';
-                                    } else if ($votes[$post['post_id']] == "1") {
+                                    } else if (isset($votes) && $votes[$post['post_id']] == "1") {
                                         $upvote_class = 'upvote_filled';
                                     }
                                 }
