@@ -13,6 +13,13 @@ class AdminController{
         }
     }
 
+
+    // Dashboard functions
+    public function adminPostCategoriesChartData(){
+        $a = new AdminDaoModel;
+        $result = $a->adminPostCategoriesChartData();
+        return $result;
+    }
     // User functions
     public function getUsersData() {
         $a = new AdminDaoModel;

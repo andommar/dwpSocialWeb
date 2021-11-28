@@ -62,6 +62,11 @@ class AdminDaoModel extends DbConn {
         $result = $this->executeQueryBind($sql, $commentId);
         return $result;
     }
+    function adminPostCategoriesChartData (){
+        $sql = 'SELECT count(*) as total_posts, category_name FROM `post` GROUP by category_name';
+        $result = $this->selectQuery($sql);
+        return $result;
+    }
 }
 
 ?>

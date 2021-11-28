@@ -24,10 +24,20 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
     <title>Dashboard - SB Admin</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark p-0">
-      <a href="../../index.php" class="navbar-brand">Socially</a>
+  <nav class="navbar navbar-dark d-flex bg-dark p-0">
+        <div class="col-md-2">
+            <a href="../../index.php" class="navbar-brand">Socially</a>
+        </div>
+        <div class="admin_navbar_links px-3">
+            <div class="admin_navbar_profile d-flex align-items-center" id="user_profile">
+                <i class="fas fa-user"></i>
+                <span><?php echo $_SESSION['username'] ?></span>
+                <a id="logout" href="../home/login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
     </nav>
 
+    <!-- Sidebar -->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-2 d-none d-md-block bg-dark sidebar">
@@ -35,13 +45,13 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             <div class="sidenav-menu" id="adminSidenav">
               <nav class="d-flex flex-column" id="adminSidenav_bar">
                 <div class="sidenav-menu-heading">CORE</div>
-                <a href="admin.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                <a class="sidebar_link" href="admin.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
                 <div class="sidenav-menu-heading">MANAGEMENT</div>
-                <a href="posts.php"><i class="fas fa-comment-dots"></i>Posts</a>
-                <a href="users.php"><i class="fas fa-users"></i>Users</a>
-                <a href="comments.php"><i class="fas fa-comments"></i>Comments</a>
+                <a class="sidebar_link" href="posts.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
+                <a class="sidebar_link" href="users.php"><i class="fas fa-users fa-fw"></i>Users</a>
+                <a class="sidebar_link" href="comments.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
                 <div class="sidenav-menu-heading">STATS</div>
-                <a href="charts.php"><i class="fas fa-tachometer-alt"></i>Charts</a>
+                <a href="charts.php"><i class="fas fa-tachometer-alt fa-fw"></i>Charts</a>
               </nav>
             </div>
           </div>
@@ -66,13 +76,13 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                 <section id="totalStats">
                     <h4 class="text-muted">Stats</h4>
                     <div class="d-flex justify-content-around">
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <div class="card border-left border-primary shadow">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs weight-bold text-uppercase">
-                                                Users
+                                                Most up voted post
                                             </div>
                                             <div class="font-weight-bold text-uppercase">
                                                 <h5>53630</h5>
@@ -87,13 +97,13 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <div class="card border-left border-primary shadow">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs weight-bold text-uppercase">
-                                                Posts
+                                                Most down voted post
                                             </div>
                                             <div class="font-weight-bold text-uppercase">
                                                 <h5>53630</h5>
@@ -103,69 +113,6 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-paragraph fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card border-left border-primary shadow">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs weight-bold text-uppercase">
-                                                Comments
-                                            </div>
-                                            <div class="font-weight-bold text-uppercase">
-                                                <h5>53630</h5>
-                                            </div>
-                                            <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card border-left border-primary shadow">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs weight-bold text-uppercase">
-                                                Upvotes
-                                            </div>
-                                            <div class="font-weight-bold text-uppercase">
-                                                <h5>53630</h5>
-                                            </div>
-                                            <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
-                                        </div>
-                                        <div class="col-auto">
-                                        <i class="fas fa-arrow-up fa-2x"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="card border-left border-primary shadow">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs weight-bold text-uppercase">
-                                                Downvotes
-                                            </div>
-                                            <div class="font-weight-bold text-uppercase">
-                                                <h5>53630</h5>
-                                            </div>
-                                            <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
-                                        </div>
-                                        <div class="col-auto">
-                                        <i class="fas fa-arrow-down fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>

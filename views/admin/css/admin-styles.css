@@ -60,13 +60,24 @@ a:active {
 .sidebar-sticky a:hover {
   color: var(--bs-white);
 }
-.sidebar-sticky div,
-a {
+.sidebar-sticky div {
   padding: 10px 0 10px 5px;
   font-weight: 500;
 }
-.sidebar-sticky_bar i {
-  padding: 0 5px 0 5px;
+.sidebar-sticky a {
+  padding: 10px 0 10px 5px;
+}
+
+.sidebar_link{
+  padding-left: 2px;
+}
+
+
+.admin_navbar_profile {
+  color: var(--bs-white);
+}
+.admin_navbar_profile span, p, a {
+  padding: 0 2px;
 }
 /* Font weight */
 .weight-bold {
