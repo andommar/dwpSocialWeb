@@ -34,6 +34,9 @@ body {
   width: 37px;
   margin-right: 5px;
 }
+#logo-link {
+  cursor: pointer;
+}
 
 .input-icons i {
   position: absolute;

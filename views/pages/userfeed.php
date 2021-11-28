@@ -1,5 +1,11 @@
 <?php
 if (isset($_SESSION['userfeed_dropdown'])) $userfeed_dropdown = $_SESSION['userfeed_dropdown'];
+if (isset($data)) {
+  $posts = $data[0];
+  $votes = $data[1];
+  $upvote_class = "upvote_default";
+  $downvote_class = "downvote_default";
+}
 ?>
 <div class="row">
   <div class="col col-lg-12 col-xs-12">
@@ -16,7 +22,7 @@ if (isset($_SESSION['userfeed_dropdown'])) $userfeed_dropdown = $_SESSION['userf
     <div id="filtered-posts">
       <?php
       if (isset($data)) {
-        foreach ($data as $post) { ?>
+        foreach ($posts as $post) { ?>
           <div class="post">
             <div class="post_title">
               <img src="views/web/img/avatars/<?php echo $post['avatar'] ?>" alt="user" />
@@ -50,9 +56,18 @@ if (isset($_SESSION['userfeed_dropdown'])) $userfeed_dropdown = $_SESSION['userf
             </div>
             <div class="votes_comments_area">
               <div class="icons" id="<?php echo $post['post_id'] ?>">
-                <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,1)" />
+                <?php
+                if (isset($votes[$post['post_id']])) {
+                  if ($votes[$post['post_id']] == "0") {
+                    $downvote_class = 'downvote_filled';
+                  } else if ($votes[$post['post_id']] == "1") {
+                    $upvote_class = 'upvote_filled';
+                  }
+                }
+                ?>
+                <img class="img-fluid upvote_button vote_icon_size <?php echo $upvote_class; ?>" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,1)" />
                 <span class="votes_number purple_color total_upvotes"><?php echo $post['up_votes'] ?></span>
-                <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,0)" />
+                <img class="img-fluid downvote_button vote_icon_size <?php echo $downvote_class; ?>" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,0)" />
                 <span class="votes_number red_color total_downvotes"><?php echo $post['down_votes'] ?></span>
               </div>
               <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
@@ -67,6 +82,9 @@ if (isset($_SESSION['userfeed_dropdown'])) $userfeed_dropdown = $_SESSION['userf
               </div>
             </div>
           </div>
+          <?php // We reset the up/downvote icon values  
+          $upvote_class = "upvote_default";
+          $downvote_class = "downvote_default"; ?>
       <?php }
       } ?>
     </div>

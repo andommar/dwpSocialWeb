@@ -4,7 +4,7 @@ $(document).ready(function() {
     sendPostId = function(id){
         loadContent('show_post',id);
     }
-    
+
     // We retrieve the data and refresh the posts
     loadPosts = function(value){ 
     
@@ -17,40 +17,11 @@ $(document).ready(function() {
         .done(function(data) {
             var filteredPosts = $.parseJSON(data);
             loadContent('userfeed', filteredPosts);
-            //We load the rates in each post
-            getUserPostsRate();
         });
-    };
-    getUserPostsRate = function(){ 
-        $.ajax({
-            url: "controller/ViewsController.php",
-            method: "POST",
-            data: { option:"user_votes"}
-        })
-        .done(function(data) {
-            fillVotesWhenLoadedPost($.parseJSON(data));
-        });
-        
-    };
-    getPostTotalVotes = function(postId){
-        $.ajax({
-            url: "controller/ViewsController.php",
-            method: "POST",
-            data: { option:"post_votes", postId:postId}
-        })
-        .done(function(data) {
-            updatePostTotalVotes(postId, $.parseJSON(data));
-        });
-    };
-
-    updatePostTotalVotes = function(postId, totalVotes){
-       $("#"+postId+" .total_upvotes").html(totalVotes[0]['up_votes']);
-       $("#"+postId+" .total_downvotes").html(totalVotes[0]['down_votes']);
     };
 
     // First thing that will be loaded. We send the default filter for the query that retrieves the userfeed posts
     loadPosts('latest');
-    
 
     // When user clicks on a post voting icon
     ratePost = function(postId, isPositive){ 
@@ -68,18 +39,7 @@ $(document).ready(function() {
         }
         
     };
-    fillVotesWhenLoadedPost = function(ratedPosts){ 
-        for (let i = 0; i < ratedPosts.length; i++) {
-            // upvote
-            if(parseInt(ratedPosts[i]['is_positive'])){
-                $("#"+ratedPosts[i]['post_id']+" .upvote_button").removeClass( "upvote_default" ).addClass( "upvote_filled" );
-            }
-            //downvote
-            else{
-                $("#"+ratedPosts[i]['post_id']+" .downvote_button").removeClass( "downvote_default" ).addClass( "downvote_filled" );
-            }
-        }
-    };
+    
     // When the post is rated, this applies the css to the selected vote button 
     fillVoteWhenClicked = function(postId,rate){ 
         // unfill all votes
@@ -110,6 +70,22 @@ $(document).ready(function() {
             }
         }
     };
+    // Gets the post total votes
+    getPostTotalVotes = function(postId){
+        $.ajax({
+            url: "controller/ViewsController.php",
+            method: "POST",
+            data: { option:"post_votes", postId:postId}
+        })
+        .done(function(data) {
+            updatePostTotalVotes(postId, $.parseJSON(data));
+        });
+    };
 
+    // Updates the total votes in the post
+    updatePostTotalVotes = function(postId, totalVotes){
+        $("#"+postId+" .total_upvotes").html(totalVotes[0]['up_votes']);
+        $("#"+postId+" .total_downvotes").html(totalVotes[0]['down_votes']);
+     };
 
 });

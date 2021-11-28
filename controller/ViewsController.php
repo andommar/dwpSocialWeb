@@ -220,20 +220,40 @@ if (isset($_POST["option"])) {
         case "userfeed":
             $userId = $_SESSION['userId'];
             $filter = $_POST["userfeedFilter"];
+            $_SESSION['userfeed_dropdown'] = $filter;
             $p = new PostController();
             $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
-            $_SESSION['userfeed_dropdown'] = $filter;
-            echo json_encode($posts);
+
+            if (isset($posts) && $posts) {
+                // We retrieve user's votes on posts
+                $v = new VoteController();
+                $votes = $v->getUserRatedPosts($userId);
+                $votes = formatVotesArray($votes);
+                $posts_and_votes = array($posts, $votes);
+                echo json_encode($posts_and_votes);
+            } else {
+                echo json_encode($posts);
+            }
             break;
         case "specific_category":
             $_SESSION['category_name'] = $_POST['categoryName'];
             break;
         case "category_posts":
+            $userId = $_SESSION['userId'];
             $filter = $_POST["categoryPostsFilter"];
             $_SESSION['categoryPosts_dropdown'] = $filter;
             $p = new PostController();
             $posts = $p->loadCategoryPostsFiltered($_SESSION['category_name'], $filter);
-            echo json_encode($posts);
+            if (isset($posts) && $posts) {
+                // We retrieve user's votes on posts
+                $v = new VoteController();
+                $votes = $v->getUserRatedPosts($userId);
+                $votes = formatVotesArray($votes);
+                $posts_and_votes = array($posts, $votes);
+                echo json_encode($posts_and_votes);
+            } else {
+                echo json_encode($posts);
+            }
             break;
         case "rate_post":
             $userId = $_SESSION['userId'];
@@ -440,4 +460,15 @@ function validateSignUpFields($username, $email, $password, $password2)
         $isDataValid = true;
     }
     return $isDataValid;
+}
+// We create an associative array (key=>value) for the user votes in each post
+// $votes[post_id] = is_positive
+// $votes["13"] = "0"/"1"
+function formatVotesArray($data)
+{
+    $votes = array();
+    foreach ($data as $vote) {
+        $votes[$vote['post_id']] = $vote['is_positive'];
+    }
+    return  $votes;
 }
