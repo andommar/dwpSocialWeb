@@ -1,3 +1,11 @@
+<?php
+require_once ('../../bootstrapping.php');
+$a = new AdminController();
+if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
+    $redirect = new Redirector("../home/login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +21,7 @@
   <body>
       <!-- Top navbar -->
     <nav class="navbar navbar-dark sticky-top bg-dark p-0">
-      <a href="#" class="navbar-brand">Socially</a>
+      <a href="../../index.php" class="navbar-brand">Socially</a>
     </nav>
 
     <!-- Sidebar -->
