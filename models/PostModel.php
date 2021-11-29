@@ -91,12 +91,19 @@ class PostModel
   {
     $db = new DbConn();
     $date = date('Y-m-d H:i:s');
-    $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`)
+    if (!$description && $mediaUrl) {
+      $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`)
+      VALUES ( ?, ?, ?, ?, null, ?)';
+      $arr = [$userId, $title, $categoryName, $mediaUrl, $date];
+    } else if ($description && !$mediaUrl) {
+      $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`)
+      VALUES ( ?, ?, ?, null, ?, ?)';
+      $arr = [$userId, $title, $categoryName, $description, $date];
+    } else {
+      $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`)
             VALUES ( ?, ?, ?, ?, ?, ?)';
-    // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
-    // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
-    $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date];
-
+      $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date];
+    }
     $result = $db->executeQueryBindArr($sql, $arr);
     return $result;
   }

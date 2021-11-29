@@ -19,13 +19,12 @@ require_once('../../bootstrapping.php');
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Stylesheets -->
   <link rel="stylesheet" href="../web/css/login-signup.css" />
-  <link rel="stylesheet" href="../web/css/messages-styles.css" />
+  <link rel="stylesheet" href="../web/css/utilities.css" />
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="signup">
-  <!-- with container fluid type the column takes 100% of the height -->
   <div class="container-fluid d-flex flex-column">
     <div class="row min-vh-100">
       <div id="signup-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap">
@@ -37,7 +36,7 @@ require_once('../../bootstrapping.php');
         <form action="" method="post">
           <!-- USERNAME -->
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Username<span class="required_field">*</span></label>
             <!-- required="" aria-required="true" -->
             <input type="text" name="username" id="username" autocomplete="off" autofocus="autofocus" onfocus="this.select()" />
           </div>
@@ -45,14 +44,14 @@ require_once('../../bootstrapping.php');
           <span class="msg error-message my-2" id="username-error"></span>
           <!-- EMAIL -->
           <div class="form-group">
-            <label for="email">Email</label>
+            <label for="email">Email<span class="required_field">*</span></label>
             <input type="text" name="email" id="email" autocomplete="off" />
           </div>
           <!-- EMAIL Error -->
           <span class="msg error-message my-2" id="email-error"></span>
           <!-- PASSWORD -->
           <div class="form-group" id="password-parent">
-            <label for="password">Password</label>
+            <label for="password">Password<span class="required_field">*</span></label>
             <i id="password-show" class="fas fa-eye-slash"></i>
             <input type="password" name="password" id="password" autocomplete="off" />
           </div>
@@ -60,7 +59,7 @@ require_once('../../bootstrapping.php');
           <span class="msg error-message my-2" id="password-error"></span>
           <!-- PASSWORD 2 -->
           <div class="form-group" id="password2-parent">
-            <label for="password2">Confirm Password</label>
+            <label for="password2">Confirm Password<span class="required_field">*</span></label>
             <i id="password2-show" class="fas fa-eye-slash"></i>
             <input type="password" name="password2" id="password2" autocomplete="off" />
           </div>
@@ -69,7 +68,7 @@ require_once('../../bootstrapping.php');
           <!-- TERMS OF USE -->
           <div class="terms-margin">
             <input type="checkbox" id="termsofuse" name="termsofuse" class="custom-checkbox">
-            <label for="termsofuse"> I accept the Terms of Use.</label>
+            <label for="termsofuse"> I accept the Terms of Use.<span class="required_field">*</span></label>
           </div>
           <!-- TERMS OF USE Error -->
           <span class="msg error-message my-2" id="termsofuse-error"></span>

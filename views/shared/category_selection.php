@@ -26,7 +26,7 @@ $categories = $c->loadCategories();
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../web/css/login-signup.css" />
     <link rel="stylesheet" href="../web/css/category_selection.css" />
-    <link rel="stylesheet" href="../web/css/messages-styles.css" />
+    <link rel="stylesheet" href="../web/css/utilities.css" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>

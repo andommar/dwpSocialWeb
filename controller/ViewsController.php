@@ -15,10 +15,6 @@ define('TB', 1099511627776);
 
 $mediaPath = "../views/web/img/media/";
 $avatarPath = "../views/web/img/avatars/";
-$msg = array(
-    "id" => "",
-    "text" => "",
-);
 
 
 //This handles the incoming data from AJAX - Post requests 
@@ -29,41 +25,40 @@ if (isset($_POST["option"])) {
     switch ($option) {
 
         case "login":
-            global $msg;
             $username = $_POST["username"];
             $password = $_POST["password"];
-
+            $c = new LoginController();
             // Data validation 
-            if (validateUsername($username) && validatePassword($password)) {
-                $c = new LoginController();
-                $msg = $c->loginUser($username, $password);
-                if ($msg) echo json_encode($msg); // We send the validation error message
+            if ($c->validateUsername($username) && $c->validatePassword($password)) {
+                $result = $c->loginUser($username, $password);
+                if ($result) echo json_encode($result); // We send the validation error message
             } else {
-                echo json_encode($msg); // We send the validation error message
+                echo json_encode($c->msg); // We send the validation error message
             }
             break;
         case "signup":
-            global $msg;
             global $newUserId;
             $username = $_POST['username'];
             $email = $_POST['email'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
             $avatar = generate_rnd_avatar();
+            $c = new UserController();
             // Data validation 
-            if (validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
+            if ($c->validateSignUpFields($username, $email, $password, $password2)) {   // Validation OK
                 // Password hashing
                 $iterations = ['cost' => 12];
                 $hashed_password = password_hash($password, PASSWORD_BCRYPT, $iterations);
-
-                $c = new UserController();
                 $result = $c->registerUser($username, $email, $hashed_password, $avatar);
                 if (is_string($result)) {
                     $newUserId = $result;
                     $_SESSION['userId'] = $newUserId;
                 }
+                echo json_encode($result);
+            } else {
+                echo json_encode($c->msg);
             }
-            echo json_encode($result);
+
             break;
             // Validations cases
         case "new_post_form":
@@ -71,14 +66,33 @@ if (isset($_POST["option"])) {
             $errors = [];
             $data = [];
 
+            // Title
             if (empty($_POST["title"])) {
-                $errors['title'] = 'New post must have a title';
+                $errors['title'] = 'Title cannot be empty';
+            } else if (strlen($_POST["title"]) < 4) {
+                $errors['title'] = 'Title must have at least 4 characters';
             }
-            if ($_POST["category"] == 'Category') {
-                $errors['category'] = 'Select the category of your post';
+            // Category
+            else if ($_POST["category"] == 'Category') {
+                $errors['category'] = 'Category cannot be empty';
             }
-            if (empty($_POST["description"])) {
-                $errors['description'] = 'Select the description of your post';
+            // Image
+            else if (empty($_FILES['imgfile']['name']) && empty($_POST["description"])) {
+                $errors['general'] = 'A post must have a description or an image.';
+            }
+            // Description
+            // mb_strlen($string, '8bit');
+            // strlen($_POST["description"]) < 4
+            else if (!empty($_POST["description"])) {
+                if (strlen($_POST["description"]) < 4) {
+                    $errors['description'] = 'Description must have at least 4 characters';
+                } else if (mb_strlen($_POST["description"], '8bit') > 15000) {
+                    $errors['description'] = 'Description is too long';
+                }
+            }
+
+            if (empty($_FILES['imgfile']['name'])) {
+                $imgFileName = "";
             }
 
             // If inputs arent empty and user has chosen a category
@@ -87,30 +101,36 @@ if (isset($_POST["option"])) {
                 $title = $_POST["title"];
                 $category = $_POST["category"];
                 $description = $_POST["description"];
-                $imgFile = $_FILES['imgfile'];
-                $imgFileName = strtolower($_FILES['imgfile']['name']);
-                $imgFiltype = $imgFile['type'];
-                // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
-                // $imgFileName = $imgFileName . '.' . $imgFileExtension;
 
-                // Image upload validation. Verify image file extension. 
-                if (($imgFiltype == "image/jpeg" ||
-                    $imgFiltype == "image/jpg"   ||
-                    $imgFiltype == "image/png"   ||
-                    $imgFiltype == "image/gif")) {
-                    //and size meet the criteria 
-                    if ($imgFile['size'] > 2 * MB) {
-                        $error['image'] = "Max image size is 5MB";
+                if (!empty($_FILES['imgfile']['name'])) { // The post has an image
+                    $imgFile = $_FILES['imgfile'];
+                    $imgFileName = strtolower($_FILES['imgfile']['name']);
+                    $imgFiltype = $imgFile['type'];
+                    // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
+                    // $imgFileName = $imgFileName . '.' . $imgFileExtension;
+
+                    // Image upload validation. Verify image file extension. 
+                    if (($imgFiltype == "image/jpeg" ||
+                        $imgFiltype == "image/jpg"   ||
+                        $imgFiltype == "image/png"   ||
+                        $imgFiltype == "image/gif")) {
+                        //and size meet the criteria 
+                        if ($imgFile['size'] > 2 * MB) {
+                            $error['image'] = "Max image size is 5MB";
+                        } else {
+                            // If there's no errors we add a unique string as a prefix to the file name
+                            $prefix = uniqid();
+                            $imgFileName = $prefix . '_' . $imgFileName;
+                            move_uploaded_file($imgFile['tmp_name'], $mediaPath . $imgFileName);
+                            $p = new PostController();
+                            $p->newPost($userid, $title, $category, $imgFileName, $description);
+                        }
                     } else {
-                        // If there's no errors we add a unique string as a prefix to the file name
-                        $prefix = uniqid();
-                        $imgFileName = $prefix . '_' . $imgFileName;
-                        move_uploaded_file($imgFile['tmp_name'], $mediaPath . $imgFileName);
-                        $p = new PostController();
-                        $p->newPost($userid, $title, $category, $imgFileName, $description);
+                        $error['image'] = "Only jpeg, jpg, png or gif images allowed";
                     }
-                } else {
-                    $error['image'] = "Only jpeg, jpg, png or gif images allowed";
+                } else { // The post has no image
+                    $p = new PostController();
+                    $p->newPost($userid, $title, $category, $imgFileName, $description);
                 }
             }
 
@@ -220,20 +240,40 @@ if (isset($_POST["option"])) {
         case "userfeed":
             $userId = $_SESSION['userId'];
             $filter = $_POST["userfeedFilter"];
+            $_SESSION['userfeed_dropdown'] = $filter;
             $p = new PostController();
             $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
-            $_SESSION['userfeed_dropdown'] = $filter;
-            echo json_encode($posts);
+
+            if (isset($posts) && $posts) {
+                // We retrieve user's votes on posts
+                $v = new VoteController();
+                $votes = $v->getUserRatedPosts($userId);
+                $votes = formatVotesArray($votes);
+                $posts_and_votes = array($posts, $votes);
+                echo json_encode($posts_and_votes);
+            } else {
+                echo json_encode($posts);
+            }
             break;
         case "specific_category":
             $_SESSION['category_name'] = $_POST['categoryName'];
             break;
         case "category_posts":
+            $userId = $_SESSION['userId'];
             $filter = $_POST["categoryPostsFilter"];
             $_SESSION['categoryPosts_dropdown'] = $filter;
             $p = new PostController();
             $posts = $p->loadCategoryPostsFiltered($_SESSION['category_name'], $filter);
-            echo json_encode($posts);
+            if (isset($posts) && $posts) {
+                // We retrieve user's votes on posts
+                $v = new VoteController();
+                $votes = $v->getUserRatedPosts($userId);
+                $votes = formatVotesArray($votes);
+                $posts_and_votes = array($posts, $votes);
+                echo json_encode($posts_and_votes);
+            } else {
+                echo json_encode($posts);
+            }
             break;
         case "rate_post":
             $userId = $_SESSION['userId'];
@@ -291,26 +331,12 @@ if (isset($_POST["option"])) {
         case "category_selection":
 
             $userId = $_SESSION['userId'];
-            // categories parameter is not null
-            if (isset($_POST["categories"]) && $_POST["categories"] != null) {
-
-                $categories = $_POST["categories"];
-
-                if (sizeof($categories) < 2 || empty($categories)) {
-                    $msg["id"] = "categories";
-                    $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
-                    echo json_encode($msg); // We send the validation error message
-                } else {
-                    $c = new CategoryController();
-                    $result = $c->registerUserCategories($userId, $categories);
-                    echo $result;
-                }
-            }
-            // categories parameter is null
-            else {
-                $msg["id"] = "categories";
-                $msg["text"] = "You must select at least 2 categories in order to complete the registration.";
-                echo json_encode($msg); // We send the validation error message
+            $c = new CategoryController();
+            if ($c->validateCategorySelection($_POST["categories"])) {
+                $result = $c->registerUserCategories($userId, $_POST["categories"]);
+                echo $result;
+            } else {
+                echo json_encode($c->msg); // We send the validation error message
             }
 
             break;
@@ -318,38 +344,6 @@ if (isset($_POST["option"])) {
 }
 
 // Validation functions
-function validateUsername($username)
-{
-
-    $dataIsValid = true;
-    global $msg;
-    $username = htmlspecialchars(trim($username)); // sanitizes input before sql query and removes spaces
-    $username = str_replace(' ', '', $username);    // removes any space between characters
-    if (empty($username)) {
-
-        $msg["id"] = "username";
-        $msg["text"] = "Username cannot be empty.";
-        $dataIsValid = false;
-    }
-
-    return $dataIsValid;
-}
-function validatePassword($password)
-{
-
-    $dataIsValid = true;
-    global $msg;
-    $password = htmlspecialchars(trim($password));
-    $password = str_replace(' ', '', $password);
-    if (empty($password)) {
-
-        $msg["id"] = "password";
-        $msg["text"] = "Password cannot be empty.";
-        $dataIsValid = false;
-    }
-
-    return $dataIsValid;
-}
 
 function generate_rnd_avatar()
 {
@@ -357,87 +351,15 @@ function generate_rnd_avatar()
     $avatar = 'avatar_' . $rnd_number . '.png';
     return $avatar;
 }
-function validateSignUpFields($username, $email, $password, $password2)
+
+// We create an associative array (key=>value) for the user votes in each post
+// $votes[post_id] = is_positive
+// $votes["13"] = "0"/"1"
+function formatVotesArray($data)
 {
-    global $msg;
-    $isDataValid = false;
-    // Variables sanitizing
-    $username = htmlspecialchars(trim($username));
-    $username = str_replace(' ', '', $username);
-
-    $email = htmlspecialchars(trim($email));
-    $email = str_replace(' ', '', $email);
-
-    $password = htmlspecialchars(trim($password));
-    $password = str_replace(' ', '', $password);
-
-    $password2 = htmlspecialchars(trim($password2));
-    $password2 = str_replace(' ', '', $password2);
-
-    // Regex
-    $username_regexp = "/^[0-9A-Za-z\_]+$/";
-    $email_regexp = "/^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/";
-    $password_regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/";
-
-
-    // USERNAME
-    if (empty($username)) {
-        $msg["id"] = "username";
-        $msg["text"] = "Username cannot be empty.";
+    $votes = array();
+    foreach ($data as $vote) {
+        $votes[$vote['post_id']] = $vote['is_positive'];
     }
-    // Username length
-    else if (strlen($username) < 4) {
-        $msg["id"] = "username";
-        $msg["text"] = "Username must have at least 4 characters.";
-    } else if (strlen($username) > 30) {
-        $msg["id"] = "username";
-        $msg["text"] = "Username cannot exceed 30 characters.";
-    }
-    // Username is not the accepted type
-    else if (!preg_match($username_regexp, $username)) {
-        $msg["id"] = "username";
-        $msg["text"] = "Username can only contain letters, numbers and underscores.";
-    }
-    // EMAIL
-    else if (empty($email)) {
-        $msg["id"] = "email";
-        $msg["text"] = "Email cannot be empty.";
-    }
-    // Email is not the accepted type
-    else if (!preg_match($email_regexp, $email)) {
-        $msg["id"] = "email";
-        $msg["text"] = "This email is not valid.";
-    }
-    // PASSWORD
-    else if (empty($password)) {
-        $msg["id"] = "password";
-        $msg["text"] = "Password cannot be empty.";
-    }
-    // Password length
-    else if (strlen($password) < 6) {
-        $msg["id"] = "password";
-        $msg["text"] = "Password must have at least 6 characters.";
-    } else if (strlen($password) > 30) {
-        $msg["id"] = "password";
-        $msg["text"] = "Password cannot exceed 30 characters.";
-    }
-    // Password is not the accepted type
-    else if (!preg_match($password_regexp, $password)) {
-        $msg["id"] = "password";
-        $msg["text"] = "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
-    }
-    // PASSWORD 2
-    else if (empty($password2)) {
-        $msg["id"] = "password2";
-        $msg["text"] = "Password cannot be empty.";
-    }
-    // PASSWORD VS PASSWORD  2
-    // Passwords have different values
-    else if (!($password === $password2)) {
-        $msg["id"] = "password2";
-        $msg["text"] = "Passwords must be identical.";
-    } else {
-        $isDataValid = true;
-    }
-    return $isDataValid;
+    return  $votes;
 }

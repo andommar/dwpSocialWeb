@@ -87,19 +87,15 @@
 }
 .all-categories #Art {
   background-image: url("https://i.imgur.com/KSDiBmC.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Books {
   background-image: url("https://i.imgur.com/4yleEi0.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Films {
   background-image: url("https://i.imgur.com/tSnaWwL.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Finance {
   background-image: url("https://i.imgur.com/UkF6fgx.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Fitness {
   background-image: url("https://i.imgur.com/SyJ4iqN.jpg");
@@ -107,7 +103,6 @@
 }
 .all-categories #Food {
   background-image: url("https://i.imgur.com/qVZ8N0b.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Gaming {
   background-image: url("https://i.imgur.com/qy8HywK.jpg");
@@ -115,7 +110,6 @@
 }
 .all-categories #Health {
   background-image: url("https://i.imgur.com/AMeccP7.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #Humor {
   background-image: url("https://i.imgur.com/jX04HFo.jpg");
@@ -123,7 +117,6 @@
 }
 .all-categories #Music {
   background-image: url("https://i.imgur.com/mSBBdhW.jpg");
-  /* background-position-y: 274px; */
 }
 .all-categories #News {
   background-image: url("https://i.imgur.com/UKm96E5.jpg");
@@ -151,10 +144,9 @@
 }
 .all-categories #Videos {
   background-image: url("https://i.imgur.com/k4BlqD8.jpg");
-  /* background-position-y: 346px; */
 }
 
-/* Cards header (category name) */
+/* Cards text (category name) */
 .all-categories .card .card-text {
   font-size: 31px;
   letter-spacing: 2px;

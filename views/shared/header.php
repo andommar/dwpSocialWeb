@@ -15,7 +15,7 @@
         <li><a id="about-us" class="dropdown-item" href="#">About us</a></li>
       </ul>
     </div>
-    <div class="input-icons">
+    <div id="search-bar">
       <form class="d-flex">
         <input class="form-control me-2 input-field" type="search" placeholder="Type something" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search </button>

@@ -1,30 +1,27 @@
 <?php
-
-
 $c = new CategoryController();
 $categories = $c->loadCategories();
-
-
-
 ?>
 
-
 <div class="row d-flex justify-content-center min-vh-100">
-
   <div id="post-form" class="col col-lg-10">
     <section>
       <div class="container-form min-vh-100">
+        <!-- Standard top popup message -->
+        <div class="text-center mb-3 alert alert-danger py-2 fade show d-none" role="alert" id="general-message">
+          <span class="my-2 " id="general"></span>
+        </div>
         <h2 class="f-heading">
           <span>New post</span>
         </h2>
         <form action="" method="post" enctype="multipart/form-data" id="new-post-form">
           <div class="form-group">
-            <label for="title">Title</label>
+            <label for="title">Title<span class="required_field_dark">*</span></label>
             <input type="text" name="title" id="title">
             <span class="msg error-message-dark my-2" id="title-error">
           </div>
           <div class="form-group">
-            <label for="category">Category</label>
+            <label for="category">Category<span class="required_field_dark">*</span></label>
             <select name="category" id="category">
               <option value="Category">Select category</option>
               <?php foreach ($categories as $category) { ?>
