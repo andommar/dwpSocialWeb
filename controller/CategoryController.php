@@ -3,6 +3,11 @@
 
 class CategoryController
 {
+    public $msg = array(
+        "id" => "",
+        "text" => "",
+    );
+
     // Categories
     public function loadCategories()
     {
@@ -42,5 +47,24 @@ class CategoryController
         $c = new CategoryModel();
         $res = $c->registerUserCategories($userId, $categories);
         return $res;
+    }
+
+    // Validation 
+    public function validateCategorySelection($categories)
+    {
+        $isDataValid = true;
+        // categories parameter is not null
+        if ($categories != null) {
+            if (sizeof($categories) < 2 || empty($categories)) {
+                $this->msg["id"] = "categories";
+                $this->msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+                $isDataValid = false;
+            }
+        } else { // No categories
+            $this->msg["id"] = "categories";
+            $this->msg["text"] = "You must select at least 2 categories in order to complete the registration.";
+            $isDataValid = false;
+        }
+        return $isDataValid;
     }
 }

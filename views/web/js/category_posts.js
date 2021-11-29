@@ -13,11 +13,8 @@ $(document).ready(function() {
         .done(function(data) {
             var filteredCategoryPosts = $.parseJSON(data);
             loadContent('category_posts', filteredCategoryPosts);
-            
-            //We load the rates in each post
-            getUserPostsRate();
         });
     };
-    
+
 
 });
