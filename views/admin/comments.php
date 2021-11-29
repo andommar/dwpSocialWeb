@@ -36,6 +36,7 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             </div>
         </div>
     </nav>
+
     <!-- Sidebar -->
     <div class="container-fluid">
       <div class="row">
@@ -59,19 +60,10 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
 
         <?php 
         $a = new AdminController();
-        $data = $a->getUsersData();
+        $data = $a->getCommentsData();
 
-        if((isset($_GET['delete'])) || (isset($_GET['ban']))){
-            // Check delete request is done by an admin user
-            if($a->isUserAdmin($_SESSION['userId'])){
-                if(isset($_GET['delete'])){
-                    $a->deleteUser($_GET['delete']);
-                    echo 'User deleted successfully';
-                } else {
-                    $a->banUser($_GET['ban'], $_GET['banned']);
-                    echo 'User banned successfully';
-                }
-            }
+        if((isset($_GET['delete'])) && ($a->isUserAdmin($_SESSION['userId']))){
+            $a->deleteComment($_GET['delete']);
         }
         ?>
         <main class="col-md-10 pt-3 px-4">
@@ -196,40 +188,32 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             <!-- Tables section  -->
             <div class="row">
                 <div class="my-3">
-                    <section id="newUsers">
-                        <h4 class="text-muted">Users</h4>
+                    <section id="commentSection">
+                        <h4 class="text-muted">Posts</h4>
                         <table id="display_table" class="table table-striped table-bordered table-hover table-sm" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                 <th class="th-sm">Id</th>
-                                <th class="th-sm">Username</th>
-                                <th class="th-sm">Email</th>
-                                <th class="th-sm">Rank</th>
-                                <th class="th-sm">Permission</th>
+                                <th class="th-sm">User</th>
+                                <th class="th-sm">Post</th>
+                                <th class="th-sm">User comment</th>
+                                <th class="th-sm">Date</th>
                                 <th class="th-sm">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data as $user) {
+                                <?php foreach ($data as $comment) {
                                 echo '<tr>';
-                                echo '<td> '.$user['user_id'].'</td>';
-                                echo '<td> '.$user['username'].'</td>';
-                                echo '<td> '.$user['email'].'</td>';
-                                echo '<td> '.$user['rank'].'</td>';
-                                echo '<td> '.$user['role_name'].'</td>';
+                                echo '<td> '.$comment['comment_id'].'</td>';
+                                echo '<td> '.$comment['username'].'</td>';
+                                echo '<td> '.$comment['title'].'</td>';
+                                echo '<td> ';
+                                echo (strlen($comment['description'])>=50) ? substr($comment['description'], 0, 50).'...': $comment['description'];
+                                echo '</td>';
+                                echo '<td> '.date("d-m-Y, H:i",strtotime($comment['datetime'])).'</td>';
                                 echo '<td>';
-                                echo '<a href="#" class="add"><i class="fas fa-pen"></i></a>';
-
-                                echo '<a href="users.php?delete='.$user['user_id'].'" class="delete" 
-                                    onclick="return confirm(\'Are you sure you want to delete this user and their posts/comments?\');"><i class="fas fa-trash"></i></a>';
-                                    
-                                echo '<a href="users.php?ban='.$user['user_id'].'&banned='.$user['banned'].'"
-                                    onclick="return confirm(\'Are you sure you want to ban/unban this user?\');class="ban">';
-                                        if ($user['banned']){
-                                            echo '<i class="fas fa-check"></i>';
-                                        } else {
-                                            echo '<i class="fas fa-ban"></i>';
-                                        }
+                                echo '<a href="comments.php?delete='.$comment['comment_id'].'" class="delete" 
+                                    onclick="return confirm(\'Are you sure you want to delete this comment?\');"><i class="fas fa-trash"></i></a>';
                                 echo '</a>';
                                 echo '</td>';
                                 echo '</tr>';

@@ -28,7 +28,7 @@ if (isset($_POST["pageName"])) {
             include_once('../views/pages/all_categories.php');
             break;
         default:
-            $content = '<h1> This is what you came for' . $pageId . ' </h1>';
+            // $content = '<h1> This is what you came for' . $pageId . ' </h1>';
             break;
     }
 

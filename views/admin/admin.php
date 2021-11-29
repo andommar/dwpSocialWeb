@@ -1,3 +1,11 @@
+<?php
+require_once ('../../bootstrapping.php');
+$a = new AdminController();
+if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
+    $redirect = new Redirector("../home/login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,13 +15,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
     <link href="css/admin-styles.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Chart js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Datatables CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <title>Dashboard - SB Admin</title>
   </head>
   <body>
       <!-- Top navbar -->
-    <nav class="navbar navbar-dark sticky-top bg-dark p-0">
-      <a href="#" class="navbar-brand">Socially</a>
+    <nav class="navbar navbar-dark bg-dark p-0">
+        <div class="col-md-2">
+            <a href="../../index.php" class="navbar-brand">Socially</a>
+        </div>
+        <div class="admin_navbar_links px-3">
+            <div class="admin_navbar_profile d-flex align-items-center" id="user_profile">
+                <i class="fas fa-user"></i>
+                <span><?php echo $_SESSION['username'] ?></span>
+                <a id="logout" href="../home/login.php?logout=1"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
     </nav>
 
     <!-- Sidebar -->
@@ -24,13 +46,13 @@
             <div class="sidenav-menu" id="adminSidenav">
               <nav class="d-flex flex-column" id="adminSidenav_bar">
                 <div class="sidenav-menu-heading">CORE</div>
-                <a href="admin.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                <a class="sidebar_link" href="admin.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
                 <div class="sidenav-menu-heading">MANAGEMENT</div>
-                <a href="posts.php"><i class="fas fa-comment-dots"></i>Posts</a>
-                <a href="users.php"><i class="fas fa-users"></i>Users</a>
-                <a href="comments.php"><i class="fas fa-comments"></i>Comments</a>
+                <a class="sidebar_link" href="posts.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
+                <a class="sidebar_link" href="users.php"><i class="fas fa-users fa-fw"></i>Users</a>
+                <a class="sidebar_link" href="comments.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
                 <div class="sidenav-menu-heading">STATS</div>
-                <a href="charts.php"><i class="fas fa-tachometer-alt"></i>Charts</a>
+                <a href="charts.php"><i class="fas fa-tachometer-alt fa-fw"></i>Charts</a>
               </nav>
             </div>
           </div>
@@ -162,22 +184,22 @@
                 <section id="graphs">
                     <h4 class="text-muted">Graphs</h4>
                     <div class="d-flex justify-content-around">
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <div class="card mb-4 shadow">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area me-1"></i>
                                     Line Chart Example
                                 </div>
-                                <div class="card-body"><canvas id="myLineChart" width="100%" height="40"></canvas></div>
+                                <div class="card-body"><canvas id="myLineChart" width="100%" height="80"></canvas></div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="card mb-4 shadow">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area me-1"></i>
                                     Line Chart Example
                                 </div>
-                                <div class="card-body"><canvas id="myDoughnutChart" width="100%" height="40"></canvas></div>
+                                <div class="card-body"><canvas id="myDoughnutChart" width="100%" height="80"></canvas></div>
                             </div>
                         </div>
                     </div>
