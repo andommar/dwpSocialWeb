@@ -1,24 +1,29 @@
 <?php
 
-
 if (isset($_SESSION['categoryPosts_dropdown'])) $categoryPosts_dropdown = $_SESSION['categoryPosts_dropdown'];
-
 if (isset($data)) {
     $posts = $data[0];
     if (isset($data[1])) $votes = $data[1]; // There's a possibility that there are no votes in posts 
     $upvote_class = "upvote_default";
     $downvote_class = "downvote_default";
 }
-
 // We load the category posts (it's possible there are no posts yet)
 if (isset($_SESSION['category_name'])) {
     $categoryName = $_SESSION['category_name'];
 }
-
 // We load the categories as well to get the icons (we need them in case the category doesn't have posts)
 $c = new CategoryController();
 $categories = $c->loadCategories();
 
+function cutTextIfLong($text)
+{
+    if (strlen($text) > 232) { // Description is longer than 146 of length
+        $text_cut = substr($text, 0, 232);
+        return $text_cut;
+    } else {
+        return $text;
+    }
+}
 ?>
 <div class="row">
     <?php
@@ -53,18 +58,17 @@ $categories = $c->loadCategories();
                                 <span>Posted by <b><?php echo $post['username'] ?></b></span>
                             </div>
                         </div>
-                        <div class="post_description">
+                        <div class="post_description <?php if (!$post['media_url']) echo "post_description_xs" ?>">
                             <p class="post_subtitle">
                                 <a class="text-decoration-none dynamic-content custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)"><?php echo $post['title'] ?></a>
                             </p>
-                            <?php if ($post['media_url']) { ?>
+                            <?php if (isset($post['media_url'])) { ?>
                                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
                             <?php } ?>
-                            <?php if (isset($post['description'])) { ?>
+                            <?php if ($post['description']) { ?>
                                 <div class="post_description_title">
-
                                     <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
-                                        <?php if ($post['description']) echo $post['description'] ?>
+                                        <?php if (isset($post['description'])) echo cutTextIfLong($post['description']) ?>
                                     </p>
                                 </div>
                             <?php } ?>

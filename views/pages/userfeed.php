@@ -6,6 +6,15 @@ if (isset($data)) {
   $upvote_class = "upvote_default";
   $downvote_class = "downvote_default";
 }
+function cutTextIfLong($text)
+{
+  if (strlen($text) > 232) { // Description is longer than 146 of length
+    $text_cut = substr($text, 0, 232);
+    return $text_cut;
+  } else {
+    return $text;
+  }
+}
 ?>
 <div class="row">
   <div class="col col-lg-12 col-xs-12">
@@ -35,17 +44,17 @@ if (isset($data)) {
                 <span>Posted by <b><?php echo $post['username'] ?></b></span>
               </div>
             </div>
-            <div class="post_description">
+            <div class="post_description <?php if (!$post['media_url']) echo "post_description_xs" ?>">
               <p class="post_subtitle">
                 <a class="text-decoration-none dynamic-content custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)"><?php echo $post['title'] ?></a>
               </p>
-              <?php if ($post['media_url']) { ?>
+              <?php if (isset($post['media_url'])) { ?>
                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
               <?php } ?>
-              <?php if (isset($post['description'])) { ?>
+              <?php if ($post['description']) { ?>
                 <div class="post_description_title">
                   <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
-                    <?php if ($post['description']) echo $post['description'] ?>
+                    <?php if (isset($post['description'])) echo cutTextIfLong($post['description']) ?>
                   </p>
                 </div>
               <?php } ?>
