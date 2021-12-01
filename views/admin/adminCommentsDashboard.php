@@ -45,11 +45,11 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             <div class="sidenav-menu" id="adminSidenav">
               <nav class="d-flex flex-column" id="adminSidenav_bar">
                 <div class="sidenav-menu-heading">CORE</div>
-                <a class="sidebar_link" href="admin.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
+                <a class="sidebar_link" href="adminDashboard.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
                 <div class="sidenav-menu-heading">MANAGEMENT</div>
-                <a class="sidebar_link" href="posts.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
-                <a class="sidebar_link" href="users.php"><i class="fas fa-users fa-fw"></i>Users</a>
-                <a class="sidebar_link" href="comments.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
+                <a class="sidebar_link" href="adminPostsDashboard.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
+                <a class="sidebar_link" href="adminUsersDashboard.php"><i class="fas fa-users fa-fw"></i>Users</a>
+                <a class="sidebar_link" href="adminCommentsDashboard.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
                 <div class="sidenav-menu-heading">STATS</div>
                 <a href="charts.php"><i class="fas fa-tachometer-alt fa-fw"></i>Charts</a>
               </nav>
@@ -60,11 +60,11 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
 
         <?php 
         $a = new AdminController();
-        $data = $a->getPostsData();
+        $data = $a->getCommentsData();
 
-        if((isset($_GET['delete'])) && $a->isUserAdmin($_SESSION['userId'])){
-                $a->deletePost($_GET['delete']);
-            }
+        if((isset($_GET['delete'])) && ($a->isUserAdmin($_SESSION['userId']))){
+            $a->deleteComment($_GET['delete']);
+        }
         ?>
         <main class="col-md-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap align-items-center">
@@ -76,13 +76,13 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                 <section id="totalStats">
                     <h4 class="text-muted">Stats</h4>
                     <div class="d-flex justify-content-around">
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <div class="card border-left border-primary shadow">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs weight-bold text-uppercase">
-                                                Most up voted post
+                                                Users
                                             </div>
                                             <div class="font-weight-bold text-uppercase">
                                                 <h5>53630</h5>
@@ -97,13 +97,13 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <div class="card border-left border-primary shadow">
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs weight-bold text-uppercase">
-                                                Most down voted post
+                                                Posts
                                             </div>
                                             <div class="font-weight-bold text-uppercase">
                                                 <h5>53630</h5>
@@ -118,6 +118,69 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-2">
+                            <div class="card border-left border-primary shadow">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs weight-bold text-uppercase">
+                                                Comments
+                                            </div>
+                                            <div class="font-weight-bold text-uppercase">
+                                                <h5>53630</h5>
+                                            </div>
+                                            <!-- <h5 class="card-title">Users</h5>
+                                            <p class="card-text">41233</p> -->
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card border-left border-primary shadow">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs weight-bold text-uppercase">
+                                                Upvotes
+                                            </div>
+                                            <div class="font-weight-bold text-uppercase">
+                                                <h5>53630</h5>
+                                            </div>
+                                            <!-- <h5 class="card-title">Users</h5>
+                                            <p class="card-text">41233</p> -->
+                                        </div>
+                                        <div class="col-auto">
+                                        <i class="fas fa-arrow-up fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="card border-left border-primary shadow">
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs weight-bold text-uppercase">
+                                                Downvotes
+                                            </div>
+                                            <div class="font-weight-bold text-uppercase">
+                                                <h5>53630</h5>
+                                            </div>
+                                            <!-- <h5 class="card-title">Users</h5>
+                                            <p class="card-text">41233</p> -->
+                                        </div>
+                                        <div class="col-auto">
+                                        <i class="fas fa-arrow-down fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>
@@ -125,34 +188,32 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             <!-- Tables section  -->
             <div class="row">
                 <div class="my-3">
-                    <section id="postsSection">
+                    <section id="commentSection">
                         <h4 class="text-muted">Posts</h4>
                         <table id="display_table" class="table table-striped table-bordered table-hover table-sm" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                 <th class="th-sm">Id</th>
-                                <th class="th-sm">Title</th>
-                                <th class="th-sm">Original poster</th>
-                                <th class="th-sm">Category</th>
-                                <th class="th-sm">Up votes</th>
-                                <th class="th-sm">Down votes</th>
-                                <th class="th-sm">Total comments</th>
+                                <th class="th-sm">User</th>
+                                <th class="th-sm">Post</th>
+                                <th class="th-sm">User comment</th>
+                                <th class="th-sm">Date</th>
                                 <th class="th-sm">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data as $post) {
+                                <?php foreach ($data as $comment) {
                                 echo '<tr>';
-                                echo '<td> '.$post['post_id'].'</td>';
-                                echo '<td> '.$post['title'].'</td>';
-                                echo '<td> '.$post['username'].'</td>';
-                                echo '<td> '.$post['category_name'].'</td>';
-                                echo '<td> '.$post['up_votes'].'</td>';
-                                echo '<td> '.$post['down_votes'].'</td>';
-                                echo '<td> '.$post['total_comments'].'</td>';
+                                echo '<td> '.$comment['comment_id'].'</td>';
+                                echo '<td> '.$comment['username'].'</td>';
+                                echo '<td> '.$comment['title'].'</td>';
+                                echo '<td> ';
+                                echo (strlen($comment['description'])>=50) ? substr($comment['description'], 0, 50).'...': $comment['description'];
+                                echo '</td>';
+                                echo '<td> '.date("d-m-Y, H:i",strtotime($comment['datetime'])).'</td>';
                                 echo '<td>';
-                                echo '<a href="posts.php?delete='.$post['post_id'].'" class="delete" 
-                                    onclick="return confirm(\'Are you sure you want to delete this posts and its related comments?\');"><i class="fas fa-trash"></i></a>';
+                                echo '<a href="comments.php?delete='.$comment['comment_id'].'" class="delete" 
+                                    onclick="return confirm(\'Are you sure you want to delete this comment?\');"><i class="fas fa-trash"></i></a>';
                                 echo '</a>';
                                 echo '</td>';
                                 echo '</tr>';
