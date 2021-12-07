@@ -9,6 +9,7 @@ class UserModel
     private $avatar;
     private $password;
     private $rank;
+    private $role;
     public $message = array(
         "id" => "",
         "text" => "",
@@ -20,7 +21,7 @@ class UserModel
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`
+            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name
                     from user where `user_id` = ?";
             $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
@@ -31,6 +32,7 @@ class UserModel
                     $this->password = $values['password'];
                     $this->avatar = $values['avatar'];
                     $this->rank = $values['rank'];
+                    $this->role = $values['role_name'];
                 }
             }
             $result = true;
@@ -66,6 +68,10 @@ class UserModel
     public function getUserEmail()
     {
         return $this->email;
+    }
+    public function getUserRole()
+    {
+        return $this->role;
     }
 
     //Setters
@@ -105,6 +111,16 @@ class UserModel
     {
         $this->email = $email;
         $this->updateUserInfo('email', $email);
+    }
+    public function setUserRole($role)
+    {
+        $this->role = $role;
+        $this->updateUserInfo('role_name', $role);
+    }
+    public function setUserRank($rank)
+    {
+        $this->rank = $rank;
+        $this->updateUserInfo('rank', $rank);
     }
 
     // Methods

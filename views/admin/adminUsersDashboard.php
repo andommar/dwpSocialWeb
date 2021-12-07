@@ -218,12 +218,12 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                                 echo '<td> '.$user['rank'].'</td>';
                                 echo '<td> '.$user['role_name'].'</td>';
                                 echo '<td>';
-                                echo '<a href="#" class="add"><i class="fas fa-pen"></i></a>';
+                                echo '<a href="adminEditUser.php?edit='.$user['user_id'].'" class="add"><i class="fas fa-pen"></i></a>';
 
-                                echo '<a href="users.php?delete='.$user['user_id'].'" class="delete" 
+                                echo '<a href="adminUsersDashboard.php?delete='.$user['user_id'].'" class="delete" 
                                     onclick="return confirm(\'Are you sure you want to delete this user and their posts/comments?\');"><i class="fas fa-trash"></i></a>';
                                     
-                                echo '<a href="users.php?ban='.$user['user_id'].'&banned='.$user['banned'].'"
+                                echo '<a href="adminUsersDashboard.php?ban='.$user['user_id'].'&banned='.$user['banned'].'"
                                     onclick="return confirm(\'Are you sure you want to ban/unban this user?\');class="ban">';
                                         if ($user['banned']){
                                             echo '<i class="fas fa-check"></i>';

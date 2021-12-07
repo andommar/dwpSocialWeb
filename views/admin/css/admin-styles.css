@@ -38,6 +38,14 @@ body {
   font-family: var(--bs-font-sans-serif);
 }
 
+p {
+  margin-bottom: 0;
+}
+
+.navbar-brand {
+  padding: 5px;
+}
+
 .sidebar-sticky {
   min-width: 250px;
   max-width: 220px;
@@ -51,9 +59,9 @@ body {
   color: var(--bs-gray-700);
 }
 .sidebar-sticky a,
-a:hover,
-a:focus,
-a:active {
+.sidebar-sticky a:hover,
+.sidebar-sticky a:focus,
+.sidebar-sticky a:active {
   text-decoration: none;
   color: var(--bs-gray-600);
 }
@@ -76,7 +84,7 @@ a:active {
 .admin_navbar_profile {
   color: var(--bs-white);
 }
-.admin_navbar_profile span, p, a {
+.admin_navbar_profile span {
   padding: 0 2px;
 }
 /* Font weight */
@@ -93,3 +101,54 @@ a:active {
 .text-lg {
   font-size: 1.2rem;
 }
+
+/* Tables  */
+
+#display_table th, td{
+  text-align: center;
+}
+
+#display_table a {
+  padding: 0 2px;
+}
+
+/*Edit user profile page */
+.role-badge{
+  border-radius: 14px;
+  background-color: #00ff55;
+  padding: 2px 16px;
+  margin: 0px 5px;
+  font-size: 14px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.secondary-text{
+  font-size: .85rem;
+  font-weight: 400;
+}
+
+.user-rank{
+  font-size: .95rem;
+  font-weight: 500; 
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  margin: 2px 5px 2px 2px;
+  object-fit: cover;
+}
+
+#user-info-section p,
+#user-comments-section p {
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+#user-info-section b,
+#user-comments-section b  {
+  font-weight: 600;
+}
+
+

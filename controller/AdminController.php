@@ -1,5 +1,5 @@
 <?php 
-// require '../bootstrapping.php';
+// require '../../bootstrapping.php';
 
 class AdminController{
 
@@ -12,7 +12,6 @@ class AdminController{
             return true;
         }
     }
-
 
     // Dashboard functions
     public function adminPostCategoriesChartData(){
@@ -39,6 +38,47 @@ class AdminController{
         return $result;
     }
 
+    // Edit user functions 
+
+    //Function gathers the form sent via POST from the edit user in the admin section and validates its inputs
+    public function validateForm ($postData) {
+        $data = [];
+        $text = [];
+        $u = new UserModel ($postData['userid']);
+        foreach ($postData as $key=>$value) {
+            if (!empty($value)){
+                $this->validateInput($value);
+                // Checks the key name of the array and updates the data
+                if ($key == 'username') { 
+                    $u-> setUsername($value);
+                    $text['username'] = 'Username updated successfully';
+                } else if ($key == 'email'){
+                    $u-> setUserEmail($value);
+                    $text['email'] = 'Email updated successfully';
+
+                } else if ($key == 'password'){
+                    $u-> setUserPassword($value);
+                    $text['password'] = 'Password updated successfully';
+
+                } else if ($key == 'userrank'){
+                    $u-> setUserRank($value);
+                    $text['userrank'] = 'User rank updated successfully';
+
+                } else if ($key == 'userpermission'){
+                    $u-> setUserRole($value);
+                    $text['userpermission'] = 'User permission updated successfully';
+
+                }
+            }
+        }
+
+        $data['success'] = true;
+        $data['text'] = 'User data updated successfully';
+
+        return  $data;
+        
+    }
+
     //Post functions
     public function getPostsData() {
         $a = new AdminDaoModel;
@@ -60,6 +100,16 @@ class AdminController{
         $a = new AdminDaoModel;
         $result = $a->deleteComment($commentId);
         return $result;
+    }
+
+
+    // Validations
+
+    private function validateInput ($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        $data = str_replace(' ', '', $data);
     }
 
 }
