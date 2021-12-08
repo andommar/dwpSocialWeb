@@ -63,9 +63,17 @@ class AdminDaoModel extends DbConn {
         return $result;
     }
     function adminPostCategoriesChartData (){
+        $arr = array();
         $sql = 'SELECT count(*) as total_posts, category_name FROM `post` GROUP by category_name';
         $result = $this->selectQuery($sql);
-        return $result;
+        $arr[] = $result;
+        $sql = "SELECT date_format(registration_date, '%M') as Month,  count(user_id) as num_users
+                from user
+                group by date_format(registration_date, '%M')
+                order by Month(registration_date)";
+        $result = $this->selectQuery($sql);
+        $arr[] = $result;
+        return $arr;
     }
 }
 

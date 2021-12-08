@@ -45,12 +45,12 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
           <div class="sidebar-sticky">
             <div class="sidenav-menu" id="adminSidenav">
               <nav class="d-flex flex-column" id="adminSidenav_bar">
-                <div class="sidenav-menu-heading">CORE</div>
-                <a class="sidebar_link" href="admin.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
+              <div class="sidenav-menu-heading">CORE</div>
+                <a class="sidebar_link" href="adminDashboard.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
                 <div class="sidenav-menu-heading">MANAGEMENT</div>
-                <a class="sidebar_link" href="posts.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
-                <a class="sidebar_link" href="users.php"><i class="fas fa-users fa-fw"></i>Users</a>
-                <a class="sidebar_link" href="comments.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
+                <a class="sidebar_link" href="adminPostsDashboard.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
+                <a class="sidebar_link" href="adminUsersDashboard.php"><i class="fas fa-users fa-fw"></i>Users</a>
+                <a class="sidebar_link" href="adminCommentsDashboard.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
                 <div class="sidenav-menu-heading">STATS</div>
                 <a href="charts.php"><i class="fas fa-tachometer-alt fa-fw"></i>Charts</a>
               </nav>
@@ -188,7 +188,7 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                             <div class="card mb-4 shadow">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area me-1"></i>
-                                    Line Chart Example
+                                    New users
                                 </div>
                                 <div class="card-body"><canvas id="myLineChart" width="100%" height="80"></canvas></div>
                             </div>
@@ -197,9 +197,9 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                             <div class="card mb-4 shadow">
                                 <div class="card-header">
                                     <i class="fas fa-chart-area me-1"></i>
-                                    Line Chart Example
+                                    Posts per category
                                 </div>
-                                <div class="card-body"><canvas id="myDoughnutChart" width="100%" height="80"></canvas></div>
+                                <div class="card-body"><canvas id="myPieChart" width="100%" height="80"></canvas></div>
                             </div>
                         </div>
                     </div>
@@ -344,7 +344,7 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
         </main>
       </div>
     </div>
-    <script src="js/chart-line.js"></script>
-    <script src="js/chart-doughnut.js"></script>
+    <script src="js/charts.js"></script>
+    <!-- <script src="js/chart-pie.js"></script> -->
   </body>
 </html>

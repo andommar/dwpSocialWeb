@@ -9,6 +9,16 @@ if (isset($_POST["option"])) {
             $data=$a->adminPostCategoriesChartData();
             echo json_encode($data);
             break;
+        case "adminEditUser":
+            $a = new AdminController();
+            $result = $a->validateForm($_POST);
+            echo json_encode($result);
+            break;
+        case "adminDeactivateUser":
+            $a = new AdminController();
+            $result = $a->banUser($_POST['userid'], $_POST['banned']);
+            echo $result;
+            break;
     }
 
 }
