@@ -1,28 +1,21 @@
 
 function validate_signup()
 {
-
     hideGeneralMessage();   // Hides general messages div every time the function is launched
-    // Reset error messages
-    
-    resetErrorMessages();
-   
-
-    // var username = $('#username').val().replace(/\s/g, '');
-    // var email =$('#email').val().replace(/\s/g, '');
-    // var password =$('#password').val().replace(/\s/g, '');
-    // var password2 =$('#password2').val().replace(/\s/g, '');
+    resetSignUpErrorMessages(); // Reset error messages
     
     var username = $('#username').val();
+    username = username.trim();
     var email =$('#email').val();
+    email = email.trim();
     var password =$('#password').val();
+    password = password.trim();
     var password2 =$('#password2').val();
+    password2 = password2.trim();
     
-  
     var username_regexp = /^[0-9A-Za-z\_]+$/;
     var email_regexp = /^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/;
     var password_regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/;
-
     
     // USERNAME
 
@@ -92,7 +85,6 @@ function validate_signup()
     
     else
     {
-        // ajax
         $.ajax({
             url: "../../controller/ViewsController.php",
             method: "POST",
@@ -105,7 +97,7 @@ function validate_signup()
                     // Redirection to next step (category selection) 
                     window.location.replace('../shared/category_selection.php');
                 }
-                else{ // PHP validation error ||  User doesn't exist
+                else{ // PHP validation error ||  User doesn't exist || Error in query
                     
                     if(parsedData["id"] == "username"){
                         $('#username-error').text(parsedData["text"]);
@@ -118,6 +110,10 @@ function validate_signup()
                     }
                     else if(parsedData["id"] == "password2"){
                         $('#password2-error').text(parsedData["text"]);
+                    }
+                    else if(parsedData["id"] == "general"){
+                        $('#general').text(parsedData["text"]);
+                        showGeneralMessage();
                     }
                 }
             }
@@ -134,7 +130,6 @@ function validate_signup()
     }
 }
 
-
 function cleanPasswordField(){
     $('#password').val('');
     $('#password').text("");
@@ -143,7 +138,7 @@ function cleanPassword2Field(){
     $('#password2').val('');
     $('#password2').text("");
 }
-function resetErrorMessages(){
+function resetSignUpErrorMessages(){
     $('#username-error').val('');
     $('#username-error').text("");
 
@@ -160,7 +155,6 @@ function resetErrorMessages(){
     $('#termsofuse-error').text("");
 
 }
-
 
 $(document).ready(function() {
     // When user clicks on show/hide password (eye icon)

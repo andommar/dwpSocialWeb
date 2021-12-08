@@ -205,7 +205,12 @@ class UserModel
                     $arr = [$username, $avatar, $password, $email, 'Beginner', 'User'];
                     $result = $db->executeQueryBindArr($sql, $arr);
                     // If the user is succesfully created, we retrieve the user Id when inserted
-                    if ($result) $newUserId = $db->dbConn->lastInsertId();
+                    if ($result) {
+                        $newUserId = $db->dbConn->lastInsertId();
+                    } else {
+                        $this->message["id"] = "general";
+                        $this->message["text"] = "Sorry, the user couldn't be created.";
+                    }
                 }
             }
             if ($result) {

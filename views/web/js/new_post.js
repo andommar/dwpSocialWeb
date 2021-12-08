@@ -1,104 +1,276 @@
+
+// Bytes equivalences
+const TB = 1099511627776;
+const GB = 1073741824;
+const MB = 1048576;
+const KB = 1024;
+let imageHeight = 0;
+let imageWidth = 0;
+let imageRatio = 0;
+
 $(document).ready(function () {
+
+  loadEditor = function(){
+    tinymce.remove("textarea#description");
+    tinymce.init({
+      selector: 'textarea#description',
+      // when a toolbar icon doesn't fit, it's placed on another row
+      //** toolbar_mode: 'wrap',
+      toolbar_mode:'floating',
+      // Dark theme (comment this lines to set light theme again)
+      // skin: "oxide-dark",
+      // content_css: "dark",
+      //formatselect (headings)
+      // strikethrough (underline in the middle)
+      // link toolbar and plugin
+      // emoticons and plugin
+      // ** toolbar: 'undo redo | styleselect | bold italic underline formatpainter | alignleft aligncenter alignright alignjustify numlist bullist ',
+      // icon groups in toolbar
+      toolbar: 'undo redo | styleselect | bold italic underline strikethrough formatpainter | alignment | lists',
+      // styleselect (todos los styles)
+      // formatselect (headings)
+      toolbar_groups: {
+        alignment: {
+          icon: 'align-left',
+          items: 'alignleft aligncenter alignright alignjustify'
+        },
+        lists: {
+          icon: 'ordered-list',
+          //tooltip: 'Formatting',
+          items: 'numlist bullist'
+        }
+      },
+
+      plugins: 'formatpainter lists',
+      // lists indent 
+      lists_indent_on_tab: false,
+      // link_default_protocol: 'https',
+      // Removes the menu bar (File, Edit, View and Format)
+      menubar : false,
+      // If false, removes the resizing option
+      statusbar:true,
+      // removes the branding name
+      // branding: false
+    });
+
+  }
+
   submitNewPostForm = function () {
     hideGeneralMessage();   // Hides general messages div every time the function is launched
-    var frontValidationOk = true;
-    resetErrorMessages();
-    // $(document).on('click', '#new_post-submit-btn', function(e){
-    // e.preventDefault();
+    resetNewPostErrorMessages();   // Reset error messages
     //Files can be sent through AJAX using the FormData object.
-    //The AJAX call must specify contentType and psrocessdata otherwise it won't work.
-    let mydata = $("#new-post-form")[0];
+    //The AJAX call must specify contentType and processdata otherwise it won't work.
+    // We retrieve the form data before validation, only to have all the fields
+    mydata = $("#new-post-form")[0];
     let formData = new FormData(mydata);
+
+    // Fields retrievement
+    let title = $('#new-post-form #title').val().trim();
+    formData.set('title', title);
+    // Category
+    let category = $('#new-post-form #category').val().trim();
+    formData.set('category', category);
+    let description = "";
+    // For validation, we retrieve the textarea editor content as "text" (plain text)
+    let plainDescription = tinyMCE.activeEditor.getContent({format : 'text'}).trim();
+    // If validation is okay, we retrieve the textarea editor content as "raw" (with tags)
+    let editorDescription = tinyMCE.activeEditor.getContent({format : 'raw'});
+    let imageFile;
+    if($('#new-post-form #imgfile').get(0).files[0]){
+      imageFile = $('#new-post-form #imgfile').get(0).files[0];
+    }
     formData.append("option", "new_post_form");
-
-    // //Title
-    // if(isEmptyOrSpaces(formData.get('title'))){
-    //   $("#title-error").text('Title cannot be empty');
-    //   frontValidationOk=false;
-    // }
-    // else if(formData.get('title').length<4){
-    //   $("#title-error").text('Title must have at least 4 characters');
-    //   frontValidationOk=false;
-    // }
-    // // Category
-    // else if(formData.get('category')=="Category"){
-    //   $("#category-error").text('Category cannot be empty');
-    //   frontValidationOk=false;
-    // }
-    // // Image
-    // // Posts must have an image or a description: Posts with photo can have a description or not | Posts without photo must have a description
-    // else if(isEmptyOrSpaces(formData.get('description')) && !imgfile){
-    //   $('#general').text("A post must have a description or an image.");
-    //   showGeneralMessage();
-    //   frontValidationOk=false;
-    // }
-    // // Description
-    // else if(!isEmptyOrSpaces(formData.get('description'))){
-    //   // Description is not empty but has less than 4 characters
-    //   if(formData.get('description').length<4){
-    //     $("#description-error").text('Description must have at least 4 characters');
-    //     frontValidationOk=false;
-    //   } // We check the total bytes of the description
-    //   else if(byteCount(formData.get('description'))>15000){
-    //     $("#description-error").text('Description is too long');
-    //     frontValidationOk=false;
-    //   }
-    // }
     
-
-    if(frontValidationOk){
+    if(validateNewPostFields(title,category,plainDescription,editorDescription,imageFile,formData)){
       $.ajax({
         method: "POST",
         url: "controller/ViewsController.php",
         contentType: false, // to tell jQuery to not set any content type header.
         processData: false, //  to send a DOMDocument, or other non-processed data it has to be set to false
-        data: formData,
-        dataType: "json",
+        data: formData
+        //dataType: "json",
       })
         .done(function (data) {
-          if (!data.success) {
-            if (data.errors.title) {
-              $("#title-error").text(data.errors.title);
+          if(data){
+            var parsedData = $.parseJSON(data);
+            if(typeof parsedData === 'boolean'){ // true or false
+              
+              // post succesfully created
+              // Redirect to the specific category page to see the created new post 
+              redirectToCategoryPage(formData.get('category'));
+             
             }
-            else if (data.errors.category) {
-              $("#category-error").text(data.errors.category);
+            else{ 
+              
+              if(parsedData["id"] == "title"){
+                $('#title-error').text(parsedData["text"]);
+              }
+              else if(parsedData["id"] == "category"){
+                  $('#category-error').text(parsedData["text"]);
+              }
+              else if(parsedData["id"] == "description"){
+                  $('#description-error').text(parsedData["text"]);
+              }
+              else if(parsedData["id"] == "image"){
+                  $('#image-error').text(parsedData["text"]);
+              }
+              emptyImageField();
             }
-            else if (data.errors.description) {
-              $("#description-error").text(data.errors.description);
-            }
-            else if (data.errors.image) {
-              $("#image-error").text(data.errors.image);
-            }
-            else if(data.errors.general){
-              $('#general').text(data.errors.general);
-              showGeneralMessage();
-            }
-          } else { // Post successfully created
-            // Redirect to the specific category page to see the created new post 
-            redirectToCategoryPage(formData.get('category'));
-            // location.reload();
           }
+          else{
+            $('#general').text("Ooops! Something went wrong.");
+            showGeneralMessage();
+            emptyImageField();
+          }
+
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          if (console && console.log) {
-            alert("ajax failed: " + textStatus);
-          }
+          $('#general').text("Ooops! Something went wrong.");
+          showGeneralMessage();
+          emptyImageField();
         });
-     }
+
+    }
+
   };
-  // TEXT type on DB has a maximum size, we must check that the input description doesn't exceed it
-  function byteCount(s) {
-    let lengthOfText = encodeURI(s).split(/%..|./).length - 1;
-      return lengthOfText;
+  
+});
+// Validation 
+function validateNewPostFields(title,category,plainDescription,editorDescription,imageFile,formData){
+  let dataIsValid = true;
+  // TITLE
+  if(isEmptyOrSpaces(title)){
+    $("#title-error").text('Title cannot be empty');
+    dataIsValid=false;
   }
-  function resetErrorMessages() {
+  else if(title.length<4){
+    $("#title-error").text('Title must have at least 4 characters');
+    dataIsValid=false;
+  }
+  // CATEGORY
+    else if(category=="Category"){
+      $("#category-error").text('Category cannot be empty');
+      dataIsValid=false;     
+    }  
+  // IMAGE
+  // Posts must have an image or a description: Posts with photo can have a description or not | Posts without photo must have a description
+
+  else if(isEmptyOrSpaces(plainDescription) && (!imageFile)){
+    $('#image-error').text("A post must have a description or an image.");
+    dataIsValid=false;
+  }
+  // DESCRIPTION AND IMAGE
+  // If there is no description but there is an image, we send an empty description
+  else if(isEmptyOrSpaces(plainDescription) && imageFile){
+    description = plainDescription;
+  }
+  else if(!isEmptyOrSpaces(plainDescription)){
+    description = editorDescription;
+    // Description is not empty but has less than 4 characters
+    if(plainDescription.length<4){
+      $("#description-error").text('Description must have at least 4 characters');
+      dataIsValid=false;
+    } // We check the total bytes of the description
+    else if(byteCount(plainDescription)>15000){
+      $("#description-error").text('Description is too long');
+      dataIsValid=false;
+    }
+  }
+  // Image specific validation 
+  if (!imageFile) {// If there is no image, we set its value to empty
+    imageFile = "";
+    formData.set('imgfile', "");
+  }
+  if(imageFile){ 
+    
+    formData.set('imgfile', $('#new-post-form #imgfile').get(0).files[0]);
+
+    if (isImageTheSupportedType(imageFile['type'])) {
+      //and size meet the criteria 
+      if (isImageBiggerThan2MB(imageFile['size'])) {
+        $('#image-error').text("Maximum image size is 2MB");
+        dataIsValid = false;
+      }
+      else if(imageRatio<0.5){ // Image's height size is too big
+        $('#image-error').text("Image height is too big in relation to its width.");
+        dataIsValid = false;
+      }
+      else if(imageRatio>3){ // Image's width size is too big
+        $('#image-error').text("Image width is too big in relation to its height.");
+        dataIsValid = false;
+      }
+    } else {
+      $('#image-error').text("Only jpeg, jpg, png and gif images are allowed");
+        dataIsValid = false;
+    }
+  } 
+  formData.set('description', description);
+  return dataIsValid;
+}
+
+// If user wants to remove the image on the post
+function removeAttachedImage () {
+  // We only call the function if there's an image to remove
+  if($("#new-post-form #imgfile").val()){
+    emptyImageField();
+  }
+}
+function resetNewPostErrorMessages() {
+    $("#title-error").val('');
     $("#title-error").text("");
+    $("#category-error").val('');
     $("#category-error").text("");
+    $("#description-error").val('');
     $("#description-error").text("");
+    $("#image-error").val('');
     $("#image-error").text("");
   }
+  
+function emptyImageField(){
+  $("#new-post-form #imgfile").val('');
+  
+}
 
-  function redirectToCategoryPage(categoryName){
-    loadSpecificCategory(categoryName);
+function redirectToCategoryPage(categoryName){
+  loadSpecificCategory(categoryName);
+}
+
+ // Image functions
+ function isImageTheSupportedType(imageType)
+ {
+     if ((imageType == "image/jpeg" ||
+         imageType == "image/jpg"   ||
+         imageType == "image/png"   ||
+         imageType == "image/gif")) {
+         return true;
+     } else {
+         return false;
+     }
+ }
+ // File image format is Bytes
+ function isImageBiggerThan2MB(imageSize)
+ {
+     if (imageSize > 2 * MB) {
+         return true;
+     }
+     return false;
+ }
+
+// When an image is uploaded, its dimensions are saved in global variables
+function getImageDimensions(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var img = new Image;
+      img.onload = function() {
+        imageHeight = img.height;
+        imageWidth = img.width;
+        imageRatio = imageWidth/imageHeight; 
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(input.files[0]);
   }
-});
+}
+
+

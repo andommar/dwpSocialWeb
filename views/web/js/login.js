@@ -3,11 +3,13 @@ function validate_login()
 {
     hideGeneralMessage();   // Hides general messages div every time the function is launched
     
-    resetErrorMessages();   // Reset error messages
+    resetLoginErrorMessages();   // Reset error messages
 
     var error="";
     var username =$('#username').val();
+    username = username.trim();
     var password =$('#password').val();
+    password = password.trim();
 
     if( isEmptyOrSpaces(username) ){
         $('#username-error').text("Username cannot be empty");
@@ -77,7 +79,7 @@ function cleanPasswordField(){
     $('#password').text("");
 }
 
-function resetErrorMessages(){
+function resetLoginErrorMessages(){
     $('#username-error').val('');
     $('#username-error').text("");
     

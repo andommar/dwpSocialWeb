@@ -1,6 +1,6 @@
 $(document).ready(function () {
   submitUserSettingsForm = function () {
-    resetErrorMessages();
+    resetProfileErrorMessages();
     //Files can be sent through AJAX using the FormData object.
     //The AJAX call must specify contentType and psrocessdata otherwise it won't work.
     let formData = {
@@ -51,7 +51,7 @@ $(document).ready(function () {
   };
 
   uploadUserAvatar = function () {
-    resetErrorMessages();
+    resetProfileErrorMessages();
 
     let mydata = $("#new-avatar-form")[0];
     let formData = new FormData(mydata);
@@ -88,11 +88,16 @@ $(document).ready(function () {
       });
   };
 
-  function resetErrorMessages() {
+  function resetProfileErrorMessages() {
     $("#email-error").text("");
+    $("#email-error").val('');
     $("#avatar-error").text("");
+    $("#avatar-error").val('');
     $("#password-error").text("");
+    $("#password-error").val('');
     $("#password1-error").text("");
+    $("#password1-error").val('');
     $("#password2-error").text("");
+    $("#password2-error").val('');
   }
 });

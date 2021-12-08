@@ -15,15 +15,6 @@ if (isset($_SESSION['category_name'])) {
 $c = new CategoryController();
 $categories = $c->loadCategories();
 
-function cutTextIfLong($text)
-{
-    if (strlen($text) > 232) { // Description is longer than 146 of length
-        $text_cut = substr($text, 0, 232);
-        return $text_cut;
-    } else {
-        return $text;
-    }
-}
 ?>
 <div class="row">
     <?php
@@ -62,14 +53,12 @@ function cutTextIfLong($text)
                             <p class="post_subtitle">
                                 <a class="text-decoration-none dynamic-content custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)"><?php echo $post['title'] ?></a>
                             </p>
-                            <?php if (isset($post['media_url'])) { ?>
+                            <?php if ($post['media_url']) { ?>
                                 <img class="img-fluid custom-link" src="views/web/img/media/<?php echo $post['media_url'] ?>" alt="post-media" onclick="sendPostId(<?php echo $post['post_id'] ?>)" />
                             <?php } ?>
                             <?php if ($post['description']) { ?>
-                                <div class="post_description_title">
-                                    <p class="custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
-                                        <?php if (isset($post['description'])) echo cutTextIfLong($post['description']) ?>
-                                    </p>
+                                <div class="post_description_title custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
+                                    <?php if ($post['description']) echo $post['description']; ?>
                                 </div>
                             <?php } ?>
                         </div>
@@ -87,16 +76,16 @@ function cutTextIfLong($text)
                                     }
                                 }
                                 ?>
-                                <img class="img-fluid upvote_button vote_icon_size <?php echo $upvote_class; ?>" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,1)" />
+                                <img class="upvote_button vote_icon_size <?php echo $upvote_class; ?>" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,1)" />
                                 <span class="votes_number purple_color total_upvotes"><?php echo $post['up_votes'] ?></span>
-                                <img class="img-fluid downvote_button vote_icon_size <?php echo $downvote_class; ?>" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,0)" />
+                                <img class="downvote_button vote_icon_size <?php echo $downvote_class; ?>" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post['post_id'] ?>,0)" />
                                 <span class="votes_number red_color total_downvotes"><?php echo $post['down_votes'] ?></span>
                             </div>
                             <div class="comment_counts custom-link-text" onclick="sendPostId(<?php echo $post['post_id'] ?>)">
                                 <i class="far fa-comment-alt"></i>
                                 <?php if ($post['total_comments'] == 0) { ?>
                                     <span>No comments yet</span>
-                                <?php } else if (($post['total_comments'] == 1)) { ?>
+                                <?php } else if ($post['total_comments'] == 1) { ?>
                                     <span><?php echo $post['total_comments']; ?> comment</span>
                                 <?php } else { ?>
                                     <span><?php echo $post['total_comments']; ?> comments</span>

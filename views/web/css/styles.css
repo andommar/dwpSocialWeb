@@ -237,6 +237,10 @@ body {
   cursor: pointer;
 }
 /* Posts */
+
+img.img-fluid {
+  min-width: 100%;
+}
 .post {
   background-color: #242526;
   border-radius: 10px;
@@ -301,9 +305,9 @@ body {
   background-color: #2a2b2d; /*#3a3b3c;*/
   text-align: left;
   position: relative;
+  word-wrap: break-word; /* Prevents text from overflowing div */
 }
-.description-read_more {
-}
+
 /*
 .post_description_title:after {
   background: -webkit-linear-gradient(
@@ -326,6 +330,13 @@ body {
   top: 0;
 }
 */
+.post_description_title {
+  color: #e4e6eb;
+}
+.post_description_title code {
+  color: #15ac1a;
+  background-color: #252525;
+}
 .post_description_title span {
   color: #b7babe;
   font-size: 13px;
@@ -345,8 +356,16 @@ body {
   font-size: smaller;
 }
 
-/* Post Votes */
-
+/* Post Votes and Comments */
+#comment-form label {
+  color: #989898;
+}
+#comment-submit {
+  padding: 9px;
+  margin-top: -1px;
+  font-size: 15px;
+  width: 100%;
+}
 .votes_comments_area {
   display: flex;
   justify-content: space-between;
