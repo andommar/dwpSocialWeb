@@ -1,16 +1,10 @@
 <?php
-spl_autoload_register(function ($class) {
-    $file = __DIR__ . '/../models/' . $class . '.php';
-    if (file_exists($file)) {
-        require $file;
-    }
-});
-// spl_autoload_register(function ($class) {
-//     include "../models/" . $class . ".php";
-// });
-// include "bootstrapping.php";
-class PostController
+class PostController extends MediaController
 {
+    public $msg = array(
+        "id" => "",
+        "text" => "",
+    );
 
     public function loadUserFeedPostsFiltered($userId, $filter)
     {
@@ -43,5 +37,75 @@ class PostController
         $p = new PostModel();
         $res = $p->newPost($userId, $title, $categoryName, $mediaUrl, $description);
         return $res;
+    }
+
+    // Validation
+    public function validateNewPostFields(&$title, $category, &$description, &$imageFile)
+    {
+        $dataIsValid = true;
+        $title = htmlspecialchars(trim($_POST["title"]));
+        $description = (trim($_POST["description"]));
+        // Title
+        if (empty($title)) {
+            $this->msg["id"] = 'title';
+            $this->msg["text"] = 'Title cannot be empty';
+            $dataIsValid = false;
+        } else if (strlen($title) < 4) {
+            $this->msg["id"] = 'title';
+            $this->msg["text"] = 'Title must have at least 4 characters';
+            $dataIsValid = false;
+        }
+        // Category
+        else if ($category == 'Category') {
+            $this->msg["id"] = 'category';
+            $this->msg["category"] = 'Category cannot be empty';
+            $dataIsValid = false;
+        }
+        // Image
+        else if (empty($imageFile) && empty($description)) {
+            $this->msg["id"] = 'general';
+            $this->msg["text"] = 'A post must have a description or an image.';
+            $dataIsValid = false;
+        }
+        // Description
+        else if (!empty($description)) {
+            if (strlen($description) < 4) {
+                $this->msg["id"] = 'description';
+                $this->msg["text"] = 'Description must have at least 4 characters';
+                $dataIsValid = false;
+            } else if (mb_strlen($description, '8bit') > 15000) {
+                $this->msg["id"] = 'description';
+                $this->msg["text"] = 'Description is too long';
+                $dataIsValid = false;
+            }
+        }
+
+        // Image
+        if (!empty($imageFile)) { // The post has an image
+            // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
+            // $imgFileName = $imgFileName . '.' . $imgFileExtension;
+
+            if ($this->isImageTheSupportedType($imageFile['type'])) {
+                //Image size bigger than 2MB
+                if ($this->isImageBiggerThan2MB($imageFile['size'])) {
+                    $this->msg["id"] = 'image';
+                    $this->msg["text"] = 'Maximum image size is 2MB';
+                    $dataIsValid = false;
+                } else if ($this->getImageRatio($imageFile['tmp_name']) < 0.5) { // Image's height size is too big
+                    $this->msg["id"] = 'image';
+                    $this->msg["text"] = 'Image height is too big in relation to its width.';
+                    $dataIsValid = false;
+                } else if ($this->getImageRatio($imageFile['tmp_name']) > 3) { // Image's width size is too big
+                    $this->msg["id"] = 'image';
+                    $this->msg["text"] = 'Image width is too big in relation to its height';
+                    $dataIsValid = false;
+                }
+            } else {
+                $this->msg["id"] = 'image';
+                $this->msg["text"] = 'Only jpeg, jpg, png and gif images are allowed';
+                $dataIsValid = false;
+            }
+        }
+        return $dataIsValid;
     }
 }

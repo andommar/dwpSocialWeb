@@ -62,10 +62,10 @@ $comments = $c->loadCommentsbyPostId($post_id);
                             <?php
                             echo '<script type="text/javascript">sendUsrPostId(' . $post[0]['post_id'] . ');</script>';
                             ?>
-                            <img class="img-fluid upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,1)" />
+                            <img class="upvote_button vote_icon_size upvote_default" src="https://i.imgur.com/cJ150o7.png" alt="upvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,1)" />
                             <span class="votes_number purple_color total_upvotes"><?php echo $post[0]['up_votes'] ?></span>
 
-                            <img class="img-fluid downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,0)" />
+                            <img class="downvote_button vote_icon_size downvote_default" src="https://i.imgur.com/f50DFkG.png" alt="downvote button" onclick="ratePost(<?php echo $post[0]['post_id'] ?>,0)" />
                             <span class="votes_number red_color total_downvotes"><?php echo $post[0]['down_votes'] ?></span>
                         </div>
                         <div class="comment_counts">
@@ -82,18 +82,18 @@ $comments = $c->loadCommentsbyPostId($post_id);
                     <!-- Post comment -->
                     <section id="comment-form-section">
                         <div class="row">
-                            <div class="col justify-content-center m-3 comment-form-wrapper">
+                            <div class="col justify-content-center m-3">
                                 <form id="comment-form">
                                     <div class="my-2">
-                                        <label for="exampleFormControlTextarea1">Write a comment</label>
-                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                        <label for="exampleFormControlTextarea1" class="mb-1">Write a comment</label>
+                                        <textarea class="form-control" id="comment-description" rows="3"></textarea>
                                     </div>
-                                    <div class="my-2">
+                                    <!-- <div class="my-2">
                                         <label for="exampleFormControlFile1">Upload image</label>
                                         <input type="file" class="form-control-file" id="imageupload">
-                                    </div>
-                                    <div class="my-2">
-                                        <button type="button" id="comment-submit" class="btn btn-primary" onclick="submitNewComment(<?php echo $post_id ?>)">Submit</button>
+                                    </div> -->
+                                    <div class="my-2 d-flex justify-content-end">
+                                        <button type="button" id="comment-submit" class="btn btn-success" onclick="submitNewComment(<?php echo $post_id ?>)">Submit</button>
                                     </div>
                                 </form>
                             </div>

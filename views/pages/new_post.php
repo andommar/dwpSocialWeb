@@ -4,6 +4,7 @@ $categories = $c->loadCategories();
 ?>
 
 <div class="row d-flex justify-content-center min-vh-100">
+
   <div id="post-form" class="col col-lg-10">
     <section>
       <div class="container-form min-vh-100">
@@ -35,15 +36,17 @@ $categories = $c->loadCategories();
             <textarea type="text" name="description" id="description"></textarea>
             <span class="msg error-message-dark my-2" id="description-error">
           </div>
-          <div class="form-group">
-            <input type="file" name="imgfile" id="imgfile">
-            <span class="msg error-message-dark my-2" id="image-error">
+          <div class="form-group d-flex mb-1">
+            <input type="file" name="imgfile" id="imgfile" onchange="getImageDimensions(this);">
+            <button id="remove-img-btn" class="btn" type="button" onclick="removeAttachedImage()">Remove attached image</button>
           </div>
-          <div id="error-msg"></div>
+          <div><span class="msg error-message-dark my-2" id="image-error"></div>
           <button class="btn" type="button" id="new_post-submit-btn" onclick="submitNewPostForm()"> Create</button>
-
         </form>
       </div>
     </section>
   </div>
+  <?php
+  echo '<script type="text/javascript">loadEditor();</script>';
+  ?>
 </div>

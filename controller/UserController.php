@@ -48,7 +48,7 @@ class UserController
     }
 
     // Validation
-    function validateSignUpFields($username, $email, $password, $password2)
+    function validateSignUpFields(&$username, &$email, &$password, &$password2)
     {
         $isDataValid = false;
         // Variables sanitizing

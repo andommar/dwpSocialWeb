@@ -5,9 +5,6 @@ require_once('DbConn.php');
 class PostModel
 {
 
-
-
-
   public function loadUserFeedPostsFiltered($userId, $filter)
   {
     // Filter: latest, popular, oldest, unpopular
