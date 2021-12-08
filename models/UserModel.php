@@ -10,6 +10,7 @@ class UserModel
     private $password;
     private $rank;
     private $role;
+    private $banned;
     public $message = array(
         "id" => "",
         "text" => "",
@@ -21,7 +22,7 @@ class UserModel
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name
+            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name, banned
                     from user where `user_id` = ?";
             $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
@@ -33,6 +34,7 @@ class UserModel
                     $this->avatar = $values['avatar'];
                     $this->rank = $values['rank'];
                     $this->role = $values['role_name'];
+                    $this->banned = $values['banned'];
                 }
             }
             $result = true;
@@ -72,6 +74,10 @@ class UserModel
     public function getUserRole()
     {
         return $this->role;
+    }
+    public function getUserStatus()
+    {
+        return $this->banned;
     }
 
     //Setters

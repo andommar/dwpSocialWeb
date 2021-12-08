@@ -168,16 +168,22 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
                             </form>
 
 
-                            </form>
-
                             <!-- Disable user -->
                             <div class="d-flex justify-content-between align-items-center pt-3" id="deactivate">
                                 <div> <b>Activate/Deactivate account</b>
                                     <p>User won't be able to log in</p>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <button class="btn btn-danger">Deactivate</button>
-                                </div>
+                                <form action="" method='post'>
+                                    <div class="d-flex align-items-center">
+                                        <input type="hidden" id="userBanStatus" name="userBanStatus" value=<?php echo $data['banned'] ?>>
+                                        <button class="btn btn-danger" id="deactivateUserBtn" onclick="adminDeactivateUser(event)" value=<?php echo $userId ?>>
+                                            <?php if($data['banned'] == 0) {echo 'Deactivate';} else {echo 'Activate';}  ?>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div>
+                                <span class="msg error-message my-2" id="success-info-user-ban">
                             </div>
                         </div>
                     </div>

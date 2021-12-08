@@ -14,6 +14,11 @@ if (isset($_POST["option"])) {
             $result = $a->validateForm($_POST);
             echo json_encode($result);
             break;
+        case "adminDeactivateUser":
+            $a = new AdminController();
+            $result = $a->banUser($_POST['userid'], $_POST['banned']);
+            echo $result;
+            break;
     }
 
 }

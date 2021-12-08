@@ -1,5 +1,24 @@
 $(document).ready(function(){
 
+    adminDeactivateUser = function (e) {
+        e.preventDefault();
+        let userId = $('#deactivateUserBtn').val();
+        let userBanned = $('#userBanStatus').val();
+        $.ajax({
+            method: "POST",
+            url: "../../controller/AdminViewController.php",
+            data: {option: 'adminDeactivateUser', userid: userId, banned: userBanned}
+        })
+        .done(function(data){
+            // data = $.parseJSON(data);
+            $('#success-info-user-ban').text(data);
+
+        })
+        .fail(function(error){
+            console.log(error);
+        })
+    }
+
     adminUpdateUser = function (e) {
         e.preventDefault();
         resetErrorMessages();
@@ -71,15 +90,13 @@ $(document).ready(function(){
             })
             .done(function(data){
                 data=$.parseJSON(data);
-                console.log("Hello");
-                console.log(data);
     
-                if (!data.success) {
+                if (!(data.id == 'result')) {
                     if (data.text) {
-                        $('#success-info').text("Something bad");
+                        $('#'+data.id+'-error').text(data.text)
                       }
                 } else {
-                    $('#success-info').text("User data updated successfully");
+                    $('#success-info').text(data.text);
                 }
     
             })

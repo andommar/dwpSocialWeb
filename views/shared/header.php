@@ -28,6 +28,7 @@
     <div class="d-flex align-items-center" id="scrollTop">
       <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
     </div>
+    <!-- <?php if($userData['role'] == 'Admin') { echo '<a class="btn btn-outline-success mx-2" href="views/admin/adminDashboard.php">Admin </a>';} ?> -->
     <div class="navbar_profile d-flex align-items-center" id="user_profile">
       <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" />
       <span><?php echo $userData['username'] ?></span>

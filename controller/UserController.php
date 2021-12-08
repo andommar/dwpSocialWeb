@@ -29,7 +29,8 @@ class UserController
             'username' => $u->getUsername(),
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail(),
-            'rank' => $u->getUserRank()        ];
+            'rank' => $u->getUserRank()
+        ];
         return $data;
     }
 
@@ -42,7 +43,8 @@ class UserController
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail(),
             'rank' => $u->getUserRank(),
-            'role' => $u->getUserRole()
+            'role' => $u->getUserRole(),
+            'banned' => $u->getUserStatus()
         ];
         return $data;
     }
