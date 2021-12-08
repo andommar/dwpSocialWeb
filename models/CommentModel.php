@@ -24,17 +24,19 @@ class CommentModel
         }
     }
 
-    public function newComment($userId, $postId, $description, $mediaUrl)
+    // $userId, $postId, $description, $mediaUrl
+    public function newComment($userId, $postId, $description)
     {
         try {
 
-
+            // media url is not binded yet
             $result = false;
             $db = new DbConn();
             $date = date('Y-m-d H:i:s');
-            $arr = [$userId, $postId, $description, $mediaUrl, 0, 0, $date];
-            $sql = 'INSERT INTO `comment` (`user_id`, post_id, `description`, media_url, up_votes, down_votes, `datetime`)
-                VALUES (?,?,?,?,?,?,?)';
+            // $arr = [$userId, $postId, $description, $mediaUrl, 0, 0, $date];
+            $arr = [$userId, $postId, $description, 0, 0, $date];
+            $sql = 'INSERT INTO `comment` (`user_id`, post_id, `description`, up_votes, down_votes, `datetime`)
+                VALUES (?,?,?,?,?,?)';
             $result = $db->executeQueryBindArr($sql, $arr);
             return $result;
         } catch (\PDOException $ex) {

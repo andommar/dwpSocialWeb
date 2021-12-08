@@ -1,6 +1,4 @@
 <?php
-// require_once("../models/UserLogin.php");
-
 
 class LoginController
 {
@@ -17,12 +15,15 @@ class LoginController
     }
 
     // Validation functions
-    public function validateUsername($username)
+    // Variables are passed by reference
+    // If we sanitize the input here, it has effect on ViewsController variable
+    public function validateUsername(&$username)
     {
 
         $dataIsValid = true;
         $username = htmlspecialchars(trim($username)); // sanitizes input before sql query and removes spaces
         $username = str_replace(' ', '', $username);    // removes any space between characters
+
         if (empty($username)) {
 
             $this->msg["id"] = "username";
@@ -32,12 +33,12 @@ class LoginController
 
         return $dataIsValid;
     }
-    public function validatePassword($password)
+    public function validatePassword(&$password)
     {
-
         $dataIsValid = true;
         $password = htmlspecialchars(trim($password));
         $password = str_replace(' ', '', $password);
+
         if (empty($password)) {
 
             $this->msg["id"] = "password";

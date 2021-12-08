@@ -7,12 +7,13 @@ $(document).ready(function () {
         }, 200, function() {
         // Animation complete.
     });
+
   };
   submitNewComment = function (postId) {
     var formData = {
       formtype: "comment",
-      description: $("#description").val(),
-      image: $("#imgupload").val(),
+      description: $("#comment-description").val()
+      // image: $("#imgupload").val(),
     };
     $.ajax({
       method: "POST",

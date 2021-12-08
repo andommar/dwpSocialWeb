@@ -2,7 +2,7 @@
 
 .container-form {
   margin: auto;
-  max-width: 600px;
+  max-width: 650px;
   overflow: auto;
   padding: 52px 66px;
   background-color: #35333361;
@@ -27,6 +27,29 @@
   width: 100%;
   padding: 10px;
   border: 1px #ddd solid;
+}
+
+#post-form section input[type="file"] {
+  width: 60%;
+}
+
+#post-form section #remove-img-btn {
+  color: #fff;
+  padding: 7px 11px;
+  border: 1px solid white;
+  cursor: pointer;
+  border-radius: 0px;
+  margin-left: auto;
+  font-weight: 400;
+}
+
+#post-form section #remove-img-btn:hover {
+  background-color: white;
+  color: #2b2b2b;
+  -webkit-transition: background-color 0.4s ease-out;
+  -moz-transition: background-color 0.4s ease-out;
+  -o-transition: background-color 0.4s ease-out;
+  transition: background-color 0.4s ease-out;
 }
 
 #post-form section textarea {

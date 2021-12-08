@@ -58,91 +58,25 @@ if (isset($_POST["option"])) {
             } else {
                 echo json_encode($c->msg);
             }
-
             break;
-            // Validations cases
         case "new_post_form":
-
-            $errors = [];
-            $data = [];
-
-            // Title
-            if (empty($_POST["title"])) {
-                $errors['title'] = 'Title cannot be empty';
-            } else if (strlen($_POST["title"]) < 4) {
-                $errors['title'] = 'Title must have at least 4 characters';
-            }
-            // Category
-            else if ($_POST["category"] == 'Category') {
-                $errors['category'] = 'Category cannot be empty';
-            }
-            // Image
-            else if (empty($_FILES['imgfile']['name']) && empty($_POST["description"])) {
-                $errors['general'] = 'A post must have a description or an image.';
-            }
-            // Description
-            // mb_strlen($string, '8bit');
-            // strlen($_POST["description"]) < 4
-            else if (!empty($_POST["description"])) {
-                if (strlen($_POST["description"]) < 4) {
-                    $errors['description'] = 'Description must have at least 4 characters';
-                } else if (mb_strlen($_POST["description"], '8bit') > 15000) {
-                    $errors['description'] = 'Description is too long';
+            $userid = $_SESSION['userId'];
+            $title = $_POST["title"];
+            $category = $_POST["category"];
+            $description = $_POST["description"];
+            $imageFile = "";
+            if (isset($_FILES['imgfile'])) $imageFile = $_FILES['imgfile'];
+            $imgFileName = "";
+            $p = new PostController();
+            if ($p->validateNewPostFields($title, $category, $description, $imageFile)) {
+                if (isset($_FILES['imgfile'])) { // Post with image
+                    $p->uploadImage($imageFile, $imgFileName); // Uploads image to media folder
                 }
+                $result = $p->newPost($userid, $title, $category, $imgFileName, $description);
+                echo json_encode($result); // We send query result
+            } else { // validation errors
+                echo json_encode($p->msg);
             }
-
-            if (empty($_FILES['imgfile']['name'])) {
-                $imgFileName = "";
-            }
-
-            // If inputs arent empty and user has chosen a category
-            if (empty($errors)) {
-                $userid = $_SESSION['userId'];
-                $title = $_POST["title"];
-                $category = $_POST["category"];
-                $description = $_POST["description"];
-
-                if (!empty($_FILES['imgfile']['name'])) { // The post has an image
-                    $imgFile = $_FILES['imgfile'];
-                    $imgFileName = strtolower($_FILES['imgfile']['name']);
-                    $imgFiltype = $imgFile['type'];
-                    // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
-                    // $imgFileName = $imgFileName . '.' . $imgFileExtension;
-
-                    // Image upload validation. Verify image file extension. 
-                    if (($imgFiltype == "image/jpeg" ||
-                        $imgFiltype == "image/jpg"   ||
-                        $imgFiltype == "image/png"   ||
-                        $imgFiltype == "image/gif")) {
-                        //and size meet the criteria 
-                        if ($imgFile['size'] > 2 * MB) {
-                            $error['image'] = "Max image size is 5MB";
-                        } else {
-                            // If there's no errors we add a unique string as a prefix to the file name
-                            $prefix = uniqid();
-                            $imgFileName = $prefix . '_' . $imgFileName;
-                            move_uploaded_file($imgFile['tmp_name'], $mediaPath . $imgFileName);
-                            $p = new PostController();
-                            $p->newPost($userid, $title, $category, $imgFileName, $description);
-                        }
-                    } else {
-                        $error['image'] = "Only jpeg, jpg, png or gif images allowed";
-                    }
-                } else { // The post has no image
-                    $p = new PostController();
-                    $p->newPost($userid, $title, $category, $imgFileName, $description);
-                }
-            }
-
-            if (!empty($errors)) {
-                $data['success'] = false;
-                $data['errors'] = $errors;
-            } else {
-                $data['success'] = true;
-                $data['message'] = 'Success!';
-            }
-
-            echo json_encode($data);
             break;
 
         case "profile_form":
@@ -310,12 +244,15 @@ if (isset($_POST["option"])) {
                 $data = [];
                 $postId = $_POST["postId"];
                 $userId = $_SESSION['userId'];
-                if (empty($formData['description']) && empty($formData['image'])) {
-                    $errors['message'] = 'Type something or upload an image to send a comment';
+                //&& empty($formData['image'])
+                if (empty($formData['description'])) {
+                    // 'or upload an image'
+                    $errors['message'] = 'Type something to send a comment';
                 } else {
                     // Message and image validation
                     $c = new CommentController();
-                    $result = $c->newComment($userId, $postId, $formData['description'], $formData['image']);
+                    //$userId, $postId, $formData['description'],$formData['image']
+                    $result = $c->newComment($userId, $postId, $formData['description']);
                 }
 
                 if (!empty($errors)) {

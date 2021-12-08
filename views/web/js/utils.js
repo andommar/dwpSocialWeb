@@ -39,3 +39,9 @@ function hideGeneralMessage(){
     $('#general-message').removeClass( "d-block" ).addClass( "d-none" );
   }
 }
+
+// TEXT type on DB has a maximum size, we must check that the input description doesn't exceed it
+function byteCount(s) {
+  let lengthOfText = encodeURI(s).split(/%..|./).length - 1;
+    return lengthOfText;
+}

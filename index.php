@@ -28,7 +28,8 @@ $userData = $c->getUserInfo();
   <link rel="stylesheet" href="views/web/css/profile-style.css" />
   <link rel="stylesheet" href="views/web/css/category_posts.css" />
   <link rel="stylesheet" href="views/web/css/all_categories.css" />
-
+  <!-- Tiny MCE | Text editor for text styling -->
+  <script src="https://cdn.tiny.cloud/1/miwptpgkuardbryq4clyxu4r63ugkxeiu94huixvgv7nn7lr/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>Socially</title>
@@ -60,7 +61,7 @@ $userData = $c->getUserInfo();
 <script type="text/javascript" src="views/web/js/userfeed.js"></script>
 <script type="text/javascript" src="views/web/js/show_post.js"></script>
 <script type="text/javascript" src="views/web/js/new_post.js"></script>
-<script type="text/javascript" src="views/web/js/profile_settings.js"></script>
+<script type="text/javascript" src="views/web/js/user_profile.js"></script>
 <script type="text/javascript" src="views/web/js/category_posts.js"></script>
 <script type="text/javascript" src="views/web/js/all_categories.js"></script>
 
