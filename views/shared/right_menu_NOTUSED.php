@@ -27,7 +27,7 @@ if ($session->confirm_logged_in()) {
             $redirect = new Redirector("views/home/login.php");
         }
         $u = new UserController();
-        $userData = $u->getUserInfo();
+        $userData = $u->getUserInfo($_SESSION['userId']);
 
         // Check if user follows the category
 

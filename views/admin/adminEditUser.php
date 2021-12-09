@@ -65,7 +65,7 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             $userId = $_GET['edit'];
         }
         $a = new UserController(); 
-        $data = $a->getUserData($userId)
+        $data = $a->getUserInfo($userId)
         ?>
         <main class="col-md-6 pt-3 px-4">
           <!-- Edit user section -->

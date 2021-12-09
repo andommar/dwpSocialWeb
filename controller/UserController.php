@@ -21,20 +21,7 @@ class UserController
         return $res; // If user is successfully created, returns their user Id
     }
 
-    public function getUserInfo()
-    {
-        $u = new UserModel($_SESSION['userId']);
-        $data = [
-            'userId' => $u->getUserId(),
-            'username' => $u->getUsername(),
-            'avatar' => $u->getUserAvatar(),
-            'email' => $u->getUserEmail(),
-            'rank' => $u->getUserRank()
-        ];
-        return $data;
-    }
-
-    public function getUserData($userId)
+    public function getUserInfo($userId)
     {
         $u = new UserModel($userId);
         $data = [
@@ -48,6 +35,21 @@ class UserController
         ];
         return $data;
     }
+
+    // public function getUserData($userId)
+    // {
+    //     $u = new UserModel($userId);
+    //     $data = [
+    //         'userId' => $u->getUserId(),
+    //         'username' => $u->getUsername(),
+    //         'avatar' => $u->getUserAvatar(),
+    //         'email' => $u->getUserEmail(),
+    //         'rank' => $u->getUserRank(),
+    //         'role' => $u->getUserRole(),
+    //         'banned' => $u->getUserStatus()
+    //     ];
+    //     return $data;
+    // }
     
     public function getUserPassword()
     {
