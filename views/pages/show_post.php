@@ -2,7 +2,7 @@
 
 
 $u = new UserController();
-$userData = $u->getUserInfo();
+$userData = $u->getUserInfo($_SESSION['userId']);
 
 // Load POST INFO
 // this data comed from the Page Controller

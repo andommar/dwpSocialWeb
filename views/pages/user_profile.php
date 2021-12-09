@@ -5,7 +5,7 @@ if ($session->confirm_logged_in()) {
   $redirect = new Redirector("../home/login.php");
 }
 $u = new UserController();
-$userData = $u->getUserInfo();
+$userData = $u->getUserInfo($_SESSION['userId']);
 ?>
 
 

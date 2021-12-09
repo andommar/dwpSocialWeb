@@ -199,7 +199,7 @@ values (null, 'tmatkin8', 'avatar_4.png','M2nGgFiAu', 'nellum8@tiny.cc',FALSE, '
 INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
 values (null, 'wbeany9', 'avatar_6.png', 'DslPJgeHR', 'korrick9@statcounter.com',FALSE, 'Beginner', 'User');
 INSERT INTO `user` (`user_id`, username, avatar, `password`, email, banned, `rank`, role_name) 
-values (null, 'socially', 'avatar_6.png', 'social1', 'admin@socially.com',FALSE, 'Beginner', 'Admin');
+values (null, 'socially', 'avatar_6.png', '$2y$12$RsLZLWJxUldmir7wtSbt9.7N8MP6g9XEIcctVAIyDFa3LRJep1ytK', 'admin@socially.com',FALSE, 'Administration', 'Admin');
 
 
 /* Posts */
