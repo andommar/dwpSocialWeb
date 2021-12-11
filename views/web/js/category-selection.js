@@ -140,7 +140,7 @@ function validate_category_selection()
             //ajax "category_selection"
 
             $.ajax({
-                url: "../../controller/ViewsController.php",
+                url: "controller/ViewsController.php",
                 method: "POST",
                 data: { option:"category_selection", categories:selectedCategories}
             })
@@ -156,7 +156,7 @@ function validate_category_selection()
                     else{
                         // Categories correctly added to registered user
                         // We send the user to the main page, logged in
-                        window.location.href = '../../index.php';
+                        window.location.href ='home';
                     }
                 }
                 else{

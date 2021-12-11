@@ -1,7 +1,7 @@
 <?php
 
 // Session handling
-require_once('../../bootstrapping.php');
+// require_once('../../bootstrapping.php');
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
     $redirect = new Redirector("../home/login.php");
@@ -24,9 +24,9 @@ $categories = $c->loadCategories();
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../web/css/login-signup.css" />
-    <link rel="stylesheet" href="../web/css/category_selection.css" />
-    <link rel="stylesheet" href="../web/css/utilities.css" />
+    <link rel="stylesheet" href="views/web/css/login-signup.css" />
+    <link rel="stylesheet" href="views/web/css/category_selection.css" />
+    <link rel="stylesheet" href="views/web/css/utilities.css" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -97,7 +97,7 @@ $categories = $c->loadCategories();
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 
 </body>
-<script type="text/javascript" src="../web/js/utils.js"></script>
-<script type="text/javascript" src="../web/js/category-selection.js"></script>
+<script type="text/javascript" src="views/web/js/utils.js"></script>
+<script type="text/javascript" src="views/web/js/category-selection.js"></script>
 
 </html>

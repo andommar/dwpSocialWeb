@@ -28,16 +28,14 @@
     <div class="d-flex align-items-center" id="scrollTop">
       <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
     </div>
-    <?php if ($userData['role'] == 'Admin') {
-      echo '<a class="btn btn-outline-success mx-2" href="views/admin/adminDashboard.php">Admin </a>';
-    } ?>
+    <?php if($userData['role'] == 'Admin') { echo '<a class="btn btn-outline-success mx-2" href="admin">Admin </a>';} ?>
     <div class="navbar_profile d-flex align-items-center" id="user_profile">
       <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" />
       <span><?php echo $userData['username'] ?></span>
     </div>
     <div class="navbar_links">
       <i class="fa fa-plus" id="new_post" data-toggle="tooltip" data-placement="bottom" title="New Post"></i>
-      <a id="logout" href="./views/home/login.php?logout=1"><i class="fas fa-sign-out-alt" data-toggle="tooltip" data-placement="bottom" title="Logout"></i></a>
+      <a id="logout" href="logout/1"><i class="fas fa-sign-out-alt" data-toggle="tooltip" data-placement="bottom" title="Logout"></i></a>
     </div>
   </div>
 </div>

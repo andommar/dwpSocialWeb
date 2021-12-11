@@ -44,9 +44,9 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
             <div class="sidenav-menu" id="adminSidenav">
               <nav class="d-flex flex-column" id="adminSidenav_bar">
                 <div class="sidenav-menu-heading">CORE</div>
-                <a class="sidebar_link" href="adminDashboard.php"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
+                <a class="sidebar_link" href="admin"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
                 <div class="sidenav-menu-heading">MANAGEMENT</div>
-                <a class="sidebar_link" href="adminPostsDashboard.php"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
+                <a class="sidebar_link" href="admin/posts"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
                 <a class="sidebar_link" href="adminUsersDashboard.php"><i class="fas fa-users fa-fw"></i>Users</a>
                 <a class="sidebar_link" href="adminCommentsDashboard.php"><i class="fas fa-comments fa-fw"></i>Comments</a>
                 <div class="sidenav-menu-heading">STATS</div>
