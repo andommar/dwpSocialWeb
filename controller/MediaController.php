@@ -5,11 +5,13 @@ spl_autoload_register(function ($class) {
 
 class MediaController
 {
-    public $msg = array(
+    public $msg2 = array(
         "id" => "",
         "text" => "",
     );
 
+    protected $image;
+    protected $imageType;
     protected $imageWidth;
     protected $imageHeight;
 
@@ -19,10 +21,34 @@ class MediaController
     public const MB = 1048576;
     public const KB = 1024;
 
+
     // Images path
     public const MEDIAPATH = "../views/web/img/media/";
 
     // Image functions
+    public function load($imageFile)
+    {
+        $image_info = getimagesize($imageFile['tmp_name']);
+        $this->imageType = $image_info[2];
+
+        if ($this->imageType == IMAGETYPE_JPEG) {
+            $this->image = imagecreatefromjpeg($imageFile['tmp_name']);
+        } elseif ($this->imageType == IMAGETYPE_GIF) {
+            $this->image = imagecreatefromgif($imageFile['tmp_name']);
+        } elseif ($this->imageType == IMAGETYPE_PNG) {
+            $this->image = imagecreatefrompng($imageFile['tmp_name']);
+        }
+    }
+    public function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 100)
+    {
+        if ($image_type == IMAGETYPE_JPEG) {
+            return imagejpeg($this->image, $filename, $compression);
+        } else if ($image_type == IMAGETYPE_GIF) {
+            return imagegif($this->image, $filename);
+        } else if ($image_type == IMAGETYPE_PNG) {
+            return imagepng($this->image, $filename);
+        } else return false;
+    }
     public function isImageTheSupportedType($imgType)
     {
         if (($imgType == "image/jpeg" ||
@@ -42,13 +68,6 @@ class MediaController
         }
         return false;
     }
-    public function uploadImage($imageFile, &$imgFileName)
-    {
-        // We add a unique string as a prefix to the file name
-        $prefix = uniqid();
-        $imgFileName = $prefix . '_' . strtolower($imageFile['name']);
-        move_uploaded_file($imageFile['tmp_name'], self::MEDIAPATH . $imgFileName);
-    }
     // We have to provide the image name in order to get the image dimensions
     public function getImageRatio($imageName)
     {
@@ -67,5 +86,50 @@ class MediaController
     {
         $imageHeight = getimagesize($imageName)[1]; // Position 1 of the array is the Height
         return $imageHeight;
+    }
+    public function scaleImageToPostWidthAndSave($imageFile, &$imgFileName)
+    {
+        $isImageSaved = false;
+        // 1: We create a new image from file
+        $this->load($imageFile);
+        // 2: We define the new dimensions of the image
+        if ($this->imageWidth < 700) { // If the image is equal to 554 or less, but not too big, we don't scale the image
+            $width = $this->imageWidth;
+        } else { // If the image is bigger, we set a maximim width height
+            $width = 700;
+        }
+        // width we want the new image to have
+        $ratio = $width / $this->imageWidth;    // we calculate the ratio to get the proportional height
+        $height = $this->imageHeight * $ratio;
+        // 3: We create a new true color image
+        $new_image = imagecreatetruecolor($width, $height);
+        // 4: We Copy and resize part of an image with resampling
+        imagecopyresampled(
+            $new_image,
+            $this->image,
+            0,
+            0,
+            0,
+            0,
+            $width,
+            $height,
+            imagesx($this->image),
+            imagesy($this->image)
+        );
+        $this->image = $new_image;
+        // 5: We define a unique name
+        $prefix = uniqid();
+        $imgFileName = $prefix . '_' . strtolower($imageFile['name']);
+        // 6: We save the image on the images path folder
+        $isImageSaved = $this->save("" . self::MEDIAPATH . $imgFileName . "");
+        return $isImageSaved;
+    }
+    public function saveOriginalImage($imageFile, &$imgFileName)
+    {
+        // We add a unique string as a prefix to the file name
+        $prefix = uniqid();
+        $imgFileName = $prefix . '_' . strtolower($imageFile['name']);
+        $isImageUploaded = move_uploaded_file($imageFile['tmp_name'], self::MEDIAPATH . $imgFileName);
+        return $isImageUploaded;
     }
 }

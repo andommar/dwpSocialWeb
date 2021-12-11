@@ -1,28 +1,29 @@
 
 $(document).ready(function() {
+
+
+    // We retrieve the data and refresh the posts
+    loadFeed = function(filter){ 
+    
+        var feedFilter = filter;
+        $.ajax({
+            url: "controller/ViewsController.php",
+            method: "POST",
+            data: { option:'feed', feedFilter: feedFilter}
+        })
+        .done(function(data) {
+            var filteredPosts = $.parseJSON(data);
+            loadContent('feed', filteredPosts);
+        });
+    };
+
+    loadFeed('latest');
+
     // When we click something on a post that must redirect to that specific post page > we take the post id and the page name ("showpost" page) 
     sendPostId = function(id){
         loadContent('show_post',id);
     }
-
-    // We retrieve the data and refresh the posts
-    loadPosts = function(value){ 
     
-        var userfeedFilter = value;
-        $.ajax({
-            url: "controller/ViewsController.php",
-            method: "POST",
-            data: { option:"userfeed", userfeedFilter: userfeedFilter}
-        })
-        .done(function(data) {
-            var filteredPosts = $.parseJSON(data);
-            loadContent('userfeed', filteredPosts);
-        });
-    };
-
-    // First thing that will be loaded. We send the default filter for the query that retrieves the userfeed posts
-    loadPosts('latest');
-
     // When user clicks on a post voting icon
     ratePost = function(postId, isPositive){ 
         if(isPositive || !isPositive){
@@ -86,6 +87,6 @@ $(document).ready(function() {
     updatePostTotalVotes = function(postId, totalVotes){
         $("#"+postId+" .total_upvotes").html(totalVotes[0]['up_votes']);
         $("#"+postId+" .total_downvotes").html(totalVotes[0]['down_votes']);
-     };
+    };
 
 });

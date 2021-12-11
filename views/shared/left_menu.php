@@ -3,7 +3,6 @@
   <?php
   $c = new CategoryController();
   $categories = $c->getUserCategories();
-
   foreach ($categories as $category) { ?>
     <li class="category_names">
       <a onclick="loadSpecificCategory('<?php echo $category['category_name'] ?>')">
@@ -11,5 +10,6 @@
         <span><?php echo $category['category_name'] ?></span>
       </a>
     </li>
-  <?php }; ?>
+  <?php }
+  ?>
 </ul>

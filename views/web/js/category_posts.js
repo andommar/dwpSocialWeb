@@ -16,5 +16,28 @@ $(document).ready(function() {
         });
     };
 
+    joinCategoryOnCategoryPage = function(value){
+        var categoryName = value;
+        $.ajax({
+            url: "controller/ViewsController.php",
+            method: "POST",
+            data: { option:"join_category", categoryName:categoryName}
+        })
+        .done(function(data) {
+            loadSpecificCategory(categoryName);
+        });
+    }
+    leaveCategoryOnCategoryPage = function(value){
+        var categoryName = value;
+        $.ajax({
+            url: "controller/ViewsController.php",
+            method: "POST",
+            data: { option:"leave_category", categoryName:categoryName}
+        })
+        .done(function(data) {
+            loadSpecificCategory(categoryName);
+        });
+    }
+
 
 });

@@ -37,8 +37,9 @@ $comments = $c->loadCommentsbyPostId($post_id);
                         <img src="views/web/img/avatars/<?php echo $post[0]['avatar'] ?>" alt="user" />
                         <div class="post_title_content">
                             <p class="mb-0">
-                                <?php echo $post[0]['category_name'] ?>
-                                <i class="<?php echo $post[0]['icon'] ?> mx-1"></i>
+                                <a onclick="loadSpecificCategory('<?php echo $post[0]['category_name'] ?>')" class="text-decoration-none"><?php echo $post[0]['category_name'] ?>
+                                    <i class="<?php echo $post[0]['icon'] ?> mx-1"></i>
+                                </a>
                             </p>
                             <span>Posted by <b><?php echo $post[0]['username'] ?></b></span>
                         </div>
@@ -134,9 +135,9 @@ $comments = $c->loadCommentsbyPostId($post_id);
 
             <!-- Follow category button. Depending on whether the user is a follower of the category or not-->
             <?php if ((int)$category[0]['total'] > 0) { ?>
-                <button type="button" class="btn btn-leave">Leave Category</button>
+                <button type="button" class="btn btn-leave" onclick="leaveCategoryOnShowPostPage('<?php echo $category_info[0]['category_name'] ?>','<?php echo $post_id ?>')">Leave Category</button>
             <?php } else { ?>
-                <button type="button" class="btn btn-join">Join Category</button>
+                <button type="button" class="btn btn-join" onclick="joinCategoryOnShowPostPage('<?php echo $category_info[0]['category_name'] ?>','<?php echo $post_id ?>')">Join Category</button>
             <?php } ?>
 
 
@@ -144,6 +145,4 @@ $comments = $c->loadCommentsbyPostId($post_id);
 
     </div>
 
-
-    ;
 </div>

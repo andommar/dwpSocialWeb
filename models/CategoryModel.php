@@ -20,6 +20,43 @@ class CategoryModel
             print($ex->getMessage());
         }
     }
+    public function joinCategory($userId, $categoryName)
+    {
+        try {
+            $result = false;
+            $db = new DbConn();
+            $arr = [$userId, $categoryName];
+            $sql = 'INSERT INTO user_category (`user_id`,category_name) VALUES (?,?)';
+            $result = $db->executeQueryBindArr($sql, $arr);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
+    public function leaveCategory($userId, $categoryName)
+    {
+        try {
+            $result = false;
+            $db = new DbConn();
+            $arr = [$userId, $categoryName];
+            $sql = 'DELETE FROM user_category WHERE `user_id`=? AND category_name=?';
+            $result = $db->executeQueryBindArr($sql, $arr);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
+    public function getCategoryTotalPosts($categoryName)
+    {
+        try {
+            $db = new Dbconn();
+            $sql = 'SELECT COUNT(*) AS total FROM `post` WHERE category_name = ?';
+            $result = $db->selectQueryBind($sql, $categoryName);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
     public function loadCategories()
     {
         try {
