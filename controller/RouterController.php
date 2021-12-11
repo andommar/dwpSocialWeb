@@ -38,6 +38,10 @@ class RouterController {
                 $file = 'views/home/signup';
                 $route = 'signup';
                 break;
+            case 'category_selection':
+                $file = 'views/shared/category_selection';
+                $route = 'category_selection';
+                break;
             // case '':
             //     $file = 'views/admin/admin-dashboard';
             //     $route = 'admin';

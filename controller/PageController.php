@@ -9,8 +9,8 @@ if (isset($_POST["pageName"])) {
     }
     $pageName = $_POST["pageName"];
     switch ($pageName) {
-        case 'userfeed':
-            include_once('../views/pages/userfeed.php');
+        case 'feed':
+            include_once('../views/pages/feeds.php');
             break;
         case 'new_post':
             include_once('../views/pages/new_post.php');

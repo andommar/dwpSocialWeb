@@ -94,11 +94,16 @@ $(document).ready(function () {
           if(data){
             var parsedData = $.parseJSON(data);
             if(typeof parsedData === 'boolean'){ // true or false
+              if(parsedData) {// post succesfully created
+                // Redirect to the specific category page to see the created new post 
+                redirectToCategoryPage(formData.get('category'));
+              }
+              else{// Errors
+                $('#general-message #general').text("Ooops! Something went wrong.");
+                showGeneralMessage();
+                emptyImageField();
+              }
               
-              // post succesfully created
-              // Redirect to the specific category page to see the created new post 
-              redirectToCategoryPage(formData.get('category'));
-             
             }
             else{ 
               
@@ -114,18 +119,22 @@ $(document).ready(function () {
               else if(parsedData["id"] == "image"){
                   $('#image-error').text(parsedData["text"]);
               }
+              else if(parsedData["id"] == "general"){
+                $('#general-message #general').text(parsedData["text"]);
+                showGeneralMessage();
+              }
               emptyImageField();
             }
           }
           else{
-            $('#general').text("Ooops! Something went wrong.");
+            $('#general-message #general').text("Ooops! Something went wrong.");
             showGeneralMessage();
             emptyImageField();
           }
 
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          $('#general').text("Ooops! Something went wrong.");
+          $('#general-message #general').text("Ooops! Something went wrong.");
           showGeneralMessage();
           emptyImageField();
         });

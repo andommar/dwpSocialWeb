@@ -52,7 +52,8 @@ if ($session->confirm_logged_in()) {
 
       <!-- Main content -->
       <div class="col col-lg-10 col-sm-9 col-xs-12" id='content'>
-        <?php require_once('views/pages/userfeed.php'); ?>
+        <?php $_SESSION['feed_page'] = "userfeed" ?>
+        <?php require_once('views/pages/feeds.php'); ?>
       </div>
 
     </div>
@@ -64,7 +65,7 @@ if ($session->confirm_logged_in()) {
 <script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
 <script type="text/javascript" src="views/web/js/header.js"></script>
 <script type="text/javascript" src="views/web/js/left-menu.js"></script>
-<script type="text/javascript" src="views/web/js/userfeed.js"></script>
+<script type="text/javascript" src="views/web/js/feeds.js"></script>
 <script type="text/javascript" src="views/web/js/show_post.js"></script>
 <script type="text/javascript" src="views/web/js/new_post.js"></script>
 <script type="text/javascript" src="views/web/js/user_profile.js"></script>

@@ -15,6 +15,12 @@ class CategoryController
         $res = $c->loadCategories();
         return $res;
     }
+    public function getCategoryTotalPosts($categoryName)
+    {
+        $c = new CategoryModel();
+        $res = $c->getCategoryTotalPosts($categoryName);
+        return $res;
+    }
 
     public function getUserCategories()
     {
@@ -46,6 +52,18 @@ class CategoryController
     {
         $c = new CategoryModel();
         $res = $c->registerUserCategories($userId, $categories);
+        return $res;
+    }
+    public function joinCategory($userId, $categoryName)
+    {
+        $c = new CategoryModel();
+        $res = $c->joinCategory($userId, $categoryName);
+        return $res;
+    }
+    public function leaveCategory($userId, $categoryName)
+    {
+        $c = new CategoryModel();
+        $res = $c->leaveCategory($userId, $categoryName);
         return $res;
     }
 

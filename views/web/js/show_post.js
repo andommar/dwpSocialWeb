@@ -54,5 +54,26 @@ $(document).ready(function () {
         }
     // }
   };
+  joinCategoryOnShowPostPage = function(categoryName, postId){
+    $.ajax({
+        url: "controller/ViewsController.php",
+        method: "POST",
+        data: { option:"join_category", categoryName:categoryName}
+    })
+    .done(function(data) {  
+      loadContent('show_post',postId);
+    });
+  }
+  leaveCategoryOnShowPostPage = function(categoryName, postId){
+    $.ajax({
+      url: "controller/ViewsController.php",
+      method: "POST",
+      data: { option:"leave_category", categoryName:categoryName}
+    })
+    .done(function(data) {
+      loadContent('show_post',postId);
+    });
+}
+
 
 });

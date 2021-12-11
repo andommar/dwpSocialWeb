@@ -10,9 +10,9 @@
         <i class="fas fa-bars"></i>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a id="all-cats" class="dropdown-item" href="#">All categories</a></li>
-        <li><a id="popular-feed" class="dropdown-item" href="#">Popular feed</a></li>
-        <li><a id="about-us" class="dropdown-item" href="#">About us</a></li>
+        <li><a id="all-cats" class="dropdown-item">All categories</a></li>
+        <li><a id="popular-feed" class="dropdown-item" onclick="<?php $_SESSION['feed_page'] = "popularfeed" ?>">Popular feed</a></li>
+        <li><a id="about-us" class="dropdown-item">About us</a></li>
       </ul>
     </div>
     <div id="search-bar">
@@ -37,7 +37,5 @@
       <i class="fa fa-plus" id="new_post" data-toggle="tooltip" data-placement="bottom" title="New Post"></i>
       <a id="logout" href="logout/1"><i class="fas fa-sign-out-alt" data-toggle="tooltip" data-placement="bottom" title="Logout"></i></a>
     </div>
-
-
   </div>
 </div>

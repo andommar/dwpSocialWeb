@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['userfeed_dropdown'])) $userfeed_dropdown = $_SESSION['userfeed_dropdown'];
+if (isset($_SESSION['feed_dropdown'])) $feed_dropdown = $_SESSION['feed_dropdown'];
 if (isset($data)) {
   $posts = $data[0];
   if (isset($data[1])) $votes = $data[1]; // There's a possibility that there are no votes in posts
@@ -10,17 +10,27 @@ if (isset($data)) {
 ?>
 <div class="row">
   <div class="col col-lg-12 col-xs-12">
-    <?php if (isset($userfeed_dropdown)) { ?>
-      <div id="userfeed_filters_section" class="dropdown d-flex justify-content-end">
-        <select name="userfeed_filters" id="userfeed_filters" onchange="loadPosts(this.value);">
-          <option value="latest" <?php if ($userfeed_dropdown == 'latest') echo 'selected="selected"' ?>>Latest posts</option>
-          <option value="popular" <?php if ($userfeed_dropdown == 'popular') echo 'selected="selected"' ?>>Popular posts</option>
-          <option value="oldest" <?php if ($userfeed_dropdown == 'oldest') echo 'selected="selected"' ?>>Oldest posts</option>
-          <option value="unpopular" <?php if ($userfeed_dropdown == 'unpopular') echo 'selected="selected"' ?>>Unpopular posts</option>
+    <!-- Breadcrumb -->
+    <div class="d-flex justify-content-start breadcrumb_section">
+      <span class="secondary-breadcrumb">Home</span>
+      <span class="breadcrumb-divider"><i class="fas fa-angle-right"></i></span>
+      <?php if ($_SESSION['feed_page'] == 'userfeed') { ?>
+        <span class="primary-breadcrumb">My feed</span>
+      <?php } else if ($_SESSION['feed_page'] == 'popularfeed') { ?>
+        <span class="primary-breadcrumb">Popular feed</span>
+      <?php } ?>
+    </div>
+    <?php if (isset($feed_dropdown) && isset($data)) { ?>
+      <div id="feed_filters_section" class="dropdown d-flex justify-content-end">
+        <select name="feed_filters" id="feed_filters" onchange="loadFeed(this.value);">
+          <option value="latest" <?php if ($feed_dropdown == 'latest') echo 'selected="selected"' ?>>Latest posts</option>
+          <option value="popular" <?php if ($feed_dropdown == 'popular') echo 'selected="selected"' ?>>Popular posts</option>
+          <option value="oldest" <?php if ($feed_dropdown == 'oldest') echo 'selected="selected"' ?>>Oldest posts</option>
+          <option value="unpopular" <?php if ($feed_dropdown == 'unpopular') echo 'selected="selected"' ?>>Unpopular posts</option>
         </select>
       </div>
     <?php } ?>
-    <div id="filtered-posts">
+    <div id="feed_filtered-posts">
       <?php
       if (isset($data)) {
         foreach ($posts as $post) { ?>
@@ -84,8 +94,12 @@ if (isset($data)) {
           <?php // We reset the up/downvote icon values  
           $upvote_class = "upvote_default";
           $downvote_class = "downvote_default"; ?>
-      <?php }
-      } ?>
+        <?php }
+      } else { ?>
+        <div class="no-posts-message">
+          <p class="m-0">You aren't following any category. Explore the Popular feed or go to All categories to find categories of your interest.</p>
+        </div>
+      <?php } ?>
     </div>
   </div>
 </div>

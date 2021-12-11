@@ -34,7 +34,7 @@ function validate_login()
                 var parsedData = $.parseJSON(data);
                 if(parsedData["id"].length==0 || parsedData["id"]==""){   // No PHP validation errors & User Exists 
                     
-                    window.location.replace('home'); // We send the user to the main page, logged in
+                    window.location.href = 'home'; // We send the user to the main page, logged in
                 }
                 else{ // PHP validation error ||  User doesn't exist
                     if(parsedData["id"] == "general"){

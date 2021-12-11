@@ -10,7 +10,9 @@ body {
   background: #18191a;
   overflow-x: hidden;
 }
-
+.c-pointer {
+  cursor: pointer;
+}
 /* ------------ HEADER ------------ */
 /* Top Navbar */
 .navbar {
@@ -44,6 +46,7 @@ body {
 #header-dropdown ul a {
   font-size: 15px;
   color: white;
+  cursor: pointer;
 }
 #header-dropdown ul a:hover,
 #header-dropdown ul a:active,
@@ -224,11 +227,30 @@ body {
 
 /* --------------------  CENTRAL CONTENT  (userfeed, category_posts, show_post) ---------------------  */
 
+/* Header breadcrumb */
+.breadcrumb_section {
+  margin-top: 2em;
+  font-weight: 400;
+  margin-left: 3.6em;
+  color: #198754;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.breadcrumb_section .breadcrumb-divider {
+  margin-left: 7px;
+  margin-right: 7px;
+  font-size: 10px;
+  margin-top: 5px;
+  color: #198754;
+}
+.breadcrumb_section .primary-breadcrumb {
+  text-decoration: underline;
+}
 /* Dropdown filter on Posts */
-#userfeed_filters_section {
+#feed_filters_section {
   margin: 2em 27em;
 }
-#userfeed_filters_section #userfeed_filters {
+#feed_filters_section #feed_filters {
   background-color: #242526;
   color: white;
   border: 1px solid #2a2b2d;
@@ -248,6 +270,7 @@ img.img-fluid {
   margin-bottom: 2em;
   margin-right: 27em;
   margin-left: 16em;
+  max-width: 554px; /* Maximum image width */
 }
 
 .post_title {
@@ -417,7 +440,7 @@ img.img-fluid {
 .comment_counts {
   color: #b7babe;
 }
-#filtered-posts .comment_counts:hover {
+#feed_filtered-posts .comment_counts:hover {
   color: #959595;
 }
 .custom-link,
@@ -449,7 +472,7 @@ a:link {
 }
 #scrollTop i {
   cursor: pointer;
-  margin-right: 2em;
+  /* margin-right: 2em; */
   background-color: hsl(0deg 0% 13%);
   padding: 12px 14px;
   border-radius: 100%;
