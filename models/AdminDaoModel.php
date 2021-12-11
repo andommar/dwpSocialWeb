@@ -4,7 +4,7 @@ class AdminDaoModel extends DbConn {
 
 
     function isUserAdmin($userId){
-        $sql = 'SELECT role_name from USER where `user_id` = ?';
+        $sql = 'SELECT role_name from user where `user_id` = ?';
         $result = $this->selectQueryBind($sql,$userId);
         if ($result[0]['role_name']== "Admin"){
             return true;
@@ -20,13 +20,13 @@ class AdminDaoModel extends DbConn {
     }
 
     function deleteUser ($userId){
-        $sql = 'DELETE FROM USER where `user_id` = ?';
+        $sql = 'DELETE FROM user where `user_id` = ?';
         $result = $this->executeQueryBind($sql, $userId);
         return $result;
     }
 
     function banUser ($userId, $newStatus){
-        $sql = 'UPDATE USER SET banned = ? where `user_id` = ?';
+        $sql = 'UPDATE user SET banned = ? where `user_id` = ?';
         $arr = [$newStatus, $userId];
         $result = $this->executeQueryBindArr($sql, $arr);
         return $result;
@@ -58,7 +58,7 @@ class AdminDaoModel extends DbConn {
     }
 
     function deleteComment ($commentId){
-        $sql = 'DELETE FROM COMMENT where `comment_id` = ?';
+        $sql = 'DELETE FROM comment where `comment_id` = ?';
         $result = $this->executeQueryBind($sql, $commentId);
         return $result;
     }

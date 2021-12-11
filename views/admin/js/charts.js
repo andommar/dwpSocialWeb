@@ -1,8 +1,8 @@
 $(document).ready(function () {
   $.ajax({
     method: "POST",
-    url: "../../controller/AdminViewController.php",
-    data: { option: "adminDashboard" },
+    url: "controller/AdminViewController.php",
+    data: { option: "admin-dashboard" },
   })
     .done(function (data) {
       var graphData = $.parseJSON(data);

@@ -8,6 +8,14 @@ DROP TABLE user_category;
 
 
 -- USER > Delete user FKs manually
+-- ** Get table constrains
+-- SELECT *  FROM information_schema.KEY_COLUMN_USAGE WHERE REFERENCED_TABLE_NAME = 'user';
+
+-- ALTER TABLE `user` DROP FOREIGN KEY user_ibfk_1;
+-- ALTER TABLE `post` DROP FOREIGN KEY post_ibfk_2;
+
+
+
 
 
 DROP TABLE `role`; 

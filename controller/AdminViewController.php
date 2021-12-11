@@ -4,7 +4,7 @@ if (isset($_POST["option"])) {
     $option = $_POST["option"];
 
     switch ($option) {
-        case "adminDashboard":
+        case "admin-dashboard":
             $a = new AdminController();
             $data=$a->adminPostCategoriesChartData();
             echo json_encode($data);

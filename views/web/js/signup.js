@@ -86,7 +86,7 @@ function validate_signup()
     else
     {
         $.ajax({
-            url: "../../controller/ViewsController.php",
+            url: "controller/ViewsController.php",
             method: "POST",
             data: { option:"signup", username:username, email:email, password:password, password2:password2}
         })
@@ -95,7 +95,7 @@ function validate_signup()
                 var parsedData = $.parseJSON(data);
                 if(typeof parsedData === 'string'){   // No PHP validation errors & User is new 
                     // Redirection to next step (category selection) 
-                    window.location.replace('../shared/category_selection.php');
+                    window.location.replace('views/shared/category_selection.php');
                 }
                 else{ // PHP validation error ||  User doesn't exist || Error in query
                     

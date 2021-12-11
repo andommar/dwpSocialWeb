@@ -11,11 +11,12 @@ class AdminController{
     public function isUserAdmin($userId){
         $a = new AdminDaoModel;
         $result = $a->isUserAdmin($userId);
-        if (!$result){
-            new Redirector("../home/login.php");
-        } else {
-            return true;
-        }
+        return $result;
+        // if (!$result){
+        //     return false;
+        // } else {
+        //     return true;
+        // }
     }
 
     // Dashboard functions

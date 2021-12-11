@@ -1,5 +1,5 @@
 <?php
-require_once('../../bootstrapping.php');
+// require_once('../../bootstrapping.php');
 ?>
 
 <!doctype html>
@@ -11,15 +11,15 @@ require_once('../../bootstrapping.php');
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Sign Up</title>
   <!-- Web icon -->
-  <link rel="icon" href="../web/img/assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="views/web/img/assets/favicon.ico" type="image/x-icon">
   <!-- Bootstrap 5.1.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="../web/css/login-signup.css" />
-  <link rel="stylesheet" href="../web/css/utilities.css" />
+  <link rel="stylesheet" href="views/web/css/login-signup.css" />
+  <link rel="stylesheet" href="views/web/css/utilities.css" />
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -86,8 +86,8 @@ require_once('../../bootstrapping.php');
     </div> <!-- container -->
   </div>
   <!-- Validation -->
-  <script type="text/javascript" src="../web/js/utils.js"></script>
-  <script type="text/javascript" src="../web/js/signup.js"></script>
+  <script type="text/javascript" src="views/web/js/utils.js"></script>
+  <script type="text/javascript" src="views/web/js/signup.js"></script>
 </body>
 
 </html>

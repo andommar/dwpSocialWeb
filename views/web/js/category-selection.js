@@ -156,7 +156,7 @@ function validate_category_selection()
                     else{
                         // Categories correctly added to registered user
                         // We send the user to the main page, logged in
-                        window.location.replace('../../index.php');
+                        window.location.replace('../../home');
                     }
                 }
                 else{
