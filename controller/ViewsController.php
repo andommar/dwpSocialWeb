@@ -24,6 +24,9 @@ if (isset($_POST["option"])) {
 
     switch ($option) {
 
+        case "set_feed":
+            $_SESSION['feed_page'] = $_POST["feedPage"];
+            break;
         case "login":
             $username = $_POST["username"];
             $password = $_POST["password"];
@@ -60,6 +63,7 @@ if (isset($_POST["option"])) {
             }
             break;
         case "new_post_form":
+            $result = false;
             $userid = $_SESSION['userId'];
             $title = $_POST["title"];
             $category = $_POST["category"];
@@ -70,13 +74,23 @@ if (isset($_POST["option"])) {
             $p = new PostController();
             if ($p->validateNewPostFields($title, $category, $description, $imageFile)) {
                 if (isset($_FILES['imgfile'])) { // Post with image
-                    $p->uploadImage($imageFile, $imgFileName); // Uploads image to media folder
+                    // We save the image
+                    $isImageUploaded = $p->scaleImageToPostWidthAndSave($imageFile, $imgFileName);
+                    if (!$isImageUploaded) {
+                        $p->msg["id"] = 'general';
+                        $p->msg["text"] = 'The image you chose could not be uploaded. Try again or choose another image.';
+                        $result = $p->msg;
+                    } else { // Image successfully uploaded
+                        $result = $p->newPost($userid, $title, $category, $imgFileName, $description);
+                    }
+                } else { // Post with no image
+                    $result = $p->newPost($userid, $title, $category, $imgFileName, $description);
                 }
-                $result = $p->newPost($userid, $title, $category, $imgFileName, $description);
-                echo json_encode($result); // We send query result
             } else { // validation errors
-                echo json_encode($p->msg);
+                $result = $p->msg;
             }
+
+            echo json_encode($result); // We send query result
             break;
 
         case "profile_form":
@@ -171,12 +185,16 @@ if (isset($_POST["option"])) {
             echo json_encode($data);
 
             break;
-        case "userfeed":
+        case "feed":
             $userId = $_SESSION['userId'];
-            $filter = $_POST["userfeedFilter"];
-            $_SESSION['userfeed_dropdown'] = $filter;
+            $filter = $_POST["feedFilter"];
+            $_SESSION['feed_dropdown'] = $filter;
             $p = new PostController();
-            $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
+            if ($_SESSION['feed_page'] == "userfeed") {
+                $posts = $p->loadUserFeedPostsFiltered($userId, $filter);
+            } else if ($_SESSION['feed_page'] == "popularfeed") {
+                $posts = $p->loadPopularFeedPostsFiltered($filter);
+            }
 
             if (isset($posts) && $posts) {
                 // We retrieve user's votes on posts
@@ -189,6 +207,24 @@ if (isset($_POST["option"])) {
                 echo json_encode($posts);
             }
             break;
+            // case "popularfeed":
+            //     $userId = $_SESSION['userId'];
+            //     $filter = $_POST["popularfeedFilter"];
+            //     $_SESSION['popularfeed_dropdown'] = $filter;
+            //     $p = new PostController();
+            //     $posts = $p->loadPopularFeedPostsFiltered($filter);
+
+            //     if (isset($posts) && $posts) {
+            //         // We retrieve user's votes on posts
+            //         $v = new VoteController();
+            //         $votes = $v->getUserRatedPosts($userId);
+            //         $votes = formatVotesArray($votes);
+            //         $posts_and_votes = array($posts, $votes);
+            //         echo json_encode($posts_and_votes);
+            //     } else {
+            //         echo json_encode($posts);
+            //     }
+            //     break;
         case "specific_category":
             $_SESSION['category_name'] = $_POST['categoryName'];
             break;
@@ -275,6 +311,24 @@ if (isset($_POST["option"])) {
             } else {
                 echo json_encode($c->msg); // We send the validation error message
             }
+
+            break;
+        case "join_category":
+
+            $userId = $_SESSION['userId'];
+            $categoryName = $_POST["categoryName"];
+            $c = new CategoryController();
+            $result = $c->joinCategory($userId, $categoryName);
+            echo $result;
+
+            break;
+        case "leave_category":
+
+            $userId = $_SESSION['userId'];
+            $categoryName = $_POST["categoryName"];
+            $c = new CategoryController();
+            $result = $c->leaveCategory($userId, $categoryName);
+            echo $result;
 
             break;
     }

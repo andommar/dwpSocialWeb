@@ -12,6 +12,12 @@ class PostController extends MediaController
         $res = $p->loadUserFeedPostsFiltered($userId, $filter);
         return $res;
     }
+    public function loadPopularFeedPostsFiltered($filter)
+    {
+        $p = new PostModel();
+        $res = $p->loadPopularFeedPostsFiltered($filter);
+        return $res;
+    }
     public function loadPostById($postId)
     {
         $p = new PostModel();
@@ -90,6 +96,10 @@ class PostController extends MediaController
                 if ($this->isImageBiggerThan2MB($imageFile['size'])) {
                     $this->msg["id"] = 'image';
                     $this->msg["text"] = 'Maximum image size is 2MB';
+                    $dataIsValid = false;
+                } else if ($this->getImageWidth($imageFile['tmp_name']) < 554) { // The image is too small
+                    $this->msg["id"] = 'image';
+                    $this->msg["text"] = 'Image is too small. Choose an image of a minimum width of 554px.';
                     $dataIsValid = false;
                 } else if ($this->getImageRatio($imageFile['tmp_name']) < 0.5) { // Image's height size is too big
                     $this->msg["id"] = 'image';

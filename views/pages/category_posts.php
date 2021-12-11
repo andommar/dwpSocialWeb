@@ -10,10 +10,20 @@ if (isset($data)) {
 // We load the category posts (it's possible there are no posts yet)
 if (isset($_SESSION['category_name'])) {
     $categoryName = $_SESSION['category_name'];
+
+    $c = new CategoryController();
+    // We load the categories as well to get the icons (we need them in case the category doesn't have posts)
+    $categories = $c->loadCategories();
+    // We load the specific category info
+    $category_info = $c->loadCategoryById($categoryName);
+    // We check if user is follower
+    $categoryFollower = $c->isUserFollower($categoryName);
+    // category total posts
+    $totalPosts = $c->getCategoryTotalPosts($categoryName);
+    // we retrieve category's total followers and join button state
+    $followers = $c->getCategoryFollowers($categoryName);
 }
-// We load the categories as well to get the icons (we need them in case the category doesn't have posts)
-$c = new CategoryController();
-$categories = $c->loadCategories();
+
 
 ?>
 <div class="row">
@@ -22,12 +32,30 @@ $categories = $c->loadCategories();
     ?>
     <div class="col col-lg-12 col-xs-12 p-0">
         <div id="category-header">
-            <p class="mb-0 text-center">
+            <p id="category-title" class="mb-0 text-center">
                 <?php foreach ($categories as $category) { ?>
                     <?php if ($category['category_name'] == $categoryName) { ?> <i class="<?php echo $category['icon'] ?> mx-1"></i> <?php } ?>
                 <?php } ?>
                 <?php echo $categoryName ?>
+
+                <!-- Follow category button. Depending on whether the user is a follower of the category or not-->
+                <?php if ((int)($categoryFollower[0]['total']) > 0) { ?>
+                    <button type="button" class="btn btn-leave" onclick="leaveCategoryOnCategoryPage('<?php echo $categoryName ?>')">Leave Category</button>
+                <?php } else { ?>
+                    <button type="button" class="btn btn-join" onclick="joinCategoryOnCategoryPage('<?php echo $categoryName ?>')">Join Category</button>
+                <?php } ?>
+                <!-- Category Followers -->
+                <span id="category-members">
+                    <strong><?php echo $followers[0]['total'] ?></strong> <span>Members</span>
+                    <span class="m-1"></span>
+                    <strong class="ml-3"><?php echo $totalPosts[0]['total'] ?></strong> <span>Posts</span>
+                </span>
             </p>
+            <div id="category-info" class="text-center">
+                <!-- Category description -->
+                </hr>
+                <p id="category-description"><?php echo $category_info[0]['description'] ?></p>
+            </div>
         </div>
         <?php if (isset($categoryPosts_dropdown) && isset($data)) { ?>
             <div id="category-posts_filters_section" class="dropdown d-flex justify-content-end">

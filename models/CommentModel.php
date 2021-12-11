@@ -32,6 +32,7 @@ class CommentModel
             // media url is not binded yet
             $result = false;
             $db = new DbConn();
+            date_default_timezone_set("Europe/Copenhagen");
             $date = date('Y-m-d H:i:s');
             // $arr = [$userId, $postId, $description, $mediaUrl, 0, 0, $date];
             $arr = [$userId, $postId, $description, 0, 0, $date];
