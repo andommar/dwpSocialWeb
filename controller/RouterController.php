@@ -31,7 +31,7 @@ class RouterController {
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
                 } else if(!empty($params[1]) && $params[1] == 'users'){
-                    $file = 'views/admin/pages/admin-users';
+                    $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
                 } else if(!empty($params[1]) && $params[1] == 'user'){
                     $file = 'views/admin/admin-dashboard';
@@ -68,10 +68,10 @@ class RouterController {
                 break;
         }
 
-        if (!empty($params[1]) && !($params[0] == 'admin' || $params[0] == 'logout')){
-            $file = 'views/home/404';
-            $route = '404';
-        }
+        // if (!empty($params[1]) && !($params[0] == 'admin' || $params[0] == 'logout')){
+        //     $file = 'views/home/404';
+        //     $route = '404';
+        // }
 
         $r = new RouterModel ($request);
         $r->get($route, $file);
