@@ -6,8 +6,8 @@
             <a class="sidebar_link" href="admin" id="admin-dashboard-link"><i class="fas fa-tachometer-alt fa-fw"></i>Dashboard</a>
             <div class="sidenav-menu-heading">MANAGEMENT</div>
             <a class="sidebar_link" href="admin/posts" id="admin-posts-link"><i class="fas fa-comment-dots fa-fw"></i>Posts</a>
-            <a class="sidebar_link" href="adminUsersDashboard.php" id="admin-users-link"><i class="fas fa-users fa-fw"></i>Users</a>
-            <a class="sidebar_link" href="adminCommentsDashboard.php" id="admin-comments-link"><i class="fas fa-comments fa-fw"></i>Comments</a>
+            <a class="sidebar_link" href="admin/users" id="admin-users-link"><i class="fas fa-users fa-fw"></i>Users</a>
+            <a class="sidebar_link" href="admin/comments" id="admin-comments-link"><i class="fas fa-comments fa-fw"></i>Comments</a>
             <div class="sidenav-menu-heading">STATS</div>
             <a href="charts.php"><i class="fas fa-tachometer-alt fa-fw"></i>Charts</a>
             </nav>

@@ -193,7 +193,7 @@ if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
         </main>
       </div>
     </div>
-    <script src="js/admin-dashboard.js"></script>
+    <script src="js/admin-validation.js"></script>
     <script src="views/web/js/utils.js"></script>
     <!-- <script src="js/chart-pie.js"></script> -->
   </body>
