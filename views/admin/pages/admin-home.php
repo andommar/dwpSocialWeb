@@ -30,4 +30,7 @@
     </div>
 </div>
 
+<?php echo '<script src="'. PATH .'views/admin/js/charts.js"></script>'; ?>
+
+
 

@@ -38,8 +38,8 @@ if((isset($_GET['delete'])) && $a->isUserAdmin($_SESSION['userId'])){
                                 echo '<td> '.$post['down_votes'].'</td>';
                                 echo '<td> '.$post['total_comments'].'</td>';
                                 echo '<td>';
-                                echo '<button type="button" class="btn btn-danger btn-sm 
-                                        onclick="return confirm(\'Are you sure you want to delete this posts and its related comments?\');"
+                                echo '<button type="button" class="btn btn-danger btn-sm"  id="deletePostBtn"
+                                        onclick="adminDeletePost(this.value);"
                                         value='.$post['post_id'].'><i class="fas fa-trash"></i></button>';
                                 echo '</a>';
                                 echo '</td>';
@@ -52,3 +52,4 @@ if((isset($_GET['delete'])) && $a->isUserAdmin($_SESSION['userId'])){
           </div>
 
   <script src="../views/admin/js/data-table.js"></script>
+  <?php echo '<script src="'. PATH .'views/admin/js/admin-dashboard.js"></script>'; ?>

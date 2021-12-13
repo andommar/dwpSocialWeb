@@ -19,6 +19,11 @@ if (isset($_POST["option"])) {
             $result = $a->banUser($_POST['userid'], $_POST['banned']);
             echo $result;
             break;
+        case "adminDeletePost":
+            $a = new AdminController();
+            $result = $a->deletePost($_POST['postId']);
+            echo json_encode($result);
+            break;
     }
 
 }

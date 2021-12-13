@@ -42,8 +42,14 @@ class AdminDaoModel extends DbConn {
     }
 
     function deletePost ($postId){
-        $sql = 'DELETE FROM POST where `post_id` = ?';
-        $result = $this->executeQueryBind($sql, $postId);
+        $tableParam = 'post';
+        $fieldParam = 'post_id';
+        if ($this->checkIdExists($tableParam, $fieldParam, $postId)){
+            $sql = 'DELETE FROM post where `post_id` = ?';
+            $result = $this->executeQueryBind($sql, $postId);
+        } else {
+            $result =false;
+        }
         return $result;
     }
 
@@ -74,6 +80,15 @@ class AdminDaoModel extends DbConn {
         $result = $this->selectQuery($sql);
         $arr[] = $result;
         return $arr;
+    }
+
+    function checkIdExists ($tableParam, $fieldParam, $idParam){
+        $sql = "SELECT {$fieldParam} FROM {$tableParam} WHERE {$fieldParam} = ?";
+        $result = $this->selectQueryBind($sql,$idParam);
+        if(!$result){
+            $result = false;
+        }
+        return $result;
     }
 }
 

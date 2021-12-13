@@ -104,6 +104,11 @@ class AdminController{
     public function deletePost($postId){
         $a = new AdminDaoModel;
         $result = $a->deletePost($postId);
+        if($result == true){
+            $result = 'Post deleted successfully';
+        } else {
+            $result = 'Something went wrong. Contact administration';
+        }
         return $result;
     }
     // Comments functions

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark bg-dark p-0">
     <div class="col-md-2">
-        <a href="home" class="navbar-brand">Socially</a>
+        <a href="../home" class="navbar-brand">Socially</a>
     </div>
     <div class="admin_navbar_links px-3">
         <div class="admin_navbar_profile d-flex align-items-center" id="user_profile">
