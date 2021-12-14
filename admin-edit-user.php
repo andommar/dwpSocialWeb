@@ -17,7 +17,7 @@
                 <div class="d-flex align-items-start py-3 border-bottom">
                     <div class="col-md-6 d-flex px-2 user-profile-info" id="user-info-section"> 
                         <div class="col-md-4">
-                            <?php echo '<img src="'. PATH .'views/web/img/avatars/'.$data['avatar'].'" class="img" alt="">' ?>
+                            <?php echo '<img src="'. PATH .'/views/web/img/avatars/'.$data['avatar'].'" class="img" alt="">' ?>
                         </div>
                         <div class="col-md-6 d-flex-column px-2 align-self-center">
                             <div class="d-flex user-title-info">

@@ -1,11 +1,12 @@
 <?php
 // require_once ('../../bootstrapping.php');
+define("PATH", '/dwpSocialWeb/'); //Change '/dwpSocialWeb/' to '/' on the live server
+
 $a = new AdminController();
 if (!(isset($_SESSION['userId']) && $a->isUserAdmin($_SESSION['userId']))){
-    $redirect = new Redirector("home");
+    $redirect = new Redirector(PATH.'home');
 }
 
-define("PATH", '/dwpSocialWeb/');
 ?>
 
 <!DOCTYPE html>
