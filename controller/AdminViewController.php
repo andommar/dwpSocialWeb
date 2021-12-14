@@ -33,6 +33,11 @@ if (isset($_POST["option"])) {
             $result = $a->deletePost($_POST['postId']);
             echo json_encode($result);
             break;
+        case "adminDeleteComment":
+            $a = new AdminController();
+            $result = $a->deleteComment($_POST['commentId']);
+            echo json_encode($result);
+            break;
     }
 
 }

@@ -67,6 +67,29 @@ $(document).ready(function(){
             alert('Could not process the data');
         }
     }
+    adminDeleteComment = function (value) {
+
+        if (!isNaN(value)){
+            if (confirm("Are you sure you want to delete this comment?")){
+                let commentId = value;
+                $.ajax({
+                    method: "POST",
+                    url: "../controller/AdminViewController.php",
+                    data: {option: 'adminDeleteComment', commentId: commentId }
+                })
+                .done(function(data){
+                    alert(data);
+                })
+                .fail (function(error){
+                    console.log(error);
+                })
+            } else {
+                return false;
+            }
+        } else {
+            alert('Could not process the data');
+        }
+    }
     adminEditUserRedirect = function (value) {
 
         if (!isNaN(value)){

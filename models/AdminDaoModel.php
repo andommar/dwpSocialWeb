@@ -76,8 +76,14 @@ class AdminDaoModel extends DbConn {
     }
 
     function deleteComment ($commentId){
-        $sql = 'DELETE FROM comment where `comment_id` = ?';
-        $result = $this->executeQueryBind($sql, $commentId);
+        $tableParam = 'comment';
+        $fieldParam = 'comment_id';
+        if ($this->checkIdExists($tableParam, $fieldParam, $commentId)){
+            $sql = 'DELETE FROM comment where `comment_id` = ?';
+            $result = $this->executeQueryBind($sql, $commentId);
+        }else {
+            $result =false;
+        }
         return $result;
     }
     function adminPostCategoriesChartData (){

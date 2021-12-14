@@ -139,6 +139,11 @@ class AdminController{
     public function deleteComment($commentId){
         $a = new AdminDaoModel;
         $result = $a->deleteComment($commentId);
+        if($result == true){
+            $result = 'Comment deleted successfully';
+        } else {
+            $result = 'Something went wrong. Contact administration';
+        }
         return $result;
     }
 

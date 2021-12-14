@@ -36,9 +36,9 @@ if((isset($_GET['delete'])) && ($a->isUserAdmin($_SESSION['userId']))){
                                 echo '</td>';
                                 echo '<td> '.date("d-m-Y, H:i",strtotime($comment['datetime'])).'</td>';
                                 echo '<td>';
-                                echo '<a href="comments.php?delete='.$comment['comment_id'].'" class="delete" 
-                                    onclick="return confirm(\'Are you sure you want to delete this comment?\');"><i class="fas fa-trash"></i></a>';
-                                echo '</a>';
+                                echo '<button type="button" class="btn btn-danger btn-sm"  id="deleteCommentBtn"
+                                onclick="return adminDeleteComment(this.value);"
+                                value='.$comment['comment_id'].'><i class="fas fa-trash"></i></button>';
                                 echo '</td>';
                                 echo '</tr>';
                                 } ?>
@@ -48,4 +48,4 @@ if((isset($_GET['delete'])) && ($a->isUserAdmin($_SESSION['userId']))){
                 </div>
           </div>
 
-    <script src="../views/admin/js/data-table.js"></script>
+  <?php echo '<script src="'. PATH .'/views/admin/js/data-table.js"></script>'; ?>
