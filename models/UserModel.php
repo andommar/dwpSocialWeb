@@ -169,6 +169,25 @@ class UserModel
             print($ex->getMessage());
         }
     }
+    public function isUsernameBanned($username)
+    {
+        try {
+            $db = new Dbconn();
+            $result = false;
+            if ($db->isConnected()) {
+                $sql = 'SELECT count(*) as total from user where `username` = ? and banned=1';
+                $result = $db->selectQueryBindSingleFetch($sql, $username);
+                if ($result[0]['total'] == 0) {
+                    $result = false;
+                } else {
+                    $result = true;
+                }
+            }
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
 
     public function isUserRegisteredId($userId)
     {
@@ -196,9 +215,6 @@ class UserModel
                 if ($this->isUsernameRegistered($username)) {
                     $this->message["id"] = "username";
                     $this->message["text"] = "This username is currently being used by another user.";
-                } else if ($this->isEmailRegistered($email)) {
-                    $this->message["id"] = "email";
-                    $this->message["text"] = "This email is currently being used by another user.";
                 } else {
                     $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
                     VALUES (?, ?, ?, ?, ?, ?)';

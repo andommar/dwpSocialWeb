@@ -87,10 +87,7 @@ class PostController extends MediaController
         }
 
         // Image
-        if (!empty($imageFile)) { // The post has an image
-            // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
-            // $imgFileName = $imgFileName . '.' . $imgFileExtension;
-
+        if (!empty($imageFile)) {
             if ($this->isImageTheSupportedType($imageFile['type'])) {
                 //Image size bigger than 2MB
                 if ($this->isImageBiggerThan2MB($imageFile['size'])) {
@@ -101,13 +98,17 @@ class PostController extends MediaController
                     $this->msg["id"] = 'image';
                     $this->msg["text"] = 'Image is too small. Choose an image of a minimum width of 554px.';
                     $dataIsValid = false;
+                } else if ($this->getImageWidth($imageFile['tmp_name']) > 1920 || $this->getImageHeight($imageFile['tmp_name']) > 1920) { // The image is too big in px
+                    $this->msg["id"] = 'image';
+                    $this->msg["text"] = "Image width or height can't be bigger than 1920px";
+                    $dataIsValid = false;
                 } else if ($this->getImageRatio($imageFile['tmp_name']) < 0.5) { // Image's height size is too big
                     $this->msg["id"] = 'image';
-                    $this->msg["text"] = 'Image height is too big in relation to its width.';
+                    $this->msg["text"] = 'Image height is too big in relation to its width. (Accepted ratios: 0.5-3)';
                     $dataIsValid = false;
                 } else if ($this->getImageRatio($imageFile['tmp_name']) > 3) { // Image's width size is too big
                     $this->msg["id"] = 'image';
-                    $this->msg["text"] = 'Image width is too big in relation to its height';
+                    $this->msg["text"] = 'Image width is too big in relation to its height. (Accepted ratios: 0.5-3)';
                     $dataIsValid = false;
                 }
             } else {

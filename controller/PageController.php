@@ -27,6 +27,9 @@ if (isset($_POST["pageName"])) {
         case 'all_categories':
             include_once('../views/pages/all_categories.php');
             break;
+        case 'about_us':
+            include_once('../views/pages/about_us.php');
+            break;
         default:
             // $content = '<h1> This is what you came for' . $pageId . ' </h1>';
             break;

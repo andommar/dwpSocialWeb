@@ -14,21 +14,9 @@ $(document).ready(function () {
     tinymce.remove("textarea#description");
     tinymce.init({
       selector: 'textarea#description',
-      // when a toolbar icon doesn't fit, it's placed on another row
-      //** toolbar_mode: 'wrap',
       toolbar_mode:'floating',
-      // Dark theme (comment this lines to set light theme again)
-      // skin: "oxide-dark",
-      // content_css: "dark",
-      //formatselect (headings)
-      // strikethrough (underline in the middle)
-      // link toolbar and plugin
-      // emoticons and plugin
-      // ** toolbar: 'undo redo | styleselect | bold italic underline formatpainter | alignleft aligncenter alignright alignjustify numlist bullist ',
       // icon groups in toolbar
       toolbar: 'undo redo | styleselect | bold italic underline strikethrough formatpainter | alignment | lists',
-      // styleselect (todos los styles)
-      // formatselect (headings)
       toolbar_groups: {
         alignment: {
           icon: 'align-left',
@@ -36,21 +24,16 @@ $(document).ready(function () {
         },
         lists: {
           icon: 'ordered-list',
-          //tooltip: 'Formatting',
           items: 'numlist bullist'
         }
       },
-
       plugins: 'formatpainter lists',
       // lists indent 
       lists_indent_on_tab: false,
-      // link_default_protocol: 'https',
       // Removes the menu bar (File, Edit, View and Format)
       menubar : false,
       // If false, removes the resizing option
       statusbar:true,
-      // removes the branding name
-      // branding: false
     });
 
   }
@@ -200,12 +183,20 @@ function validateNewPostFields(title,category,plainDescription,editorDescription
         $('#image-error').text("Maximum image size is 2MB");
         dataIsValid = false;
       }
+      else if(imageWidth<554){// Image width is too small
+        $('#image-error').text("Image is too small. Choose an image of a minimum width of 554px.");
+        dataIsValid = false;
+      }
+      else if(imageWidth>1920 || imageHeight>1920){// The image is too big in px
+        $('#image-error').text("Image width or height can't be bigger than 1920px.");
+        dataIsValid = false;
+      }
       else if(imageRatio<0.5){ // Image's height size is too big
-        $('#image-error').text("Image height is too big in relation to its width.");
+        $('#image-error').text("Image height is too big in relation to its width. (Accepted ratios: 0.5-3)");
         dataIsValid = false;
       }
       else if(imageRatio>3){ // Image's width size is too big
-        $('#image-error').text("Image width is too big in relation to its height.");
+        $('#image-error').text("Image width is too big in relation to its height. (Accepted ratios: 0.5-3)");
         dataIsValid = false;
       }
     } else {
@@ -231,8 +222,8 @@ function resetNewPostErrorMessages() {
     $("#category-error").text("");
     $("#description-error").val('');
     $("#description-error").text("");
-    $("#image-error").val('');
-    $("#image-error").text("");
+    $("#avatar-error").val('');
+    $("#avatar-error").text("");
   }
   
 function emptyImageField(){
