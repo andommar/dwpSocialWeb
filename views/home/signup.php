@@ -80,7 +80,7 @@
           </p>
         </form>
         <footer>
-          <p>Already have an account? <a class="purple-color" href="login.php">Login Here</a></p>
+          <p>Already have an account? <a class="purple-color" href="login">Login Here</a></p>
         </footer>
       </div>
     </div> <!-- container -->

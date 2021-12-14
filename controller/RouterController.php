@@ -1,6 +1,8 @@
 <?php
-class RouterController {
-    public function routerRedirect($request) {
+class RouterController
+{
+    public function routerRedirect($request)
+    {
         $localpath = 'dwpSocialWeb';
         $request = str_replace($localpath, '', $request,);
         $request = trim($request, '/',);
@@ -42,19 +44,16 @@ class RouterController {
                 $file = 'views/shared/category_selection';
                 $route = 'category_selection';
                 break;
-            // case '':
-            //     $file = 'views/admin/admin-dashboard';
-            //     $route = 'admin';
-            //     break;
+                // case '':
+                //     $file = 'views/admin/admin-dashboard';
+                //     $route = 'admin';
+                //     break;
             default:
                 $file = 'views/home/404';
                 $route = '404';
                 break;
         }
-        $r = new RouterModel ($request);
+        $r = new RouterModel($request);
         $r->get($route, $file);
     }
 }
-
-
-?>

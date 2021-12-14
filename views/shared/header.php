@@ -1,34 +1,23 @@
 <div class="row navbar d-flex align-items-center h-auto sticky-top">
-  <div class="col col-6 navbar_left d-flex align-items-center flex-fill my-2">
+  <div class="col col-9 navbar_left d-flex align-items-center flex-fill my-2">
     <div>
       <a id="logo-link"><img class="navbar_logo" src="views/web/img/assets/logo_low.png" alt="avatar" /></a>
     </div>
-
     <!-- Dropdown menu -->
-    <div id="header-dropdown" class="dropdown mx-3">
-      <button class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li><a id="all-cats" class="dropdown-item">All categories</a></li>
-        <li><a id="popular-feed" class="dropdown-item" onclick="<?php $_SESSION['feed_page'] = "popularfeed" ?>">Popular feed</a></li>
-        <li><a id="about-us" class="dropdown-item">About us</a></li>
-      </ul>
-    </div>
-    <div id="search-bar">
-      <form class="d-flex">
-        <input class="form-control me-2 input-field" type="search" placeholder="Type something" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search </button>
-      </form>
+    <div id="header-buttons" class="dropdown mx-3">
+      <button type="button" class="btn" id="all-cats">All categories</button>
+      <button type="button" class="btn" id="popular-feed" onclick="<?php $_SESSION['feed_page'] = "popularfeed" ?>">Popular feed</button>
+      <button type="button" class="btn" id="about-us" onclick="goToAboutPage()">About us</button>
     </div>
   </div>
-
-  <div class="col col-6 navbar_right d-flex align-items-center flex-fill my-2">
+  <div class="col col-3 navbar_right d-flex align-items-center flex-fill my-2">
     <!-- Scroll to top button -->
     <div class="d-flex align-items-center" id="scrollTop">
       <i class="fas fa-arrow-up" data-toggle="tooltip" data-placement="bottom" title="Scroll to Top"></i>
     </div>
-    <?php if($userData['role'] == 'Admin') { echo '<a class="btn btn-outline-success mx-2" href="admin">Admin </a>';} ?>
+    <?php if ($userData['role'] == 'Admin') {
+      echo '<a class="btn btn-outline-success mx-2" href="admin">Admin </a>';
+    } ?>
     <div class="navbar_profile d-flex align-items-center" id="user_profile">
       <img src="./views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" />
       <span><?php echo $userData['username'] ?></span>

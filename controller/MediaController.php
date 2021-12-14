@@ -24,6 +24,7 @@ class MediaController
 
     // Images path
     public const MEDIAPATH = "../views/web/img/media/";
+    public const AVATARPATH = "../views/web/img/avatars/";
 
     // Image functions
     public function load($imageFile)
@@ -122,6 +123,59 @@ class MediaController
         $imgFileName = $prefix . '_' . strtolower($imageFile['name']);
         // 6: We save the image on the images path folder
         $isImageSaved = $this->save("" . self::MEDIAPATH . $imgFileName . "");
+        // 7: We destroy the temporary image
+        imagedestroy($new_image);
+        return $isImageSaved;
+    }
+    public function cropScaleAndSaveAvatar($imageFile, &$imgFileName)
+    {
+        $isImageSaved = false;
+        // 1: We create a new image from file
+        $this->load($imageFile);
+        // 2: we define its width and height
+        $width = $this->imageWidth;
+        $height = $this->imageHeight;
+        $size = min($width, $height); // we take the shortest image side
+        // 3: CROPPING - We crop the image in the middle, except if it's a square image
+        if ($width == $height) { // square avatar
+            $new_avatar = imagecrop($this->image, ['x' => 0, 'y' => 0, 'width' => $size, 'height' => $size]);
+        } else if ($width > $height) {
+            $x = ($width / 2) - ($height / 2);
+            $new_avatar = imagecrop($this->image, ['x' => $x, 'y' => 0, 'width' => $size, 'height' => $size]);
+        } else if ($width < $height) {
+            $y = ($height / 2) - ($width / 2);
+            $new_avatar = imagecrop($this->image, ['x' => 0, 'y' => $y, 'width' => $size, 'height' => $size]);
+        }
+        // 4: we save the image in the property
+        // We create a new true color image
+        $this->image = $new_avatar;
+
+        // 5: RESIZING - we create a copy image 
+        $new_image = imagecreatetruecolor(120, 120);
+        // 6: We resize the square image to 120x120 px
+        imagecopyresampled(
+            $new_image,
+            $this->image,
+            0,
+            0,
+            0,
+            0,
+            120,
+            120,
+            imagesx($this->image),
+            imagesy($this->image)
+        );
+        // 7: We save the result image
+        $this->image = $new_image;
+
+        // 8: We define a unique name
+        $prefix = uniqid();
+        $imgFileName = $prefix . '_' . strtolower($imageFile['name']);
+        // 9: We save the image on the images path folder
+        $isImageSaved = $this->save("" . self::AVATARPATH . $imgFileName . "");
+        // 10: We destroy the temporary images
+        imagedestroy($new_avatar);
+        imagedestroy($new_image);
         return $isImageSaved;
     }
     public function saveOriginalImage($imageFile, &$imgFileName)

@@ -1,5 +1,7 @@
 
-
+DROP TABLE web_insight;
+DROP TABLE company_developer;
+DROP TABLE company;
 DROP TABLE user_message; 
 DROP TABLE user_votes_post; 
 DROP TABLE post_tag; 

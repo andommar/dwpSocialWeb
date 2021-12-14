@@ -6,7 +6,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
-class UserController
+class UserController extends MediaController
 {
     public $msg = array(
         "id" => "",
@@ -36,21 +36,6 @@ class UserController
         return $data;
     }
 
-    // public function getUserData($userId)
-    // {
-    //     $u = new UserModel($userId);
-    //     $data = [
-    //         'userId' => $u->getUserId(),
-    //         'username' => $u->getUsername(),
-    //         'avatar' => $u->getUserAvatar(),
-    //         'email' => $u->getUserEmail(),
-    //         'rank' => $u->getUserRank(),
-    //         'role' => $u->getUserRole(),
-    //         'banned' => $u->getUserStatus()
-    //     ];
-    //     return $data;
-    // }
-    
     public function getUserPassword()
     {
         $u = new UserModel($_SESSION['userId']);
@@ -148,5 +133,148 @@ class UserController
             $isDataValid = true;
         }
         return $isDataValid;
+    }
+
+    function validateUserProfile(&$email, &$password, &$password1, &$password2)
+    {
+        $isDataValid = true;
+        // Variables sanitizing
+
+        $email = htmlspecialchars(trim($email));
+        $email = str_replace(' ', '', $email);
+
+        $password = htmlspecialchars(trim($password));
+        $password = str_replace(' ', '', $password);
+
+        $password1 = htmlspecialchars(trim($password1));
+        $password1 = str_replace(' ', '', $password1);
+
+        $password2 = htmlspecialchars(trim($password2));
+        $password2 = str_replace(' ', '', $password2);
+
+        // Regex
+        $email_regexp = "/^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/";
+        $password_regexp = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,30}$/";
+
+        // No field 
+        if (!$email && !$password && !$password1 && !$password2) {
+            $this->msg["id"] = "general";
+            $this->msg["text"] = "Write an email or password to save changes.";
+            $isDataValid = false;
+        } else if ($email) { // check if email is the accepted type
+            if (!preg_match($email_regexp, $email)) {
+                $this->msg["id"] = "email";
+                $this->msg["text"] = "This email is not valid.";
+                $isDataValid = false;
+            } else {
+                if ($this->getUserInfo($_SESSION['userId'])['email'] === $email) {
+                    $this->msg["id"] = "email";
+                    $this->msg["text"] = "The new email should be different than your current one.";
+                    $isDataValid = false;
+                } else if (($password && (!$password1 || !$password2)) || ($password1 && (!$password || !$password2)) || ($password2 && (!$password || !$password1))) {
+                    $this->msg["id"] = "general";
+                    $this->msg["text"] = "The new password, the confirmation password and the current password are required to upload your information.";
+                    $isDataValid = false;
+                } else if ($password && $password1 && $password2) {
+                    if (!password_verify($password, $this->getUserPassword())) {
+                        $this->msg["id"] = "password";
+                        $this->msg["text"] = "Your current password is incorrect. Try again.";
+                        $isDataValid = false;
+                    } else if (!preg_match($password_regexp, $password1)) {
+                        $this->msg["id"] = "general";
+                        $this->msg["text"] = "The new password must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
+                        $isDataValid = false;
+                    } else if (strlen($password1) < 6) {
+                        $this->msg["id"] = "password1";
+                        $this->msg["text"] = "Password must have at least 6 characters.";
+                        $isDataValid = false;
+                    } else if (strlen($password1) > 30) {
+                        $this->msg["id"] = "password1";
+                        $this->msg["text"] = "Password cannot exceed 30 characters.";
+                        $isDataValid = false;
+                    } else if ($password1 !== $password2) {
+                        $this->msg["id"] = "general";
+                        $this->msg["text"] = "The new password and the confirmation password don't match.";
+                        $isDataValid = false;
+                    } else if (($password === $password1) && ($password1 === $password2) && ($password === $password2)) {
+                        $this->msg["id"] = "general";
+                        $this->msg["text"] = "The new password should be different than your current one.";
+                        $isDataValid = false;
+                    }
+                }
+            }
+        } else if (($password && (!$password1 || !$password2)) || ($password1 && (!$password || !$password2)) || ($password2 && (!$password || !$password1))) {
+            $this->msg["id"] = "general";
+            $this->msg["text"] = "The new password, the confirmation password and the current password are required to upload your information.";
+            $isDataValid = false;
+        } else if ($password && $password1 && $password2) {
+            if (!password_verify($password, $this->getUserPassword())) {
+                $this->msg["id"] = "password";
+                $this->msg["text"] = "Your current password is incorrect. Try again.";
+                $isDataValid = false;
+            } else if (!preg_match($password_regexp, $password1)) {
+                $this->msg["id"] = "general";
+                $this->msg["text"] = "The new password must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
+                $isDataValid = false;
+            } else if (strlen($password1) < 6) {
+                $this->msg["id"] = "password1";
+                $this->msg["text"] = "Password must have at least 6 characters.";
+                $isDataValid = false;
+            } else if (strlen($password1) > 30) {
+                $this->msg["id"] = "password1";
+                $this->msg["text"] = "Password cannot exceed 30 characters.";
+                $isDataValid = false;
+            } else if ($password1 !== $password2) {
+                $this->msg["id"] = "general";
+                $this->msg["text"] = "The new password and the confirmation password don't match.";
+                $isDataValid = false;
+            } else if (($password === $password1) && ($password1 === $password2) && ($password === $password2)) {
+                $this->msg["id"] = "general";
+                $this->msg["text"] = "The new password should be different than your current one.";
+                $isDataValid = false;
+            }
+        }
+        return $isDataValid;
+    }
+
+    function validateNewAvatar(&$imageFile)
+    {
+        $dataIsValid = true;
+        if (!empty($imageFile)) { // The user uploaded an avatar
+
+            if ($this->isImageTheSupportedType($imageFile['type'])) {
+                //Image size bigger than 2MB
+                if ($this->isImageBiggerThan2MB($imageFile['size'])) {
+                    $this->msg["id"] = 'avatar';
+                    $this->msg["text"] = 'Maximum image size is 2MB';
+                    $dataIsValid = false;
+                } else if ($this->getImageWidth($imageFile['tmp_name']) < 120) { // The image is too small
+                    $this->msg["id"] = 'avatar';
+                    $this->msg["text"] = 'Image is too small. Choose an image of a minimum width of 120px.';
+                    $dataIsValid = false;
+                } else if ($this->getImageWidth($imageFile['tmp_name']) > 1920 || $this->getImageHeight($imageFile['tmp_name']) > 1920) { // The image is too big in px
+                    $this->msg["id"] = 'avatar';
+                    $this->msg["text"] = "Image width or height can't be bigger than 1920px.";
+                    $dataIsValid = false;
+                } else if ($this->getImageRatio($imageFile['tmp_name']) < 0.5) { // Image's height size is too big
+                    $this->msg["id"] = 'avatar';
+                    $this->msg["text"] = 'Image height is too big in relation to its width. (Accepted ratios: 0.5-3)';
+                    $dataIsValid = false;
+                } else if ($this->getImageRatio($imageFile['tmp_name']) > 3) { // Image's width size is too big
+                    $this->msg["id"] = 'avatar';
+                    $this->msg["text"] = 'Image width is too big in relation to its height. (Accepted ratios: 0.5-3)';
+                    $dataIsValid = false;
+                }
+            } else {
+                $this->msg["id"] = 'avatar';
+                $this->msg["text"] = 'Only jpeg, jpg, png and gif images are allowed';
+                $dataIsValid = false;
+            }
+        } else { // The user didn't upload an avatar
+            $this->msg["id"] = 'avatar';
+            $this->msg["text"] = 'You uploaded no image.';
+            $dataIsValid = false;
+        }
+        return $dataIsValid;
     }
 }

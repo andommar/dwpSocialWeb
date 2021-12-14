@@ -21,10 +21,16 @@ class UserLogin
             // Hashed password comparison
             // We compare the input pass to one found on the database (hashed) 
             if (password_verify($pass, $result[0]['password'])) {
-                // if ($result[0]['password'] == $pass) {
-                $_SESSION['userId'] = $result[0]['user_id'];
-                $_SESSION['username'] = $result[0]['username'];
-                $_SESSION['avatar'] = $result[0]['avatar'];
+                $u = new UserModel($result[0]['user_id']);
+                if ($u->getUserStatus()) { // Check if user is banned
+                    $this->message["id"] = "general";
+                    $this->message["text"] = "You are banned. Contact the administrator to be able to log in again with this user.";
+                    session_destroy();  // we make sure the session is not
+                } else {
+                    $_SESSION['userId'] = $result[0]['user_id'];
+                    $_SESSION['username'] = $result[0]['username'];
+                    $_SESSION['avatar'] = $result[0]['avatar'];
+                }
             } else {
                 $this->message["id"] = "general";
                 $this->message["text"] = "Username/password combination incorrect. Please make sure your caps lock key is off and try again.";
