@@ -1,11 +1,11 @@
 $( document ).ready(function() {
 
     // When clicking on menu > "all categories" option
-    $("ul #all-cats").click(function () {
+    $("#header-buttons #all-cats").click(function () {
         loadContent('all_categories', "");
     });
     // When clicking on menu > "popular feed" option
-    $("ul #popular-feed").click(function () {
+    $("#header-buttons #popular-feed").click(function () {
         $.ajax({
             url: "controller/ViewsController.php",
             method: "POST",
@@ -24,6 +24,10 @@ $( document ).ready(function() {
         //goToUserFeed('latest');
         location.reload();
     });
+    goToAboutPage= function(){
+        loadContent('about_us', "");
+    }
+    
 });
 
 // // Functions need to be defined outside docready

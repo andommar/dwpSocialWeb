@@ -94,97 +94,88 @@ if (isset($_POST["option"])) {
             break;
 
         case "profile_form":
-            $errors = [];
-            $data = [];
 
-            if (!empty($_POST["password"])) {
-                $inputPassword = $_POST["password"];
-                $u = new UserController();
-                if ($inputPassword == $u->getUserPassword()) {
-
-                    if (!empty($_POST["email"])) {
-                        $email = $_POST["email"];
-                        $u->setUser()->setUserEmail($email);
-                    }
-
-                    if (!empty($_POST["password1"]) && !empty($_POST["password2"])) {
-                        $password1 = $_POST["password1"];
-                        $password2 = $_POST["password2"];
-                        if (($password1 === $password2)) {
-                            $u->setUser()->setUserPassword($password1);
-                        } else {
-                            $errors['password1'] = "The passwords don't match";
-                            $errors['password2'] = "The passwords don't match";
-                        }
-                    } else {
-                        if (empty($_POST["password1"])) {
-                            if (!empty($_POST["password2"])) {
-                                $errors['password1'] = "Type the new password";
-                            }
-                        } elseif (!empty($_POST["password1"])) {
-                            if (empty($_POST["password2"])) {
-                                $errors['password2'] = "Type the new password";
-                            }
-                        }
-                    }
-                } else {
-                    $errors['password'] = 'Incorrect password';
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $password1 = $_POST['password1'];
+            $password2 = $_POST['password2'];
+            $u = new UserController();
+            if ($u->validateUserProfile($email, $password, $password1, $password2)) {
+                if ($email && !$password1) { // Update email
+                    $u->setUser()->setUserEmail($email);
+                    $result = true;
+                } else if (!$email && $password1) { // Update password
+                    // Password hashing
+                    $iterations = ['cost' => 12];
+                    $hashed_password = password_hash($password1, PASSWORD_BCRYPT, $iterations);
+                    $u->setUser()->setUserPassword($hashed_password);
+                    $result = true;
+                } else if ($email && $password1) { // Update email and password
+                    // Password hashing
+                    $iterations = ['cost' => 12];
+                    $hashed_password = password_hash($password1, PASSWORD_BCRYPT, $iterations);
+                    $u->setUser()->setUserEmail($email);
+                    $u->setUser()->setUserPassword($hashed_password);
+                    $result = true;
                 }
-            } else {
-                $errors['password'] = 'Type your password to save your changes';
+            } else { // validation errors
+                $result = $u->msg;
             }
-
-            if (!empty($errors)) {
-                $data['success'] = false;
-                $data['errors'] = $errors;
-            } else {
-                $data['success'] = true;
-                $data['message'] = 'Success!';
-            }
-            echo json_encode($data);
-
-
+            echo json_encode($result);
             break;
 
         case "new_avatar_form":
 
-            // Code similar to above. An image validation function needs to be done
-
-            $errors = [];
-            $data = [];
-
-            $imgFile = $_FILES['new-avatar-upload'];
-            $imgFileName = strtolower($_FILES['new-avatar-upload']['name']);
-            $imgFiltype = $imgFile['type'];
-
-            if (($imgFiltype == "image/jpeg" ||
-                $imgFiltype == "image/jpg"   ||
-                $imgFiltype == "image/png"   ||
-                $imgFiltype == "image/gif")) {
-                //and size meet the criteria 
-                if ($imgFile['size'] > 2 * MB) {
-                    $error['avatar'] = "Max image size is 2MB";
-                } else {
-                    // If there's no errors we add a unique string as a prefix to the file name
-                    $prefix = uniqid();
-                    $imgFileName = $prefix . '_' . $imgFileName;
-                    move_uploaded_file($imgFile['tmp_name'], $avatarPath . $imgFileName);
-                    $u = new UserController();
+            $imageFile = "";
+            if (isset($_FILES['new-avatar-upload'])) $imageFile = $_FILES['new-avatar-upload'];
+            $imgFileName = "";
+            $u = new UserController();
+            if ($u->validateNewAvatar($imageFile)) { // If image is ok we set it 
+                // We save the image
+                $isImageUploaded = $u->cropScaleAndSaveAvatar($imageFile, $imgFileName); // we scale it to 120px width
+                if (!$isImageUploaded) {
+                    $u->msg["id"] = 'general';
+                    $u->msg["text"] = 'The image you chose could not be uploaded. Try again or choose another image.';
+                    $result = $u->msg;
+                } else { // Image successfully uploaded
                     $u->setUser()->setUserAvatar($imgFileName);
+                    $result = true;
                 }
-            } else {
-                $error['avatar'] = "Only jpeg, jpg, png or gif images allowed";
+            } else { // validation errors
+                $result = $u->msg;
             }
-            if (!empty($errors)) {
-                $data['success'] = false;
-                $data['errors'] = $errors;
-            } else {
-                $data['success'] = true;
-                $data['message'] = 'Success!';
-            }
-            echo json_encode($data);
+
+
+            // -------------------------------------------------------- NO  ----------------
+            // $imgFile = $_FILES['new-avatar-upload'];
+            // $imgFileName = strtolower($_FILES['new-avatar-upload']['name']);
+            // $imgFiltype = $imgFile['type'];
+
+            // if (($imgFiltype == "image/jpeg" ||
+            //     $imgFiltype == "image/jpg"   ||
+            //     $imgFiltype == "image/png"   ||
+            //     $imgFiltype == "image/gif")) {
+            //     //and size meet the criteria 
+            //     if ($imgFile['size'] > 2 * MB) {
+            //         $error['avatar'] = "Max image size is 2MB";
+            //     } else {
+            //         // If there's no errors we add a unique string as a prefix to the file name
+            //         $prefix = uniqid();
+            //         $imgFileName = $prefix . '_' . $imgFileName;
+            //         move_uploaded_file($imgFile['tmp_name'], $avatarPath . $imgFileName);
+            //         $u = new UserController();
+            //         $u->setUser()->setUserAvatar($imgFileName);
+            //     }
+            // } else {
+            //     $error['avatar'] = "Only jpeg, jpg, png or gif images allowed";
+            // }
+            // -------------------------------------------------------------- NO -----------
+            echo json_encode($result);
 
             break;
+
+
+
         case "feed":
             $userId = $_SESSION['userId'];
             $filter = $_POST["feedFilter"];
@@ -207,24 +198,6 @@ if (isset($_POST["option"])) {
                 echo json_encode($posts);
             }
             break;
-            // case "popularfeed":
-            //     $userId = $_SESSION['userId'];
-            //     $filter = $_POST["popularfeedFilter"];
-            //     $_SESSION['popularfeed_dropdown'] = $filter;
-            //     $p = new PostController();
-            //     $posts = $p->loadPopularFeedPostsFiltered($filter);
-
-            //     if (isset($posts) && $posts) {
-            //         // We retrieve user's votes on posts
-            //         $v = new VoteController();
-            //         $votes = $v->getUserRatedPosts($userId);
-            //         $votes = formatVotesArray($votes);
-            //         $posts_and_votes = array($posts, $votes);
-            //         echo json_encode($posts_and_votes);
-            //     } else {
-            //         echo json_encode($posts);
-            //     }
-            //     break;
         case "specific_category":
             $_SESSION['category_name'] = $_POST['categoryName'];
             break;

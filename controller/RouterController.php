@@ -1,6 +1,8 @@
 <?php
-class RouterController {
-    public function routerRedirect($request) {
+class RouterController
+{
+    public function routerRedirect($request)
+    {
         $localpath = 'dwpSocialWeb';
         $request = str_replace($localpath, '', $request,);
         $request = trim($request, '/',);
@@ -79,6 +81,3 @@ class RouterController {
 
 
 }
-
-
-?>

@@ -72,7 +72,7 @@ $('#password').keypress(function (e) {
      {
         validate_login();  // we submit the form
      }
-   });   
+});   
 
 function cleanPasswordField(){
     $('#password').val('');

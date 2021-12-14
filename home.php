@@ -25,6 +25,7 @@ if ($session->confirm_logged_in()) {
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="views/web/css/styles.css" />
   <link rel="stylesheet" href="views/web/css/utilities.css" />
+  <link rel="stylesheet" href="views/web/css/about_us.css" />
   <link rel="stylesheet" href="views/web/css/new_post.css" />
   <link rel="stylesheet" href="views/web/css/show_post.css" />
   <link rel="stylesheet" href="views/web/css/profile-style.css" />
@@ -61,6 +62,7 @@ if ($session->confirm_logged_in()) {
 <script type="text/javascript" src="views/web/js/dynamic-content.js"></script>
 <script type="text/javascript" src="views/web/js/header.js"></script>
 <script type="text/javascript" src="views/web/js/left-menu.js"></script>
+<script type="text/javascript" src="views/web/js/about_us.js"></script>
 <script type="text/javascript" src="views/web/js/feeds.js"></script>
 <script type="text/javascript" src="views/web/js/show_post.js"></script>
 <script type="text/javascript" src="views/web/js/new_post.js"></script>

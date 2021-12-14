@@ -5,6 +5,32 @@ USE sociallydb;
 
 /* Tables creation */
 
+CREATE TABLE company(
+  company_name VARCHAR(100) NOT NULL PRIMARY KEY,
+  header_title VARCHAR(255) NOT NULL,
+  header_desc VARCHAR(255) NOT NULL,
+  rights VARCHAR(100) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  phone VARCHAR(100) NOT NULL
+)ENGINE = InnoDB;
+
+CREATE TABLE company_developer(
+	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  company_name VARCHAR (100) NOT NULL,
+  `name` VARCHAR (100) NOT NULL,
+  surname VARCHAR (100) NOT NULL,
+  profession VARCHAR (100) NOT NULL,
+  FOREIGN KEY (company_name) REFERENCES company (company_name)
+)ENGINE = InnoDB;
+
+CREATE TABLE web_insight(
+  field_title VARCHAR (100) NOT NULL PRIMARY KEY,
+  company_name VARCHAR (100) NOT NULL,
+  field_icon VARCHAR (100) NOT NULL,
+  field_desc VARCHAR (255) NOT NULL,
+  FOREIGN KEY (company_name) REFERENCES company (company_name)
+)ENGINE = InnoDB;
+
 CREATE TABLE `role` (
     role_name VARCHAR (100) NOT NULL PRIMARY KEY
 )ENGINE = InnoDB;
@@ -111,6 +137,50 @@ CREATE TABLE user_message(
 
 
 /* Data insertion */
+
+/* Company */
+INSERT INTO company(company_name,header_title,header_desc,rights,`address`,phone) VALUES (
+  "socially",
+  "Hi, we are Socially!",
+  "Socially is a place to discover and to achieve authentic human connection. Whether you're into music, art, or a never-ending stream of the internet's cutest animals, there's a place here for you.",
+  "All rights reserved 2021-2022",
+  "30 Milwaukee Drive, 5400. Ohio, United States",
+  "807-139-6554"
+);
+/* Company developer */
+INSERT INTO company_developer(`id`,company_name,`name`, surname, profession) VALUES(
+  NULL,
+  "socially",
+  "Anna",
+  "Lopez Ribo",
+  "Web developer"
+);
+INSERT INTO company_developer(`id`,company_name,`name`, surname, profession) VALUES(
+  NULL,
+  "socially",
+  "Andres",
+  "Dominguez Martinez",
+  "Web developer"
+);
+/* Web insight*/
+INSERT INTO web_insight (field_title,company_name,field_icon,field_desc) VALUES(
+  "Post",
+  "socially",
+  "fas fa-edit",
+  "The community can share content by posting links and images."
+);
+INSERT INTO web_insight (field_title,company_name,field_icon,field_desc) VALUES(
+  "Comment",
+  "socially",
+  "fas fa-comments",
+  "The community comments on posts. Comments provide discussion and often humor."
+);
+INSERT INTO web_insight (field_title,company_name,field_icon,field_desc) VALUES(
+  "Vote",
+  "socially",
+  "fas fa-thumbs-up",
+  "Posts can be upvoted or downvoted. The latest posts rise to the top."
+);
 
 /* Role */
 INSERT INTO `role` (role_name) VALUES ('Guest');
