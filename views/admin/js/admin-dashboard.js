@@ -1,18 +1,79 @@
 $(document).ready(function(){
     adminDeletePost = function (value) {
-        // e.preventDefault();
-        // console.log(value);
-        let postId = value;
-        $.ajax({
-            method: "POST",
-            url: "../controller/AdminViewController.php",
-            data: {option: 'adminDeletePost', postId: postId }
-        })
-        .done(function(data){
-            alert(data);
-        })
-        .fail (function(error){
-            console.log(error);
-        })
+
+        if (confirm("Are you sure you want to delete the post and its comments?")){
+            let postId = value;
+            $.ajax({
+                method: "POST",
+                url: "../controller/AdminViewController.php",
+                data: {option: 'adminDeletePost', postId: postId }
+            })
+            .done(function(data){
+                alert(data);
+            })
+            .fail (function(error){
+                console.log(error);
+            })
+        } else {
+            return false;
+        }
+
+    }
+    adminBanUser = function (value, banned) {
+
+        if (!isNaN(value) && !isNaN(banned)){
+            if (confirm("Are you sure you want to ban this user?")){
+                let userId = value;
+                let userBanned = banned;
+                $.ajax({
+                    method: "POST",
+                    url: "/dwpSocialWeb/controller/AdminViewController.php",
+                    data: {option: 'adminBanUser', userid: userId, banned: userBanned }
+                })
+                .done(function(data){
+                    alert(data);
+                })
+                .fail (function(error){
+                    console.log(error);
+                })
+            } else {
+                return false;
+            }
+        } else {
+            alert('Could not process the data');
+        }
+
+    }
+    adminDeleteUser = function (value) {
+
+        if (!isNaN(value)){
+            if (confirm("Are you sure you want to delete this user?")){
+                let userId = value;
+                $.ajax({
+                    method: "POST",
+                    url: "../controller/AdminViewController.php",
+                    data: {option: 'adminDeleteUser', userid: userId }
+                })
+                .done(function(data){
+                    alert(data);
+                })
+                .fail (function(error){
+                    console.log(error);
+                })
+            } else {
+                return false;
+            }
+        } else {
+            alert('Could not process the data');
+        }
+    }
+    adminEditUserRedirect = function (value) {
+
+        if (!isNaN(value)){
+            let link = '../admin/user/'+value;
+            window.location.href = link;
+        } else {
+            alert('Could not process the data');
+        }
     }
 })

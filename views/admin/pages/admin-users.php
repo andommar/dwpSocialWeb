@@ -44,19 +44,22 @@ if((isset($_GET['delete'])) || (isset($_GET['ban']))){
                                 echo '<td> '.$user['rank'].'</td>';
                                 echo '<td> '.$user['role_name'].'</td>';
                                 echo '<td>';
-                                echo '<a href="adminEditUser.php?edit='.$user['user_id'].'" class="add"><i class="fas fa-pen"></i></a>';
-
-                                echo '<a href="adminUsersDashboard.php?delete='.$user['user_id'].'" class="delete" 
-                                    onclick="return confirm(\'Are you sure you want to delete this user and their posts/comments?\');"><i class="fas fa-trash"></i></a>';
-                                    
-                                echo '<a href="adminUsersDashboard.php?ban='.$user['user_id'].'&banned='.$user['banned'].'"
-                                    onclick="return confirm(\'Are you sure you want to ban/unban this user?\');class="ban">';
-                                        if ($user['banned']){
-                                            echo '<i class="fas fa-check"></i>';
-                                        } else {
-                                            echo '<i class="fas fa-ban"></i>';
-                                        }
-                                echo '</a>';
+ 
+                                echo '<button type="button" class="btn btn-info btn-sm"  id="editUserBtn"
+                                onclick="adminEditUserRedirect(this.value);"
+                                value='.$user['user_id'].'><i class="fas fa-pen"></i></button>';
+                                echo '<button type="button" class="btn btn-danger btn-sm"  id="deleteUserBtn"
+                                onclick="return adminDeleteUser(this.value);"
+                                value='.$user['user_id'].'><i class="fas fa-trash"></i></button>';
+                                echo '<button type="button" class="btn btn-warning btn-sm"  id="banUserBtn"
+                                onclick="return adminBanUser(this.value, '.$user['banned'].');"
+                                value='.$user['user_id'].'>';
+                                if ($user['banned']){
+                                    echo '<i class="fas fa-check"></i>';
+                                } else {
+                                    echo '<i class="fas fa-ban"></i>';
+                                }
+                                echo '</button>';
                                 echo '</td>';
                                 echo '</tr>';
                                 } ?>

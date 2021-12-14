@@ -39,7 +39,7 @@ if((isset($_GET['delete'])) && $a->isUserAdmin($_SESSION['userId'])){
                                 echo '<td> '.$post['total_comments'].'</td>';
                                 echo '<td>';
                                 echo '<button type="button" class="btn btn-danger btn-sm"  id="deletePostBtn"
-                                        onclick="adminDeletePost(this.value);"
+                                        onclick="return adminDeletePost(this.value);"
                                         value='.$post['post_id'].'><i class="fas fa-trash"></i></button>';
                                 echo '</a>';
                                 echo '</td>';

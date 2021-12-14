@@ -18,7 +18,7 @@ class RouterController {
                 break;
             case 'home':
                 $file = 'home';
-                $route = '/';
+                $route = '/'; //change to home in one.com
                 break;
             case 'admin':
                 if(empty($params[1])){
@@ -68,10 +68,10 @@ class RouterController {
                 break;
         }
 
-        // if (!empty($params[1]) && !($params[0] == 'admin' || $params[0] == 'logout')){
-        //     $file = 'views/home/404';
-        //     $route = '404';
-        // }
+        if (!empty($params[1]) && !($params[0] == 'admin' || $params[0] == 'logout')){
+            $file = 'views/home/404';
+            $route = '404';
+        }
 
         $r = new RouterModel ($request);
         $r->get($route, $file);

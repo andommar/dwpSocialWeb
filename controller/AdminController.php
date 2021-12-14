@@ -33,20 +33,39 @@ class AdminController{
     }
     public function deleteUser($userId){
         $a = new AdminDaoModel;
-        $result = $a->deleteUser($userId);
+        if (is_numeric($userId)){
+            $result = $a->deleteUser($userId);
+            if($result == true){
+                $result = 'User deleted successfully';
+            } else {
+                $result = 'Something went wrong. Contact administration';
+            }
+        } else {
+            $result = 'Could not process the data';
+        }
+
         return $result;
     }
     public function banUser($userId,$isBanned){
         $a = new AdminDaoModel;
-        //Check if user is banned or not and apply new ban status. If they are banned (1) now they'll be unbanned (0)
-        $newStatus = $isBanned == 0 ? 1 : 0; 
-        $result = $a->banUser($userId,$newStatus);
-        if($isBanned == 0) {
-            $result = 'User account deactivated';
+        if (is_numeric($isBanned) && is_numeric($userId)){
+            if($isBanned == 1 or $isBanned == 0){
+                $newStatus = $isBanned == 0 ? 1 : 0; 
+                $result = $a->banUser($userId,$newStatus);
+                if($isBanned == 0) {
+                    $result = 'User account deactivated';
+                } else {
+                    $result = 'User account activated';
+                }            
+            } else {
+                $result = 'Could not process the data';
+            }
         } else {
-            $result = 'User account activated';
+            $result = 'Could not process the data';
         }
+        //Check if user is banned or not and apply new ban status. If they are banned (1) now they'll be unbanned (0)
         return $result;
+
     }
 
     // Edit user functions 

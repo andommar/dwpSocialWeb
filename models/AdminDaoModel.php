@@ -14,21 +14,33 @@ class AdminDaoModel extends DbConn {
     }
 
     function getUsersData(){
-        $sql = 'SELECT `user_id`, username, email, `rank`, role_name, banned from USER';
+        $sql = 'SELECT `user_id`, username, email, `rank`, role_name, banned from user';
         $result = $this->selectQuery($sql);
         return $result;
     }
 
     function deleteUser ($userId){
-        $sql = 'DELETE FROM user where `user_id` = ?';
-        $result = $this->executeQueryBind($sql, $userId);
+        $tableParam = 'user';
+        $fieldParam = 'user_id';
+        if ($this->checkIdExists($tableParam, $fieldParam, $userId)){
+            $sql = 'DELETE FROM user where `user_id` = ?';
+            $result = $this->executeQueryBind($sql, $userId);
+        } else {
+            $result = false;
+        }
         return $result;
     }
 
     function banUser ($userId, $newStatus){
-        $sql = 'UPDATE user SET banned = ? where `user_id` = ?';
-        $arr = [$newStatus, $userId];
-        $result = $this->executeQueryBindArr($sql, $arr);
+        $tableParam = 'user';
+        $fieldParam = 'user_id';
+        if ($this->checkIdExists($tableParam, $fieldParam, $userId)){
+            $sql = 'UPDATE user SET banned = ? where `user_id` = ?';
+            $arr = [$newStatus, $userId];
+            $result = $this->executeQueryBindArr($sql, $arr);
+        } else {
+            $result = false;
+        }
         return $result;
     }
 

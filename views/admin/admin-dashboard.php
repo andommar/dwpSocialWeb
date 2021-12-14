@@ -55,5 +55,5 @@ define("PATH", '/dwpSocialWeb/');
       </div>
     </div>
   </body>
-   <!-- <script src="js/chart-pie.js"></script> -->
+  <?php echo '<script src="'. PATH .'views/admin/js/admin-dashboard.js"></script>'; ?>
 </html>

@@ -14,9 +14,18 @@ if (isset($_POST["option"])) {
             $result = $a->validateForm($_POST);
             echo json_encode($result);
             break;
-        case "adminDeactivateUser":
+        case "adminEditUserRedirect":
+            $redirect = new Redirector('../admin/user/'.$_POST['userid']);
+            return $redirect;
+            break;
+        case "adminBanUser":
             $a = new AdminController();
             $result = $a->banUser($_POST['userid'], $_POST['banned']);
+            echo json_encode($result);
+            break;
+        case "adminDeleteUser":
+            $a = new AdminController();
+            $result = $a->deleteUser($_POST['userid']);
             echo $result;
             break;
         case "adminDeletePost":
