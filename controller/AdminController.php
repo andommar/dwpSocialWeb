@@ -91,7 +91,7 @@ class AdminController
         $u = new UserModel($postData['userid']);
         foreach ($postData as $key => $value) {
             if (!empty($value)) {
-                $this->validateInput($value);
+                $value=$this->validateInput($value);
                 // Checks the key name of the array and updates the data
                 if ($key == 'username') {
                     if ($this->validateAdminUsername($value)) {
@@ -164,12 +164,13 @@ class AdminController
 
     // Validations
 
-    private function validateInput($data)
+    public function validateInput($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
         $data = str_replace(' ', '', $data);
+        return $data;
     }
 
     private function validateAdminUsername($username)
@@ -246,5 +247,13 @@ class AdminController
         }
 
         return $dataOk;
+    }
+
+    public function checkUserIdExists($inputId){
+        $a = new AdminDaoModel();
+        $tableParam = 'user';
+        $fieldParam = 'user_id';
+        $result= $a->checkIdExists($tableParam, $fieldParam, $inputId);
+        return $result;
     }
 }

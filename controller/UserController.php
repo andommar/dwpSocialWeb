@@ -36,6 +36,22 @@ class UserController extends MediaController
         return $data;
     }
 
+    public function getUserCountStats ($userId)
+    {
+        $u = new UserModel ($userId);
+        $stats = [
+            'tot_comments' => '',
+            'tot_posts'=> ''
+        ];
+        $tableParam = 'comment'; $fieldParam = 'user_id';
+        $result = $u->getUserCountStats($tableParam, $fieldParam, $userId);
+        $stats['tot_comments'] = $result[0];
+        $tableParam = 'post'; $fieldParam = 'user_id';
+        $result = $u->getUserCountStats($tableParam, $fieldParam, $userId);
+        $stats['tot_posts'] = $result[0];
+        return $stats;
+    }
+
     public function getUserPassword()
     {
         $u = new UserModel($_SESSION['userId']);

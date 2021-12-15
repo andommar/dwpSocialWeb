@@ -1,12 +1,20 @@
 <?php 
         if (!empty($args)){
             if (!empty($args[2]) && is_numeric($args[2])){
-                $userId = $args[2];
-                $u = new UserController();
-                $data = $u->getUserInfo($userId);
+                $a = new AdminController();
+                $data = $a->validateInput($args[2]);
+                $userId = $data;
+                if($a->checkUserIdExists($userId)){
+                    $u = new UserController();
+                    $data = $u->getUserInfo($userId);
+                    $stats = $u->getUserCountStats($userId);
+                } else {
+                    $redirector = new Redirector(PATH.'404');
+                }
             }
-        } else {
-            $redirector = new Redirector('home');
+            else {
+                $redirector = new Redirector(PATH.'404');
+            }
         }
         ?>
 <div class="col-md-6 pt-3 px-4">
@@ -29,8 +37,8 @@
                     </div>
                     <div class="col-md-6 d-flex-column px-2" id="user-comments-section">
                         <h5>User statistics</h5> 
-                        <p><b>Total comments:&nbsp;</b><span class="number-user-posts">3</span></p> 
-                        <p><b>Total posts:&nbsp;</b><span class="number-user-posts">3</span></p>
+                        <p><b>Total comments:&nbsp;</b><span class="number-user-posts"><?php echo $stats['tot_comments'][0] ?></span></p> 
+                        <p><b>Total posts:&nbsp;</b><span class="number-user-posts"><?php echo $stats['tot_posts'][0] ?></span></p>
                     </div>
                 </div>
 

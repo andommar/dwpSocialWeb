@@ -259,6 +259,17 @@ class UserModel
         return $result;
     }
 
+    public function getUserCountStats ($tableParam, $fieldParam, $userId)
+    {
+        $db = new Dbconn();
+        $result = false;
+        if ($db->isConnected()) {
+            $sql = "SELECT count(*) as total from {$tableParam} where {$fieldParam} = ?";
+            $result = $db->selectQueryBind($sql, $userId);
+        }
+        return $result;
+    }
+
     private function updateUserInfo($field, $data)
     {
         $db = new Dbconn();

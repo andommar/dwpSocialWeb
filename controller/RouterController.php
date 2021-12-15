@@ -26,16 +26,16 @@ class RouterController
                 if(empty($params[1])){
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
-                } else if(!empty($params[1]) && $params[1] == 'posts'){
+                } else if(!empty($params[1]) && $params[1] == 'posts' && empty($params[2])){
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
-                }else if(!empty($params[1]) && $params[1] == 'comments'){
+                }else if(!empty($params[1]) && $params[1] == 'comments' && empty($params[2])){
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
-                } else if(!empty($params[1]) && $params[1] == 'users'){
+                } else if(!empty($params[1]) && $params[1] == 'users' && empty($params[2])){
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
-                } else if(!empty($params[1]) && $params[1] == 'user'){
+                } else if(!empty($params[1]) && $params[1] == 'user' && sizeof($params)<=3){
                     $file = 'views/admin/admin-dashboard';
                     $route = 'admin';
                 }else{
@@ -63,6 +63,10 @@ class RouterController
             case 'category_selection':
                 $file = 'views/shared/category_selection';
                 $route = 'category_selection';
+                break;
+            case '404':
+                $file = 'views/home/404';
+                $route = '404';
                 break;
             default:
                 $file = 'views/home/404';
