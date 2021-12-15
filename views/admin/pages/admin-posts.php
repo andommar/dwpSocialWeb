@@ -1,11 +1,6 @@
 <?php
 $data = $a->getPostsData();
-
-if ((isset($_GET['delete'])) && $a->isUserAdmin($_SESSION['userId'])) {
-    $a->deletePost($_GET['delete']);
-}
 ?>
-
 <div class="d-flex justify-content-between flex-wrap align-items-center">
     <h1>Admin Dashboard</h1>
 </div>

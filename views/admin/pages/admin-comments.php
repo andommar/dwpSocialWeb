@@ -1,9 +1,5 @@
 <?php
 $data = $a->getCommentsData();
-
-if ((isset($_GET['delete'])) && ($a->isUserAdmin($_SESSION['userId']))) {
-    $a->deleteComment($_GET['delete']);
-}
 ?>
 
 <div class="d-flex justify-content-between flex-wrap align-items-center">

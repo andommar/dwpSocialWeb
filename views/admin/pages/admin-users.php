@@ -1,18 +1,5 @@
 <?php
 $data = $a->getUsersData();
-
-if ((isset($_GET['delete'])) || (isset($_GET['ban']))) {
-    // Check delete request is done by an admin user
-    if ($a->isUserAdmin($_SESSION['userId'])) {
-        if (isset($_GET['delete'])) {
-            $a->deleteUser($_GET['delete']);
-            echo 'User deleted successfully';
-        } else {
-            $a->banUser($_GET['ban'], $_GET['banned']);
-            echo 'User banned successfully';
-        }
-    }
-}
 ?>
 
 

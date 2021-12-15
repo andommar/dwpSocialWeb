@@ -20,8 +20,6 @@ $i = 0;
                                         <h5><?php echo $stats[$i][0] ?? 0; //Null coalescing operator: It returns its first operand if it exists and is not null; otherwise it returns its second operand
                                             $i++; ?></h5>
                                     </div>
-                                    <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-users fa-2x"></i>
@@ -42,8 +40,6 @@ $i = 0;
                                         <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
-                                    <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-paragraph fa-2x"></i>
@@ -64,8 +60,6 @@ $i = 0;
                                         <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
-                                    <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-comments fa-2x"></i>
@@ -86,8 +80,6 @@ $i = 0;
                                         <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
-                                    <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-arrow-up fa-2x"></i>
@@ -108,8 +100,6 @@ $i = 0;
                                         <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
-                                    <!-- <h5 class="card-title">Users</h5>
-                                            <p class="card-text">41233</p> -->
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-arrow-down fa-2x"></i>

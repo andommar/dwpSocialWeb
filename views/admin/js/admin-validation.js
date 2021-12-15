@@ -10,9 +10,7 @@ $(document).ready(function(){
             data: {option: 'adminDeactivateUser', userid: userId, banned: userBanned}
         })
         .done(function(data){
-            // data = $.parseJSON(data);
-            $('#success-info-user-ban').text(data);
-
+            location.reload();
         })
         .fail(function(error){
             console.log(error);
@@ -97,6 +95,9 @@ $(document).ready(function(){
                       }
                 } else {
                     $('#success-info').text(data.text);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 3000);
                 }
     
             })

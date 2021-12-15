@@ -86,12 +86,12 @@ class AdminController
     {
 
         $this->msg['id'] = 'result';
-        $this->msg['text'] = 'User updated successfuly';
+        $this->msg['text'] = 'User updated successfuly. The page will refresh in 3 seconds.';
 
         $u = new UserModel($postData['userid']);
         foreach ($postData as $key => $value) {
             if (!empty($value)) {
-                $value=$this->validateInput($value);
+                $value = $this->validateInput($value);
                 // Checks the key name of the array and updates the data
                 if ($key == 'username') {
                     if ($this->validateAdminUsername($value)) {
@@ -136,7 +136,7 @@ class AdminController
         $a = new AdminDaoModel();
         $result = $a->deletePost($postId);
         if ($result == true) {
-            $result = 'Post deleted successfully';
+            $result = 'Post deleted successfully. The page will now be refreshed.';
         } else {
             $result = 'Something went wrong. Contact administration';
         }
@@ -154,7 +154,7 @@ class AdminController
         $a = new AdminDaoModel();
         $result = $a->deleteComment($commentId);
         if ($result == true) {
-            $result = 'Comment deleted successfully';
+            $result = 'Comment deleted successfully. The page will now be refreshed.';
         } else {
             $result = 'Something went wrong. Contact administration';
         }
@@ -249,11 +249,12 @@ class AdminController
         return $dataOk;
     }
 
-    public function checkUserIdExists($inputId){
+    public function checkUserIdExists($inputId)
+    {
         $a = new AdminDaoModel();
         $tableParam = 'user';
         $fieldParam = 'user_id';
-        $result= $a->checkIdExists($tableParam, $fieldParam, $inputId);
+        $result = $a->checkIdExists($tableParam, $fieldParam, $inputId);
         return $result;
     }
 }

@@ -10,6 +10,7 @@ $(document).ready(function(){
             })
             .done(function(data){
                 alert(data);
+                location.reload();
             })
             .fail (function(error){
                 console.log(error);
@@ -32,6 +33,7 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     alert(data);
+                    location.reload();
                 })
                 .fail (function(error){
                     console.log(error);
@@ -56,6 +58,7 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     alert(data);
+                    location.reload();
                 })
                 .fail (function(error){
                     console.log(error);
@@ -79,6 +82,7 @@ $(document).ready(function(){
                 })
                 .done(function(data){
                     alert(data);
+                    location.reload();
                 })
                 .fail (function(error){
                     console.log(error);
