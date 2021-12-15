@@ -1,7 +1,7 @@
 <div class="row navbar d-flex align-items-center h-auto sticky-top">
   <div class="col col-9 navbar_left d-flex align-items-center flex-fill my-2">
     <div>
-      <a id="logo-link"><img class="navbar_logo" src="views/web/img/assets/logo_low.png" alt="avatar" /></a>
+      <a id="logo-link"><img class="navbar_logo" src="views/web/img/assets/logo_low.png" alt="socially_logo" /></a>
     </div>
     <!-- Dropdown menu -->
     <div id="header-buttons" class="dropdown mx-3">

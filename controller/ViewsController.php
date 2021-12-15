@@ -145,31 +145,6 @@ if (isset($_POST["option"])) {
                 $result = $u->msg;
             }
 
-
-            // -------------------------------------------------------- NO  ----------------
-            // $imgFile = $_FILES['new-avatar-upload'];
-            // $imgFileName = strtolower($_FILES['new-avatar-upload']['name']);
-            // $imgFiltype = $imgFile['type'];
-
-            // if (($imgFiltype == "image/jpeg" ||
-            //     $imgFiltype == "image/jpg"   ||
-            //     $imgFiltype == "image/png"   ||
-            //     $imgFiltype == "image/gif")) {
-            //     //and size meet the criteria 
-            //     if ($imgFile['size'] > 2 * MB) {
-            //         $error['avatar'] = "Max image size is 2MB";
-            //     } else {
-            //         // If there's no errors we add a unique string as a prefix to the file name
-            //         $prefix = uniqid();
-            //         $imgFileName = $prefix . '_' . $imgFileName;
-            //         move_uploaded_file($imgFile['tmp_name'], $avatarPath . $imgFileName);
-            //         $u = new UserController();
-            //         $u->setUser()->setUserAvatar($imgFileName);
-            //     }
-            // } else {
-            //     $error['avatar'] = "Only jpeg, jpg, png or gif images allowed";
-            // }
-            // -------------------------------------------------------------- NO -----------
             echo json_encode($result);
 
             break;

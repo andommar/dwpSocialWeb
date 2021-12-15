@@ -4,33 +4,30 @@
 <!-- Graphs section -->
 <div class="row">
     <div class="my-3">
-    <section id="graphs">
-        <h4 class="text-muted">Graphs</h4>
-        <div class="d-flex justify-content-around">
-            <div class="col-md-5">
-                <div class="card mb-4 shadow">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        New users
+        <section id="graphs">
+            <h4 class="text-muted secondary-header-margin">Graphs</h4>
+            <div class="d-flex justify-content-around">
+                <div class="col-md-5">
+                    <div class="card mb-4 shadow">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area me-1"></i>
+                            New users
+                        </div>
+                        <div class="card-body"><canvas id="myLineChart" width="100%" height="80"></canvas></div>
                     </div>
-                    <div class="card-body"><canvas id="myLineChart" width="100%" height="80"></canvas></div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow">
+                        <div class="card-header">
+                            <i class="fas fa-chart-area me-1"></i>
+                            Posts per category
+                        </div>
+                        <div class="card-body"><canvas id="myPieChart" width="100%" height="80"></canvas></div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-4 shadow">
-                    <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Posts per category
-                    </div>
-                    <div class="card-body"><canvas id="myPieChart" width="100%" height="80"></canvas></div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
     </div>
 </div>
 
-<?php echo '<script src="'. PATH .'views/admin/js/charts.js"></script>'; ?>
-
-
-
+<?php echo '<script src="' . PATH . 'views/admin/js/charts.js"></script>'; ?>
