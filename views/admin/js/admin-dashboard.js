@@ -28,7 +28,7 @@ $(document).ready(function(){
                 let userBanned = banned;
                 $.ajax({
                     method: "POST",
-                    url: "/dwpSocialWeb/controller/AdminViewController.php",
+                    url: "../controller/AdminViewController.php",
                     data: {option: 'adminBanUser', userid: userId, banned: userBanned }
                 })
                 .done(function(data){

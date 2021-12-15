@@ -9,10 +9,12 @@ if (!empty($args)) {
             $data = $u->getUserInfo($userId);
             $stats = $u->getUserCountStats($userId);
         } else {
-            $redirector = new Redirector(PATH . '404');
+            echo '<script type="text/javascript">window.location.href ="/404" ; </script>';
+            // $redirector = new Redirector(PATH . '404');
         }
     } else {
-        $redirector = new Redirector(PATH . '404');
+        echo '<script type="text/javascript">window.location.href ="/404" ; </script>';
+        // $redirector = new Redirector(PATH . '404');
     }
 }
 ?>
