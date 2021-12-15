@@ -17,7 +17,7 @@ $i = 0;
                                         Users
                                     </div>
                                     <div class="font-weight-bold text-uppercase">
-                                        <h5><?php echo $stats[$i][0];
+                                        <h5><?php echo $stats[$i][0] ?? 0; //Null coalescing operator: It returns its first operand if it exists and is not null; otherwise it returns its second operand
                                             $i++; ?></h5>
                                     </div>
                                     <!-- <h5 class="card-title">Users</h5>
@@ -39,7 +39,7 @@ $i = 0;
                                         Posts
                                     </div>
                                     <div class="font-weight-bold text-uppercase">
-                                        <h5><?php echo $stats[$i][0];
+                                        <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
                                     <!-- <h5 class="card-title">Users</h5>
@@ -61,7 +61,7 @@ $i = 0;
                                         Comments
                                     </div>
                                     <div class="font-weight-bold text-uppercase">
-                                        <h5><?php echo $stats[$i][0];
+                                        <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
                                     <!-- <h5 class="card-title">Users</h5>
@@ -83,7 +83,7 @@ $i = 0;
                                         Upvotes
                                     </div>
                                     <div class="font-weight-bold text-uppercase">
-                                        <h5><?php echo $stats[$i][0];
+                                        <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
                                     <!-- <h5 class="card-title">Users</h5>
@@ -105,7 +105,7 @@ $i = 0;
                                         Downvotes
                                     </div>
                                     <div class="font-weight-bold text-uppercase">
-                                        <h5><?php echo $stats[$i][0];
+                                        <h5><?php echo $stats[$i][0] ?? 0;
                                             $i++; ?></h5>
                                     </div>
                                     <!-- <h5 class="card-title">Users</h5>
