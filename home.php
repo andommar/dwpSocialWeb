@@ -4,9 +4,6 @@ $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
   $redirect = new Redirector("login");
 } else {
-  // $request = $_SERVER['REQUEST_URI'];
-  // $r = new RouterController();
-  // $r->routerRedirect($request);
   $c = new UserController();
   $userData = $c->getUserInfo($_SESSION['userId']);
 }

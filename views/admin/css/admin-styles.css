@@ -66,26 +66,80 @@ p {
   color: var(--bs-gray-600);
 }
 .sidebar-sticky a:hover {
-  color: var(--bs-white);
+  color: #ccc;
 }
 .sidebar-sticky div {
   padding: 10px 0 10px 5px;
   font-weight: 500;
 }
+.sidebar-sticky div #adminSidenav_bar {
+  margin-left: 1em;
+}
 .sidebar-sticky a {
   padding: 10px 0 10px 5px;
+  color: #b4b4b4;
+}
+.sidebar-sticky .icons_margin {
+  margin-right: 9px;
 }
 
-.sidebar_link{
+.sidebar_link {
   padding-left: 2px;
 }
+/* Navbar Header */
+#admin-navbar {
+  background: #242526;
+  width: 100vw;
+  height: 56px;
+  padding: 0 16px 0 31px;
+  justify-content: space-between;
+  box-shadow: 0 2px 2px -2px rgb(255 255 255 / 40%);
+}
+#admin-navbar #home_icon {
+  color: #f0f0f0;
+}
+#admin-navbar .navbar_logo {
+  width: 37px;
+  margin-right: 5px;
+}
+#admin-navbar .admin_navbar_links a {
+  font-size: 16px;
+}
+#admin-navbar .admin_navbar_links #logout {
+  margin-right: 5px;
+  background: #404041;
+  padding: 8px 12px 8px 12px;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+}
+#admin-navbar .admin_navbar_links #logout:hover {
+  background: #4e4f50;
+}
 
-
+.admin_navbar_profile .profile_name {
+  margin-right: 9px;
+}
+.admin_navbar_profile .profile_name img {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
 .admin_navbar_profile {
   color: var(--bs-white);
 }
 .admin_navbar_profile span {
   padding: 0 2px;
+}
+/* Admin content */
+#admin-content {
+  padding: 4em;
+}
+.secondary-header-margin {
+  margin-top: 5px;
+  margin-bottom: 18px;
 }
 /* Font weight */
 .weight-bold {
@@ -104,16 +158,23 @@ p {
 
 /* Tables  */
 
-#display_table th, td{
+#display_table th,
+td {
   text-align: center;
 }
 
 #display_table a {
   padding: 0 2px;
 }
-
+.dataTables_length {
+  margin-bottom: 1.6em;
+}
+#editUserBtn,
+#deleteUserBtn {
+  margin-right: 8px;
+}
 /*Edit user profile page */
-.role-badge{
+.role-badge {
   border-radius: 14px;
   background-color: #00ff55;
   padding: 2px 16px;
@@ -123,14 +184,14 @@ p {
   font-weight: 500;
 }
 
-.secondary-text{
-  font-size: .85rem;
+.secondary-text {
+  font-size: 0.85rem;
   font-weight: 400;
 }
 
-.user-rank{
-  font-size: .95rem;
-  font-weight: 500; 
+.user-rank {
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .img {
@@ -147,8 +208,6 @@ p {
   font-size: 1.1rem;
 }
 #user-info-section b,
-#user-comments-section b  {
+#user-comments-section b {
   font-weight: 600;
 }
-
-

@@ -1,7 +1,7 @@
 $(document).ready(function () {
   $.ajax({
     method: "POST",
-    url: "controller/AdminViewController.php",
+    url: "/dwpSocialWeb/controller/AdminViewController.php",
     data: { option: "admin-dashboard" },
   })
     .done(function (data) {

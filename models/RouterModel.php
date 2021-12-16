@@ -25,15 +25,14 @@ class RouterModel{
 		if($uri[0] == trim($route, "/")){
 
 		    //remove index 0 and reset the array index
-			array_shift($uri);
+			// array_shift($uri);
 			$args = $uri;
 
 			require $file . '.php';
 
-		} else if ($route = '404') {
+		} else if ($route == '404') {
 			require $file . '.php';
 		}
 
 	}
-
 }

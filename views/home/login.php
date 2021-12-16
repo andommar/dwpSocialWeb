@@ -1,9 +1,9 @@
 <?php
 // require_once('../../bootstrapping.php');
 $session = new SessionHandle;
-if (!empty($args)) {
-    $logout = new LogOut();
-    $redirect = new Redirector("../login");
+if (!empty($args[1]) && $args[1] == 1) {
+        $logout = new LogOut();
+        $redirect = new Redirector("../login");
 } elseif ($session->logged_in()) {
     $redirect = new Redirector("home");
 }

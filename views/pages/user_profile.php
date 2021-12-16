@@ -89,17 +89,5 @@ $userData = $u->getUserInfo($_SESSION['userId']);
         </div>
       </div>
     </div> <!-- Profile settings section end-->
-
-    <div class="row mt-3 mb-3">
-      <div class="col-lg-12 px-4">
-        <div class="profile-section-subtitle">
-          <h4>Statistics</h4>
-          <hr>
-        </div>
-        <div class="profile-avatar d-flex flex-row">
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>

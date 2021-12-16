@@ -99,13 +99,6 @@ CREATE TABLE `post_tag` (
   FOREIGN KEY (tag_name) REFERENCES tag (tag_name) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
-CREATE TABLE `media` (
-	media_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  comment_id INT,
-  post_id INT,
-  `url` VARCHAR(255) NOT NULL,
-  FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE
-)ENGINE = InnoDB;
 
 CREATE TABLE `comment` (
   comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -117,23 +110,9 @@ CREATE TABLE `comment` (
   down_votes INT DEFAULT 0,
   `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
   FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  -- FOREIGN KEY (media_id) REFERENCES media (media_id),
   FOREIGN KEY (post_id) REFERENCES post (post_id) ON DELETE CASCADE
 )ENGINE = InnoDB;
 
-ALTER TABLE `media` ADD FOREIGN KEY (comment_id) REFERENCES `comment` (comment_id);
-
-CREATE TABLE user_message(
-  user_msg_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  media_id INT,
-  sender_id INT NOT NULL,
-  receiver_id INT NOT NULL,
-  `description` TEXT NOT NULL,
-  `datetime` DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-  FOREIGN KEY (sender_id) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (receiver_id) REFERENCES `user` (`user_id`) ON DELETE CASCADE,
-  FOREIGN KEY (media_id) REFERENCES media (media_id) ON DELETE CASCADE
-)ENGINE = InnoDB;
 
 
 /* Data insertion */

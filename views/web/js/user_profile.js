@@ -6,7 +6,6 @@ $(document).ready(function () {
     // We only call the function if there's an image to remove
     if($("#profile-settings-section #new-avatar-upload").val()){
       $("#profile-settings-section #new-avatar-upload").val('');
-      $('.custom-file #upload-avatar-button').prop('disabled', true);
     }
   }
 
@@ -92,8 +91,7 @@ $(document).ready(function () {
     else{
       imageFile="";
     }
-    if(true){
-    //if(validateAvatarImage(imageFile)){
+    if(validateAvatarImage(imageFile)){
       $.ajax({
         method: "POST",
         url: "controller/ViewsController.php",
@@ -180,7 +178,7 @@ function validateAvatarImage(imageFile){
         isDataOk = false;
     }
   }
-  
+  return isDataOk;
 }
 function validateUserProfileForm(email,password,password1,password2){
   var email_regexp = /^[^0-9][A-z0-9_-]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/;
