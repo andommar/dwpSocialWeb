@@ -16,12 +16,12 @@
 }
 #show-post_category-section #category-members {
   font-size: 11px;
-  color: #b99be1;
+  color: #198754; /*#b99be1;*/
 }
 
 #show-post_category-section button {
   color: #ffffff;
-  background-color: #9b2fe4;
+  background-color: #198754; /*#9b2fe4;*/
   padding: 11px 10px;
   margin-bottom: 0.3 em;
   font-size: smaller;
@@ -30,11 +30,30 @@
 
 #show-post_category-section .btn-leave {
   color: #ffffff;
-  background-color: #9b2fe4;
+  background-color: #198754;
+}
+#show-post_category-section .btn-leave:hover {
+  color: #198754;
+  border: 1px solid #198754;
+  background-color: unset;
+  -webkit-transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s;
+  -o-transition: background-color 0.4s;
+  transition: background-color 0.4s;
 }
 #show-post_category-section .btn-join {
+  color: #198754;
+  border: 1px solid #198754;
+  background-color: unset;
+}
+#show-post_category-section .btn-join:hover {
   color: #ffffff;
-  background-color: #9b2fe4;
+  background-color: #198754;
+  border: none;
+  -webkit-transition: background-color 0.4s;
+  -moz-transition: background-color 0.4s;
+  -o-transition: background-color 0.4s;
+  transition: background-color 0.4s;
 }
 
 /* Comment form */
@@ -42,10 +61,7 @@
 .comment-row {
   max-width: 97%;
 }
-.comment-form-wrapper {
-  background: rgb(191, 191, 191, 0.3);
-  border-radius: 5px;
-}
+
 .comment-form-wrapper label {
   color: white;
 }
@@ -54,7 +70,6 @@
 .comment-avatar {
   max-height: 50px;
   width: 33px;
-  cursor: pointer;
 }
 .comment-post {
   background-color: #373737;
@@ -63,10 +78,16 @@
   color: white;
   font-size: 14px;
   margin-bottom: 20px;
+  text-align: justify;
 }
 .comment-username {
   color: white;
   font-size: 12px;
   font-weight: bold;
-  cursor: pointer;
+}
+.comment-datetime {
+  font-size: 10px;
+  color: #a4a4a4;
+  margin-bottom: 4px;
+  display: block;
 }

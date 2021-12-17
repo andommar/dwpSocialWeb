@@ -1,17 +1,24 @@
 $(document).ready(function () {
-  sendUsrPostId = function (userId,postId){
-    getUserSinglePostRate(userId,postId);
+  sendUsrPostId = function (postId){
+    getUserSinglePostRate(postId);
+     // Scrolls to the top of the page
+     $( "html,body" ).animate({
+        scrollTop: $("body").offset().top
+        }, 200, function() {
+        // Animation complete.
+    });
+
   };
-  submitNewComment = function (userId,postId) {
+  submitNewComment = function (postId) {
     var formData = {
       formtype: "comment",
-      description: $("#description").val(),
-      image: $("#imgupload").val(),
+      description: $("#comment-description").val()
+      // image: $("#imgupload").val(),
     };
     $.ajax({
       method: "POST",
       url: "controller/ViewsController.php",
-      data: {formData:formData, userId:userId, postId:postId, option:"submit_post_comment"},
+      data: {formData:formData, postId:postId, option:"submit_post_comment"},
       encode: true,
     })
       .done(function (data) {
@@ -24,11 +31,11 @@ $(document).ready(function () {
         console.log(textStatus);
       });
   };
-  getUserSinglePostRate = function(userId,postId){  
+  getUserSinglePostRate = function(postId){  
     $.ajax({
         url: "controller/ViewsController.php",
         method: "POST",
-        data: { option:"singlepost_user_votes", userId:userId, postId:postId}
+        data: { option:"singlepost_user_votes", postId:postId}
     })
     .done(function(data) {
       var parsedData = $.parseJSON(data);
@@ -38,7 +45,6 @@ $(document).ready(function () {
   };
   fillSinglePostVotes= function(ratedPost){ 
         // upvote
-        console.log(parseInt(ratedPost['is_positive']));
         if(parseInt(ratedPost['is_positive'])){
             $("#"+ratedPost['post_id']+" .upvote_button").removeClass( "upvote_default" ).addClass( "upvote_filled" );
         }
@@ -48,5 +54,26 @@ $(document).ready(function () {
         }
     // }
   };
+  joinCategoryOnShowPostPage = function(categoryName, postId){
+    $.ajax({
+        url: "controller/ViewsController.php",
+        method: "POST",
+        data: { option:"join_category", categoryName:categoryName}
+    })
+    .done(function(data) {  
+      loadContent('show_post',postId);
+    });
+  }
+  leaveCategoryOnShowPostPage = function(categoryName, postId){
+    $.ajax({
+      url: "controller/ViewsController.php",
+      method: "POST",
+      data: { option:"leave_category", categoryName:categoryName}
+    })
+    .done(function(data) {
+      loadContent('show_post',postId);
+    });
+}
+
 
 });

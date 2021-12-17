@@ -1,10 +1,11 @@
 <?php
 
-require_once('../../bootstrapping.php');
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+    $redirect = new Redirector("../home/login.php");
+}
 $c = new CategoryController();
 $categories = $c->loadCategories();
-$userId = $_SESSION['userId'];
-
 
 ?>
 
@@ -21,17 +22,21 @@ $userId = $_SESSION['userId'];
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../web/css/login-signup.css" />
-    <link rel="stylesheet" href="../web/css/category_selection.css" />
-    <link rel="stylesheet" href="../web/css/messages-styles.css" />
+    <link rel="stylesheet" href="views/web/css/login-signup.css" />
+    <link rel="stylesheet" href="views/web/css/category_selection.css" />
+    <link rel="stylesheet" href="views/web/css/utilities.css" />
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body id="category-selection">
     <div class="container-fluid d-flex flex-column">
-        <div class="row">
-            <div id="category-selection-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap extra-margin">
+        <div class="row min-vh-100">
+            <div id="category-selection-form" class="col col-lg-4 col-md-9 col-sm-12 col-xs-12 mx-auto form-wrap">
+                <!-- Standard top popup message -->
+                <div class="text-center mb-3 alert alert-danger py-2 fade show d-none" role="alert" id="general-message">
+                    <span class="my-2 " id="general"></span>
+                </div>
                 <h3 class="text-center">Choose the categories that you are interested in</h3>
                 <!-- -->
                 <form method="post" action="" onsubmit="return false">
@@ -79,7 +84,7 @@ $userId = $_SESSION['userId'];
                     </div>
                     <h6 id="category-info-text" class="text-center mt-3">Please, pick at least <u>two</u></h6>
 
-                    <button disabled class="btn" type="button" name="submit" id="category-submit-btn" onclick="validate_category_selection(<?php echo $userId ?>)">Next</button>
+                    <input disabled class="btn mb-3" type="button" value="Next" name="submit" id="category-submit-btn" onclick="validate_category_selection()">
                     <!-- <div id="omit-link" class="text-center mt-2"><u><a href="../../index.php">Omit</a></u></div> -->
                 </form>
 
@@ -90,6 +95,7 @@ $userId = $_SESSION['userId'];
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 
 </body>
-<script type="text/javascript" src="../web/js/category-selection.js"></script>
+<script type="text/javascript" src="views/web/js/utils.js"></script>
+<script type="text/javascript" src="views/web/js/category-selection.js"></script>
 
 </html>

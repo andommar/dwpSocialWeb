@@ -1,74 +1,50 @@
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  overflow: hidden;
-  padding: 0 40px;
+/* Shared style: generic styles, messages to the user, required fields, etc.  */
+
+/* Required fields */
+
+.required_field {
+  color: red;
+  font-size: small;
+  margin-left: 6px;
+}
+.required_field_dark {
+  color: #a82222;
+  font-size: small;
+  margin-left: 6px;
 }
 
-.flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
+/* Messages */
 
-.vflex {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+.msg {
+  font-style: italic;
 }
-
-/* Card */
-.card {
-  background-color: rgba(240, 240, 240, 0.6);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-  height: 200px;
-  width: 200px;
-  margin: 10px;
-  border-radius: 10px;
+.error-message {
+  color: red;
+}
+.error-message-dark {
+  color: #a82222;
+}
+.info-message {
   color: #fff;
 }
-
-.card-image {
-  background-size: cover;
-  opacity: 0.75;
-  height: 100%;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.success-message {
+  color: rgb(26, 172, 70);
 }
-
-.card h3,
-p {
-  position: relative;
-  top: 20px;
-  left: 10px;
+.danger-message {
+  color: rgb(255, 197, 6);
 }
-
-.card-1 {
-  background-image: url(https://source.unsplash.com/featured/?water);
-}
-.card-2 {
-  background-image: url(https://source.unsplash.com/featured/?dog);
-}
-.card-3 {
-  background-image: url(https://source.unsplash.com/featured/?nature);
+.no-posts-message {
+  color: grey;
+  border: 2px solid #1a1a1a;
+  background-color: #80808021;
+  border-radius: 6px;
+  text-align: center;
+  margin: 3em;
+  padding: 9em 0em;
 }
 
 /* Padding */
 
-.py-1 {
-  padding: 0.5rem 0;
-}
-.py-2 {
-  padding: 1rem 0;
-}
-.py-3 {
-  padding: 1.5rem 0;
-}
 .py-4 {
   padding: 2rem 0;
 }
@@ -77,16 +53,6 @@ p {
 }
 .py-6 {
   padding: 3rem 0;
-}
-
-.p-1 {
-  padding: 0.5rem;
-}
-.p-2 {
-  padding: 1rem;
-}
-.p-3 {
-  padding: 1.5rem;
 }
 .p-4 {
   padding: 2rem;
@@ -99,15 +65,7 @@ p {
 }
 
 /* Margin */
-.my-1 {
-  margin: 0.5rem 0;
-}
-.my-2 {
-  margin: 1rem 0;
-}
-.my-3 {
-  margin: 1.5rem 0;
-}
+
 .my-4 {
   margin: 2rem 0;
 }
@@ -116,16 +74,6 @@ p {
 }
 .my-6 {
   margin: 3rem 0;
-}
-
-.m-1 {
-  margin: 0.5rem 0;
-}
-.m-2 {
-  margin: 1rem 0;
-}
-.m-3 {
-  margin: 1.5rem 0;
 }
 .m-4 {
   margin: 2rem 0;

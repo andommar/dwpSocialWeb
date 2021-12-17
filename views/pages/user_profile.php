@@ -1,92 +1,93 @@
-<?php 
+<?php
+// Session handling
+$session = new SessionHandle();
+if ($session->confirm_logged_in()) {
+  $redirect = new Redirector("../home/login.php");
+}
 $u = new UserController();
-$userData = $u->getUserInfo();
+$userData = $u->getUserInfo($_SESSION['userId']);
 ?>
 
+<div class="profile-section-title">
+  <?php
+  echo '<script type="text/javascript">scrollToTop();</script>';
+  ?>
+  <h2>User profile</h2>
+</div>
+<div class="row sections-style" id="profile-settings-section">
+  <div class="col col-lg-12 col-xs-12 ">
+    <div class="row mt-3 mb-3">
+      <div class="col-lg-12 px-4">
+        <div class="profile-section-subtitle">
+          <h4>Profile Settings</h4>
+          <hr>
+        </div>
+        <div class="profile-avatar d-flex flex-row">
+          <!-- class="rounded-circle" -->
+          <img src="views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" />
+          <div class="d-flex flex-column justify-content-center" id="username-info">
+            <p id="username-title">Username</p>
+            <p id="username-description"><?php echo $userData['username'] ?></p>
+          </div>
+        </div>
+        <form action="" method="post" enctype="multipart/form-data" id="new-avatar-form">
+          <div class="d-flex align-items-center mt-3">
+            <div class="custom-file">
+              <p class="file-info-txt"><i>Choose a file to upload your current avatar. The image will be cropped at the centre, so we recommend that you choose a square image (or almost square) for better results.</i></p>
+              <input type="file" name="new-avatar-upload" class="custom-file-input" id="new-avatar-upload" onchange="getImageDimensions(this)">
+              <button class="btn" id="upload-avatar-button" type="button" onclick="uploadUserAvatar()">
+                <i class="fa fa-fw fa-camera"></i>
+                <span>Change avatar</span>
 
-<div class="row">
-    <div class="col col-lg-10 col-xs-12 d-flex justify-content-center">
-        <section id="user_profile_section">
-            <div class="profile-wrapper">
-                <div class="row py-4 mt-2">
-                    <div class="col-lg-12 d-flex flex-column justify-content-center px-4">
-                        <div class="profile-title d-flex justify-content-center">
-                            <h2>User profile</h2>
-                        </div>    
-                        <div class="profile-avatar d-flex justify-content-center">
-                            <img src="views/web/img/avatars/<?php echo $userData['avatar'] ?>" alt="avatar" id="user_profile" class="rounded-circle"/>
-                        </div>
-                        <div class="user-details d-flex flex-column align-items-center">
-                            <span id="username-detail"><?php echo $userData['username'] ?></span>
-                            <span id="username-detail"><?php echo $userData['email'] ?></span>
-                            <!-- <span id="user-rank"><?php echo $userData['rank'] ?></span> -->
-                        </div>
-                        <form action="" method="post" enctype="multipart/form-data" id="new-avatar-form">
-                          <div class="form-group  d-flex flex-column align-items-center">
-                              <div class="custom-file">
-                                  <input type="file" name="new-avatar-upload" class="custom-file-input" id="new-avatar-upload">
-                                  <span class="msg error-message my-2" id="avatar-error">
-                                  <button class="btn btn-primary" type="button" onclick="uploadUserAvatar()">
-                                      <i class="fa fa-fw fa-camera"></i>
-                                      <span>Upload avatar</span>
-                                  </button>
-                              </div>
-                              <div id="avatar-msg"></div>
-                          </div>
-                        </form>
-                        <form action="" method="post" id="profile-form">
-                          <hr>
-                          <div class="profile-settings">
-                              <h3>Profile Settings</h3>
-                          </div>
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group">
-                                <label>Email</label>
-                                <input class="form-control" type="text" name="email" id="email-profile" placeholder="<?php echo $userData['email'] ?>">
-                                <span class="msg error-message my-2" id="email-error">
-                              </div>
-                            </div>
-                          </div>
-                          <hr>
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group">
-                                <label>New Password</label>
-                                <input class="form-control" type="password" name="password1" id="password1-profile" placeholder="••••••">
-                                <span class="msg error-message my-2" id="password1-error">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group">
-                                <label>Confirm Password</label>
-                                <input class="form-control" type="password" name="password2" id="password2-profile" placeholder="••••••">
-                                <span class="msg error-message my-2" id="password2-error">
-                              </div>
-                            </div>
-                          </div>
-                          <hr>
-                          <div class="row">
-                            <div class="col">
-                              <div class="form-group">
-                                <label>Current Password</label>
-                                <input class="form-control" type="password" name="password" id="password-profile" placeholder="••••••">
-                                <span class="msg error-message my-2" id="password-error">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                              <div class="col d-flex justify-content-end pt-4 pb-2">
-                                  <button class="btn btn-primary" type="button" onclick="submitUserSettingsForm()">Save Changes</button>
-                              </div>
-                              <div id="success-msg"></div>
-                          </div>
-                        </form>
-                    </div>
-                </div>
+              </button>
+              <button id="user-remove-img-btn" class="btn" type="button" onclick="removeUserAttachedImage()">Remove attached image</button>
             </div>
-        </section>
-    </div>
+          </div>
+          <div class="d-flex mt-1 mb-0">
+            <span class="msg error-message my-2" id="avatar-error"></span>
+            <div id="avatar-msg"></div>
+          </div>
+          <hr>
+        </form>
+        <div>
+          <p class="file-info-txt"><i>Update your email, your password or both.</i></p>
+          <form action="" method="post" id="profile-form" class="d-flex flex-column">
+            <div class="d-flex">
+              <div class="mb-3">
+                <label>Email</label>
+                <input class="form-control" type="text" autocomplete="off" name="email" id="email-profile" placeholder="<?php echo $userData['email'] ?>">
+                <span class="msg error-message my-2" id="email-error"></span>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="mr">
+                <label>New Password</label>
+                <input class="form-control" type="password" autocomplete="off" name="password1" id="password1-profile" placeholder="••••••">
+                <span class="msg error-message my-2" id="password1-error"></span>
+              </div>
+              <div class="mr">
+                <label>Confirm Password</label>
+                <input class="form-control" type="password" autocomplete="off" name="password2" id="password2-profile" placeholder="••••••">
+                <span class="msg error-message my-2" id="password2-error"></span>
+              </div>
+              <hr>
+              <div class="mr">
+                <label>Current Password</label>
+                <input class="form-control" type="password" autocomplete="off" name="password" id="password-profile" placeholder="••••••">
+                <span class="msg error-message my-2" id="password-error"></span>
+              </div>
+              <div>
+                <div class="col d-flex justify-content-end pt-4 pb-2">
+                  <button class="btn save-profile-button" type="button" onclick="submitUserSettingsForm()">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="success-message"></div>
+          <span class="msg error-message my-2" id="general-error"></span>
+        </div>
+      </div>
+    </div> <!-- Profile settings section end-->
+  </div>
 </div>

@@ -1,3 +1,5 @@
+/* General style, Header, Side menus and Main content (posts) */
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -8,8 +10,11 @@ body {
   background: #18191a;
   overflow-x: hidden;
 }
-
-/* NAVBAR */
+.c-pointer {
+  cursor: pointer;
+}
+/* ------------ HEADER ------------ */
+/* Top Navbar */
 .navbar {
   background: #242526;
   width: 100vw;
@@ -19,11 +24,6 @@ body {
   box-shadow: 0 2px 2px -2px rgba(255, 255, 255, 0.4);
 }
 
-.navbar_center {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-}
 .navbar_right {
   text-align: right;
   justify-content: flex-end;
@@ -34,44 +34,91 @@ body {
   width: 37px;
   margin-right: 5px;
 }
-
-.input-icons i {
-  position: absolute;
+#logo-link {
+  cursor: pointer;
 }
 
-.icon {
-  padding: 13px 10px;
-  color: #a8abaf;
-  min-width: 20px;
-  text-align: center;
-  margin-right: 20px;
+/* Header buttons */
+#header-buttons button {
+  color: white;
+  margin-right: 0.8em;
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 3px;
 }
+#header-buttons #all-cats {
+  background-color: hsl(281, 53%, 61%);
+  padding-right: 1.1em;
+  padding-left: 1.1em;
+}
+#header-buttons #all-cats:hover {
+  background-color: hsl(281, 53%, 56%);
+  transition: 0.5s;
+}
+#header-buttons #popular-feed {
+  background-color: hsl(162, 96%, 40%);
+  padding-right: 1.2em;
+  padding-left: 1.2em;
+}
+#header-buttons #popular-feed:hover {
+  background-color: hsl(162, 96%, 35%);
+  transition: 0.5s;
+}
+#header-buttons #about-us {
+  background-color: hsl(183, 67%, 44%);
+  padding-right: 1.6em;
+  padding-left: 1.6em;
+}
+#header-buttons #about-us:hover {
+  background-color: hsl(183, 67%, 39%);
+  transition: 0.5s;
+}
+/* #header-buttons ul {
+  background-color: #242526;
+  box-shadow: -7px 9px 20px 8px #00000045;
+}
+#header-buttons ul a {
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+}
+#header-buttons ul a:hover,
+#header-buttons ul a:active,
+#header-buttons ul a:focus {
+  background-color: #b64ffb;
+  color: white;
+  transition: 0.5s;
+}
+#header-buttons button {
+  background-color: #3a3b3c;
+  color: white;
+}
+#header-buttons button:focus {
+  background-color: #b64ffb;
+  color: white;
+  outline: none;
+  box-shadow: none;
+}
+#header-buttons button:hover,
+.navbar_links #new_post:hover,
+.navbar_links #logout i:hover {
+  background-color: #b64ffb;
+  color: white;
+  transition: 0.5s;
+} */
 
-.input-field {
+/* Search bar */
+#search-bar .input-field {
   width: 56%;
-  background: #3a3b3c;
+  /* background: #3a3b3c; */
   border: none;
-  color: #a8abaf;
+  /* color: #a8abaf; */
 }
 
-.input-field:focus {
+#search-bar .input-field:focus {
   outline: none;
 }
-
-.active_icon {
-  border-bottom: 3px solid #b64ffb;
-}
-
-.active_icon i {
-  color: #b64ffb; /*!important*/
-}
-
-.navbar a {
-  text-decoration: none;
-  color: #b8bbbf;
-  font-size: 23px;
-}
-
+/* User profile name */
 .navbar_profile {
   height: 40px;
   margin-right: 20px;
@@ -98,7 +145,7 @@ body {
   font-size: 15px;
   font-weight: 500;
 }
-
+/* Top right buttons (new post and logout)*/
 .navbar_links a {
   font-size: 16px;
 }
@@ -117,10 +164,10 @@ body {
   background: #4e4f50;
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ------------ LEFT MENU (Categories) and RIGHT MENU (Category info in Show Post) ------------ */
+
+.category_names span {
+  cursor: pointer;
 }
 
 .content_left,
@@ -166,10 +213,10 @@ body {
 
 .content_left ul li i,
 .content_right ul li i {
-  background: #2b2b2b; /*background: #404041;*/
+  background: #2b2b2b;
   padding: 10px;
   border-radius: 100%;
-  color: #b64ffb; /* color: #e7e9ed; */
+  color: #b64ffb;
   cursor: pointer;
   transition: 0.3s;
   font-size: 16px;
@@ -212,98 +259,44 @@ body {
   background: #454545;
 }
 
-/* Center content */
+/* --------------------  CENTRAL CONTENT  (userfeed, category_posts, show_post) ---------------------  */
 
-.media_container {
-  padding: 5px 92px;
+/* Header breadcrumb */
+.breadcrumb_section {
+  margin-top: 2em;
+  font-weight: 400;
+  margin-left: 3.6em;
+  color: #198754;
+  font-size: 14px;
+  text-transform: capitalize;
 }
-
-.share {
-  background-color: #242526;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-.share_upside {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.share_upside img {
+.breadcrumb_section .breadcrumb-divider {
+  margin-left: 7px;
   margin-right: 7px;
-  width: 38px;
+  font-size: 10px;
+  margin-top: 5px;
+  color: #198754;
 }
-
-.share_upside input {
-  flex: 1;
-  padding: 12px 0 12px 12px;
-  background: #3a3b3c;
-  border: none;
-  border-radius: 25px;
-  font-size: 1em;
-  color: #a8abaf;
+.breadcrumb_section .primary-breadcrumb {
+  text-decoration: underline;
 }
-
-.share_upside input:focus {
-  outline: none;
+/* Dropdown filter on Posts */
+#feed_filters_section {
+  margin: 2em 27em;
 }
-
-.media_container hr {
-  border-style: solid;
-  border-color: rga(255, 255, 255, 0.08);
-  border-width: 1px;
+#feed_filters_section #feed_filters {
+  background-color: #242526;
+  color: white;
+  border: 1px solid #2a2b2d;
+  padding: 7px 15px;
+  border-radius: 5px;
+  cursor: pointer;
 }
+/* Posts */
 
-.share_downside {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 15px;
-  height: 40px;
+img.img-fluid {
+  min-width: 100%;
 }
-
-.share_downside_link {
-  width: 33.3%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.share_downside_link:hover {
-  background: #3a3b3c;
-  border-radius: 10px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.share_downside_link i {
-  font-size: 25px;
-  margin-right: 5px;
-}
-
-.share_downside_link span {
-  color: #b7babe;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.live-video-icon {
-  color: #f23e5c;
-}
-
-.photo-video-icon {
-  color: #58c472;
-}
-
-.feeling-icon {
-  color: #f8c03e;
-}
-
-/* Post */
-
 .post {
   background-color: #242526;
   border-radius: 10px;
@@ -311,6 +304,7 @@ body {
   margin-bottom: 2em;
   margin-right: 27em;
   margin-left: 16em;
+  max-width: 554px; /* Maximum image width */
 }
 
 .post_title {
@@ -328,6 +322,9 @@ body {
 .post_title_content {
   text-align: left;
 }
+.post_title_content a {
+  cursor: pointer;
+}
 
 .post_title_content p {
   color: #e4e6eb;
@@ -342,9 +339,13 @@ body {
 .post_description {
   min-height: 287px;
 }
+.post_description_xs {
+  min-height: 170px;
+}
+
 .post_description p {
-  font-size: 17px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .post_subtitle {
@@ -358,34 +359,69 @@ body {
 .post_description_title {
   margin-top: -5px;
   padding: 10px 15px;
-  background-color: #3a3b3c;
+  background-color: #2a2b2d; /*#3a3b3c;*/
   text-align: left;
+  position: relative;
+  word-wrap: break-word; /* Prevents text from overflowing div */
 }
 
+/*
+.post_description_title:after {
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ffffff00 0%,
+    #2a2b2d 67%,
+    #2a2b2d 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    #ffffff00 0%,
+    #2a2b2d 67%,
+    #2a2b2d 100%
+  );
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+*/
+.post_description_title {
+  color: #e4e6eb;
+}
+.post_description_title code {
+  color: #15ac1a;
+  background-color: #252525;
+}
 .post_description_title span {
   color: #b7babe;
   font-size: 13px;
 }
 
 .post_description_title p {
-  font-weight: 500;
+  font-weight: 400; /* 500 */
   color: #e4e6eb;
   font-size: 15px;
+  text-align: justify;
 }
 
-/* Post date area */
 .post-date-area {
   text-align: right;
   padding: 10px 15px;
   color: #989898;
   font-size: smaller;
 }
-/* votes */
-.purple_color {
-  color: #b64ffb;
+
+/* Post Votes and Comments */
+#comment-form label {
+  color: #989898;
 }
-.red_color {
-  color: #f03a17;
+#comment-submit {
+  padding: 9px;
+  margin-top: -1px;
+  font-size: 15px;
+  width: 100%;
 }
 .votes_comments_area {
   display: flex;
@@ -394,21 +430,33 @@ body {
   padding: 10px 15px;
 }
 
+.votes_comments_area .purple_color {
+  color: #b64ffb;
+}
+.votes_comments_area .red_color {
+  color: #f03a17;
+}
+
 .votes_comments_area .icons {
   display: flex;
   align-items: center;
 }
-/* Vote icons */
+
 .votes_comments_area .icons img {
   cursor: pointer;
 }
 
 .votes_comments_area .icons .votes_number {
-  /* color: #b7babe; */
   margin-left: 3px;
   font-size: 11px;
   font-weight: bold;
   margin-right: 8px;
+}
+
+/* Vote icons */
+
+.vote_icon_size {
+  width: 20px;
 }
 .upvote_default {
   content: url("https://i.imgur.com/5FxIKEq.png");
@@ -426,14 +474,9 @@ body {
 .comment_counts {
   color: #b7babe;
 }
-#filtered-posts .comment_counts:hover {
+#feed_filtered-posts .comment_counts:hover {
   color: #959595;
 }
-
-.divider {
-  padding: 0 15px 0 15px;
-}
-
 .custom-link,
 .custom-link-text {
   cursor: pointer;
@@ -453,18 +496,9 @@ a,
 a:link {
   color: inherit;
 }
-#userfeed_filters_section {
-  margin: 2em 27em;
-}
-#userfeed_filters_section #userfeed_filters {
-  background-color: #242526;
-  color: white;
-  border: 1px solid #2a2b2d;
-  padding: 7px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-/* Header Scroll button */
+
+/* Scroll to top Button */
+
 #scrollTop {
   position: absolute;
   top: 648px;
@@ -472,7 +506,7 @@ a:link {
 }
 #scrollTop i {
   cursor: pointer;
-  margin-right: 2em;
+  /* margin-right: 2em; */
   background-color: hsl(0deg 0% 13%);
   padding: 12px 14px;
   border-radius: 100%;
@@ -480,26 +514,22 @@ a:link {
   color: hsl(0deg 0% 30%);
   box-shadow: 2px 2px 5px 0px #0000002b;
 }
-.vote_icon_size {
-  width: 20px;
-}
-.category_names span {
-  cursor: pointer;
-}
-/* Small devices */
+/* --------------------------  Media Queries  ------------------------ */
+
+/* Left and right menu behavior when resizing viewport */
 @media (min-width: 577px) {
   .content_right div,
   .content_left ul {
     position: fixed;
   }
 }
-
 @media (max-width: 576px) {
   .content_right ul,
   .content_left ul {
     position: unset;
   }
 }
+/* Posts behavior when resizing viewport */
 @media (max-width: 1300px) {
   .post {
     margin: 2em 0em;
@@ -509,7 +539,6 @@ a:link {
     margin-right: 16em;
   }
 }
-
 @media (max-width: 1160px) {
   .post {
     margin: 2em 0em;
