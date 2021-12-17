@@ -11,28 +11,19 @@ class PostModel extends DbConn
     switch ($filter) {
         // Most recent posts
       case "latest":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY `datetime` DESC';
-
         break;
         // Oldest posts
       case "oldest":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY `datetime`';
-
         break;
         // Most voted posts
       case "popular":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY p.up_votes DESC';
-
         break;
-
         // Most unvoted posts
       case "unpopular":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.category_name IN (SELECT category_name FROM user_category WHERE `user_id` = ?) ORDER BY p.down_votes DESC';
-
         break;
     }
     $result = $this->selectQueryBind($sql, $userId);
@@ -46,28 +37,19 @@ class PostModel extends DbConn
     switch ($filter) {
         // Most recent posts
       case "latest":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name ORDER BY `datetime` DESC';
-
         break;
         // Oldest posts
       case "oldest":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name ORDER BY `datetime`';
-
         break;
         // Most voted posts
       case "popular":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name ORDER BY p.up_votes DESC';
-
         break;
-
         // Most unvoted posts
       case "unpopular":
-
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name ORDER BY p.down_votes DESC';
-
         break;
     }
     $result = $this->selectQuery($sql);
@@ -103,7 +85,6 @@ class PostModel extends DbConn
       case "popular":
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY p.up_votes DESC';
         break;
-
         // Most unvoted posts
       case "unpopular":
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY p.down_votes DESC';
