@@ -8,11 +8,8 @@ class DbConn
 
     public function __construct()
     {
-
-        $dsn = "mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset={$this->charset}";
-
         try {
-            $this->dbConn = new PDO($dsn, DB_USER, DB_PASS);
+            $this->dbConn = new PDO(DSN, DB_USER, DB_PASS);
         } catch (PDOException $e) {
             echo "Error trying to stablish connection with database" . $e->getMessage() . "<br/>";
             die();

@@ -22,11 +22,12 @@ class UserLogin extends DbConn
                 if ($u->getUserStatus()) { // Check if user is banned
                     $this->message["id"] = "general";
                     $this->message["text"] = "You are banned. Contact the administrator to be able to log in again with this user.";
-                    session_destroy();  // we make sure the session is not
+                    session_destroy();  // we make sure the session is not kept
                 } else {
                     $_SESSION['userId'] = $result[0]['user_id'];
                     $_SESSION['username'] = $result[0]['username'];
                     $_SESSION['avatar'] = $result[0]['avatar'];
+                    session_regenerate_id(true);
                 }
             } else {
                 $this->message["id"] = "general";
