@@ -56,7 +56,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
                         </div>
                     </div>
                     <div class="post-date-area">
-                        <span><?php echo $post[0]['datetime'] ?></span>
+                        <span><?php echo date_format(new DateTime($post[0]['datetime']), 'j D M Y') ?></span>
                     </div>
                     <div class="votes_comments_area">
                         <div class="icons" id="<?php echo $post[0]['post_id'] ?>">
@@ -111,7 +111,7 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                 </div>
                                 <div class="comment-post">
                                     <span class="comment-username"><?php echo $comment['username']; ?></span>
-                                    <span class="comment-datetime"><?php echo $comment['datetime']; ?></span>
+                                    <span class="comment-datetime"><?php echo date_format(new DateTime($comment['datetime']), 'j D M Y'); ?></span>
                                     <p class="mb-0"><?php echo $comment['description']; ?></p>
                                 </div>
                             </div>
