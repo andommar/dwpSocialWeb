@@ -1,15 +1,12 @@
 <?php
 
-require_once('DbConn.php');
-
-class PostModel
+class PostModel extends DbConn
 {
 
   public function loadUserFeedPostsFiltered($userId, $filter)
   {
     // Filter: latest, popular, oldest, unpopular
 
-    $db = new Dbconn();
     $sql = "";
     switch ($filter) {
         // Most recent posts
@@ -38,14 +35,13 @@ class PostModel
 
         break;
     }
-    $result = $db->selectQueryBind($sql, $userId);
+    $result = $this->selectQueryBind($sql, $userId);
     return $result;
   }
   public function loadPopularFeedPostsFiltered($filter)
   {
     // Filter: latest, popular, oldest, unpopular
 
-    $db = new Dbconn();
     $sql = "";
     switch ($filter) {
         // Most recent posts
@@ -74,28 +70,25 @@ class PostModel
 
         break;
     }
-    $result = $db->selectQuery($sql);
+    $result = $this->selectQuery($sql);
     return $result;
   }
 
   public function loadPostById($postId)
   {
-    $db = new Dbconn();
     $sql = 'SELECT u.user_id,u.username,u.avatar,u.rank, p.*, c.icon FROM user u,post p,category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND p.post_id = ?';
-    $result = $db->selectQueryBind($sql, $postId);
+    $result = $this->selectQueryBind($sql, $postId);
     return $result;
   }
   public function loadCategoryPosts($categoryName)
   {
-    $db = new Dbconn();
     $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY `datetime` DESC';
-    $result = $db->selectQueryBind($sql, $categoryName);
+    $result = $this->selectQueryBind($sql, $categoryName);
     return $result;
   }
   public function loadCategoryPostsFiltered($categoryName, $filter)
   {
     // Filter: latest, popular, oldest, unpopular
-    $db = new Dbconn();
     $sql = "";
     switch ($filter) {
         // Most recent posts
@@ -116,13 +109,12 @@ class PostModel
         $sql = 'SELECT u.user_id,u.username,u.avatar, p.*, c.icon FROM user u, post p, category c WHERE u.user_id = p.user_id AND p.category_name = c.category_name AND c.category_name = ? ORDER BY p.down_votes DESC';
         break;
     }
-    $result = $db->selectQueryBind($sql, $categoryName);
+    $result = $this->selectQueryBind($sql, $categoryName);
     return $result;
   }
 
   public function newPost($userId, $title, $categoryName, $mediaUrl, $description)
   {
-    $db = new DbConn();
     date_default_timezone_set("Europe/Copenhagen");
     $date = date('Y-m-d H:i:s');
     if (!$description && $mediaUrl) {
@@ -138,7 +130,7 @@ class PostModel
             VALUES ( ?, ?, ?, ?, ?, ?)';
       $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date];
     }
-    $result = $db->executeQueryBindArr($sql, $arr);
+    $result = $this->executeQueryBindArr($sql, $arr);
     return $result;
   }
 }

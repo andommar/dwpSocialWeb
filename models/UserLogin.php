@@ -1,7 +1,6 @@
 <?php
-require_once('DbConn.php');
 require_once('Redirector.php');
-class UserLogin
+class UserLogin extends DbConn
 {
 
     public $message = array(
@@ -10,12 +9,10 @@ class UserLogin
     );
     public function loginUser($username, $password)
     {
-
-        $db = new DbConn();
         $user = trim($username);
         $pass = trim($password);
         $sql = 'SELECT user_id, username, avatar,`password` from user where username = ? LIMIT 1';
-        $result = $db->selectQueryBind($sql, $user);
+        $result = $this->selectQueryBind($sql, $user);
         // User exists
         if (count($result) == 1) {
             // Hashed password comparison
