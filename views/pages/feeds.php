@@ -61,7 +61,7 @@ if (isset($data)) {
               <?php } ?>
             </div>
             <div class="post-date-area">
-              <span><?php echo $post['datetime'] ?></span>
+              <span><?php echo date_format(new DateTime($post['datetime']), 'j D M Y');  ?></span>
             </div>
             <div class="votes_comments_area">
               <div class="icons" id="<?php echo $post['post_id'] ?>">

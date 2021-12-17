@@ -1,17 +1,14 @@
 <?php
 
-require_once('DbConn.php');
-
-class VoteModel
+class VoteModel extends DbConn
 {
 
     public function isPostPreviouslyRated($user_id, $post_id)
     {
         try {
-            $db = new Dbconn();
             $sql = 'SELECT count(*) FROM user_votes_post WHERE user_id=? AND post_id=?';
             $arr = [$user_id, $post_id];
-            $result = $db->selectQueryBindArrSingleFetch($sql, $arr);
+            $result = $this->selectQueryBindArrSingleFetch($sql, $arr);
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());
@@ -22,10 +19,9 @@ class VoteModel
         try {
 
 
-            $db = new Dbconn();
             $sql = 'SELECT is_positive FROM user_votes_post WHERE `user_id`=? AND post_id=?';
             $arr = [$user_id, $post_id];
-            $result = $db->selectQueryBindArrSingleFetch($sql, $arr);
+            $result = $this->selectQueryBindArrSingleFetch($sql, $arr);
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());
@@ -36,7 +32,6 @@ class VoteModel
 
         try {
 
-            $db = new Dbconn();
             $result = false;
             $isOldVotePositive = $this->isOldVotePositive($user_id, $post_id);
             $isPostPreviouslyRated = $this->isPostPreviouslyRated($user_id, $post_id);
@@ -53,7 +48,7 @@ class VoteModel
                 if (($isOldVotePositive[0] && $newVote) || (!$isOldVotePositive[0] && !$newVote)) {
                     $sql =  'DELETE from user_votes_post WHERE `user_id`=? AND post_id=?';
                     $arr = [$user_id, $post_id];
-                    $query_result = $db->executeQueryBindArr($sql, $arr);
+                    $query_result = $this->executeQueryBindArr($sql, $arr);
                     if ($query_result) $result = -1;
                 }
                 // User votes the opposite  (UPDATE query)
@@ -61,14 +56,14 @@ class VoteModel
 
                     $sql =  'UPDATE user_votes_post SET is_positive=? WHERE `user_id`=? AND post_id=?';
                     $arr = [$newVote, $user_id, $post_id];
-                    $query_result = $db->executeQueryBindArr($sql, $arr);
+                    $query_result = $this->executeQueryBindArr($sql, $arr);
                     if ($query_result) $result = $newVote ? 2 : 3;
                 }
             } else { // First time rating the post (INSERT QUERY)
 
                 $sql =  'INSERT INTO user_votes_post (`user_id`,post_id,is_positive) VALUES (?, ?, ?)';
                 $arr = [$user_id, $post_id, $newVote];
-                $query_result = $db->executeQueryBindArr($sql, $arr);
+                $query_result = $this->executeQueryBindArr($sql, $arr);
                 if ($query_result) $result = $newVote ? 2 : 3;
             }
 
@@ -82,10 +77,9 @@ class VoteModel
     public function getUserRatedPosts($user_id)
     {
         try {
-            $db = new Dbconn();
             $result = false;
             $sql = 'SELECT post_id, is_positive FROM user_votes_post WHERE user_id = ?';
-            $result = $db->selectQueryBind($sql, $user_id);
+            $result = $this->selectQueryBind($sql, $user_id);
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());
@@ -95,11 +89,10 @@ class VoteModel
     public function getUserRatedPostByPostId($user_id, $post_id)
     {
         try {
-            $db = new Dbconn();
             $result = false;
             $sql = 'SELECT post_id,is_positive FROM user_votes_post WHERE user_id = ? and post_id =?';
             $arr = [$user_id, $post_id];
-            $result = $db->selectQueryBindArrSingleFetch($sql, $arr);
+            $result = $this->selectQueryBindArrSingleFetch($sql, $arr);
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());
@@ -108,10 +101,9 @@ class VoteModel
     public function getPostVotes($post_id)
     {
         try {
-            $db = new Dbconn();
             $result = false;
             $sql = 'SELECT up_votes,down_votes FROM post WHERE post_id = ?';
-            $result = $db->selectQueryBindSingleFetch($sql, $post_id);
+            $result = $this->selectQueryBindSingleFetch($sql, $post_id);
             return $result;
         } catch (\PDOException $ex) {
             print($ex->getMessage());

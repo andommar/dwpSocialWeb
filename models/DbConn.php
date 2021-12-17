@@ -8,12 +8,8 @@ class DbConn
 
     public function __construct()
     {
-
-        // $dsn = "mysql:host=".$this->servername."; dbname=".$this->dbname.";charset=".$this->charset.";
-        $dsn = "mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset={$this->charset}";
-
         try {
-            $this->dbConn = new PDO($dsn, DB_USER, DB_PASS);
+            $this->dbConn = new PDO(DSN, DB_USER, DB_PASS);
         } catch (PDOException $e) {
             echo "Error trying to stablish connection with database" . $e->getMessage() . "<br/>";
             die();
@@ -35,10 +31,9 @@ class DbConn
                 die();
             }
             return ($res);
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 
     // For no condition queries
@@ -55,10 +50,9 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 
 
@@ -76,15 +70,14 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
     // For retrieving counts or a single column and sending one parameter
     public function selectQueryBindSingleFetch($sql, $bindParam)
     {
-        try{
+        try {
             $stmt = null;
             $result = false;
             if (isset($sql) && $sql != "" && isset($this->dbConn)) {
@@ -96,10 +89,9 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 
     public function selectQueryBindArr($sql, $bindArr)
@@ -117,10 +109,9 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
     // For retrieving counts or a single column and sending more than one parameter
     public function selectQueryBindArrSingleFetch($sql, $bindArr)
@@ -138,10 +129,9 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 
     public function executeQueryBind($sql, $bindParam)
@@ -157,10 +147,9 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 
     public function executeQueryBindArr($sql, $bindArr)
@@ -175,9 +164,8 @@ class DbConn
                 }
             }
             return ($result);
-        } catch (Exception $e){
+        } catch (Exception $e) {
             return false;
         }
-
     }
 }
